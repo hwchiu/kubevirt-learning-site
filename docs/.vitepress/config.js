@@ -107,6 +107,7 @@ export default defineConfig({
             { text: 'Live Migration 實作', link: '/deep-dive/migration-internals' },
             { text: '效能調校指南', link: '/deep-dive/performance-tuning' },
             { text: '安全架構', link: '/deep-dive/security' },
+            { text: 'GPU/vGPU 直通', link: '/deep-dive/gpu-passthrough' },
           ]
         }
       ],
@@ -114,7 +115,9 @@ export default defineConfig({
         {
           text: '📖 實用指南',
           items: [
+            { text: '🚀 快速開始', link: '/guides/quickstart' },
             { text: 'VMware 到 KubeVirt', link: '/guides/vmware-to-kubevirt' },
+            { text: '高可用 & 災難恢復', link: '/guides/ha-dr' },
             { text: '故障排除手冊', link: '/guides/troubleshooting' },
           ]
         }
