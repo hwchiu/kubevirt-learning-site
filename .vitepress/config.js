@@ -29,6 +29,7 @@ export default defineConfig({
           items: [
             { text: '系統架構概述', link: '/architecture/overview' },
             { text: 'VM 生命週期流程', link: '/architecture/lifecycle' },
+            { text: '架構深入剖析', link: '/architecture/deep-dive' },
           ]
         }
       ],

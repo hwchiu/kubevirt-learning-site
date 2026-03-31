@@ -31,6 +31,7 @@ export default defineConfig({
           items: [
             { text: '系統架構概述', link: '/architecture/overview' },
             { text: 'VM 生命週期流程', link: '/architecture/lifecycle' },
+            { text: '架構深入剖析', link: '/architecture/deep-dive' },
           ]
         }
       ],
@@ -43,6 +44,13 @@ export default defineConfig({
             { text: 'virt-controller', link: '/components/virt-controller' },
             { text: 'virt-handler', link: '/components/virt-handler' },
             { text: 'virt-launcher', link: '/components/virt-launcher' },
+          ]
+        },
+        {
+          text: '🔧 輔助元件',
+          items: [
+            { text: '輔助元件與工具程式', link: '/components/auxiliary-binaries' },
+            { text: 'Hook Sidecar 機制', link: '/components/hook-sidecars' },
           ]
         }
       ],
