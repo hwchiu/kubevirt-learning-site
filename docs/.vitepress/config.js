@@ -19,6 +19,8 @@ export default defineConfig({
       { text: '📦 API 資源', link: '/api-resources/vm-vmi' },
       { text: '🌐 網路', link: '/networking/overview' },
       { text: '💾 儲存', link: '/storage/overview' },
+      { text: '🔬 深入剖析', link: '/deep-dive/qemu-kvm' },
+      { text: '📖 實用指南', link: '/guides/vmware-to-kubevirt' },
       { text: '🛠️ virtctl', link: '/virtctl/guide' },
       { text: '🚀 進階功能', link: '/advanced/live-migration' },
     ],
@@ -93,6 +95,27 @@ export default defineConfig({
             { text: 'Live Migration', link: '/advanced/live-migration' },
             { text: 'Snapshot & Restore', link: '/advanced/snapshots' },
             { text: 'Observability & 監控', link: '/advanced/observability' },
+          ]
+        }
+      ],
+      '/deep-dive/': [
+        {
+          text: '🔬 深入剖析',
+          items: [
+            { text: 'QEMU/KVM 虛擬化核心', link: '/deep-dive/qemu-kvm' },
+            { text: 'Windows VM 最佳化', link: '/deep-dive/windows-optimization' },
+            { text: 'Live Migration 實作', link: '/deep-dive/migration-internals' },
+            { text: '效能調校指南', link: '/deep-dive/performance-tuning' },
+            { text: '安全架構', link: '/deep-dive/security' },
+          ]
+        }
+      ],
+      '/guides/': [
+        {
+          text: '📖 實用指南',
+          items: [
+            { text: 'VMware 到 KubeVirt', link: '/guides/vmware-to-kubevirt' },
+            { text: '故障排除手冊', link: '/guides/troubleshooting' },
           ]
         }
       ],

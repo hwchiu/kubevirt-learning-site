@@ -1,21 +1,26 @@
 # Snapshot、Clone 與 Export — 資料保護與搬移
 
-## 概述
+KubeVirt 提供了完整的 VM 資料保護與搬移解決方案，包含快照（Snapshot）、克隆（Clone）與匯出（Export）三大功能，讓工程師可以在不中斷服務的情況下保護 VM 狀態、複製環境或將 VM 磁碟遷移到其他平台。
 
-KubeVirt 提供完整的 VM 資料保護與搬移生態系：
-
-| 資源 | 功能 | API Group |
-|------|------|-----------|
-| VirtualMachineSnapshot | 為執行中或停止的 VM 建立快照 | snapshot.kubevirt.io |
-| VirtualMachineSnapshotContent | 快照的實際儲存物件 | snapshot.kubevirt.io |
-| VirtualMachineRestore | 從快照還原 VM | snapshot.kubevirt.io |
-| VirtualMachineClone | 從 VM 或快照克隆新 VM | clone.kubevirt.io |
-| VirtualMachineExport | 匯出 VM 磁碟供外部存取 | export.kubevirt.io |
-| VirtualMachineBackup | 完整備份（含增量） | backup.kubevirt.io |
+:::info 前提條件
+本章節所有功能都需要：
+1. 叢集安裝了支援 **VolumeSnapshot** 的 CSI 驅動（如 Ceph RBD CSI、vSphere CSI、AWS EBS CSI）
+2. 叢集中存在 **VolumeSnapshotClass** 資源
+3. KubeVirt >= v0.35.0（Snapshot/Restore），>= v0.57.0（Clone），>= v0.58.0（Export）
+:::
 
 ---
 
-## VirtualMachineSnapshot
+## VirtualMachineSnapshot 完整說明
+
+### 用途
+
+`VirtualMachineSnapshot` 用於建立 VM 在特定時間點的完整狀態快照，常見使用場景：
+
+- **測試前保護**：升級應用程式或核心前先建立快照，升級失敗可快速還原
+- **週期性備份**：排程建立快照作為備份策略的一部分
+- **環境複製基礎**：以快照為來源，Clone 出多個相同環境的 VM
+- **問題排查**：保留問題發生時的磁碟狀態，供事後分析
 
 ### Spec 欄位
 
@@ -23,98 +28,147 @@ KubeVirt 提供完整的 VM 資料保護與搬移生態系：
 apiVersion: snapshot.kubevirt.io/v1beta1
 kind: VirtualMachineSnapshot
 metadata:
-  name: my-vm-snapshot
-  namespace: default
+  name: ubuntu-snapshot-20240115
+  namespace: production
 spec:
-  # 快照來源（目前只支援 VM）
+  # source：指向要快照的 VirtualMachine
   source:
-    apiGroup: kubevirt.io
+    apiGroup: "kubevirt.io"
     kind: VirtualMachine
-    name: my-vm
+    name: ubuntu-web-server
 
-  # 刪除快照時的策略（預設 Delete）
-  # Delete: 刪除快照時同時刪除 VolumeSnapshot
-  # Retain: 保留 VolumeSnapshot
-  deletionPolicy: Delete
+  # deletionPolicy：當 Snapshot 被刪除時，對應的底層 VolumeSnapshot 如何處理
+  # OnVMDelete（預設）: 當 VM 被刪除時，快照自動刪除
+  # Retain: 即使 VM 被刪除，快照仍然保留
+  deletionPolicy: Retain
 
-  # 快照操作的超時時間（秒）
-  failureDeadline: "5m0s"
+  # failureDeadline：快照建立的超時時間
+  # 若超過此時間仍未完成，快照標記為失敗
+  # 格式：Go duration 字串（如 "5m", "1h30m"）
+  failureDeadline: "5m"
 ```
 
-### Status 欄位
+### Status 欄位詳解
 
 ```yaml
 status:
-  # 快照是否可用於還原
+  # 快照建立時間
+  creationTime: "2024-01-15T10:30:00Z"
+
+  # 快照是否已就緒可用於還原
   readyToUse: true
 
-  # 建立時間
-  creationTime: "2024-01-15T10:00:00Z"
+  # 快照當前階段
+  # InProgress: 正在建立中
+  # Succeeded:  建立成功
+  # Failed:     建立失敗
+  phase: Succeeded
 
-  # 發生錯誤時的訊息
-  error: null
+  # 錯誤資訊（建立失敗時填寫）
+  error:
+    message: ""
+    time: ""
 
-  # 快照狀態
-  phase: Succeeded  # Pending, InProgress, Succeeded, Failed
-
-  # 快照指示（說明快照時的 VM 狀態）
-  indications:
-  - Online        # VM 在線上時拍攝（記憶體不一致）
-  - GuestAgent    # 有 guest agent，可進行 Quiescing
-  - NoGuestAgent  # 沒有 guest agent（與 GuestAgent 互斥）
-
-  # 對應的 VirtualMachineSnapshotContent 名稱
-  virtualMachineSnapshotContentName: vmsnapshot-content-xxx
-
-  # 包含的 Volume 快照列表
+  # 快照包含的 Volume 清單
   snapshotVolumes:
     includedVolumes:
-    - rootdisk
+      - rootdisk
+      - datadisk
     excludedVolumes:
-    - ephemeral-disk  # 暫態磁碟不納入快照
+      - ephemeral-disk  # 不支援快照的 volume 會被排除
+
+  # 對應的 VirtualMachineSnapshotContent 名稱
+  virtualMachineSnapshotContentName: "vmsnapshot-content-abc123"
+
+  # 快照指示標記（Indications）
+  indications:
+    - Online          # VM 在線時建立的快照
+    - GuestAgent      # 有 guest agent，執行了 quiesce（檔案系統凍結）
 ```
 
-### Snapshot Indications 說明
+### Snapshot Indications 完整說明
 
-| Indication | 意義 |
-|------------|------|
-| `Online` | VM 處於執行中狀態時拍攝，記憶體狀態未凍結 |
-| `GuestAgent` | Guest agent 在線，可進行檔案系統凍結 |
-| `NoGuestAgent` | Guest agent 不在線，無法凍結檔案系統 |
-| `Paused` | VM 被暫停後拍攝（應用程式一致性快照） |
-| `QuiesceTimeout` | 凍結操作超時，降級為 crash-consistent 快照 |
+| Indication | 說明 | 資料一致性 |
+|-----------|------|-----------|
+| `Online` | VM 正在運行時建立快照 | Crash-consistent（類似拔電） |
+| `GuestAgent` | 有 guest agent，成功執行 quiesce | Application-consistent（最佳） |
+| `NoGuestAgent` | 沒有 guest agent，無法 quiesce | Crash-consistent |
+| `QuiesceTimeout` | 有 guest agent 但 quiesce 超時 | Crash-consistent（quiesce 失敗） |
+| `Paused` | VM 被暫停後建立的快照 | Crash-consistent（較安全） |
+
+:::tip 提升快照一致性
+若要取得 Application-consistent 快照（確保資料庫等應用的完整性），需要在 VM 內安裝 **QEMU Guest Agent**：
+
+```bash
+# Ubuntu/Debian
+sudo apt-get install qemu-guest-agent
+sudo systemctl enable --now qemu-guest-agent
+
+# CentOS/RHEL
+sudo yum install qemu-guest-agent
+sudo systemctl enable --now qemu-guest-agent
+```
+
+安裝後，KubeVirt 建立快照時會自動要求 guest agent 執行 `fsfreeze`，確保檔案系統一致性。
+:::
 
 ---
 
 ## VirtualMachineSnapshotContent
 
-這是實際儲存快照資料的物件，由系統自動建立，**不需要手動管理**：
+`VirtualMachineSnapshotContent` 是實際儲存快照資料的底層物件，通常由 KubeVirt 自動建立和管理，工程師一般不需要手動操作。
+
+### 結構說明
 
 ```yaml
 apiVersion: snapshot.kubevirt.io/v1beta1
 kind: VirtualMachineSnapshotContent
 metadata:
   name: vmsnapshot-content-abc123
+  namespace: production
 spec:
-  # 對應的 VirtualMachineSnapshot
-  virtualMachineSnapshotName: my-vm-snapshot
+  # 關聯的 VirtualMachineSnapshot 名稱
+  virtualMachineSnapshotName: ubuntu-snapshot-20240115
 
-  # VM 在快照時的完整規格副本
+  # 快照時的 VM 完整規格（用於還原時重建 VM）
   source:
     virtualMachine:
-      # ... 完整的 VM spec
+      # ... 快照時完整的 VM spec
 
-  # CSI VolumeSnapshot 參考列表
+  # 每個 Volume 對應的備份資訊
   volumeBackups:
-  - volumeName: rootdisk
-    persistentVolumeClaim:
-      name: my-vm-rootdisk-pvc
-    volumeSnapshotName: vmsnapshot-vol-rootdisk-abc
+    - volumeName: rootdisk
+      persistentVolumeClaim:
+        name: ubuntu-web-server-rootdisk
+      volumeSnapshotName: vmsnapshot-rootdisk-xyz789
+
+    - volumeName: datadisk
+      persistentVolumeClaim:
+        name: ubuntu-web-server-datadisk
+      volumeSnapshotName: vmsnapshot-datadisk-xyz790
 ```
+
+:::info 底層 VolumeSnapshot 對應
+每個 `volumeBackup` 條目都對應一個底層的 Kubernetes `VolumeSnapshot` 資源。可以用以下指令查看：
+
+```bash
+kubectl get volumesnapshot -n production
+```
+:::
 
 ---
 
-## VirtualMachineRestore
+## VirtualMachineRestore 完整說明
+
+### 用途
+
+`VirtualMachineRestore` 用於將 VM 從快照還原到特定時間點的狀態。
+
+:::warning 還原前注意事項
+- 還原操作**不可逆**，還原後 VM 的當前狀態將被快照狀態取代
+- 還原時 VM 必須處於**停止（Stopped）**狀態，否則操作會被拒絕
+- 若要保留當前狀態，應先建立新快照再執行還原
+:::
 
 ### Spec 欄位
 
@@ -122,373 +176,591 @@ spec:
 apiVersion: snapshot.kubevirt.io/v1beta1
 kind: VirtualMachineRestore
 metadata:
-  name: restore-my-vm
+  name: ubuntu-restore-20240115
+  namespace: production
 spec:
-  # 還原目標（必須與快照的來源相同）
+  # target：要還原的 VM 目標
   target:
-    apiGroup: kubevirt.io
+    apiGroup: "kubevirt.io"
     kind: VirtualMachine
-    name: my-vm
+    name: ubuntu-web-server  # 還原到原始 VM（原地還原）
 
-  # 使用哪個快照來還原
-  virtualMachineSnapshotName: my-vm-snapshot
+  # virtualMachineSnapshotName：使用哪個快照還原
+  virtualMachineSnapshotName: ubuntu-snapshot-20240115
 
-  # 是否包含設定（false = 只還原磁碟不還原 VM spec）
-  # 省略或 true = 連同 VM spec 一起還原
+  # patches：JSON Patch，可在還原後修改 VM 設定
+  patches:
+    - '{"op": "replace", "path": "/spec/template/spec/hostname", "value": "restored-ubuntu"}'
+    - '{"op": "remove", "path": "/metadata/annotations/last-modified"}'
+
+  # includeVolumes：只還原指定的 Volume（留空則還原所有）
+  includeVolumes:
+    - rootdisk
+
+  # excludeVolumes：排除不需要還原的 Volume
+  excludeVolumes:
+    - datadisk  # 資料磁碟保留現有內容，只還原系統磁碟
 ```
 
 ### Status 欄位
 
 ```yaml
 status:
-  # 是否完成
+  # 還原是否完成
   complete: true
 
   # 還原完成時間
-  restoreTime: "2024-01-15T10:30:00Z"
+  restoreTime: "2024-01-15T11:00:00Z"
 
-  # 各 Volume 還原情況
-  restores:
-  - volumeName: rootdisk
-    persistentVolumeClaimName: restore-rootdisk-abc
-    volumeSnapshotName: vmsnapshot-vol-rootdisk-abc
-
-  # 發生錯誤時的訊息
+  # 條件清單
   conditions:
-  - type: Ready
-    status: "True"
+    - type: Ready
+      status: "True"
+      reason: "RestoreComplete"
+      message: "All volumes were successfully restored"
+
+  # 每個 Volume 的還原狀態
+  restores:
+    - volumeName: rootdisk
+      persistentVolumeClaim: ubuntu-web-server-rootdisk
+      volumeRestoreName: restore-rootdisk-abc123
+      initialPopulationComplete: true
 ```
 
 ---
 
-## VirtualMachineClone
+## VirtualMachineClone 完整說明
 
-Clone 操作從現有 VM 或快照建立一個全新的 VM，並自動處理 MAC Address、SMBios Serial 等唯一識別符。
+### 用途
+
+`VirtualMachineClone` 用於從現有 VM 或快照克隆出一個新的 VM，常見場景：
+
+- **環境複製**：從 golden image VM 快速批量建立多個測試環境
+- **藍綠部署**：複製生產環境 VM 作為新版本測試環境
+- **開發隔離**：為每個開發人員建立獨立的 VM 副本
 
 ### Spec 欄位
 
 ```yaml
-apiVersion: clone.kubevirt.io/v1alpha1
+apiVersion: clone.kubevirt.io/v1beta1
 kind: VirtualMachineClone
 metadata:
-  name: clone-my-vm
+  name: clone-ubuntu-for-dev
+  namespace: production
 spec:
-  # 來源
+  # source：克隆來源，可以是 VM 或 VirtualMachineSnapshot
   source:
-    apiGroup: kubevirt.io
+    apiGroup: "kubevirt.io"
     kind: VirtualMachine
-    name: my-vm
-  # 或從快照克隆
-  # source:
-  #   apiGroup: snapshot.kubevirt.io
-  #   kind: VirtualMachineSnapshot
-  #   name: my-vm-snapshot
+    name: ubuntu-web-server
 
-  # 目標 VM 名稱
+  # target：克隆出的新 VM 名稱
   target:
-    apiGroup: kubevirt.io
+    apiGroup: "kubevirt.io"
     kind: VirtualMachine
-    name: my-vm-clone
+    name: ubuntu-dev-clone
 
-  # Annotation 過濾（哪些 annotation 要保留/移除）
+  # annotationFilters：控制哪些 annotation 要複製到新 VM
+  # 支援 glob 模式，以 "!" 開頭表示排除
   annotationFilters:
-  - "!kubevirt.io/*"    # 移除所有 kubevirt.io annotation（!前綴 = 排除）
-  - "*"                  # 保留其他所有 annotation
+    - "*"                           # 複製所有 annotation
+    - "!kubevirt.io/*"              # 排除 KubeVirt 內部 annotation
+    - "!kubectl.kubernetes.io/*"    # 排除 kubectl annotation
 
-  # Label 過濾（同上）
+  # labelFilters：控制哪些 label 要複製到新 VM
   labelFilters:
-  - "!kubevirt.io/*"
-  - "*"
+    - "*"                          # 複製所有 label
+    - "!environment"               # 排除 environment label
 
-  # 為 clone 的 VM 指定新的 MAC Address
+  # newMacAddresses：為新 VM 的網路介面指定新的 MAC address
   newMacAddresses:
-    eth0: "DE:AD:BE:EF:00:02"
+    default: "02:00:00:00:00:01"
 
-  # 為 clone 的 VM 指定新的 SMBios Serial
-  newSMBiosSerial: "new-serial-12345"
-
-  # 模板 annotation 過濾（VMI template 中的 annotation）
-  templateAnnotationFilters:
-  - "!kubectl.kubernetes.io/*"
-
-  # 模板 label 過濾
-  templateLabelFilters:
-  - "*"
+  # newSMBiosSerial：指定新 VM 的 SMBios serial number
+  newSMBiosSerial: "DEV-CLONE-001"
 ```
 
-### Clone Phase 狀態機
+### Status Phase 完整說明
 
-```
-                    ┌─────────┐
-                    │ Pending │  等待快照操作開始
-                    └────┬────┘
-                         │
-              ┌──────────▼──────────┐
-              │ SnapshotInProgress  │  建立中間快照
-              └──────────┬──────────┘
-                         │
-           ┌─────────────▼─────────────┐
-           │ CreatingTargetVM          │  從快照建立目標 VM
-           └─────────────┬─────────────┘
-                         │
-           ┌─────────────▼─────────────┐
-           │ RestoreInProgress         │  還原磁碟資料
-           └─────────────┬─────────────┘
-                         │
-                    ┌────▼────┐
-                    │Succeeded│  或 Failed
-                    └─────────┘
+```mermaid
+stateDiagram-v2
+    [*] --> Pending : 建立 VirtualMachineClone
+    Pending --> SnapshotInProgress : 若來源是 VM，先建立臨時快照
+    SnapshotInProgress --> CreatingTargetVM : 快照完成，開始建立目標 VM
+    Pending --> CreatingTargetVM : 若來源已是 Snapshot，直接建立 VM
+    CreatingTargetVM --> RestoreInProgress : VM 框架建立完成，開始還原磁碟
+    RestoreInProgress --> Succeeded : 所有磁碟還原完成
+    SnapshotInProgress --> Failed : 快照建立失敗
+    CreatingTargetVM --> Failed : VM 建立失敗
+    RestoreInProgress --> Failed : 磁碟還原失敗
+    Succeeded --> [*]
+    Failed --> [*]
 ```
 
----
-
-## VirtualMachineExport
-
-用於匯出 VM 磁碟，讓外部工具（如 CDI）可以下載或存取 VM 的磁碟內容。
-
-```yaml
-apiVersion: export.kubevirt.io/v1alpha1
-kind: VirtualMachineExport
-metadata:
-  name: my-vm-export
-spec:
-  # 來源（VM, VMSnapshot, 或 PVC）
-  source:
-    apiGroup: kubevirt.io
-    kind: VirtualMachine
-    name: my-vm
-
-  # Token Secret（用於認證下載）
-  tokenSecretRef: export-token-secret
-
-  # 匯出連結的有效時間（預設 2 小時）
-  ttlDuration: "2h"
-```
-
-```yaml
-# 建立 Token Secret
-apiVersion: v1
-kind: Secret
-metadata:
-  name: export-token-secret
-type: Opaque
-stringData:
-  token: "my-secure-token-12345"
-```
-
-### Export Status
+| Phase | 說明 |
+|-------|------|
+| `Pending` | Clone 請求已接收，等待開始執行 |
+| `SnapshotInProgress` | 正在為來源 VM 建立臨時快照（當 source 是 VM 時） |
+| `CreatingTargetVM` | 正在建立目標 VM 的 Kubernetes 資源 |
+| `RestoreInProgress` | 正在從快照還原磁碟資料到新 VM |
+| `Succeeded` | 克隆成功完成，新 VM 已就緒 |
+| `Failed` | 克隆失敗，查看 `status.conditions` 了解原因 |
 
 ```yaml
 status:
-  phase: Ready  # Pending, InProgress, Ready, Failed, Terminated
-
-  # 下載連結
-  links:
-    external:
-      cert: "..."  # TLS 憑證
-      volumes:
-      - name: rootdisk
-        formats:
-        - format: raw
-          url: "https://..."
-        - format: gzip
-          url: "https://...gz"
-        - format: dir
-          url: "https://.../dir"  # 目錄格式
-        - format: tar.gz
-          url: "https://...tar.gz"
-    internal:
-      cert: "..."
-      volumes:
-      - name: rootdisk
-        formats:
-        - format: raw
-          url: "https://virt-exportserver.default.svc.cluster.local/..."
+  phase: Succeeded
+  snapshotName: tmp-snapshot-for-clone-abc123
+  restoreName: clone-restore-xyz789
+  conditions:
+    - type: Ready
+      status: "True"
+      reason: "CloneSucceeded"
+      message: "VM clone completed successfully"
+    - type: SnapshotReady
+      status: "True"
 ```
 
 ---
 
-## VirtualMachineBackup（增量備份）
+## VirtualMachineExport 完整說明
+
+### 用途
+
+`VirtualMachineExport` 提供一個臨時的 HTTP 服務，讓外部工具可以下載 VM 磁碟資料，常用於：
+
+- **跨平台遷移**：將 KubeVirt VM 遷移到 VMware、Hyper-V 或其他雲端平台
+- **外部備份工具**：整合 Velero 等備份工具對 VM 磁碟進行備份
+- **磁碟分析**：將 VM 磁碟匯出給安全分析或取證工具使用
+- **映像製作**：基於現有 VM 製作可重複使用的映像
+
+### Spec 欄位
 
 ```yaml
-apiVersion: backup.kubevirt.io/v1alpha1
-kind: VirtualMachineBackup
+apiVersion: export.kubevirt.io/v1beta1
+kind: VirtualMachineExport
 metadata:
-  name: my-vm-backup
+  name: ubuntu-export
+  namespace: production
 spec:
-  # 來源 VM
-  virtualMachineName: my-vm
+  # source：匯出來源，支援三種類型
+  source:
+    # 類型 1：直接從 VM 匯出（需要 VM 停止）
+    apiGroup: "kubevirt.io"
+    kind: VirtualMachine
+    name: ubuntu-web-server
 
-  # 備份類型：Full 或 Incremental
-  type: Incremental
+    # 類型 2：從 VirtualMachineSnapshot 匯出（推薦）
+    # apiGroup: "snapshot.kubevirt.io"
+    # kind: VirtualMachineSnapshot
+    # name: ubuntu-snapshot-20240115
 
-  # 增量備份的參考基準（上次備份的名稱）
-  incrementalBackupContentName: last-backup-content
+    # 類型 3：直接從 PVC 匯出
+    # apiGroup: ""
+    # kind: PersistentVolumeClaim
+    # name: ubuntu-rootdisk-pvc
 
-  # 刪除策略
-  deletionPolicy: Retain
+  # tokenSecretRef：包含存取 token 的 Secret 名稱
+  tokenSecretRef: ubuntu-export-token
+
+  # ttlDuration：Export 服務的有效期限
+  ttlDuration: "2h"
 ```
 
-增量備份使用 CBT（Changed Block Tracking）技術，只備份自上次備份以來變更的磁碟區塊。
+### 建立存取 Token
+
+```bash
+kubectl create secret generic ubuntu-export-token \
+  --from-literal=token="$(openssl rand -base64 32)" \
+  -n production
+```
+
+### Status 欄位與下載連結
+
+```yaml
+status:
+  phase: Ready
+
+  tokenSecretRef: ubuntu-export-token
+
+  links:
+    internal:
+      cert: "<base64 CA certificate>"
+      volumes:
+        - name: rootdisk
+          formats:
+            - format: raw
+              url: "https://virt-export-ubuntu-export.production.svc/volumes/rootdisk/disk.img"
+            - format: gzip
+              url: "https://virt-export-ubuntu-export.production.svc/volumes/rootdisk/disk.img.gz"
+            - format: archive
+              url: "https://virt-export-ubuntu-export.production.svc/volumes/rootdisk/disk.tar.gz"
+
+    external:
+      cert: "<base64 CA certificate>"
+      volumes:
+        - name: rootdisk
+          formats:
+            - format: raw
+              url: "https://vm-export.example.com/volumes/rootdisk/disk.img"
+            - format: vmdk
+              url: "https://vm-export.example.com/volumes/rootdisk/disk.vmdk"
+```
+
+### 支援的匯出格式
+
+| 格式 | 說明 | 適用場景 |
+|------|------|---------|
+| `raw` | 原始磁碟映像（.img） | 通用，可直接掛載 |
+| `gzip` | gzip 壓縮的 raw 格式（.img.gz） | 節省傳輸頻寬 |
+| `vmdk` | VMware 磁碟格式（.vmdk） | 遷移到 VMware vSphere |
+| `archive` | tar 封存（包含所有磁碟） | 多磁碟 VM 的完整備份 |
+
+---
+
+## CSI Volume Snapshot 依賴關係
+
+KubeVirt 的 Snapshot 功能依賴 Kubernetes 的 **CSI Volume Snapshot** 機制。
+
+### 必要元件
+
+```
+Storage Provider（如 Ceph, AWS EBS）
+    ↓
+CSI Driver（實作 VolumeSnapshot API）
+    ↓
+VolumeSnapshotClass（設定快照參數）
+    ↓
+KubeVirt（使用 VolumeSnapshotClass 建立 VolumeSnapshot）
+```
+
+### VolumeSnapshotClass 設定範例
+
+```yaml
+# Ceph RBD CSI 的 VolumeSnapshotClass
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshotClass
+metadata:
+  name: ceph-rbd-snapshotclass
+  annotations:
+    snapshot.storage.kubernetes.io/is-default-class: "true"
+driver: rbd.csi.ceph.com
+deletionPolicy: Delete
+parameters:
+  clusterID: "your-ceph-cluster-id"
+  csi.storage.k8s.io/snapshotter-secret-name: ceph-csi-secret
+  csi.storage.k8s.io/snapshotter-secret-namespace: ceph-system
+---
+# AWS EBS CSI 的 VolumeSnapshotClass
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshotClass
+metadata:
+  name: ebs-vsc
+  annotations:
+    snapshot.storage.kubernetes.io/is-default-class: "true"
+driver: ebs.csi.aws.com
+deletionPolicy: Delete
+parameters:
+  tagSpecification_1: "Name={{.VolumeSnapshotNamespace}}/{{.VolumeSnapshotName}}"
+```
+
+### KubeVirt 選擇 VolumeSnapshotClass 的邏輯
+
+1. **優先使用標記為預設的 VolumeSnapshotClass**（`is-default-class: "true"`）
+2. 若無預設，使用與 PVC 相同 CSI Driver 的 VolumeSnapshotClass
+3. 若有多個符合條件的，依照字母順序選擇第一個
+
+:::warning 快照功能無法使用的常見原因
+```bash
+# 檢查是否有可用的 VolumeSnapshotClass
+kubectl get volumesnapshotclass
+
+# 檢查 CSI driver 是否支援 snapshot
+kubectl get csidriver -o custom-columns='NAME:.metadata.name,SNAPSHOT:.spec.volumeLifecycleModes'
+
+# 若沒有任何 VolumeSnapshotClass，快照功能將無法使用
+kubectl describe vmsnapshot <name> -n <namespace>
+```
+:::
 
 ---
 
 ## 完整操作流程
 
-### 建立並使用 Snapshot
+```mermaid
+sequenceDiagram
+    participant User as 使用者
+    participant K8s as Kubernetes API
+    participant KV as KubeVirt
+    participant CSI as CSI Driver
+    participant VM as 虛擬機器
 
-```bash
-# 1. 建立快照
-kubectl apply -f - <<EOF
-apiVersion: snapshot.kubevirt.io/v1beta1
-kind: VirtualMachineSnapshot
-metadata:
-  name: pre-upgrade-snapshot
-spec:
-  source:
-    apiGroup: kubevirt.io
-    kind: VirtualMachine
-    name: production-vm
-  failureDeadline: "5m0s"
-EOF
+    Note over User,VM: 建立快照流程
+    User->>K8s: 建立 VirtualMachineSnapshot
+    K8s->>KV: 觸發 snapshot controller
+    KV->>VM: 通知 guest agent 執行 fsfreeze
+    VM-->>KV: fsfreeze 完成
+    KV->>CSI: 建立 VolumeSnapshot（每個磁碟）
+    CSI-->>KV: VolumeSnapshot 就緒
+    KV->>VM: 通知 guest agent 執行 fsthaw
+    VM-->>KV: fsthaw 完成
+    KV->>K8s: 更新 VirtualMachineSnapshotContent
+    K8s-->>User: status.readyToUse = true
 
-# 2. 等待快照就緒
-kubectl wait vmsnapshot pre-upgrade-snapshot \
-  --for=jsonpath='{.status.readyToUse}'=true \
-  --timeout=300s
+    Note over User,VM: 原地還原流程
+    User->>K8s: 停止 VM（runStrategy: Halted）
+    User->>K8s: 建立 VirtualMachineRestore
+    K8s->>KV: 觸發 restore controller
+    KV->>CSI: 從 VolumeSnapshot 建立新 PVC
+    CSI-->>KV: PVC 建立完成
+    KV->>K8s: 更新 VM 使用新 PVC
+    K8s-->>User: status.complete = true
+    User->>K8s: 啟動 VM
 
-# 3. 確認快照狀態
-kubectl get vmsnapshot pre-upgrade-snapshot -o yaml
-
-# 4. （在升級失敗後）建立還原
-kubectl apply -f - <<EOF
-apiVersion: snapshot.kubevirt.io/v1beta1
-kind: VirtualMachineRestore
-metadata:
-  name: restore-from-pre-upgrade
-spec:
-  target:
-    apiGroup: kubevirt.io
-    kind: VirtualMachine
-    name: production-vm
-  virtualMachineSnapshotName: pre-upgrade-snapshot
-EOF
-
-# 5. 等待還原完成
-kubectl wait vmrestore restore-from-pre-upgrade \
-  --for=condition=Ready \
-  --timeout=600s
-
-# 6. 查看還原結果
-kubectl get vmrestore restore-from-pre-upgrade -o yaml
-```
-
-### 克隆 VM
-
-```bash
-# 克隆 VM
-kubectl apply -f - <<EOF
-apiVersion: clone.kubevirt.io/v1alpha1
-kind: VirtualMachineClone
-metadata:
-  name: dev-clone
-spec:
-  source:
-    apiGroup: kubevirt.io
-    kind: VirtualMachine
-    name: template-vm
-  target:
-    apiGroup: kubevirt.io
-    kind: VirtualMachine
-    name: dev-vm-01
-  newMacAddresses:
-    eth0: ""  # 自動分配新 MAC
-  labelFilters:
-  - "!kubevirt.io/*"
-  - "*"
-EOF
-
-# 等待克隆完成
-kubectl wait vmclone dev-clone \
-  --for=jsonpath='{.status.phase}'=Succeeded \
-  --timeout=600s
-```
-
-### 使用 virtctl 管理
-
-```bash
-# 快照操作
-virtctl vmexport create my-export --vm=my-vm
-virtctl vmexport download my-export --output=/tmp/disk.img --volume=rootdisk
-
-# 查看 VM 匯出連結
-virtctl vmexport get my-export
-
-# 刪除匯出
-virtctl vmexport delete my-export
+    Note over User,VM: Clone 流程
+    User->>K8s: 建立 VirtualMachineClone
+    K8s->>KV: 觸發 clone controller
+    KV->>K8s: 建立臨時 VirtualMachineSnapshot
+    K8s-->>KV: 快照就緒
+    KV->>K8s: 建立目標 VM 框架
+    KV->>CSI: 從快照建立新 PVC（新 VM 使用）
+    CSI-->>KV: 新 PVC 就緒
+    KV->>K8s: 更新 Clone status = Succeeded
+    K8s-->>User: 新 VM 可以啟動
 ```
 
 ---
 
-## CSI Volume Snapshot 依賴
+## 完整 YAML 範例
 
-KubeVirt Snapshot 功能依賴 CSI 驅動的 VolumeSnapshot 支援：
+### VirtualMachineSnapshot 範例
 
-```bash
-# 確認 CSI 驅動支援 VolumeSnapshot
-kubectl get volumesnapshotclasses
-
-# 確認 VolumeSnapshot CRD 已安裝
-kubectl api-resources | grep volumesnapshot
-
-# 查看自動建立的 CSI VolumeSnapshot
-kubectl get volumesnapshot
+```yaml
+apiVersion: snapshot.kubevirt.io/v1beta1
+kind: VirtualMachineSnapshot
+metadata:
+  name: prod-ubuntu-snapshot-daily
+  namespace: production
+  annotations:
+    snapshot.kubevirt.io/description: "Daily backup - 2024-01-15 10:00"
+spec:
+  source:
+    apiGroup: "kubevirt.io"
+    kind: VirtualMachine
+    name: ubuntu-web-server
+  deletionPolicy: Retain
+  failureDeadline: "10m"
 ```
 
-::: warning 儲存後端要求
-- 必須使用支援 VolumeSnapshot 的 CSI 驅動（如 Rook Ceph, Dell CSI, NetApp Trident）
-- HostPath / Local Path 等本地儲存**不支援** VolumeSnapshot
-- DataVolume 使用的 PVC 也需要相同的 CSI 驅動支援
-:::
+### VirtualMachineRestore 範例（原地還原）
+
+```yaml
+# 步驟 1：先停止 VM
+# kubectl patch vm ubuntu-web-server -n production \
+#   --type merge -p '{"spec":{"runStrategy":"Halted"}}'
+
+# 步驟 2：建立 Restore 物件
+apiVersion: snapshot.kubevirt.io/v1beta1
+kind: VirtualMachineRestore
+metadata:
+  name: ubuntu-restore-to-daily
+  namespace: production
+spec:
+  target:
+    apiGroup: "kubevirt.io"
+    kind: VirtualMachine
+    name: ubuntu-web-server
+  virtualMachineSnapshotName: prod-ubuntu-snapshot-daily
+  # 只還原系統磁碟，保留資料磁碟的當前狀態
+  excludeVolumes:
+    - datadisk
+  patches:
+    - '{"op":"replace","path":"/spec/template/spec/hostname","value":"ubuntu-restored"}'
+```
+
+### VirtualMachineClone 範例（克隆為新 VM）
+
+```yaml
+# 從快照克隆新環境（推薦方式，不影響原 VM）
+apiVersion: clone.kubevirt.io/v1beta1
+kind: VirtualMachineClone
+metadata:
+  name: clone-ubuntu-to-staging
+  namespace: production
+spec:
+  source:
+    apiGroup: "snapshot.kubevirt.io"
+    kind: VirtualMachineSnapshot
+    name: prod-ubuntu-snapshot-daily
+  target:
+    apiGroup: "kubevirt.io"
+    kind: VirtualMachine
+    name: ubuntu-staging
+  annotationFilters:
+    - "*"
+    - "!kubevirt.io/*"
+    - "!cdi.kubevirt.io/*"
+  labelFilters:
+    - "*"
+    - "!environment"
+    - "!tier"
+  newMacAddresses:
+    default: "02:11:22:33:44:55"
+  newSMBiosSerial: "STAGING-001"
+---
+# 從正在運行的 VM 直接克隆
+apiVersion: clone.kubevirt.io/v1beta1
+kind: VirtualMachineClone
+metadata:
+  name: clone-ubuntu-for-dev-alice
+  namespace: production
+spec:
+  source:
+    apiGroup: "kubevirt.io"
+    kind: VirtualMachine
+    name: ubuntu-web-server
+  target:
+    apiGroup: "kubevirt.io"
+    kind: VirtualMachine
+    name: ubuntu-dev-alice
+  newMacAddresses:
+    default: "02:aa:bb:cc:dd:01"
+  newSMBiosSerial: "DEV-ALICE-001"
+```
+
+### VirtualMachineExport 範例
+
+```yaml
+# 步驟 1：建立 token secret
+# kubectl create secret generic ubuntu-export-token \
+#   --from-literal=token="$(openssl rand -hex 32)" -n production
+
+# 步驟 2：建立 Export 物件
+apiVersion: export.kubevirt.io/v1beta1
+kind: VirtualMachineExport
+metadata:
+  name: ubuntu-export-for-migration
+  namespace: production
+spec:
+  source:
+    apiGroup: "snapshot.kubevirt.io"
+    kind: VirtualMachineSnapshot
+    name: prod-ubuntu-snapshot-daily
+  tokenSecretRef: ubuntu-export-token
+  ttlDuration: "4h"
+```
 
 ---
 
 ## 常用操作指令
 
+### virtctl vmexport 相關指令
+
 ```bash
-# Snapshot
-kubectl get vmsnapshot                         # 列出所有快照
-kubectl get vmsnapshot my-snap -o yaml         # 查看快照詳情
-kubectl delete vmsnapshot old-snapshot         # 刪除快照
+# 建立 Export 並等待就緒
+virtctl vmexport create ubuntu-export \
+  --vm=ubuntu-web-server \
+  --namespace=production
 
-# Restore
-kubectl get vmrestore                          # 列出所有還原操作
-kubectl describe vmrestore my-restore         # 查看還原詳情
+# 下載匯出的磁碟（raw 格式）
+virtctl vmexport download ubuntu-export \
+  --output=ubuntu-disk.img \
+  --volume=rootdisk \
+  --namespace=production
 
-# Clone
-kubectl get vmclone                            # 列出所有克隆操作
-kubectl describe vmclone my-clone             # 查看克隆詳情
+# 下載匯出的磁碟（vmdk 格式，用於 VMware）
+virtctl vmexport download ubuntu-export \
+  --output=ubuntu-disk.vmdk \
+  --volume=rootdisk \
+  --format=vmdk \
+  --namespace=production
 
-# Export
-kubectl get vmexport                           # 列出所有匯出操作
-virtctl vmexport create exp1 --vm=my-vm       # 建立匯出
-virtctl vmexport download exp1 \              # 下載磁碟
-  --output=/tmp/disk.raw \
-  --volume=rootdisk
+# 刪除 Export
+virtctl vmexport delete ubuntu-export --namespace=production
+```
 
-# 一鍵備份腳本
-for VM in $(kubectl get vm -o name); do
-  VM_NAME=$(echo $VM | cut -d/ -f2)
-  kubectl apply -f - <<EOF
+### kubectl 查詢快照狀態指令
+
+```bash
+# 查看所有快照
+kubectl get vmsnapshot -n production
+
+# 查看快照詳細狀態（包含 indications 和 error）
+kubectl describe vmsnapshot prod-ubuntu-snapshot-daily -n production
+
+# 監看快照建立進度
+kubectl get vmsnapshot prod-ubuntu-snapshot-daily -n production \
+  -o jsonpath='{.status.phase}' --watch
+
+# 查看快照包含的 volume
+kubectl get vmsnapshot prod-ubuntu-snapshot-daily -n production \
+  -o jsonpath='{.status.snapshotVolumes}'
+
+# 查看底層 VolumeSnapshot
+kubectl get volumesnapshot -n production
+
+# 查看 VirtualMachineSnapshotContent
+kubectl get vmsnapshotcontent -n production
+
+# 查看還原狀態
+kubectl get vmrestore -n production
+kubectl describe vmrestore ubuntu-restore-to-daily -n production
+
+# 查看 Clone 狀態
+kubectl get vmclone -n production
+kubectl get vmclone clone-ubuntu-to-staging -n production \
+  -o jsonpath='{.status.phase}'
+
+# 查看 Export 狀態與下載連結
+kubectl get vmexport -n production
+kubectl get vmexport ubuntu-export-for-migration -n production \
+  -o jsonpath='{.status.links}'
+
+# 等待快照就緒（腳本使用）
+kubectl wait vmsnapshot prod-ubuntu-snapshot-daily \
+  --for=jsonpath='{.status.readyToUse}'=true \
+  --timeout=300s \
+  -n production
+
+# 等待 Clone 完成
+kubectl wait vmclone clone-ubuntu-to-staging \
+  --for=jsonpath='{.status.phase}'=Succeeded \
+  --timeout=600s \
+  -n production
+```
+
+:::tip 自動化快照腳本
+```bash
+#!/bin/bash
+VM_NAME="ubuntu-web-server"
+NAMESPACE="production"
+DATE=$(date +%Y%m%d-%H%M%S)
+SNAPSHOT_NAME="${VM_NAME}-snapshot-${DATE}"
+
+kubectl apply -f - <<EOF
 apiVersion: snapshot.kubevirt.io/v1beta1
 kind: VirtualMachineSnapshot
 metadata:
-  name: daily-${VM_NAME}-$(date +%Y%m%d)
+  name: ${SNAPSHOT_NAME}
+  namespace: ${NAMESPACE}
 spec:
   source:
-    apiGroup: kubevirt.io
+    apiGroup: "kubevirt.io"
     kind: VirtualMachine
     name: ${VM_NAME}
+  deletionPolicy: Retain
+  failureDeadline: "10m"
 EOF
-done
+
+kubectl wait vmsnapshot ${SNAPSHOT_NAME} \
+  --for=jsonpath='{.status.readyToUse}'=true \
+  --timeout=600s \
+  -n ${NAMESPACE}
+
+echo "Snapshot ${SNAPSHOT_NAME} created successfully"
+
+# 保留最近 7 個，刪除舊快照
+kubectl get vmsnapshot -n ${NAMESPACE} \
+  --sort-by=.metadata.creationTimestamp \
+  -o name | head -n -7 | xargs -r kubectl delete -n ${NAMESPACE}
 ```
+:::

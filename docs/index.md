@@ -13,11 +13,11 @@ hero:
       text: 🏗️ 開始學習架構
       link: /architecture/overview
     - theme: alt
-      text: ⚙️ 核心元件解析
-      link: /components/virt-operator
+      text: 🔬 深入剖析 QEMU/KVM
+      link: /deep-dive/qemu-kvm
     - theme: alt
-      text: 🛠️ virtctl 操作指南
-      link: /virtctl/guide
+      text: 📖 VMware 工程師指南
+      link: /guides/vmware-to-kubevirt
 
 features:
   - icon: 🖥️
@@ -43,6 +43,26 @@ features:
   - icon: 📸
     title: 快照、備份與還原
     details: 完整的 VM 生命週期管理 — 快照 (Snapshot)、克隆 (Clone)、備份 (Backup)、匯出 (Export)，確保資料安全。
+
+  - icon: 🔬
+    title: QEMU/KVM 深入剖析
+    details: 深入 virt-launcher 三層架構、Configurator 模式、DomainManager 介面、libvirt XML 產生流程，掌握虛擬化核心。
+
+  - icon: 🪟
+    title: Windows VM 最佳化
+    details: 14 種 Hyper-V Enlightenment、時脈配置、EFI/TPM/Secure Boot、VirtIO 驅動安裝，打造生產級 Windows VM。
+
+  - icon: 🔄
+    title: Live Migration 實作細節
+    details: 8 階段狀態機、Pre-copy/Post-copy/Multifd 策略、Migration Proxy 架構、libvirt API 呼叫流程完整解析。
+
+  - icon: 🛡️
+    title: 安全與效能調校
+    details: SELinux/Namespace 隔離、SEV/TDX 機密運算、CPU Pinning、NUMA 拓撲、HugePages、網路與磁碟效能最佳化。
+
+  - icon: 🔀
+    title: VMware 工程師轉換指南
+    details: 從 VMware vSphere/ESXi 概念對應到 KubeVirt，一對一功能對照表、操作指令對比、遷移策略。
 ---
 
 ## 📚 本指南涵蓋範圍
@@ -58,6 +78,8 @@ features:
 | [💾 儲存](/storage/overview) | ContainerDisk、PVC、DataVolume、Hotplug、儲存遷移 |
 | [🛠️ virtctl](/virtctl/guide) | 完整 virtctl 指令參考手冊 |
 | [🚀 進階功能](/advanced/live-migration) | Live Migration、Snapshot/Restore、Observability |
+| [🔬 深入剖析](/deep-dive/qemu-kvm) | QEMU/KVM 核心、Windows 最佳化、Migration 實作、效能調校、安全架構 |
+| [📖 實用指南](/guides/vmware-to-kubevirt) | VMware 轉換指南、故障排除手冊 |
 | [👨‍💻 開發指南](/dev-guide/getting-started) | 開發環境設置、程式碼結構導覽 |
 
 ## 🔑 快速索引
@@ -69,8 +91,13 @@ features:
 - **各元件的職責？** → [核心元件](/components/virt-operator)
 - **VM 與 VMI 的差別？** → [VM 與 VMI](/api-resources/vm-vmi)
 - **如何連線進 VM？** → [virtctl 存取操作](/virtctl/access)
-- **如何做 Live Migration？** → [Live Migration](/advanced/live-migration)
+- **如何做 Live Migration？** → [Live Migration](/advanced/live-migration) | [深入實作](/deep-dive/migration-internals)
 - **如何管理 VM 儲存？** → [儲存架構](/storage/overview)
+- **QEMU/KVM 如何運作？** → [QEMU/KVM 深入剖析](/deep-dive/qemu-kvm)
+- **Windows VM 怎麼跑最快？** → [Windows VM 最佳化](/deep-dive/windows-optimization)
+- **從 VMware 轉過來？** → [VMware 工程師指南](/guides/vmware-to-kubevirt)
+- **效能不夠好？** → [效能調校指南](/deep-dive/performance-tuning)
+- **出問題了？** → [故障排除手冊](/guides/troubleshooting)
 
 ## 🏷️ KubeVirt 核心概念速覽
 
