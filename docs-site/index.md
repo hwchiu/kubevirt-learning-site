@@ -10,11 +10,20 @@ hero:
     alt: KubeVirt
   actions:
     - theme: brand
-      text: 📘 KubeVirt 分析
+      text: 🖥️ KubeVirt
       link: /kubevirt/architecture/overview
     - theme: alt
-      text: 💾 CDI 分析
+      text: 💾 CDI
       link: /containerized-data-importer/
+    - theme: alt
+      text: 📊 Monitoring
+      link: /monitoring/
+    - theme: alt
+      text: 📋 Instancetypes
+      link: /common-instancetypes/
+    - theme: alt
+      text: 🔧 NMO
+      link: /node-maintenance-operator/
 
 features:
   - icon: 🖥️
