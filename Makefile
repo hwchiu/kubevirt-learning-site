@@ -1,4 +1,4 @@
-.PHONY: dev build preview install clean setup check-deps init-submodules
+.PHONY: dev build preview install clean setup check-deps init-submodules update-submodules submodule-status
 
 # ============================================================
 # 首次設置
@@ -17,6 +17,26 @@ init-submodules:
 	@echo "📦 初始化 git submodules..."
 	git submodule update --init --recursive
 	@echo "✅ Submodules 已初始化"
+
+# 更新所有 submodules 至追蹤分支的最新 commit
+update-submodules:
+	@echo "🔄 更新所有 submodules..."
+	git submodule update --remote --merge
+	@echo ""
+	@echo "📋 更新後狀態："
+	@git submodule status
+	@echo ""
+	@echo "✅ Submodules 已更新至最新版本"
+	@echo "   執行 git diff 檢視變更"
+	@echo "   確認後執行 git add -A && git commit 提交新版本"
+
+# 顯示所有 submodules 當前狀態與版本
+submodule-status:
+	@echo "📦 Submodule 狀態："
+	@git submodule status
+	@echo ""
+	@echo "📋 追蹤分支設定："
+	@git config --file .gitmodules --get-regexp 'submodule\..*\.branch' | sed 's/submodule\.\(.*\)\.branch/  \1:/'
 
 # 首次完整設置（新專案 clone 後執行此目標）
 setup: check-deps init-submodules install

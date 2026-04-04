@@ -35,8 +35,10 @@ digraph workflow {
   write [label="Phase 3: Write\n(4 parallel agents)"];
   integrate [label="Phase 4: Integrate\n(config + build)"];
   verify [label="Phase 5: Verify\n(build + preview)"];
+  update [label="Phase 6: Update\n(version bump + re-analyze)"];
 
   setup -> explore -> write -> integrate -> verify;
+  verify -> update [label="未來更新時", style=dashed];
 }
 ```
 
@@ -515,3 +517,64 @@ Context hint 根據 `project` 參數動態指定目標目錄：
 ```
 請基於 ./{project}/ 目錄下的原始碼以及 ./docs-site/{project}/ 的分析文件來回答。
 ```
+
+---
+
+## Phase 6: 更新維護
+
+當上游專案有新版本時，按以下流程更新文件。
+
+### 6.1 Submodule 版本管理
+
+所有 submodule 都綁定 `branch = main`，使用 Makefile 指令管理：
+
+```bash
+# 查看目前所有 submodule 版本
+make submodule-status
+
+# 更新所有 submodule 至最新 commit
+make update-submodules
+
+# 更新單一 submodule
+cd {project-name} && git pull origin main && cd ..
+```
+
+### 6.2 更新影響判斷
+
+更新 submodule 後，根據變更幅度決定處理方式：
+
+| 變更幅度 | 判斷依據 | 處理方式 |
+|---------|---------|---------|
+| **無需更新** | 僅 CI/CD、文件、測試變更 | 只更新 submodule commit，不改文件 |
+| **局部更新** | 新增 API、新增 Controller、新增功能模組 | 針對受影響的頁面重新執行 Phase 2→3 |
+| **完整更新** | 架構重構、大版本升級、核心元件重寫 | 完整重跑 Phase 2→5 |
+
+判斷方式：
+```bash
+# 進入 submodule 查看自上次分析以來的變更
+cd {project-name}
+git log --oneline {old-commit}..HEAD
+git diff --stat {old-commit}..HEAD
+```
+
+### 6.3 版本標記
+
+每個專案的 `index.md` 必須包含分析版本標記：
+
+```markdown
+::: tip 分析版本
+本文件基於 commit [`{short-sha}`]({github-url}/commit/{full-sha}) 進行分析。
+:::
+```
+
+更新文件後，同步更新此標記至新的 commit SHA。
+
+### 6.4 更新流程摘要
+
+1. `make update-submodules` — 拉取最新 code
+2. `git diff` — 檢視哪些 submodule 有變更
+3. 進入 submodule 查看 changelog / diff，判斷影響範圍
+4. 根據影響範圍執行對應的 Phase（局部或完整）
+5. 更新 `index.md` 的版本標記
+6. `make build` — 驗證建置
+7. `git add -A && git commit` — 提交更新

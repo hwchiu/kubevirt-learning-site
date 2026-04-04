@@ -4,6 +4,10 @@ layout: doc
 
 # KubeVirt Monitoring 原始碼分析
 
+::: tip 分析版本
+本文件基於 commit [`7cf151cb`](https://github.com/kubevirt/monitoring/commit/7cf151cb7271b65a2a4e09572ca09278ba2c0737) 進行分析。
+:::
+
 ## 專案簡介
 
 **KubeVirt Monitoring** 是 KubeVirt 生態系的集中式監控基礎設施專案，彙集了 Grafana 儀表板、Prometheus 告警規則與 Runbook，以及用於確保各 Operator 一致監控實踐的工具。

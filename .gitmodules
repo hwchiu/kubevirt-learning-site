@@ -1,21 +1,28 @@
 [submodule "kubevirt"]
 	path = kubevirt
 	url = https://github.com/kubevirt/kubevirt.git
+	branch = main
 [submodule "containerized-data-importer"]
 	path = containerized-data-importer
 	url = https://github.com/kubevirt/containerized-data-importer.git
+	branch = main
 [submodule "monitoring"]
 	path = monitoring
 	url = https://github.com/kubevirt/monitoring.git
+	branch = main
 [submodule "common-instancetypes"]
 	path = common-instancetypes
 	url = https://github.com/kubevirt/common-instancetypes.git
+	branch = main
 [submodule "node-maintenance-operator"]
 	path = node-maintenance-operator
 	url = https://github.com/medik8s/node-maintenance-operator.git
+	branch = main
 [submodule "forklift"]
 	path = forklift
 	url = https://github.com/kubev2v/forklift
+	branch = main
 [submodule "netbox"]
 	path = netbox
 	url = https://github.com/netbox-community/netbox.git
+	branch = main

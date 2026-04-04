@@ -4,6 +4,10 @@ layout: doc
 
 # Forklift — VM 遷移工具
 
+::: tip 分析版本
+本文件基於 commit [`2c5ffe2d`](https://github.com/kubev2v/forklift/commit/2c5ffe2d582cc9d599dedafcccb3a71a27409d20) 進行分析。
+:::
+
 [Forklift](https://github.com/kubev2v/forklift)（又稱 Migration Toolkit for Virtualization, MTV）是一個 Kubernetes Operator，負責將虛擬機器從 VMware vSphere、oVirt/RHV、OpenStack、Hyper-V 及 OVA 等來源遷移至 KubeVirt 環境。
 
 ## 文件導覽

@@ -4,6 +4,10 @@ layout: doc
 
 # Containerized Data Importer (CDI) 原始碼分析
 
+::: tip 分析版本
+本文件基於 commit [`d97a33c2`](https://github.com/kubevirt/containerized-data-importer/commit/d97a33c2f063258d14c6df27d297e84e3f48b779) 進行分析。
+:::
+
 ## 專案簡介
 
 **Containerized Data Importer (CDI)** 是 KubeVirt 生態系中負責資料管理的核心元件，提供將虛擬機器映像匯入 Kubernetes PersistentVolume 的能力。

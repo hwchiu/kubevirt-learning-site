@@ -4,6 +4,10 @@ layout: doc
 
 # NetBox — 專案總覽
 
+::: tip 分析版本
+本文件基於 commit [`09f7df07`](https://github.com/netbox-community/netbox/commit/09f7df072607d5562b54357965ed64c620c9af32) 進行分析。
+:::
+
 ## 專案資訊
 
 | 項目 | 說明 |

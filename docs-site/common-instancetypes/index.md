@@ -4,6 +4,10 @@ layout: doc
 
 # Common Instancetypes 原始碼分析
 
+::: tip 分析版本
+本文件基於 commit [`bbcbba4b`](https://github.com/kubevirt/common-instancetypes/commit/bbcbba4b4620d46bd9c8d285726bcd06add34a1c) 進行分析。
+:::
+
 ## 專案簡介
 
 **Common Instancetypes** 提供一組標準化的 VirtualMachineInstancetype 與 VirtualMachinePreference 定義，類似 AWS EC2 Instance Types 的概念，讓使用者能快速建立具有一致資源配置的虛擬機器。
