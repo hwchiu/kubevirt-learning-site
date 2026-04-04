@@ -19,6 +19,8 @@ Use this checklist to verify documentation quality before committing.
 - [ ] Processing flow diagrams (Mermaid sequence/flowchart)
 - [ ] `::: tip` containers for key insights
 - [ ] No fabricated code — all snippets verified against source
+- [ ] **IF 含演算法**: 獨立區塊含問題定義、核心邏輯程式碼、決策流程圖、複雜度分析
+- [ ] **IF 含 CLI 工具**: 指令清單、參數說明、使用範例
 
 ### controllers-api.md
 - [ ] Controller/tool registration documented
@@ -27,6 +29,8 @@ Use this checklist to verify documentation quality before committing.
 - [ ] Webhook validation rules documented
 - [ ] RBAC permissions table
 - [ ] Test architecture overview
+- [ ] **IF 提供 HTTP/gRPC API**: Endpoint 清單、Request/Response 結構、HTTP status codes、認證方式
+- [ ] **IF 有 Webhook**: 路徑、觸發資源、驗證規則、拒絕情境與錯誤訊息
 
 ### integration.md
 - [ ] Primary ecosystem integration documented
@@ -34,6 +38,7 @@ Use this checklist to verify documentation quality before committing.
 - [ ] CI/CD workflows documented
 - [ ] Usage examples from config/samples/
 - [ ] Integration architecture diagram (Mermaid)
+- [ ] **IF 有自定義 Metrics**: Metric 名稱、類型、Labels、PromQL 範例
 
 ## Cross-Page Checks
 

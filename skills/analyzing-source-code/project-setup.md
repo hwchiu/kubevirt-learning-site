@@ -16,7 +16,7 @@ How to set up a new documentation site project from scratch using this skill's w
 mkdir my-analysis-site && cd my-analysis-site
 git init
 npm init -y
-npm install -D vitepress
+npm install -D vitepress vitepress-plugin-mermaid mermaid
 ```
 
 ### 2. Create package.json Scripts
@@ -32,7 +32,9 @@ npm install -D vitepress
     "preview": "vitepress preview docs-site"
   },
   "devDependencies": {
-    "vitepress": "^1.6.4"
+    "mermaid": "^11.0.0",
+    "vitepress": "^1.6.4",
+    "vitepress-plugin-mermaid": "^2.0.0"
   }
 }
 ```
@@ -89,6 +91,7 @@ clean:
 ```javascript
 // docs-site/.vitepress/config.js
 import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 
 // Define sidebar arrays per project
 const project1Sidebar = [
@@ -104,7 +107,7 @@ const project1Sidebar = [
   },
 ]
 
-export default defineConfig({
+export default withMermaid(defineConfig({
   base: '/my-analysis-site/',
   title: '原始碼分析',
   description: '開源專案原始碼深度分析',
@@ -126,8 +129,11 @@ export default defineConfig({
     outline: { label: '本頁目錄', level: [2, 3] },
     docFooter: { prev: '上一頁', next: '下一頁' },
     lastUpdated: { text: '最後更新' }
+  },
+  mermaid: {
+    theme: 'default'
   }
-})
+}))
 ```
 
 ### 5. Create Homepage

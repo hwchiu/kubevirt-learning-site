@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 
 const kubevirtSidebar = [
   {
@@ -149,7 +150,7 @@ const nmoSidebar = [
   },
 ]
 
-export default defineConfig({
+export default withMermaid(defineConfig({
   base: '/kubevirt-learning-site/',
   title: 'KubeVirt 生態系原始碼分析',
   description: '深入分析 KubeVirt 生態系各專案原始碼 — 架構、元件、API 與實作細節',
@@ -202,5 +203,8 @@ export default defineConfig({
     lastUpdated: {
       text: '最後更新'
     }
+  },
+  mermaid: {
+    theme: 'default'
   }
-})
+}))

@@ -71,6 +71,89 @@ Not all projects are Kubernetes operators. Adapt the agents:
 - **Operators** (e.g., CDI, NMO): Standard controller/CRD/webhook analysis
 :::
 
+### Conditional Analysis Dimensions
+
+根據專案特性，探索與撰寫階段需額外涵蓋以下內容：
+
+| 條件 | 額外分析內容 | 文件歸屬 |
+|------|-------------|----------|
+| 含有特殊演算法（排程、選擇策略、狀態機轉換） | 獨立區塊說明演算法邏輯、時間/空間複雜度、決策流程圖 | core-features.md |
+| 提供 HTTP/gRPC API 供外部呼叫 | API endpoint 清單、Request/Response 結構、HTTP status codes、認證方式 | controllers-api.md |
+| 含有 Webhook（Validating/Mutating） | Webhook 路徑、觸發資源、驗證規則、拒絕情境與錯誤訊息 | controllers-api.md |
+| 使用狀態機（Phase/State transitions） | 完整狀態流轉圖（Mermaid stateDiagram）、觸發條件、錯誤狀態處理 | architecture.md |
+| 含有 CLI 工具或子命令 | 指令清單、參數說明、使用範例 | core-features.md |
+| 含有自定義 Metrics | Metric 名稱、類型、Labels、PromQL 範例 | integration.md |
+
+#### 演算法分析格式
+
+```markdown
+## {演算法名稱}
+
+### 問題定義
+
+{這個演算法要解決什麼問題}
+
+### 核心邏輯
+
+\```go
+// 檔案: pkg/path/to/algorithm.go
+// 實際演算法程式碼
+\```
+
+### 決策流程
+
+\```mermaid
+flowchart TD
+    A[輸入] --> B{條件判斷}
+    B -->|情境 A| C[策略 A]
+    B -->|情境 B| D[策略 B]
+\```
+
+### 複雜度與限制
+
+| 面向 | 說明 |
+|------|------|
+| 時間複雜度 | O(n) / O(n log n) 等 |
+| 限制條件 | {具體限制} |
+| Fallback 策略 | {降級方案} |
+```
+
+#### API 分析格式
+
+```markdown
+## API Endpoints
+
+### {HTTP Method} {Path}
+
+**功能**: {說明}
+
+**Request:**
+\```json
+{
+  "field": "value"
+}
+\```
+
+**Response:**
+
+| HTTP Status | 說明 |
+|-------------|------|
+| 200 | 成功 |
+| 400 | 請求格式錯誤 |
+| 401 | 未認證（Token 過期或無效） |
+| 403 | 權限不足 |
+| 404 | 資源不存在 |
+| 409 | 資源衝突 |
+| 500 | 內部錯誤 |
+
+**認證方式**: Bearer Token / ServiceAccount / mTLS
+
+\```go
+// 檔案: pkg/apiserver/handler.go
+// 實際 handler 程式碼
+\```
+```
+
 ### Phase 3: Documentation Writing (4 Parallel Agents)
 
 Launch 4 `general-purpose` agents to write markdown pages based on exploration findings.
@@ -128,10 +211,19 @@ func handleClone() {
 - Never invent functions, types, or behaviors
 
 ### VitePress Features
-- **Mermaid diagrams** for architecture and state machines
+- **Mermaid diagrams** for architecture and state machines — **必須安裝 `vitepress-plugin-mermaid`**
+  ```bash
+  npm install vitepress-plugin-mermaid mermaid --save-dev
+  ```
+  ```js
+  // config.js
+  import { withMermaid } from 'vitepress-plugin-mermaid'
+  export default withMermaid(defineConfig({ /* ... */ }))
+  ```
 - **`::: tip` / `::: info` / `::: warning`** containers for callouts
 - **Tables** for structured data (binaries, CRDs, metrics, permissions)
 - **Code blocks** with language syntax highlighting (go, yaml, bash, json)
+- **⚠️ 注意**: `{{ }}` Go/GitHub Actions template syntax 在 code fence 外會被 Vue 解析而報錯，需改寫或使用 inline code
 
 ### Page Structure Template
 ```markdown
