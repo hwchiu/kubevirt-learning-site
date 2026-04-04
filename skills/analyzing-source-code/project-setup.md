@@ -313,7 +313,16 @@ export default withMermaid(defineConfig({
 
 ```bash
 git submodule add https://github.com/org/project-1.git project-1
+
+# 確認 repo 的預設分支（不一定是 main，可能是 master、develop 等）
+git -C project-1 remote show origin | grep 'HEAD branch'
+
+# 設定追蹤分支（使用實際的預設分支）
+# 若使用者未指定特定 branch，預設使用 main
+git config -f .gitmodules submodule.project-1.branch main
 ```
+
+> **注意：** 每個 repo 的預設分支可能不同（main / master / develop），加入 submodule 時務必確認並正確設定 `.gitmodules` 中的 `branch` 欄位。
 
 ## Adding a New Project
 
@@ -323,12 +332,17 @@ Follow the skill's core workflow:
 # 1. Add submodule
 git submodule add https://github.com/org/new-project.git new-project
 
-# 2. Create docs directory
+# 2. 確認預設分支並設定追蹤
+DEFAULT_BRANCH=$(git -C new-project remote show origin | grep 'HEAD branch' | awk '{print $NF}')
+git config -f .gitmodules submodule.new-project.branch "$DEFAULT_BRANCH"
+echo "追蹤分支: $DEFAULT_BRANCH"
+
+# 3. Create docs directory
 mkdir -p docs-site/new-project
 
-# 3. Run the 5-phase analysis workflow (see SKILL.md)
+# 4. Run the 5-phase analysis workflow (see SKILL.md)
 
-# 4. Build and verify
+# 5. Build and verify
 make build
 make preview
 ```

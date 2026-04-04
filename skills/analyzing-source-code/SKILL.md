@@ -46,6 +46,15 @@ digraph workflow {
 ### Phase 1: Setup (Sequential)
 
 1. Add the project as a git submodule at the repo root
+   - 確認目標 repo 的預設分支（可能是 `main`、`master`、`develop` 等）
+   - 在 `.gitmodules` 中設定 `branch`，若使用者未指定則預設為 `main`
+   ```bash
+   git submodule add {repo-url} {project-name}
+   # 確認預設分支
+   git -C {project-name} remote show origin | grep 'HEAD branch'
+   # 設定追蹤分支（使用實際的預設分支，非硬編碼 main）
+   git config -f .gitmodules submodule.{project-name}.branch {actual-default-branch}
+   ```
 2. Create documentation directory: `docs-site/{project-name}/`
 3. Create `index.md` with project overview and doc navigation table
 4. Update `docs-site/.vitepress/config.js`:
