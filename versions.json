@@ -3,7 +3,7 @@
   "projects": {
     "kubevirt": {
       "repo": "https://github.com/kubevirt/kubevirt",
-      "analyzed_commit": "1784f2b81a4cb6b535851186838557e363325cb8",
+      "analyzed_commit": "008128a79acd9fc37a9e2a969dcc96a4c38be784",
       "analyzed_date": "2026-04-04",
       "pages": {
         "architecture": {
