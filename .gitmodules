@@ -4,3 +4,12 @@
 [submodule "containerized-data-importer"]
 	path = containerized-data-importer
 	url = https://github.com/kubevirt/containerized-data-importer.git
+[submodule "monitoring"]
+	path = monitoring
+	url = https://github.com/kubevirt/monitoring.git
+[submodule "common-instancetypes"]
+	path = common-instancetypes
+	url = https://github.com/kubevirt/common-instancetypes.git
+[submodule "node-maintenance-operator"]
+	path = node-maintenance-operator
+	url = https://github.com/medik8s/node-maintenance-operator.git

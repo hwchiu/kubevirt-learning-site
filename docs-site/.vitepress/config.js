@@ -102,6 +102,49 @@ const cdiSidebar = [
     text: '📖 CDI 總覽',
     items: [
       { text: '專案簡介', link: '/containerized-data-importer/' },
+      { text: '系統架構', link: '/containerized-data-importer/architecture' },
+      { text: '核心功能分析', link: '/containerized-data-importer/core-features' },
+      { text: '控制器與 API', link: '/containerized-data-importer/controllers-api' },
+      { text: '外部整合', link: '/containerized-data-importer/integration' },
+    ]
+  },
+]
+
+const monitoringSidebar = [
+  {
+    text: '📖 Monitoring 總覽',
+    items: [
+      { text: '專案簡介', link: '/monitoring/' },
+      { text: '系統架構', link: '/monitoring/architecture' },
+      { text: '核心功能分析', link: '/monitoring/core-features' },
+      { text: '控制器與 API', link: '/monitoring/controllers-api' },
+      { text: '外部整合', link: '/monitoring/integration' },
+    ]
+  },
+]
+
+const instancetypesSidebar = [
+  {
+    text: '📖 Common Instancetypes 總覽',
+    items: [
+      { text: '專案簡介', link: '/common-instancetypes/' },
+      { text: '系統架構', link: '/common-instancetypes/architecture' },
+      { text: '核心功能分析', link: '/common-instancetypes/core-features' },
+      { text: '控制器與 API', link: '/common-instancetypes/controllers-api' },
+      { text: '外部整合', link: '/common-instancetypes/integration' },
+    ]
+  },
+]
+
+const nmoSidebar = [
+  {
+    text: '📖 Node Maintenance Operator 總覽',
+    items: [
+      { text: '專案簡介', link: '/node-maintenance-operator/' },
+      { text: '系統架構', link: '/node-maintenance-operator/architecture' },
+      { text: '核心功能分析', link: '/node-maintenance-operator/core-features' },
+      { text: '控制器與 API', link: '/node-maintenance-operator/controllers-api' },
+      { text: '外部整合', link: '/node-maintenance-operator/integration' },
     ]
   },
 ]
@@ -125,12 +168,18 @@ export default defineConfig({
         items: [
           { text: 'KubeVirt', link: '/kubevirt/architecture/overview' },
           { text: 'Containerized Data Importer (CDI)', link: '/containerized-data-importer/' },
+          { text: 'Monitoring', link: '/monitoring/' },
+          { text: 'Common Instancetypes', link: '/common-instancetypes/' },
+          { text: 'Node Maintenance Operator', link: '/node-maintenance-operator/' },
         ]
       },
     ],
     sidebar: {
       '/kubevirt/': kubevirtSidebar,
       '/containerized-data-importer/': cdiSidebar,
+      '/monitoring/': monitoringSidebar,
+      '/common-instancetypes/': instancetypesSidebar,
+      '/node-maintenance-operator/': nmoSidebar,
     },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/kubevirt/kubevirt' }

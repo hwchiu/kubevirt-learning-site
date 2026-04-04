@@ -28,6 +28,24 @@ features:
     details: Kubernetes 持久化資料卷的資料匯入框架 — 負責將 VM 映像檔匯入 PVC，支援多種資料來源與傳輸方式。
     link: /containerized-data-importer/
     linkText: 開始閱讀
+
+  - icon: 📊
+    title: Monitoring
+    details: KubeVirt 生態系集中式監控基礎設施 — 75 個告警 Runbook、100+ Prometheus 指標、Grafana 儀表板與 Linter 工具。
+    link: /monitoring/
+    linkText: 開始閱讀
+
+  - icon: 📋
+    title: Common Instancetypes
+    details: 標準化 VM 實例類型與偏好設定 — 7 大系列 43 種 Instancetype、18+ OS Preference，類似 AWS EC2 Instance Types。
+    link: /common-instancetypes/
+    linkText: 開始閱讀
+
+  - icon: 🔧
+    title: Node Maintenance Operator
+    details: Kubernetes 節點維護自動化 — 自動封鎖/驅逐/解封節點，針對 KubeVirt VM 工作負載最佳化的 Operator。
+    link: /node-maintenance-operator/
+    linkText: 開始閱讀
 ---
 
 ## 📚 專案總覽
@@ -37,7 +55,10 @@ features:
 | 專案 | 說明 | 狀態 |
 |------|------|------|
 | [KubeVirt](/kubevirt/architecture/overview) | 在 Kubernetes 上運行虛擬機器的核心平台 | ✅ 完整分析 |
-| [CDI](/containerized-data-importer/) | 將 VM 映像匯入 Kubernetes PVC 的資料管理框架 | 🚧 建置中 |
+| [CDI](/containerized-data-importer/) | 將 VM 映像匯入 Kubernetes PVC 的資料管理框架 | ✅ 完整分析 |
+| [Monitoring](/monitoring/) | KubeVirt 生態系集中式監控基礎設施 | ✅ 完整分析 |
+| [Common Instancetypes](/common-instancetypes/) | 標準化 VM 實例類型與 OS 偏好設定 | ✅ 完整分析 |
+| [Node Maintenance Operator](/node-maintenance-operator/) | Kubernetes 節點維護自動化 Operator | ✅ 完整分析 |
 
 ## 🔗 原始碼連結
 
@@ -45,3 +66,6 @@ features:
 
 - **KubeVirt**: [github.com/kubevirt/kubevirt](https://github.com/kubevirt/kubevirt)
 - **CDI**: [github.com/kubevirt/containerized-data-importer](https://github.com/kubevirt/containerized-data-importer)
+- **Monitoring**: [github.com/kubevirt/monitoring](https://github.com/kubevirt/monitoring)
+- **Common Instancetypes**: [github.com/kubevirt/common-instancetypes](https://github.com/kubevirt/common-instancetypes)
+- **Node Maintenance Operator**: [github.com/medik8s/node-maintenance-operator](https://github.com/medik8s/node-maintenance-operator)
