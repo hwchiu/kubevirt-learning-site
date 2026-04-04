@@ -158,7 +158,9 @@ sequenceDiagram
 | {name} | `pkg/path/` | {key characteristic} |
 ```
 
-## Template 3: controllers-api.md
+## Template 3: controllers-api.md (Controller Operator / 大型平台)
+
+**適用類型**: 有 Reconcile() 控制器的專案
 
 ```markdown
 ---
@@ -253,6 +255,201 @@ type {Resource}Status struct {
 | {resource} | {verbs} |
 ```
 
+## Template 3B: metrics-alerts.md (監控型)
+
+**適用類型**: 核心產出為 Metrics/Alerts/Dashboard 的專案（取代 controllers-api.md）
+
+```markdown
+---
+layout: doc
+---
+
+# {Project Name} — 指標與告警規則
+
+::: info 相關章節
+- 專案整體架構請參閱 [系統架構](./architecture)
+- 各工具的功能概述請參閱 [核心功能分析](./core-features)
+- 與外部監控系統的整合請參閱 [外部整合](./integration)
+:::
+
+## 概述
+
+{Overview of metrics, alerting, and dashboard infrastructure}
+
+## 工具總覽
+
+| 工具 | 路徑 | 功能 |
+|------|------|------|
+| {tool name} | `tools/{name}/` | {description} |
+
+## {Tool Name} 實作分析
+
+### 核心邏輯
+
+\```go
+// 檔案: tools/{name}/main.go
+// real implementation code
+\```
+
+## 指標目錄
+
+| 指標名稱 | 類型 | Labels | 說明 |
+|----------|------|--------|------|
+| {metric_name} | Counter/Gauge/Histogram | {label list} | {description} |
+
+### PromQL 查詢範例
+
+\```promql
+# {query description}
+rate({metric_name}[5m])
+\```
+
+## 告警規則
+
+| 告警名稱 | 嚴重性 | 條件 | Runbook |
+|----------|--------|------|---------|
+| {AlertName} | critical/warning | {PromQL expression} | {runbook link} |
+
+### 告警規則定義
+
+\```yaml
+# 檔案: {path}/alerts.yaml
+# real alert rule YAML
+\```
+
+## Dashboard 定義
+
+| Dashboard | 面板數量 | 用途 |
+|-----------|----------|------|
+| {name} | {N} | {description} |
+```
+
+## Template 3C: resource-catalog.md (資源定義型)
+
+**適用類型**: 核心產出為 YAML 資源定義的專案（取代 controllers-api.md）
+
+```markdown
+---
+layout: doc
+---
+
+# {Project Name} — 資源類型目錄
+
+::: info 相關章節
+- 專案整體架構請參閱 [系統架構](./architecture)
+- 各資源系列的功能與規格請參閱 [核心功能分析](./core-features)
+- 與外部系統的整合方式請參閱 [外部整合](./integration)
+:::
+
+## 概述
+
+{Overview: this project is a YAML resource definition repository, not a controller}
+
+## 資源類型總覽
+
+| 資源類型 | API Group | Scope | 說明 |
+|----------|-----------|-------|------|
+| {Kind} | {group/version} | Cluster/Namespace | {description} |
+
+## {Resource Category} 系列
+
+### 類型分類
+
+| 名稱 | 規格 | 適用場景 |
+|------|------|----------|
+| {instance name} | {specs: CPU, Memory, etc.} | {use case} |
+
+### 資源定義
+
+\```yaml
+# 檔案: {path}/resource.yaml
+# real YAML definition
+\```
+
+## Label 與 Annotation 規範
+
+| Label/Annotation | 值 | 用途 |
+|-----------------|------|------|
+| {key} | {value pattern} | {purpose} |
+
+## Kustomize 建置結構
+
+\```
+project/
+├── _VirtualMachineClusterInstancetypes/
+│   ├── base/
+│   └── kustomization.yaml
+├── _VirtualMachineClusterPreferences/
+│   ├── base/
+│   └── kustomization.yaml
+└── kustomization.yaml
+\```
+
+## 驗證測試
+
+### 測試架構
+
+\```go
+// 檔案: tests/{test_file}.go
+// real test implementation
+\```
+
+| 測試類型 | 說明 |
+|----------|------|
+| 單元測試 | {what it validates} |
+| Schema 驗證 | {validation rules} |
+```
+
+## Template 3D: cli-reference.md (工具/函式庫)
+
+**適用類型**: 提供 CLI 工具或 library package 的專案（取代 controllers-api.md）
+
+```markdown
+---
+layout: doc
+---
+
+# {Project Name} — CLI / API 參考
+
+::: info 相關章節
+- 專案整體架構請參閱 [系統架構](./architecture)
+- 各功能的實作邏輯請參閱 [核心功能分析](./core-features)
+- 與外部系統的整合方式請參閱 [外部整合](./integration)
+:::
+
+## 概述
+
+{Overview of CLI/library functionality}
+
+## 指令總覽
+
+| 指令 | 說明 |
+|------|------|
+| `{command} {subcommand}` | {description} |
+
+## {Subcommand} 指令
+
+### 參數
+
+| 參數 | 類型 | 必要 | 預設 | 說明 |
+|------|------|------|------|------|
+| `--{flag}` | string | Yes/No | {default} | {description} |
+
+### 使用範例
+
+\```bash
+# {example description}
+{command} {subcommand} --flag value
+\```
+
+### 實作邏輯
+
+\```go
+// 檔案: cmd/{name}/{file}.go
+// real implementation code
+\```
+```
+
 ## Template 4: integration.md
 
 ```markdown
@@ -338,6 +535,7 @@ When adding a new project, add these 3 things to `config.js`:
 
 ```javascript
 // 1. Sidebar array (before export default)
+// 頁面名稱依專案類型而異 — 見 Phase 2.5 分類
 const newProjectSidebar = [
   {
     text: '📖 {Project} 總覽',
@@ -345,7 +543,15 @@ const newProjectSidebar = [
       { text: '專案簡介', link: '/{project-slug}/' },
       { text: '系統架構', link: '/{project-slug}/architecture' },
       { text: '核心功能分析', link: '/{project-slug}/core-features' },
+      // 依類型選擇以下其中一個：
+      // Controller Operator / 大型平台:
       { text: '控制器與 API', link: '/{project-slug}/controllers-api' },
+      // 監控型:
+      // { text: '指標與告警規則', link: '/{project-slug}/metrics-alerts' },
+      // 資源定義型:
+      // { text: '資源類型目錄', link: '/{project-slug}/resource-catalog' },
+      // 工具/函式庫:
+      // { text: 'CLI / API 參考', link: '/{project-slug}/cli-reference' },
       { text: '外部整合', link: '/{project-slug}/integration' },
     ]
   },

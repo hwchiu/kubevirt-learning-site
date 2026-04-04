@@ -22,7 +22,7 @@ Use this checklist to verify documentation quality before committing.
 - [ ] **IF 含演算法**: 獨立區塊含問題定義、核心邏輯程式碼、決策流程圖、複雜度分析
 - [ ] **IF 含 CLI 工具**: 指令清單、參數說明、使用範例
 
-### controllers-api.md
+### controllers-api.md (Controller Operator / 大型平台 only)
 - [ ] Controller/tool registration documented
 - [ ] Reconcile flow or main logic flow documented
 - [ ] Full CRD type definitions (Go structs) shown
@@ -31,6 +31,21 @@ Use this checklist to verify documentation quality before committing.
 - [ ] Test architecture overview
 - [ ] **IF 提供 HTTP/gRPC API**: Endpoint 清單、Request/Response 結構、HTTP status codes、認證方式
 - [ ] **IF 有 Webhook**: 路徑、觸發資源、驗證規則、拒絕情境與錯誤訊息
+
+### metrics-alerts.md (監控型 only)
+- [ ] Tool implementations with real code
+- [ ] Metrics catalog table (name, type, labels, description)
+- [ ] PromQL query examples
+- [ ] Alert rules with severity, condition, runbook links
+- [ ] Dashboard inventory
+
+### resource-catalog.md (資源定義型 only)
+- [ ] Resource type overview table (Kind, API Group, Scope)
+- [ ] Category/series classification with specs
+- [ ] Real YAML resource definitions
+- [ ] Label and annotation conventions
+- [ ] Kustomize build structure
+- [ ] Validation test architecture
 
 ### integration.md
 - [ ] Primary ecosystem integration documented
@@ -47,7 +62,7 @@ Use this checklist to verify documentation quality before committing.
 - [ ] All pages have `::: info 相關章節` cross-reference box linking to sibling pages
 - [ ] No broken internal links
 - [ ] No `{{ }}` Go/GitHub Actions template syntax outside code fences (Vue will fail)
-- [ ] VitePress sidebar has all 5 entries (index + 4 pages)
+- [ ] VitePress sidebar entries match actual page files (條件頁面名稱依專案類型而異)
 - [ ] Nav dropdown includes the project
 - [ ] Homepage features card and table row updated
 - [ ] `npm run build` succeeds with no errors

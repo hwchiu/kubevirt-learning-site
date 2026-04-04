@@ -8,7 +8,7 @@ layout: doc
 
 ::: info 相關章節
 - 專案整體架構請參閱 [系統架構](./architecture)
-- 工具的實作細節請參閱 [控制器與 API](./controllers-api)
+- 工具的實作細節請參閱 [指標與告警規則](./metrics-alerts)
 - 與 Prometheus/Grafana/OpenShift 的整合請參閱 [外部整合](./integration)
 :::
 

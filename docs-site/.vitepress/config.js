@@ -118,7 +118,7 @@ const monitoringSidebar = [
       { text: '專案簡介', link: '/monitoring/' },
       { text: '系統架構', link: '/monitoring/architecture' },
       { text: '核心功能分析', link: '/monitoring/core-features' },
-      { text: '控制器與 API', link: '/monitoring/controllers-api' },
+      { text: '指標與告警規則', link: '/monitoring/metrics-alerts' },
       { text: '外部整合', link: '/monitoring/integration' },
     ]
   },
@@ -131,7 +131,7 @@ const instancetypesSidebar = [
       { text: '專案簡介', link: '/common-instancetypes/' },
       { text: '系統架構', link: '/common-instancetypes/architecture' },
       { text: '核心功能分析', link: '/common-instancetypes/core-features' },
-      { text: '控制器與 API', link: '/common-instancetypes/controllers-api' },
+      { text: '資源類型目錄', link: '/common-instancetypes/resource-catalog' },
       { text: '外部整合', link: '/common-instancetypes/integration' },
     ]
   },

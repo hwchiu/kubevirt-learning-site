@@ -9,7 +9,7 @@ layout: doc
 ::: info 相關章節
 - 專案整體架構請參閱 [系統架構](./architecture)
 - Instancetype 系列與元件定義請參閱 [核心功能分析](./core-features)
-- 測試框架與驗證工具請參閱 [控制器與 API](./controllers-api)
+- 測試框架與驗證工具請參閱 [資源類型目錄](./resource-catalog)
 :::
 
 ## KubeVirt 整合

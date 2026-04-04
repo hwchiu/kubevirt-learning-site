@@ -8,7 +8,7 @@ layout: doc
 
 ::: info 相關章節
 - Instancetype 系列與 OS Preference 細節請參閱 [核心功能分析](./core-features)
-- 測試框架與 Kustomize 建置請參閱 [控制器與 API](./controllers-api)
+- 測試框架與 Kustomize 建置請參閱 [資源類型目錄](./resource-catalog)
 - 與 KubeVirt 的整合方式請參閱 [外部整合](./integration)
 :::
 

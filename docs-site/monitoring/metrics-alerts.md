@@ -2,7 +2,7 @@
 layout: doc
 ---
 
-# Monitoring — 控制器與 API
+# Monitoring — 指標與告警規則
 
 本文深入分析 kubevirt/monitoring 倉庫中各核心工具的實作，包括靜態分析器、指標文件生成器、Runbook 同步工具、指標解析器，以及 Prometheus 指標命名 Linter。所有程式碼參考均來自實際原始碼。
 

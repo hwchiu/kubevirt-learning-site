@@ -2,7 +2,7 @@
 layout: doc
 ---
 
-# Common Instancetypes — 控制器與 API
+# Common Instancetypes — 資源類型目錄
 
 ::: info 相關章節
 - 專案整體架構請參閱 [系統架構](./architecture)

@@ -8,7 +8,7 @@ layout: doc
 
 ::: info 相關章節
 - 各工具的核心功能請參閱 [核心功能分析](./core-features)
-- CI/CD 與自動化工具請參閱 [控制器與 API](./controllers-api)
+- CI/CD 與自動化工具請參閱 [指標與告警規則](./metrics-alerts)
 - 與 KubeVirt 生態系的整合請參閱 [外部整合](./integration)
 :::
 

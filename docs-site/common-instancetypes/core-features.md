@@ -8,7 +8,7 @@ layout: doc
 
 ::: info 相關章節
 - 專案整體架構與 Kustomize 建置請參閱 [系統架構](./architecture)
-- 測試框架與驗證工具請參閱 [控制器與 API](./controllers-api)
+- 測試框架與驗證工具請參閱 [資源類型目錄](./resource-catalog)
 - 與 KubeVirt 和 CDI 的整合請參閱 [外部整合](./integration)
 :::
 

@@ -64,11 +64,65 @@ See [exploration-prompts.md](./exploration-prompts.md) for the complete prompt t
 | **features** | Key functionality, algorithms, data flows | pkg/*, internal/*, core business logic |
 | **integrations** | External project references, auth, webhooks, RBAC | go.mod imports, config/rbac/*, *_webhook.go |
 
-::: warning 適應不同專案類型
-Not all projects are Kubernetes operators. Adapt the agents:
-- **YAML-based projects** (e.g., common-instancetypes): Focus on YAML definitions, Kustomize, validation scripts
-- **Monitoring/tools projects** (e.g., monitoring): Focus on tool implementations, metrics, dashboards
-- **Operators** (e.g., CDI, NMO): Standard controller/CRD/webhook analysis
+### Phase 2.5: Project Type Classification
+
+**在探索結果回來後、撰寫文件前，必須先判定專案類型。** 類型決定 Phase 3 產生哪些頁面。
+
+#### 判定流程
+
+```dot
+digraph classify {
+  rankdir=TB;
+  node [shape=diamond];
+  has_ctrl [label="有 Reconcile()\n控制器？"];
+  is_large [label="元件 ≥ 5 個\n或 CRD ≥ 10？"];
+  has_metrics [label="核心產出是\nMetrics/Alerts？"];
+  has_yaml [label="核心產出是\nYAML 資源定義？"];
+
+  node [shape=box, style=rounded];
+  type_large [label="大型平台"];
+  type_operator [label="Controller Operator"];
+  type_monitoring [label="監控型"];
+  type_resource [label="資源定義型"];
+  type_library [label="工具/函式庫"];
+
+  has_ctrl -> is_large [label="Yes"];
+  has_ctrl -> has_metrics [label="No"];
+  is_large -> type_large [label="Yes"];
+  is_large -> type_operator [label="No"];
+  has_metrics -> type_monitoring [label="Yes"];
+  has_metrics -> has_yaml [label="No"];
+  has_yaml -> type_resource [label="Yes"];
+  has_yaml -> type_library [label="No"];
+}
+```
+
+#### 類型與頁面對照表
+
+| 專案類型 | 必要頁面 | 條件頁面 | 範例專案 |
+|----------|----------|----------|----------|
+| **Controller Operator** | architecture, core-features, integration | `controllers-api.md` | CDI, NMO |
+| **大型平台** | architecture, core-features, integration | `controllers-api.md` + 可加 `lifecycle.md`, `api-reference.md` | Forklift, KubeVirt |
+| **監控型** | architecture, core-features, integration | `metrics-alerts.md`（取代 controllers-api） | Monitoring |
+| **資源定義型** | architecture, core-features, integration | `resource-catalog.md`（取代 controllers-api） | Common Instancetypes |
+| **工具/函式庫** | architecture, core-features, integration | `cli-reference.md` 或 `api-reference.md` | kubectl 插件、SDK |
+
+#### 判定依據
+
+| 信號 | 類型 |
+|------|------|
+| 有 `controllers/`、`Reconcile()` 函式、operator-sdk 結構 | Controller Operator |
+| 元件 ≥ 5、CRD ≥ 10、多個 controller + REST API | 大型平台 |
+| 核心產出為 PrometheusRule、AlertRule、Dashboard JSON、無 controller | 監控型 |
+| 核心產出為 YAML/JSON 資源定義、Kustomize overlay、無 controller | 資源定義型 |
+| 提供 CLI、SDK 或 library package、無 CRD | 工具/函式庫 |
+
+::: warning 根據專案類型選擇頁面模板
+分類後請使用對應的頁面模板。條件頁面名稱與內容結構差異如下：
+- **Controller Operator / 大型平台** → `controllers-api.md`：控制器、CRD 定義、Webhook、RBAC
+- **監控型** → `metrics-alerts.md`：工具實作、指標目錄、告警規則、Dashboard
+- **資源定義型** → `resource-catalog.md`：YAML 資源定義、分類目錄、Label 規範、驗證測試
+- **工具/函式庫** → `cli-reference.md`：指令清單、參數、使用範例、Public API
 :::
 
 ### Conditional Analysis Dimensions
@@ -154,18 +208,28 @@ flowchart TD
 \```
 ```
 
-### Phase 3: Documentation Writing (4 Parallel Agents)
+### Phase 3: Documentation Writing (3+1 Parallel Agents)
 
-Launch 4 `general-purpose` agents to write markdown pages based on exploration findings.
+Launch agents to write markdown pages based on exploration findings. **第四頁依專案類型不同。**
 
 See [doc-templates.md](./doc-templates.md) for the complete page templates.
+
+#### 必要頁面（所有專案）
 
 | Page | Content |
 |------|---------|
 | **architecture.md** | Project overview, system architecture (Mermaid), binary/tool table, directory structure, build system, state machines |
 | **core-features.md** | Key features with real code snippets, processing pipelines, algorithms, configurations |
-| **controllers-api.md** | Controllers/tools, CRD type definitions, webhooks, validation, test architecture |
 | **integration.md** | External integrations, auth mechanisms, RBAC, CI/CD, ecosystem connections |
+
+#### 條件頁面（依專案類型選擇一個）
+
+| 專案類型 | 條件頁面 | Content |
+|----------|----------|---------|
+| Controller Operator / 大型平台 | **controllers-api.md** | Controllers, CRD type definitions, webhooks, validation, REST API, HTTP status codes |
+| 監控型 | **metrics-alerts.md** | Tool implementations, metrics catalog, alert rules, dashboard inventory, PromQL examples |
+| 資源定義型 | **resource-catalog.md** | YAML resource definitions, type catalog, classification, label conventions, validation tests |
+| 工具/函式庫 | **cli-reference.md** | Command list, parameters, usage examples, public API surface |
 
 ### Phase 4: Site Integration (Sequential)
 

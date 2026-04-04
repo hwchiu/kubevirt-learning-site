@@ -117,17 +117,32 @@ Show file paths and dependency references.
 
 ## Adapting for Non-Operator Projects
 
+### Project Type Classification (Phase 2.5)
+
+After all 5 agents complete, classify the project before writing:
+
+| Check | If True → Type |
+|-------|----------------|
+| Has `Reconcile()` + ≥5 components or ≥10 CRDs | **大型平台** → `controllers-api.md` + optional extras |
+| Has `Reconcile()` + <5 components | **Controller Operator** → `controllers-api.md` |
+| No controller, core output is PrometheusRule/Alerts/Dashboards | **監控型** → `metrics-alerts.md` |
+| No controller, core output is YAML resource definitions | **資源定義型** → `resource-catalog.md` |
+| No controller, provides CLI/SDK/library | **工具/函式庫** → `cli-reference.md` |
+
 ### YAML/Kustomize Projects (e.g., common-instancetypes)
 - Replace "Controllers" agent with "YAML Definitions" agent
 - Focus on: Kustomize structure, YAML schema, validation scripts
 - Replace "API Types" with "Resource Specifications"
+- **Output page**: `resource-catalog.md` (not controllers-api.md)
 
 ### Monitoring/Tools Projects (e.g., monitoring)
 - Replace "Controllers" agent with "Tool Implementations" agent
 - Focus on: CLI tools, linters, generators, dashboards
 - Replace "Core Features" with "Metrics & Alerts & Runbooks"
+- **Output page**: `metrics-alerts.md` (not controllers-api.md)
 
 ### Library Projects
 - Replace "Controllers" agent with "Public API" agent
 - Focus on: exported functions, interfaces, usage patterns
 - Replace "Core Features" with "Library Capabilities"
+- **Output page**: `cli-reference.md` (not controllers-api.md)

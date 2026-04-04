@@ -18,5 +18,5 @@ layout: doc
 |------|------|
 | [系統架構](./architecture) | 專案結構、Kustomize 建置系統、版本管理、部署方式 |
 | [核心功能分析](./core-features) | 7 大系列 43 種 Instancetype、18+ OS Preference、元件化設計 |
-| [控制器與 API](./controllers-api) | CRD 型別定義、Label 規範、驗證測試架構 |
+| [資源類型目錄](./resource-catalog) | CRD 型別定義、Label 規範、驗證測試架構 |
 | [外部整合](./integration) | KubeVirt 整合、VirtualMachine 引用方式、Label 查詢 |
