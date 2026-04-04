@@ -13,3 +13,6 @@
 [submodule "node-maintenance-operator"]
 	path = node-maintenance-operator
 	url = https://github.com/medik8s/node-maintenance-operator.git
+[submodule "forklift"]
+	path = forklift
+	url = https://github.com/kubev2v/forklift
