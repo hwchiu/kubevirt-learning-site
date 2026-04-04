@@ -164,6 +164,20 @@ const forkliftSidebar = [
   },
 ]
 
+const netboxSidebar = [
+  {
+    text: '📖 NetBox 總覽',
+    items: [
+      { text: '專案簡介', link: '/netbox/' },
+      { text: '系統架構', link: '/netbox/architecture' },
+      { text: '核心功能分析', link: '/netbox/core-features' },
+      { text: '資料模型分析', link: '/netbox/data-models' },
+      { text: 'API 參考與分析', link: '/netbox/api-reference' },
+      { text: '外部整合與擴充', link: '/netbox/integration' },
+    ]
+  },
+]
+
 export default withMermaid(defineConfig({
   base: '/kubevirt-learning-site/',
   title: 'KubeVirt 生態系原始碼分析',
@@ -196,6 +210,7 @@ export default withMermaid(defineConfig({
           { text: 'Common Instancetypes', link: '/common-instancetypes/' },
           { text: 'Node Maintenance Operator', link: '/node-maintenance-operator/' },
           { text: 'Forklift', link: '/forklift/' },
+          { text: 'NetBox', link: '/netbox/' },
         ]
       },
     ],
@@ -206,6 +221,7 @@ export default withMermaid(defineConfig({
       '/common-instancetypes/': instancetypesSidebar,
       '/node-maintenance-operator/': nmoSidebar,
       '/forklift/': forkliftSidebar,
+      '/netbox/': netboxSidebar,
     },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/kubevirt/kubevirt' }

@@ -27,6 +27,9 @@ hero:
     - theme: alt
       text: 🚚 Forklift
       link: /forklift/
+    - theme: alt
+      text: 🌐 NetBox
+      link: /netbox/
 
 features:
   - icon: 🖥️
@@ -64,6 +67,12 @@ features:
     details: VM 遷移平台 — 支援 vSphere、oVirt、OpenStack、Hyper-V、OVA 等多來源至 KubeVirt 的自動化遷移，含增量遷移與 XCOPY 加速。
     link: /forklift/
     linkText: 開始閱讀
+
+  - icon: 🌐
+    title: NetBox
+    details: 網路基礎設施管理平台 — Python/Django 全端 Web 應用，115 個資料模型、131 REST API、GraphQL、Plugin 系統、Object-Level RBAC。
+    link: /netbox/
+    linkText: 開始閱讀
 ---
 
 ## 📚 專案總覽
@@ -78,6 +87,7 @@ features:
 | [Common Instancetypes](/common-instancetypes/) | 標準化 VM 實例類型與 OS 偏好設定 | ✅ 完整分析 |
 | [Node Maintenance Operator](/node-maintenance-operator/) | Kubernetes 節點維護自動化 Operator | ✅ 完整分析 |
 | [Forklift](/forklift/) | 多來源 VM 遷移至 KubeVirt 的自動化平台 | ✅ 完整分析 |
+| [NetBox](/netbox/) | 網路基礎設施管理平台（IPAM / DCIM） | ✅ 完整分析 |
 
 ## 🔗 原始碼連結
 
@@ -89,3 +99,4 @@ features:
 - **Common Instancetypes**: [github.com/kubevirt/common-instancetypes](https://github.com/kubevirt/common-instancetypes)
 - **Node Maintenance Operator**: [github.com/medik8s/node-maintenance-operator](https://github.com/medik8s/node-maintenance-operator)
 - **Forklift**: [github.com/kubev2v/forklift](https://github.com/kubev2v/forklift)
+- **NetBox**: [github.com/netbox-community/netbox](https://github.com/netbox-community/netbox)

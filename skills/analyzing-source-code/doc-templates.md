@@ -450,6 +450,368 @@ layout: doc
 \```
 ```
 
+## Template 3E: data-models.md (Web 應用平台條件頁)
+
+**適用類型**: 以 Django ORM 或類似框架為核心的 Web 應用平台（取代 controllers-api.md）
+
+```markdown
+---
+layout: doc
+---
+
+# {Project Name} — 資料模型
+
+::: info 相關章節
+- 專案整體架構請參閱 [系統架構](./architecture)
+- 各功能模組的實作邏輯請參閱 [核心功能分析](./core-features)
+- REST/GraphQL API 端點請參閱 [API 參考](./api-reference)
+- 與外部系統的整合方式請參閱 [外部整合](./integration)
+:::
+
+## 概述
+
+{Overview of the data model layer: ORM framework, total model count, design philosophy}
+
+## 模型總覽
+
+| App | 模型數量 | 主要模型 | 說明 |
+|-----|----------|----------|------|
+| {app_name} | {N} | {Model1, Model2, ...} | {description} |
+
+## ERD 關聯圖
+
+\```mermaid
+erDiagram
+    ModelA ||--o{ ModelB : "has many"
+    ModelA {
+        int id PK
+        string name
+        string slug
+    }
+    ModelB {
+        int id PK
+        int model_a_id FK
+        string value
+    }
+    ModelB }o--|| ModelC : "belongs to"
+    ModelC {
+        int id PK
+        string name
+    }
+\```
+
+## 核心模型深度分析
+
+### {Model Name}
+
+**檔案**: `{app}/models/{model}.py`
+
+| 欄位 | 類型 | 約束 | 說明 |
+|------|------|------|------|
+| {field_name} | {CharField/ForeignKey/...} | {unique, blank, null...} | {description} |
+
+#### 關聯關係
+
+| 關聯 | 類型 | 目標模型 | 說明 |
+|------|------|----------|------|
+| {field_name} | ForeignKey / ManyToMany / OneToOne | {TargetModel} | {description} |
+
+#### clean() / save() 自訂邏輯
+
+\```python
+# 檔案: {app}/models/{model}.py
+def clean(self):
+    # real validation logic from source
+    pass
+
+def save(self, *args, **kwargs):
+    # real save override logic from source
+    super().save(*args, **kwargs)
+\```
+
+::: tip 重點
+{Key insight about this model's design or constraints}
+:::
+
+### {Model 2 Name}
+
+{Continue pattern for each core model...}
+
+## Mixin 模式分析
+
+| Mixin | 檔案 | 提供欄位/方法 | 使用模型數 |
+|-------|------|---------------|-----------|
+| {ChangeLoggingMixin} | `{path}` | {created, last_updated, ...} | {N} |
+| {TaggingMixin} | `{path}` | {tags M2M field} | {N} |
+| {CustomFieldsMixin} | `{path}` | {custom_field_data JSONField} | {N} |
+
+### {Mixin Name} 實作
+
+\```python
+# 檔案: {path}/mixins.py
+class {MixinName}(models.Model):
+    # real mixin code from source
+    class Meta:
+        abstract = True
+\```
+
+::: info 設計決策
+{Why this mixin pattern was adopted and how it promotes consistency}
+:::
+
+## Migration 模式與慣例
+
+| 項目 | 慣例 |
+|------|------|
+| **命名規則** | {e.g., auto-generated sequential numbering} |
+| **Data Migration** | {e.g., used for seed data, field transformations} |
+| **Squash 策略** | {e.g., periodic squash per release cycle} |
+| **自訂 SQL** | {e.g., RunSQL for index or trigger creation} |
+
+### Migration 範例
+
+\```python
+# 檔案: {app}/migrations/{number}_{name}.py
+# real migration code snippet
+\```
+
+## 小結
+
+| 面向 | 說明 |
+|------|------|
+| **ORM 框架** | {framework and version} |
+| **模型總數** | {total model count} |
+| **核心 Mixin** | {list of key mixins} |
+| **關聯策略** | {e.g., ForeignKey with CASCADE, PROTECT patterns} |
+| **驗證層** | {e.g., clean() + model validators + DB constraints} |
+```
+
+## Template 3F: api-reference.md (Web 應用平台條件頁)
+
+**適用類型**: 提供 REST / GraphQL API 的 Web 應用平台（取代 controllers-api.md，常與 Template 3E 搭配使用）
+
+```markdown
+---
+layout: doc
+---
+
+# {Project Name} — API 參考
+
+::: info 相關章節
+- 專案整體架構請參閱 [系統架構](./architecture)
+- 各功能模組的實作邏輯請參閱 [核心功能分析](./core-features)
+- 資料模型與 ORM 定義請參閱 [資料模型](./data-models)
+- 與外部系統的整合方式請參閱 [外部整合](./integration)
+:::
+
+## 概述
+
+{Overview of the API layer: framework (DRF, FastAPI, etc.), versioning strategy, total endpoint count}
+
+## REST API 架構
+
+### Router 結構
+
+\```python
+# 檔案: {project}/urls.py 或 {project}/api/urls.py
+# real router registration code
+router = DefaultRouter()
+router.register('{prefix}', {ViewSet})
+\```
+
+### ViewSet 繼承層次
+
+\```mermaid
+classDiagram
+    class BaseViewSet {
+        +list()
+        +retrieve()
+        +create()
+        +update()
+        +destroy()
+    }
+    class ModelViewSet {
+        +queryset
+        +serializer_class
+    }
+    class CustomViewSet {
+        +custom_action()
+    }
+    BaseViewSet <|-- ModelViewSet
+    ModelViewSet <|-- CustomViewSet
+\```
+
+## 端點總覽
+
+| App | 端點數 | 主要方法 | 基礎路徑 |
+|-----|--------|----------|----------|
+| {app_name} | {N} | GET, POST, PUT, PATCH, DELETE | `/api/{app}/` |
+
+### {App Name} 端點
+
+| 端點 | 方法 | 說明 |
+|------|------|------|
+| `/api/{app}/{resource}/` | GET | 列出所有 {resource} |
+| `/api/{app}/{resource}/` | POST | 建立 {resource} |
+| `/api/{app}/{resource}/{id}/` | GET | 取得單一 {resource} |
+| `/api/{app}/{resource}/{id}/` | PUT/PATCH | 更新 {resource} |
+| `/api/{app}/{resource}/{id}/` | DELETE | 刪除 {resource} |
+| `/api/{app}/{resource}/{id}/{action}/` | POST | {custom action description} |
+
+## 認證與權限
+
+### 認證機制
+
+| 方式 | 說明 |
+|------|------|
+| **Token Auth** | {e.g., DRF TokenAuthentication, API key in header} |
+| **Session Auth** | {e.g., Django session-based for browser clients} |
+| **SSO / OAuth2** | {if applicable} |
+
+### 權限模型
+
+\```mermaid
+flowchart TD
+    A[Request] --> B{已認證?}
+    B -->|No| C[401 Unauthorized]
+    B -->|Yes| D{全域權限檢查}
+    D -->|Denied| E[403 Forbidden]
+    D -->|Allowed| F{物件層級權限}
+    F -->|Denied| E
+    F -->|Allowed| G[200 OK]
+\```
+
+| 權限類別 | 實作 | 說明 |
+|----------|------|------|
+| **RBAC** | {e.g., Django groups/permissions} | {description} |
+| **ObjectPermission** | {e.g., per-object access control} | {description} |
+| **自訂權限** | {e.g., custom DRF permission classes} | {description} |
+
+### 權限類別實作
+
+\```python
+# 檔案: {path}/permissions.py
+# real permission class code from source
+\```
+
+## Serializer 架構
+
+### 基底類別繼承層次
+
+\```mermaid
+classDiagram
+    class BaseSerializer {
+        +validate()
+        +create()
+        +update()
+    }
+    class ModelSerializer {
+        +Meta.model
+        +Meta.fields
+    }
+    class NestedSerializer {
+        +nested_field
+    }
+    BaseSerializer <|-- ModelSerializer
+    ModelSerializer <|-- NestedSerializer
+\```
+
+### 核心 Serializer 範例
+
+\```python
+# 檔案: {app}/api/serializers.py
+class {Model}Serializer(BaseModelSerializer):
+    # real serializer code from source
+    class Meta:
+        model = {Model}
+        fields = [...]
+\```
+
+### Nested Serializer 模式
+
+\```python
+# 檔案: {app}/api/serializers.py
+class {Parent}Serializer(BaseModelSerializer):
+    {children} = NestedSerializer(many=True)
+    # real nested serializer pattern from source
+\```
+
+::: tip 重點
+{Key insight about serializer design, e.g., writable nested serializers, brief vs. full representations}
+:::
+
+## FilterSet 與查詢參數
+
+| 參數 | 類型 | 說明 |
+|------|------|------|
+| `?{field}={value}` | exact | 精確比對 {field} |
+| `?{field}__contains={value}` | contains | 模糊搜尋 {field} |
+| `?ordering={field}` | ordering | 排序依據 |
+| `?limit={N}&offset={M}` | pagination | 分頁控制 |
+
+### FilterSet 實作
+
+\```python
+# 檔案: {app}/api/filtersets.py
+class {Model}FilterSet(BaseFilterSet):
+    # real filterset code from source
+    class Meta:
+        model = {Model}
+        fields = [...]
+\```
+
+## GraphQL 架構 (if applicable)
+
+### Schema 定義
+
+\```python
+# 檔案: {project}/graphql/schema.py
+# real GraphQL schema or type definitions
+\```
+
+### 查詢範例
+
+\```graphql
+query {
+    {resource}_list(filters: { name: { contains: "example" } }) {
+        id
+        name
+        # real query fields
+    }
+}
+\```
+
+::: info 設計決策
+{When to use REST vs GraphQL in this project}
+:::
+
+## HTTP 狀態碼對照表
+
+| 狀態碼 | 含義 | 使用場景 |
+|--------|------|----------|
+| `200 OK` | 成功 | GET、PUT、PATCH 回應 |
+| `201 Created` | 已建立 | POST 成功建立資源 |
+| `204 No Content` | 無內容 | DELETE 成功 |
+| `400 Bad Request` | 請求錯誤 | Serializer 驗證失敗 |
+| `401 Unauthorized` | 未認證 | 缺少或無效的認證憑證 |
+| `403 Forbidden` | 無權限 | 認證通過但權限不足 |
+| `404 Not Found` | 未找到 | 資源不存在 |
+| `405 Method Not Allowed` | 方法不允許 | 端點不支援該 HTTP 方法 |
+| `409 Conflict` | 衝突 | 唯一性約束違反 |
+| `429 Too Many Requests` | 請求過多 | 超過 Rate Limit |
+
+## 小結
+
+| 面向 | 說明 |
+|------|------|
+| **API 框架** | {framework and version} |
+| **端點總數** | {total endpoint count} |
+| **認證方式** | {list of auth methods} |
+| **權限模型** | {e.g., RBAC + ObjectPermission} |
+| **Serializer 數量** | {total serializer count} |
+| **GraphQL** | {Yes/No, coverage scope} |
+```
+
 ## Template 4: integration.md
 
 ```markdown
@@ -552,6 +914,9 @@ const newProjectSidebar = [
       // { text: '資源類型目錄', link: '/{project-slug}/resource-catalog' },
       // 工具/函式庫:
       // { text: 'CLI / API 參考', link: '/{project-slug}/cli-reference' },
+      // Web 應用平台:
+      // { text: '資料模型', link: '/{project-slug}/data-models' },
+      // { text: 'API 參考', link: '/{project-slug}/api-reference' },
       { text: '外部整合', link: '/{project-slug}/integration' },
     ]
   },

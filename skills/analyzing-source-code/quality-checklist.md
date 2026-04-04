@@ -47,6 +47,24 @@ Use this checklist to verify documentation quality before committing.
 - [ ] Kustomize build structure
 - [ ] Validation test architecture
 
+### data-models.md (Web 應用平台 only)
+- [ ] 模型總覽表包含所有 Django App 及其模型數量
+- [ ] 至少包含 2 張 Mermaid ERD（如 DCIM、IPAM 等主要領域）
+- [ ] 核心模型分析包含 field 數量、relationship 數量、自訂 clean/save 邏輯
+- [ ] Mixin 模式分析包含程式碼片段與使用範例
+- [ ] Migration 慣例與命名規則有說明
+- [ ] 所有程式碼區塊包含 `# 檔案:` 路徑註解
+
+### api-reference.md (Web 應用平台 only)
+- [ ] REST API 端點總覽表按 App 分類列出
+- [ ] ViewSet 繼承架構有 Mermaid 類別圖
+- [ ] Serializer 架構有程式碼範例
+- [ ] 認證方式（Token、Session、LDAP 等）有完整說明
+- [ ] HTTP 狀態碼對照表包含所有常見回應碼
+- [ ] 若有 GraphQL 則包含 Schema 定義與查詢範例
+- [ ] FilterSet 與查詢參數有範例說明
+- [ ] 所有程式碼區塊包含 `# 檔案:` 路徑註解
+
 ### integration.md
 - [ ] Primary ecosystem integration documented
 - [ ] Auth/RBAC mechanisms explained

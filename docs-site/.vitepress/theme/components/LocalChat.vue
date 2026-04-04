@@ -88,6 +88,7 @@ const currentProject = computed(() => {
     'common-instancetypes',
     'node-maintenance-operator',
     'forklift',
+    'netbox',
   ]
   for (const p of projects) {
     if (path.includes(`/${p}/`) || path.includes(`/${p}`)) return p
@@ -103,6 +104,7 @@ const projectLabel = computed(() => {
     'common-instancetypes': 'Instancetypes',
     'node-maintenance-operator': 'NMO',
     'forklift': 'Forklift',
+    'netbox': 'NetBox',
   }
   return labels[currentProject.value] || '全域'
 })

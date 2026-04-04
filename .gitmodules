@@ -16,3 +16,6 @@
 [submodule "forklift"]
 	path = forklift
 	url = https://github.com/kubev2v/forklift
+[submodule "netbox"]
+	path = netbox
+	url = https://github.com/netbox-community/netbox.git

@@ -93,7 +93,14 @@ digraph classify {
   has_metrics -> type_monitoring [label="Yes"];
   has_metrics -> has_yaml [label="No"];
   has_yaml -> type_resource [label="Yes"];
-  has_yaml -> type_library [label="No"];
+  has_yaml -> has_webapp [label="No"];
+
+  has_webapp [label="有 Django/Flask/Rails\nORM + REST API？"];
+  node [shape=box, style=rounded];
+  type_webapp [label="Web 應用平台"];
+
+  has_webapp -> type_webapp [label="Yes"];
+  has_webapp -> type_library [label="No"];
 }
 ```
 
@@ -106,6 +113,7 @@ digraph classify {
 | **監控型** | architecture, core-features, integration | `metrics-alerts.md`（取代 controllers-api） | Monitoring |
 | **資源定義型** | architecture, core-features, integration | `resource-catalog.md`（取代 controllers-api） | Common Instancetypes |
 | **工具/函式庫** | architecture, core-features, integration | `cli-reference.md` 或 `api-reference.md` | kubectl 插件、SDK |
+| **Web 應用平台** | architecture, core-features, integration | `data-models.md` + `api-reference.md` | NetBox |
 
 #### 判定依據
 
@@ -116,6 +124,7 @@ digraph classify {
 | 核心產出為 PrometheusRule、AlertRule、Dashboard JSON、無 controller | 監控型 |
 | 核心產出為 YAML/JSON 資源定義、Kustomize overlay、無 controller | 資源定義型 |
 | 提供 CLI、SDK 或 library package、無 CRD | 工具/函式庫 |
+| `apps.py` 橫跨多個 Django apps、`models.py` 含 50+ models、`serializers/`、`views/viewsets/`、REST framework、`urls.py` API routing、`templates/`、GraphQL schema | Web 應用平台 |
 
 ::: warning 根據專案類型選擇頁面模板
 分類後請使用對應的頁面模板。條件頁面名稱與內容結構差異如下：
@@ -123,6 +132,7 @@ digraph classify {
 - **監控型** → `metrics-alerts.md`：工具實作、指標目錄、告警規則、Dashboard
 - **資源定義型** → `resource-catalog.md`：YAML 資源定義、分類目錄、Label 規範、驗證測試
 - **工具/函式庫** → `cli-reference.md`：指令清單、參數、使用範例、Public API
+- **Web 應用平台** → `data-models.md`：ORM 資料模型深度分析（ERD、Mixin 模式、Migration）；`api-reference.md`：REST API 與 GraphQL 端點完整參考
 :::
 
 ### Conditional Analysis Dimensions
@@ -230,6 +240,8 @@ See [doc-templates.md](./doc-templates.md) for the complete page templates.
 | 監控型 | **metrics-alerts.md** | Tool implementations, metrics catalog, alert rules, dashboard inventory, PromQL examples |
 | 資源定義型 | **resource-catalog.md** | YAML resource definitions, type catalog, classification, label conventions, validation tests |
 | 工具/函式庫 | **cli-reference.md** | Command list, parameters, usage examples, public API surface |
+| Web 應用平台 | **data-models.md** | ORM 資料模型深度分析（ERD、Mixin 模式、Migration） |
+| Web 應用平台 | **api-reference.md** | REST API 與 GraphQL 端點完整參考 |
 
 ### Phase 4: Site Integration (Sequential)
 
