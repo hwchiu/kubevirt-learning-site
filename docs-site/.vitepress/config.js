@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { withMermaid } from 'vitepress-plugin-mermaid'
+import { localLlmChatPlugin } from './plugins/localLlmChat.js'
 
 const kubevirtSidebar = [
   {
@@ -168,6 +169,15 @@ export default withMermaid(defineConfig({
   title: 'KubeVirt 生態系原始碼分析',
   description: '深入分析 KubeVirt 生態系各專案原始碼 — 架構、元件、API 與實作細節',
   lang: 'zh-TW',
+  vite: {
+    plugins: [
+      localLlmChatPlugin({
+        projectRoot: process.cwd(),
+        cliCommand: 'claude',
+        model: 'sonnet',
+      }),
+    ],
+  },
   head: [
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }],
     ['meta', { name: 'keywords', content: 'KubeVirt, CDI, Kubernetes, VM, 原始碼分析' }],
