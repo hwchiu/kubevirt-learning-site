@@ -17,6 +17,7 @@ A systematic, parallelized workflow for analyzing open-source project source cod
 - Performing deep source code analysis for any Kubernetes operator, Go project, or YAML-based project
 - Generating structured, consistent documentation from a codebase
 - Expanding an existing multi-project VitePress documentation site
+- **「請根據最新版本分析」** — 觸發 Phase 6 增量更新流程（差異分析 → 局部更新受影響頁面）
 
 **When NOT to use:**
 - Quick README-level summaries (just read the README)
@@ -520,61 +521,140 @@ Context hint 根據 `project` 參數動態指定目標目錄：
 
 ---
 
-## Phase 6: 更新維護
+## Phase 6: 增量更新（觸發語：「請根據最新版本分析」）
 
-當上游專案有新版本時，按以下流程更新文件。
+當使用者說「**請根據最新版本分析**」或類似語句時，執行以下完整流程。**不是重新全寫，而是差異驅動的增量更新。**
 
-### 6.1 Submodule 版本管理
+### 6.1 版本追蹤機制
 
-所有 submodule 都綁定 `branch = main`，使用 Makefile 指令管理：
+專案根目錄的 `versions.json` 記錄每個專案的：
+- `analyzed_commit` — 上次分析時的 git commit SHA
+- `analyzed_date` — 分析日期
+- `pages` → `source_paths` — 每個文件頁面對應的 source 目錄映射
+
+### 6.2 增量更新流程
+
+```dot
+digraph incremental_update {
+  rankdir=TB;
+  node [shape=box, style=rounded];
+
+  pull [label="Step 1: 拉取最新 code\nmake update-submodules"];
+  check [label="Step 2: 差異檢查\nscripts/check-updates.sh"];
+  decide [label="Step 3: 判斷影響範圍" shape=diamond];
+  skip [label="無需更新\n僅更新 submodule commit"];
+  partial [label="Step 4a: 局部更新\n只重寫受影響頁面"];
+  full [label="Step 4b: 完整更新\n重跑 Phase 2→5"];
+  stamp [label="Step 5: 更新版本標記\nversions.json + index.md"];
+  verify [label="Step 6: 驗證\nmake build"];
+  commit [label="Step 7: 提交"];
+
+  pull -> check -> decide;
+  decide -> skip [label="CI/測試/文件"];
+  decide -> partial [label="新功能/新 API"];
+  decide -> full [label="架構重構"];
+  partial -> stamp;
+  full -> stamp;
+  skip -> commit;
+  stamp -> verify -> commit;
+}
+```
+
+#### Step 1: 拉取最新 code
 
 ```bash
-# 查看目前所有 submodule 版本
-make submodule-status
-
-# 更新所有 submodule 至最新 commit
+# 更新所有專案
 make update-submodules
 
-# 更新單一 submodule
-cd {project-name} && git pull origin main && cd ..
+# 或更新單一專案
+make check-update-project PROJECT=netbox
 ```
 
-### 6.2 更新影響判斷
+#### Step 2: 自動差異分析
 
-更新 submodule 後，根據變更幅度決定處理方式：
-
-| 變更幅度 | 判斷依據 | 處理方式 |
-|---------|---------|---------|
-| **無需更新** | 僅 CI/CD、文件、測試變更 | 只更新 submodule commit，不改文件 |
-| **局部更新** | 新增 API、新增 Controller、新增功能模組 | 針對受影響的頁面重新執行 Phase 2→3 |
-| **完整更新** | 架構重構、大版本升級、核心元件重寫 | 完整重跑 Phase 2→5 |
-
-判斷方式：
 ```bash
-# 進入 submodule 查看自上次分析以來的變更
-cd {project-name}
-git log --oneline {old-commit}..HEAD
-git diff --stat {old-commit}..HEAD
+# 自動執行 — 比對 versions.json 中的 analyzed_commit vs submodule HEAD
+make check-updates
 ```
 
-### 6.3 版本標記
+腳本會輸出：
+- 每個專案的新 commit 數量與摘要
+- 變更檔案統計
+- **受影響的文件頁面**（基於 `versions.json` 中的 `source_paths` 映射）
 
-每個專案的 `index.md` 必須包含分析版本標記：
+#### Step 3: 判斷更新範圍
+
+根據 check-updates 報告決定處理方式：
+
+| 變更類型 | 判斷依據 | 動作 |
+|---------|---------|------|
+| **無需更新** | 僅 CI/CD、README、測試、文件格式變更 | 跳過，直接更新 submodule commit |
+| **局部更新** | 新增 API、新增 Model、新增 Controller、功能增強 | 只對受影響頁面執行 explore + write |
+| **完整更新** | 架構重構、大版本升級（如 Django 5→6）、核心元件重寫 | 完整重跑 Phase 2→5 |
+
+#### Step 4a: 局部更新（最常見）
+
+只針對受影響的頁面重新分析：
+
+1. 根據報告中列出的受影響頁面，啟動對應的 explore agent
+2. explore agent 重點閱讀**變更的檔案**，而非整個專案
+3. 將分析結果**合併更新**到現有文件中（不是整頁重寫）
+4. 新增的功能/API/Model → 新增章節
+5. 修改的邏輯 → 更新對應段落
+6. 刪除的功能 → 移除對應說明
+
+**Explore agent 的差異分析提示詞模板：**
+```
+專案 {project} 從 {old_commit} 更新至 {new_commit}。
+以下是本次變更涉及的檔案：
+{changed_files_list}
+
+請分析這些變更對 {page_name} 頁面的影響：
+1. 是否有新增的功能/API/模型需要記錄？
+2. 是否有修改的行為需要更新描述？
+3. 是否有移除的功能需要從文件中刪除？
+4. 現有文件中哪些程式碼片段需要更新？
+
+請引用具體的檔案路徑與程式碼。
+```
+
+#### Step 4b: 完整更新
+
+等同於新專案分析，完整執行 Phase 2→5。
+
+#### Step 5: 更新版本標記
+
+更新完成後，**必須同步更新**：
+
+1. `versions.json` — 更新 `analyzed_commit` 和 `analyzed_date`
+2. `docs-site/{project}/index.md` — 更新 `::: tip 分析版本` 區塊
+
+```bash
+# versions.json 範例更新
+{
+  "analyzed_commit": "{new-full-sha}",
+  "analyzed_date": "2026-05-01"
+}
+```
 
 ```markdown
 ::: tip 分析版本
-本文件基於 commit [`{short-sha}`]({github-url}/commit/{full-sha}) 進行分析。
+本文件基於 commit [`{new-short-sha}`]({repo-url}/commit/{new-full-sha}) 進行分析。
 :::
 ```
 
-更新文件後，同步更新此標記至新的 commit SHA。
+#### Step 6-7: 驗證與提交
 
-### 6.4 更新流程摘要
+```bash
+make build
+git add -A && git commit -m "docs({project}): update analysis to {new-short-sha}"
+```
 
-1. `make update-submodules` — 拉取最新 code
-2. `git diff` — 檢視哪些 submodule 有變更
-3. 進入 submodule 查看 changelog / diff，判斷影響範圍
-4. 根據影響範圍執行對應的 Phase（局部或完整）
-5. 更新 `index.md` 的版本標記
-6. `make build` — 驗證建置
-7. `git add -A && git commit` — 提交更新
+### 6.3 Makefile 指令速查
+
+| 指令 | 用途 |
+|------|------|
+| `make submodule-status` | 查看所有 submodule 目前版本 |
+| `make update-submodules` | 更新所有 submodule 至最新 commit |
+| `make check-updates` | 更新 + 自動差異分析報告 |
+| `make check-update-project PROJECT=xxx` | 單一專案更新 + 差異分析 |

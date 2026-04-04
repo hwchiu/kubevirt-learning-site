@@ -1,4 +1,4 @@
-.PHONY: dev build preview install clean setup check-deps init-submodules update-submodules submodule-status
+.PHONY: dev build preview install clean setup check-deps init-submodules update-submodules submodule-status check-updates
 
 # ============================================================
 # 首次設置
@@ -37,6 +37,15 @@ submodule-status:
 	@echo ""
 	@echo "📋 追蹤分支設定："
 	@git config --file .gitmodules --get-regexp 'submodule\..*\.branch' | sed 's/submodule\.\(.*\)\.branch/  \1:/'
+
+# 檢查哪些專案有更新，分析受影響的文件頁面
+check-updates: update-submodules
+	@./scripts/check-updates.sh
+
+# 檢查單一專案的更新（用法: make check-update-project PROJECT=netbox）
+check-update-project:
+	@cd $(PROJECT) && git pull origin main && cd ..
+	@./scripts/check-updates.sh $(PROJECT)
 
 # 首次完整設置（新專案 clone 後執行此目標）
 setup: check-deps init-submodules install

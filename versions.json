@@ -1,0 +1,174 @@
+{
+  "description": "追蹤每個專案的分析版本與頁面對應的 source 路徑映射",
+  "projects": {
+    "kubevirt": {
+      "repo": "https://github.com/kubevirt/kubevirt",
+      "analyzed_commit": "1784f2b81a4cb6b535851186838557e363325cb8",
+      "analyzed_date": "2026-04-04",
+      "pages": {
+        "architecture": {
+          "source_paths": ["cmd/", "pkg/virt-operator/", "pkg/virt-api/", "pkg/virt-controller/", "pkg/virt-handler/", "pkg/virt-launcher/"],
+          "doc_files": ["docs-site/kubevirt/architecture/"]
+        },
+        "core-components": {
+          "source_paths": ["pkg/virt-operator/", "pkg/virt-api/", "pkg/virt-controller/", "pkg/virt-handler/", "pkg/virt-launcher/"],
+          "doc_files": ["docs-site/kubevirt/components/"]
+        },
+        "networking": {
+          "source_paths": ["pkg/network/", "pkg/virt-launcher/virtwrap/network/"],
+          "doc_files": ["docs-site/kubevirt/networking/"]
+        },
+        "storage": {
+          "source_paths": ["pkg/storage/", "pkg/container-disk/", "pkg/hotplug-disk/"],
+          "doc_files": ["docs-site/kubevirt/storage/"]
+        },
+        "api-resources": {
+          "source_paths": ["staging/src/kubevirt.io/api/", "pkg/virt-api/webhooks/"],
+          "doc_files": ["docs-site/kubevirt/api-resources/"]
+        }
+      }
+    },
+    "containerized-data-importer": {
+      "repo": "https://github.com/kubevirt/containerized-data-importer",
+      "analyzed_commit": "d97a33c2f063258d14c6df27d297e84e3f48b779",
+      "analyzed_date": "2026-04-04",
+      "pages": {
+        "architecture": {
+          "source_paths": ["cmd/", "pkg/operator/", "pkg/controller/"],
+          "doc_files": ["docs-site/containerized-data-importer/architecture.md"]
+        },
+        "core-features": {
+          "source_paths": ["pkg/importer/", "pkg/uploadserver/", "pkg/clone/", "pkg/image/"],
+          "doc_files": ["docs-site/containerized-data-importer/core-features.md"]
+        },
+        "controllers-api": {
+          "source_paths": ["pkg/controller/", "pkg/apis/", "pkg/operator/"],
+          "doc_files": ["docs-site/containerized-data-importer/controllers-api.md"]
+        },
+        "integration": {
+          "source_paths": ["pkg/monitoring/", "pkg/util/", "pkg/token/", "pkg/uploadserver/"],
+          "doc_files": ["docs-site/containerized-data-importer/integration.md"]
+        }
+      }
+    },
+    "monitoring": {
+      "repo": "https://github.com/kubevirt/monitoring",
+      "analyzed_commit": "7cf151cb7271b65a2a4e09572ca09278ba2c0737",
+      "analyzed_date": "2026-04-04",
+      "pages": {
+        "architecture": {
+          "source_paths": ["cmd/", "pkg/", "tools/"],
+          "doc_files": ["docs-site/monitoring/architecture.md"]
+        },
+        "core-features": {
+          "source_paths": ["docs/runbooks/", "dashboards/", "pkg/rules/"],
+          "doc_files": ["docs-site/monitoring/core-features.md"]
+        },
+        "metrics-alerts": {
+          "source_paths": ["docs/runbooks/", "pkg/rules/", "dashboards/grafana/"],
+          "doc_files": ["docs-site/monitoring/metrics-alerts.md"]
+        },
+        "integration": {
+          "source_paths": ["tools/", "hack/", "Makefile"],
+          "doc_files": ["docs-site/monitoring/integration.md"]
+        }
+      }
+    },
+    "common-instancetypes": {
+      "repo": "https://github.com/kubevirt/common-instancetypes",
+      "analyzed_commit": "bbcbba4b4620d46bd9c8d285726bcd06add34a1c",
+      "analyzed_date": "2026-04-04",
+      "pages": {
+        "architecture": {
+          "source_paths": ["_VirtualMachineInstancetype/", "_VirtualMachinePreference/", "tools/"],
+          "doc_files": ["docs-site/common-instancetypes/architecture.md"]
+        },
+        "core-features": {
+          "source_paths": ["_VirtualMachineInstancetype/", "_VirtualMachinePreference/"],
+          "doc_files": ["docs-site/common-instancetypes/core-features.md"]
+        },
+        "resource-catalog": {
+          "source_paths": ["_VirtualMachineInstancetype/", "_VirtualMachinePreference/"],
+          "doc_files": ["docs-site/common-instancetypes/resource-catalog.md"]
+        },
+        "integration": {
+          "source_paths": ["tools/", "hack/", "Makefile"],
+          "doc_files": ["docs-site/common-instancetypes/integration.md"]
+        }
+      }
+    },
+    "node-maintenance-operator": {
+      "repo": "https://github.com/medik8s/node-maintenance-operator",
+      "analyzed_commit": "d1a537be397a0afb2fd034650a1ed329e72699a2",
+      "analyzed_date": "2026-04-04",
+      "pages": {
+        "architecture": {
+          "source_paths": ["cmd/", "controllers/", "api/", "config/"],
+          "doc_files": ["docs-site/node-maintenance-operator/architecture.md"]
+        },
+        "core-features": {
+          "source_paths": ["controllers/", "pkg/"],
+          "doc_files": ["docs-site/node-maintenance-operator/core-features.md"]
+        },
+        "controllers-api": {
+          "source_paths": ["controllers/", "api/", "config/crd/"],
+          "doc_files": ["docs-site/node-maintenance-operator/controllers-api.md"]
+        },
+        "integration": {
+          "source_paths": ["config/", "hack/", "Makefile", "bundle/"],
+          "doc_files": ["docs-site/node-maintenance-operator/integration.md"]
+        }
+      }
+    },
+    "forklift": {
+      "repo": "https://github.com/kubev2v/forklift",
+      "analyzed_commit": "2c5ffe2d582cc9d599dedafcccb3a71a27409d20",
+      "analyzed_date": "2026-04-04",
+      "pages": {
+        "architecture": {
+          "source_paths": ["cmd/", "pkg/controller/", "pkg/lib/", "operator/"],
+          "doc_files": ["docs-site/forklift/architecture.md"]
+        },
+        "core-features": {
+          "source_paths": ["pkg/controller/plan/", "pkg/controller/provider/", "virt-v2v/"],
+          "doc_files": ["docs-site/forklift/core-features.md"]
+        },
+        "controllers-api": {
+          "source_paths": ["pkg/controller/", "pkg/apis/", "pkg/webhook/", "operator/"],
+          "doc_files": ["docs-site/forklift/controllers-api.md"]
+        },
+        "integration": {
+          "source_paths": ["pkg/controller/provider/", "pkg/lib/inventory/", "validation/"],
+          "doc_files": ["docs-site/forklift/integration.md"]
+        }
+      }
+    },
+    "netbox": {
+      "repo": "https://github.com/netbox-community/netbox",
+      "analyzed_commit": "09f7df072607d5562b54357965ed64c620c9af32",
+      "analyzed_date": "2026-04-04",
+      "pages": {
+        "architecture": {
+          "source_paths": ["netbox/netbox/", "netbox/core/", "netbox/utilities/"],
+          "doc_files": ["docs-site/netbox/architecture.md"]
+        },
+        "core-features": {
+          "source_paths": ["netbox/dcim/", "netbox/ipam/", "netbox/circuits/", "netbox/virtualization/", "netbox/wireless/", "netbox/vpn/"],
+          "doc_files": ["docs-site/netbox/core-features.md"]
+        },
+        "data-models": {
+          "source_paths": ["netbox/dcim/models/", "netbox/ipam/models/", "netbox/extras/models/", "netbox/tenancy/models/", "netbox/users/models/", "netbox/circuits/models/", "netbox/virtualization/models/"],
+          "doc_files": ["docs-site/netbox/data-models.md"]
+        },
+        "api-reference": {
+          "source_paths": ["netbox/netbox/api/", "netbox/dcim/api/", "netbox/ipam/api/", "netbox/extras/api/", "netbox/netbox/graphql/", "netbox/netbox/authentication.py"],
+          "doc_files": ["docs-site/netbox/api-reference.md"]
+        },
+        "integration": {
+          "source_paths": ["netbox/extras/", "netbox/core/", "netbox/netbox/plugins/", "netbox/netbox/settings.py"],
+          "doc_files": ["docs-site/netbox/integration.md"]
+        }
+      }
+    }
+  }
+}
