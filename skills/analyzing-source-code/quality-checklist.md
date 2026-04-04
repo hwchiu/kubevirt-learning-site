@@ -82,3 +82,37 @@ For a random sample of 5 code blocks across all pages:
 | Chunk size >500KB warning | Non-blocking; large pages are expected |
 | Dead links in build output | Fix the link in the markdown file |
 | Missing sidebar route | Add `'/{project}/': projectSidebar` to config.js |
+
+## Local LLM Chat Checks
+
+### Plugin (`localLlmChat.js`)
+- [ ] `apply: 'serve'` — must NOT run in production build
+- [ ] POST `/api/chat` endpoint accepts `{ project, question }` body
+- [ ] Spawns CLI with `--add-dir` for both project source and docs directories
+- [ ] SSE response with `status`, `result`/`error`, and `done` events
+- [ ] Heartbeat interval (5s) to prevent connection timeout
+- [ ] 5-minute process timeout to avoid hanging
+- [ ] CORS headers for `OPTIONS` preflight
+
+### Component (`LocalChat.vue`)
+- [ ] `v-if="import.meta.env.DEV"` — zero chat UI in production
+- [ ] Auto-detects current project from route path
+- [ ] All known project slugs listed in `projects` array
+- [ ] Drag-to-resize with min/max bounds (360×350 → viewport)
+- [ ] Touch support for mobile resize
+- [ ] Expand button (`⊞`/`⊟`) toggles large panel mode
+- [ ] SSE stream parsing handles all event types
+- [ ] Error state displays user-friendly message
+- [ ] Suggestion buttons for common queries
+
+### Theme Extension (`theme/index.js`)
+- [ ] Extends `DefaultTheme` (not replaces)
+- [ ] Mounts `LocalChat` in `layout-bottom` slot only
+- [ ] No other slot overrides unless explicitly needed
+
+### Config Integration
+- [ ] `localLlmChatPlugin` imported and registered in `vite.plugins`
+- [ ] `projectRoot` points to repository root (where submodules live)
+- [ ] `cliCommand` matches environment (`claude` or custom path)
+- [ ] `npm run build` succeeds — plugin is skipped in production
+- [ ] `npm run dev` shows 🤖 button in bottom-right corner

@@ -169,7 +169,147 @@ docs-site/.vitepress/dist/
 docs-site/.vitepress/cache/
 ```
 
-### 7. Add Submodules
+### 7. Setup Local LLM Chat (Dev Mode)
+
+建立三個檔案，讓 `npm run dev` 時自動啟用 AI 即時分析：
+
+#### 7a. Vite Plugin
+
+```javascript
+// docs-site/.vitepress/plugins/localLlmChat.js
+import { spawn } from 'child_process'
+import { resolve } from 'path'
+
+export function localLlmChatPlugin(options = {}) {
+  const projectRoot = options.projectRoot || process.cwd()
+  const cliCommand = options.cliCommand || 'claude'
+  const defaultModel = options.model || 'sonnet'
+
+  return {
+    name: 'local-llm-chat',
+    apply: 'serve',
+    configureServer(server) {
+      server.middlewares.use('/api/chat', async (req, res) => {
+        if (req.method !== 'POST') {
+          res.writeHead(405, { 'Content-Type': 'application/json' })
+          res.end(JSON.stringify({ error: 'Method not allowed' }))
+          return
+        }
+
+        let body = ''
+        for await (const chunk of req) body += chunk
+        const { project, question } = JSON.parse(body)
+
+        const systemPrompt = [
+          '你是一個專業的原始碼分析助手。',
+          '請用 zh-TW（繁體中文）回答，技術術語保持英文。',
+          '回答時請引用具體的檔案路徑與程式碼片段。',
+          '如果不確定，請誠實說明而非猜測。',
+        ].join('\n')
+
+        const contextHint = project
+          ? `請基於 ./${project}/ 目錄下的原始碼以及 ./docs-site/${project}/ 的分析文件來回答。`
+          : '請基於整個專案來回答。'
+
+        const args = [
+          '-p', `${contextHint}\n\n使用者問題：${question}`,
+          '--append-system-prompt', systemPrompt,
+          '--output-format', 'json',
+          '--model', defaultModel,
+        ]
+
+        if (project) {
+          args.push('--add-dir', resolve(projectRoot, project))
+          args.push('--add-dir', resolve(projectRoot, 'docs-site', project))
+        }
+
+        // SSE response
+        res.writeHead(200, {
+          'Content-Type': 'text/event-stream',
+          'Cache-Control': 'no-cache',
+          'Connection': 'keep-alive',
+        })
+
+        const heartbeat = setInterval(() => res.write('event: ping\ndata: {}\n\n'), 5000)
+        res.write(`event: status\ndata: ${JSON.stringify({ status: 'thinking', message: '正在分析原始碼...' })}\n\n`)
+
+        try {
+          const result = await new Promise((resolve, reject) => {
+            const child = spawn(cliCommand, args, { cwd: projectRoot, stdio: ['ignore', 'pipe', 'pipe'], timeout: 300000 })
+            let stdout = ''
+            child.stdout.on('data', d => stdout += d)
+            child.on('close', code => {
+              if (code !== 0) return reject(new Error(`Exit code ${code}`))
+              try { resolve(JSON.parse(stdout).result || stdout) } catch { resolve(stdout.trim()) }
+            })
+            child.on('error', reject)
+          })
+          res.write(`event: result\ndata: ${JSON.stringify({ result })}\n\n`)
+        } catch (err) {
+          res.write(`event: error\ndata: ${JSON.stringify({ error: err.message })}\n\n`)
+        } finally {
+          clearInterval(heartbeat)
+          res.write('event: done\ndata: {}\n\n')
+          res.end()
+        }
+      })
+    },
+  }
+}
+```
+
+#### 7b. Theme Extension
+
+```javascript
+// docs-site/.vitepress/theme/index.js
+import DefaultTheme from 'vitepress/theme'
+import LocalChat from './components/LocalChat.vue'
+import { h } from 'vue'
+
+export default {
+  extends: DefaultTheme,
+  Layout() {
+    return h(DefaultTheme.Layout, null, {
+      'layout-bottom': () => h(LocalChat),
+    })
+  },
+}
+```
+
+#### 7c. Chat Component
+
+建立 `docs-site/.vitepress/theme/components/LocalChat.vue`：
+
+- 使用 `import.meta.env.DEV` 條件渲染（production build 不含）
+- 自動從 `route.path` 偵測當前專案
+- 支援 drag-to-resize（左上角拖曳把手）和 expand 按鈕
+- SSE 串流解析，顯示 thinking → result
+- 預設寬度 520px，可拖曳至 360px–viewport
+
+> 完整程式碼較長（~500 行），建議直接從參考專案複製 `LocalChat.vue` 作為起點。
+
+#### 7d. Register Plugin in Config
+
+```javascript
+// docs-site/.vitepress/config.js
+import { localLlmChatPlugin } from './plugins/localLlmChat.js'
+
+export default withMermaid(defineConfig({
+  // ...existing config...
+  vite: {
+    plugins: [
+      localLlmChatPlugin({
+        projectRoot: process.cwd(),
+        cliCommand: 'claude',   // 支援 claude code router
+        model: 'sonnet',
+      }),
+    ],
+  },
+  // ...
+}))
+```
+
+### 8. Add Submodules
 
 ```bash
 git submodule add https://github.com/org/project-1.git project-1

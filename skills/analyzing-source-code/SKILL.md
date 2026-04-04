@@ -366,3 +366,140 @@ init-submodules:
 install:
 	npm install
 ```
+
+## Local LLM Chat Integration
+
+### Overview
+
+文件網站在本地開發模式（`npm run dev`）下內建 AI 即時分析功能。透過 Vite dev plugin 攔截 `/api/chat` 請求，spawn `claude -p` CLI 並以 SSE 串流回傳結果。**Production build 完全不含此功能。**
+
+### Architecture
+
+```dot
+digraph llm_chat {
+  rankdir=LR;
+  node [shape=box, style=rounded];
+
+  browser [label="瀏覽器\nLocalChat.vue"];
+  vite [label="Vite Dev Plugin\n/api/chat"];
+  cli [label="claude -p\n(或 claude code router)"];
+  source [label="Submodule\n原始碼"];
+  docs [label="docs-site/\n分析文件"];
+
+  browser -> vite [label="POST SSE"];
+  vite -> cli [label="spawn"];
+  cli -> source [label="--add-dir"];
+  cli -> docs [label="--add-dir"];
+  cli -> vite [label="JSON stdout"];
+  vite -> browser [label="SSE events"];
+}
+```
+
+### Three Components
+
+| Component | Path | Purpose |
+|-----------|------|---------|
+| **Vite Plugin** | `.vitepress/plugins/localLlmChat.js` | Dev-only middleware, spawns CLI, returns SSE |
+| **Vue Component** | `.vitepress/theme/components/LocalChat.vue` | Chat UI, drag-resize, auto-detect project |
+| **Theme Extension** | `.vitepress/theme/index.js` | Mounts component in `layout-bottom` slot |
+
+### Vite Plugin (`localLlmChat.js`)
+
+- **Apply mode**: `'serve'` only — production build ignores it
+- **Endpoint**: `POST /api/chat` with `{ project, question }` body
+- **CLI invocation**: `claude -p "{prompt}" --add-dir {projectDir} --add-dir {docsDir} --output-format json --append-system-prompt "{system}" --model sonnet`
+- **SSE events**: `status` → `result` / `error` → `done`, with heartbeat every 5s
+- **Timeout**: 5 minutes (300s)
+- **Compatible with**: `claude` (native) and `claude code router` (same CLI interface)
+
+```javascript
+// Plugin factory pattern
+export function localLlmChatPlugin(options = {}) {
+  const projectRoot = options.projectRoot || process.cwd()
+  const cliCommand = options.cliCommand || 'claude'
+  const defaultModel = options.model || 'sonnet'
+
+  return {
+    name: 'local-llm-chat',
+    apply: 'serve',
+    configureServer(server) {
+      server.middlewares.use('/api/chat', async (req, res) => {
+        // Parse POST body → build prompt → spawn CLI → stream SSE
+      })
+    },
+  }
+}
+```
+
+### Vue Component (`LocalChat.vue`)
+
+#### Key Design Decisions
+
+| Feature | Implementation |
+|---------|---------------|
+| **Dev-only** | `v-if="import.meta.env.DEV"` — tree-shaken in build |
+| **Auto-detect project** | Parses `route.path` for known project slugs |
+| **Drag-to-resize** | Top-left `nw-resize` handle with mouse + touch support |
+| **Expand mode** | `⊞` button toggles 75vw / 85vh fullscreen-like panel |
+| **SSE parsing** | `ReadableStream` reader with line-by-line event parsing |
+| **Suggestion buttons** | Quick-start questions for common analysis queries |
+
+#### Size & Constraints
+
+| Property | Default | Expanded | Min | Max |
+|----------|---------|----------|-----|-----|
+| Width | 520px | 75vw (max 900px) | 360px | viewport - 60px |
+| Height | 560px | 85vh | 350px | viewport - 100px |
+| Font size | 14px | 14px | — | — |
+| Line height | 1.7 | 1.7 | — | — |
+
+### Theme Extension (`theme/index.js`)
+
+```javascript
+import DefaultTheme from 'vitepress/theme'
+import LocalChat from './components/LocalChat.vue'
+import { h } from 'vue'
+
+export default {
+  extends: DefaultTheme,
+  Layout() {
+    return h(DefaultTheme.Layout, null, {
+      'layout-bottom': () => h(LocalChat),
+    })
+  },
+}
+```
+
+### Config Integration
+
+```javascript
+// docs-site/.vitepress/config.js
+import { localLlmChatPlugin } from './plugins/localLlmChat.js'
+
+export default withMermaid(defineConfig({
+  // ...
+  vite: {
+    plugins: [
+      localLlmChatPlugin({
+        projectRoot: process.cwd(),
+        cliCommand: 'claude',   // or any compatible CLI
+        model: 'sonnet',
+      }),
+    ],
+  },
+  // ...
+}))
+```
+
+### System Prompt Design
+
+CLI 收到的 system prompt 包含：
+1. 角色定義：原始碼分析助手，專精 KubeVirt 生態系
+2. 語言指示：zh-TW 回答，技術術語保持英文
+3. 引用規範：回答須引用檔案路徑與程式碼
+4. 誠實原則：不確定就說明，不猜測
+
+Context hint 根據 `project` 參數動態指定目標目錄：
+```
+請基於 ./{project}/ 目錄下的原始碼以及 ./docs-site/{project}/ 的分析文件來回答。
+```
