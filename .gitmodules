@@ -1,0 +1,6 @@
+[submodule "kubevirt"]
+	path = kubevirt
+	url = https://github.com/kubevirt/kubevirt.git
+[submodule "containerized-data-importer"]
+	path = containerized-data-importer
+	url = https://github.com/kubevirt/containerized-data-importer.git

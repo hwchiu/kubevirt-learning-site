@@ -1,12 +1,12 @@
 {
-  "name": "kubevirt-docs",
-  "version": "1.0.0",
-  "description": "KubeVirt 學習指南",
+  "name": "kubevirt-ecosystem-analysis",
+  "version": "2.0.0",
+  "description": "KubeVirt 生態系原始碼分析靜態網站",
   "type": "module",
   "scripts": {
-    "dev": "vitepress dev docs",
-    "build": "vitepress build docs",
-    "preview": "vitepress preview docs"
+    "dev": "vitepress dev docs-site",
+    "build": "vitepress build docs-site",
+    "preview": "vitepress preview docs-site"
   },
   "devDependencies": {
     "vitepress": "^1.6.4"
