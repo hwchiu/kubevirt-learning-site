@@ -24,6 +24,9 @@ hero:
     - theme: alt
       text: 🔧 NMO
       link: /node-maintenance-operator/
+    - theme: alt
+      text: 🚚 Forklift
+      link: /forklift/
 
 features:
   - icon: 🖥️
@@ -55,6 +58,12 @@ features:
     details: Kubernetes 節點維護自動化 — 自動封鎖/驅逐/解封節點，針對 KubeVirt VM 工作負載最佳化的 Operator。
     link: /node-maintenance-operator/
     linkText: 開始閱讀
+
+  - icon: 🚚
+    title: Forklift
+    details: VM 遷移平台 — 支援 vSphere、oVirt、OpenStack、Hyper-V、OVA 等多來源至 KubeVirt 的自動化遷移，含增量遷移與 XCOPY 加速。
+    link: /forklift/
+    linkText: 開始閱讀
 ---
 
 ## 📚 專案總覽
@@ -68,6 +77,7 @@ features:
 | [Monitoring](/monitoring/) | KubeVirt 生態系集中式監控基礎設施 | ✅ 完整分析 |
 | [Common Instancetypes](/common-instancetypes/) | 標準化 VM 實例類型與 OS 偏好設定 | ✅ 完整分析 |
 | [Node Maintenance Operator](/node-maintenance-operator/) | Kubernetes 節點維護自動化 Operator | ✅ 完整分析 |
+| [Forklift](/forklift/) | 多來源 VM 遷移至 KubeVirt 的自動化平台 | ✅ 完整分析 |
 
 ## 🔗 原始碼連結
 
@@ -78,3 +88,4 @@ features:
 - **Monitoring**: [github.com/kubevirt/monitoring](https://github.com/kubevirt/monitoring)
 - **Common Instancetypes**: [github.com/kubevirt/common-instancetypes](https://github.com/kubevirt/common-instancetypes)
 - **Node Maintenance Operator**: [github.com/medik8s/node-maintenance-operator](https://github.com/medik8s/node-maintenance-operator)
+- **Forklift**: [github.com/kubev2v/forklift](https://github.com/kubev2v/forklift)

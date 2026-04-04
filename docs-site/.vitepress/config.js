@@ -150,6 +150,19 @@ const nmoSidebar = [
   },
 ]
 
+const forkliftSidebar = [
+  {
+    text: '📖 Forklift 總覽',
+    items: [
+      { text: '專案簡介', link: '/forklift/' },
+      { text: '系統架構', link: '/forklift/architecture' },
+      { text: '核心功能分析', link: '/forklift/core-features' },
+      { text: '控制器與 API', link: '/forklift/controllers-api' },
+      { text: '外部整合', link: '/forklift/integration' },
+    ]
+  },
+]
+
 export default withMermaid(defineConfig({
   base: '/kubevirt-learning-site/',
   title: 'KubeVirt 生態系原始碼分析',
@@ -172,6 +185,7 @@ export default withMermaid(defineConfig({
           { text: 'Monitoring', link: '/monitoring/' },
           { text: 'Common Instancetypes', link: '/common-instancetypes/' },
           { text: 'Node Maintenance Operator', link: '/node-maintenance-operator/' },
+          { text: 'Forklift', link: '/forklift/' },
         ]
       },
     ],
@@ -181,6 +195,7 @@ export default withMermaid(defineConfig({
       '/monitoring/': monitoringSidebar,
       '/common-instancetypes/': instancetypesSidebar,
       '/node-maintenance-operator/': nmoSidebar,
+      '/forklift/': forkliftSidebar,
     },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/kubevirt/kubevirt' }
