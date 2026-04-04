@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, nextTick, onMounted } from 'vue'
+import { ref, computed, nextTick, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vitepress'
 
 const route = useRoute()
@@ -9,8 +9,75 @@ const question = ref('')
 const messages = ref([])
 const isLoading = ref(false)
 const messagesContainer = ref(null)
+const chatPanel = ref(null)
 
 const isDev = import.meta.env.DEV
+
+// Drag-resize state
+const isResizing = ref(false)
+const panelWidth = ref(520)
+const panelHeight = ref(560)
+const MIN_W = 360
+const MIN_H = 350
+const MAX_W = () => window.innerWidth - 60
+const MAX_H = () => window.innerHeight - 100
+
+function startResize(e) {
+  e.preventDefault()
+  isResizing.value = true
+  isExpanded.value = false
+  const startX = e.clientX
+  const startY = e.clientY
+  const startW = panelWidth.value
+  const startH = panelHeight.value
+
+  function onMove(ev) {
+    const dw = startX - ev.clientX  // drag left = wider
+    const dh = startY - ev.clientY  // drag up = taller
+    panelWidth.value = Math.min(MAX_W(), Math.max(MIN_W, startW + dw))
+    panelHeight.value = Math.min(MAX_H(), Math.max(MIN_H, startH + dh))
+  }
+  function onUp() {
+    isResizing.value = false
+    document.removeEventListener('mousemove', onMove)
+    document.removeEventListener('mouseup', onUp)
+  }
+  document.addEventListener('mousemove', onMove)
+  document.addEventListener('mouseup', onUp)
+}
+
+// Touch support for mobile resize
+function startResizeTouch(e) {
+  e.preventDefault()
+  isResizing.value = true
+  isExpanded.value = false
+  const touch = e.touches[0]
+  const startX = touch.clientX
+  const startY = touch.clientY
+  const startW = panelWidth.value
+  const startH = panelHeight.value
+
+  function onMove(ev) {
+    const t = ev.touches[0]
+    panelWidth.value = Math.min(MAX_W(), Math.max(MIN_W, startW + (startX - t.clientX)))
+    panelHeight.value = Math.min(MAX_H(), Math.max(MIN_H, startH + (startY - t.clientY)))
+  }
+  function onEnd() {
+    isResizing.value = false
+    document.removeEventListener('touchmove', onMove)
+    document.removeEventListener('touchend', onEnd)
+  }
+  document.addEventListener('touchmove', onMove, { passive: false })
+  document.addEventListener('touchend', onEnd)
+}
+
+const panelStyle = computed(() => {
+  if (isExpanded.value) return {}
+  return {
+    width: `${panelWidth.value}px`,
+    maxHeight: `${panelHeight.value}px`,
+  }
+})
 
 const currentProject = computed(() => {
   const path = route.path
@@ -146,7 +213,20 @@ function handleKeydown(e) {
     </button>
 
     <!-- Chat Panel -->
-    <div v-show="isOpen" class="chat-panel" :class="{ expanded: isExpanded }">
+    <div
+      v-show="isOpen"
+      ref="chatPanel"
+      class="chat-panel"
+      :class="{ expanded: isExpanded, resizing: isResizing }"
+      :style="panelStyle"
+    >
+      <!-- Resize handle (top-left corner) -->
+      <div
+        class="resize-handle"
+        @mousedown="startResize"
+        @touchstart="startResizeTouch"
+        title="拖曳調整大小"
+      />
       <div class="chat-header">
         <div class="chat-title">
           <span>🤖 原始碼助手</span>
@@ -272,12 +352,44 @@ export default {
   transition: all 0.3s ease;
 }
 
+.chat-panel.resizing {
+  transition: none;
+  user-select: none;
+}
+
 .chat-panel.expanded {
-  width: 75vw;
+  width: 75vw !important;
   max-width: 900px;
-  max-height: 85vh;
+  max-height: 85vh !important;
   bottom: 40px;
   right: 40px;
+}
+
+.resize-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  cursor: nw-resize;
+  z-index: 10;
+}
+
+.resize-handle::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid var(--vp-c-text-3);
+  border-left: 2px solid var(--vp-c-text-3);
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.resize-handle:hover::after {
+  opacity: 1;
 }
 
 .chat-header {
