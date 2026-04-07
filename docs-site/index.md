@@ -30,6 +30,12 @@ hero:
     - theme: alt
       text: 🌐 NetBox
       link: /netbox/
+    - theme: alt
+      text: 📨 Kafka
+      link: /kafka/
+    - theme: alt
+      text: 🗄️ TiDB
+      link: /tidb/
 
 features:
   - icon: 🖥️
@@ -73,6 +79,18 @@ features:
     details: 網路基礎設施管理平台 — Python/Django 全端 Web 應用，115 個資料模型、131 REST API、GraphQL、Plugin 系統、Object-Level RBAC。
     link: /netbox/
     linkText: 開始閱讀
+
+  - icon: 📨
+    title: Apache Kafka
+    details: 分散式事件串流平台 — Java/Scala 實作，KRaft 共識協定、Producer/Consumer API、Kafka Streams、Kafka Connect 資料整合框架。
+    link: /kafka/
+    linkText: 開始閱讀
+
+  - icon: 🗄️
+    title: TiDB
+    details: 分散式 HTAP SQL 資料庫 — Go 實作，MySQL 相容、TiKV 行式儲存、TiFlash 列式儲存、Raft 多副本強一致性、水平擴展。
+    link: /tidb/
+    linkText: 開始閱讀
 ---
 
 ## 📚 專案總覽
@@ -88,6 +106,8 @@ features:
 | [Node Maintenance Operator](/node-maintenance-operator/) | Kubernetes 節點維護自動化 Operator | ✅ 完整分析 |
 | [Forklift](/forklift/) | 多來源 VM 遷移至 KubeVirt 的自動化平台 | ✅ 完整分析 |
 | [NetBox](/netbox/) | 網路基礎設施管理平台（IPAM / DCIM） | ✅ 完整分析 |
+| [Apache Kafka](/kafka/) | 分散式事件串流平台 | ✅ 完整分析 |
+| [TiDB](/tidb/) | 分散式 HTAP SQL 資料庫 | ✅ 完整分析 |
 
 ## 🔗 原始碼連結
 
@@ -100,3 +120,5 @@ features:
 - **Node Maintenance Operator**: [github.com/medik8s/node-maintenance-operator](https://github.com/medik8s/node-maintenance-operator)
 - **Forklift**: [github.com/kubev2v/forklift](https://github.com/kubev2v/forklift)
 - **NetBox**: [github.com/netbox-community/netbox](https://github.com/netbox-community/netbox)
+- **Apache Kafka**: [github.com/apache/kafka](https://github.com/apache/kafka)
+- **TiDB**: [github.com/pingcap/tidb](https://github.com/pingcap/tidb)
