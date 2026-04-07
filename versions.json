@@ -169,6 +169,30 @@
           "doc_files": ["docs-site/netbox/integration.md"]
         }
       }
+    },
+    "multus-cni": {
+      "repo": "https://github.com/k8snetworkplumbingwg/multus-cni",
+      "branch": "master",
+      "analyzed_commit": "522324cea1f8f936fa9b32985ed356be1f1f3cc5",
+      "analyzed_date": "2026-04-07",
+      "pages": {
+        "architecture": {
+          "source_paths": ["cmd/", "pkg/multus/", "pkg/server/", "pkg/types/", "deployments/"],
+          "doc_files": ["docs-site/multus-cni/architecture.md"]
+        },
+        "core-features": {
+          "source_paths": ["pkg/multus/", "pkg/k8sclient/", "pkg/types/", "pkg/checkpoint/"],
+          "doc_files": ["docs-site/multus-cni/core-features.md"]
+        },
+        "thick-plugin": {
+          "source_paths": ["cmd/multus-daemon/", "cmd/multus-shim/", "pkg/server/", "pkg/server/api/", "pkg/server/config/"],
+          "doc_files": ["docs-site/multus-cni/thick-plugin.md"]
+        },
+        "configuration": {
+          "source_paths": ["pkg/types/types.go", "pkg/types/conf.go", "pkg/server/types.go"],
+          "doc_files": ["docs-site/multus-cni/configuration.md"]
+        }
+      }
     }
   }
 }
