@@ -191,6 +191,32 @@ const multusSidebar = [
   },
 ]
 
+const tidbSidebar = [
+  {
+    text: '📖 TiDB 總覽',
+    items: [
+      { text: '專案簡介', link: '/tidb/' },
+      { text: '系統架構', link: '/tidb/architecture' },
+      { text: '核心功能分析', link: '/tidb/core-features' },
+      { text: '控制器與 API', link: '/tidb/controllers-api' },
+      { text: '外部整合', link: '/tidb/integration' },
+    ]
+  },
+]
+
+const kafkaSidebar = [
+  {
+    text: '📖 Apache Kafka 總覽',
+    items: [
+      { text: '專案簡介', link: '/kafka/' },
+      { text: '系統架構', link: '/kafka/architecture' },
+      { text: '核心功能分析', link: '/kafka/core-features' },
+      { text: '核心模組深度解析', link: '/kafka/modules' },
+      { text: '外部整合', link: '/kafka/integration' },
+    ]
+  },
+]
+
 export default withMermaid(defineConfig({
   base: '/kubevirt-learning-site/',
   title: 'KubeVirt 生態系原始碼分析',
@@ -225,6 +251,8 @@ export default withMermaid(defineConfig({
           { text: 'Forklift', link: '/forklift/' },
           { text: 'NetBox', link: '/netbox/' },
           { text: 'Multus CNI', link: '/multus-cni/' },
+          { text: 'TiDB', link: '/tidb/' },
+          { text: 'Apache Kafka', link: '/kafka/' },
         ]
       },
     ],
@@ -237,6 +265,8 @@ export default withMermaid(defineConfig({
       '/forklift/': forkliftSidebar,
       '/netbox/': netboxSidebar,
       '/multus-cni/': multusSidebar,
+      '/tidb/': tidbSidebar,
+      '/kafka/': kafkaSidebar,
     },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/kubevirt/kubevirt' }
