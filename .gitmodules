@@ -26,3 +26,7 @@
 	path = netbox
 	url = https://github.com/netbox-community/netbox.git
 	branch = main
+[submodule "multus-cni"]
+	path = multus-cni
+	url = https://github.com/k8snetworkplumbingwg/multus-cni.git
+	branch = master

@@ -178,6 +178,19 @@ const netboxSidebar = [
   },
 ]
 
+const multusSidebar = [
+  {
+    text: '📖 Multus CNI 總覽',
+    items: [
+      { text: '專案簡介', link: '/multus-cni/' },
+      { text: '系統架構', link: '/multus-cni/architecture' },
+      { text: '核心功能分析', link: '/multus-cni/core-features' },
+      { text: 'Thick Plugin 深入剖析', link: '/multus-cni/thick-plugin' },
+      { text: '設定參考', link: '/multus-cni/configuration' },
+    ]
+  },
+]
+
 export default withMermaid(defineConfig({
   base: '/kubevirt-learning-site/',
   title: 'KubeVirt 生態系原始碼分析',
@@ -211,6 +224,7 @@ export default withMermaid(defineConfig({
           { text: 'Node Maintenance Operator', link: '/node-maintenance-operator/' },
           { text: 'Forklift', link: '/forklift/' },
           { text: 'NetBox', link: '/netbox/' },
+          { text: 'Multus CNI', link: '/multus-cni/' },
         ]
       },
     ],
@@ -222,6 +236,7 @@ export default withMermaid(defineConfig({
       '/node-maintenance-operator/': nmoSidebar,
       '/forklift/': forkliftSidebar,
       '/netbox/': netboxSidebar,
+      '/multus-cni/': multusSidebar,
     },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/kubevirt/kubevirt' }
