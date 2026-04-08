@@ -11,7 +11,7 @@ const props = defineProps({
 const selected = ref(null)
 const revealed = ref(false)
 
-const isCorrect = computed(() => selected.value === props.answer)
+const isCorrect = computed(() => selected.value !== null && selected.value === props.answer)
 
 function select(index) {
   if (revealed.value) return
