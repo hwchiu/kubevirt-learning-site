@@ -92,15 +92,17 @@ function processSvgHtml(svgHtml) {
   const viewBox = svg.getAttribute('viewBox')
   if (viewBox) {
     const parts = viewBox.trim().split(/[\s,]+/)
-    const vbWidth = parseFloat(parts[2])
-    const vbHeight = parseFloat(parts[3])
-    if (vbWidth > 0 && vbHeight > 0) {
-      svg.removeAttribute('width')
-      svg.removeAttribute('height')
-      svg.style.width = vbWidth + 'px'
-      svg.style.height = vbHeight + 'px'
-      svg.style.maxWidth = 'calc(100vw - 32px)'
-      svg.style.maxHeight = 'calc(100vh - 116px)' /* 48px toolbar + 36px hint + 32px padding */
+    if (parts.length >= 4) {
+      const vbWidth = parseFloat(parts[2])
+      const vbHeight = parseFloat(parts[3])
+      if (vbWidth > 0 && vbHeight > 0) {
+        svg.removeAttribute('width')
+        svg.removeAttribute('height')
+        svg.style.width = vbWidth + 'px'
+        svg.style.height = vbHeight + 'px'
+        svg.style.maxWidth = 'calc(100vw - 32px)'
+        svg.style.maxHeight = 'calc(100vh - 116px)' /* 48px toolbar + 36px hint + 32px padding */
+      }
     }
   }
 
