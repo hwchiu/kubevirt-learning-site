@@ -96,7 +96,13 @@ export default [
   {
     text: '📝 隨堂測驗',
     items: [
-      { text: 'KubeVirt 架構測驗', link: '/kubevirt/quiz' },
+      { text: '🏗️ 基礎架構', link: '/kubevirt/quiz/architecture' },
+      { text: '⚙️ 核心元件', link: '/kubevirt/quiz/core-components' },
+      { text: '🌐 API 與網路', link: '/kubevirt/quiz/api-networking' },
+      { text: '💾 儲存與輔助元件', link: '/kubevirt/quiz/storage' },
+      { text: '🚀 進階功能', link: '/kubevirt/quiz/advanced' },
+      { text: '🔬 深入剖析', link: '/kubevirt/quiz/deep-dive' },
+      { text: '📖 實用指南', link: '/kubevirt/quiz/practical' },
     ]
   },
 ]
