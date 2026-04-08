@@ -3,6 +3,7 @@
     <div
       v-if="visible"
       class="mermaid-zoom-overlay"
+      :class="{ 'mermaid-zoom-dark': isDark }"
       @click.self="close"
       @wheel.prevent="onWheel"
     >
@@ -34,6 +35,9 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { useData } from 'vitepress'
+
+const { isDark } = useData()
 
 const visible = ref(false)
 const svgContent = ref('')
@@ -74,9 +78,38 @@ function resetView() {
   translateY.value = 0
 }
 
+/**
+ * Fix SVG dimensions so it renders correctly in the zoom overlay.
+ * Mermaid SVGs use width="100%" which collapses to 0px inside a flex container.
+ * We extract the viewBox dimensions and set explicit pixel sizes instead.
+ */
+function processSvgHtml(svgHtml) {
+  const temp = document.createElement('div')
+  temp.innerHTML = svgHtml
+  const svg = temp.querySelector('svg')
+  if (!svg) return svgHtml
+
+  const viewBox = svg.getAttribute('viewBox')
+  if (viewBox) {
+    const parts = viewBox.trim().split(/[\s,]+/)
+    const vbWidth = parseFloat(parts[2])
+    const vbHeight = parseFloat(parts[3])
+    if (vbWidth > 0 && vbHeight > 0) {
+      svg.removeAttribute('width')
+      svg.removeAttribute('height')
+      svg.style.width = vbWidth + 'px'
+      svg.style.height = vbHeight + 'px'
+      svg.style.maxWidth = 'calc(100vw - 32px)'
+      svg.style.maxHeight = 'calc(100vh - 116px)' /* 48px toolbar + 36px hint + 32px padding */
+    }
+  }
+
+  return temp.innerHTML
+}
+
 function open(svgHtml) {
   // Content comes from same-page mermaid-rendered SVGs (already sanitized by the plugin)
-  svgContent.value = svgHtml
+  svgContent.value = processSvgHtml(svgHtml)
   scale.value = 1
   translateX.value = 0
   translateY.value = 0
@@ -291,6 +324,10 @@ onUnmounted(() => {
   margin: 48px 0 36px 0;
 }
 
+.mermaid-zoom-dark .mermaid-zoom-container {
+  background: #1b1b1f;
+}
+
 .mermaid-zoom-content {
   transition: transform 0.1s ease-out;
   padding: 16px;
@@ -298,9 +335,5 @@ onUnmounted(() => {
 
 .mermaid-zoom-content :deep(svg) {
   display: block;
-  max-width: 98vw;
-  max-height: 90vh;
-  width: auto;
-  height: auto;
 }
 </style>
