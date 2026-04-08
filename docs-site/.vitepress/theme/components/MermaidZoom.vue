@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 
 const visible = ref(false)
 const svgContent = ref('')
@@ -50,6 +50,7 @@ const contentStyle = computed(() => ({
 }))
 
 function open(svgHtml) {
+  // Content comes from same-page mermaid-rendered SVGs (already sanitized by the plugin)
   svgContent.value = svgHtml
   scale.value = 1
   translateX.value = 0
@@ -224,8 +225,6 @@ onUnmounted(() => {
   border-radius: 8px;
   padding: 24px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  max-width: 95vw;
-  max-height: 95vh;
 }
 
 .mermaid-zoom-content :deep(svg) {
