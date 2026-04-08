@@ -30,3 +30,7 @@
 	path = multus-cni
 	url = https://github.com/k8snetworkplumbingwg/multus-cni.git
 	branch = master
+[submodule "kubernetes"]
+	path = kubernetes
+	url = https://github.com/kubernetes/kubernetes.git
+	branch = master
