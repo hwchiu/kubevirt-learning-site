@@ -97,6 +97,12 @@ const kubevirtSidebar = [
       { text: '程式碼架構導覽', link: '/kubevirt/dev-guide/code-structure' },
     ]
   },
+  {
+    text: '📝 隨堂測驗',
+    items: [
+      { text: 'KubeVirt 架構測驗', link: '/kubevirt/quiz' },
+    ]
+  },
 ]
 
 const cdiSidebar = [
