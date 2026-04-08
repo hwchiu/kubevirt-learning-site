@@ -21,38 +21,20 @@ const textareaRef = ref(null)
 // Configure marked
 marked.setOptions({ breaks: true, gfm: true })
 
+// Auto-detect project from the first path segment — no hardcoded list needed
 const currentProject = computed(() => {
-  const path = route.path
-  const projects = [
-    'kubevirt',
-    'containerized-data-importer',
-    'monitoring',
-    'common-instancetypes',
-    'node-maintenance-operator',
-    'forklift',
-    'netbox',
-    'kubernetes',
-    'multus-cni',
-  ]
-  for (const p of projects) {
-    if (path.includes(`/${p}/`) || path.endsWith(`/${p}`)) return p
-  }
-  return null
+  const parts = route.path.replace(/^\//, '').split('/')
+  const segment = parts[0]
+  // Ignore VitePress built-in routes and the top-level index
+  if (!segment || segment === 'index' || segment.endsWith('.html')) return null
+  return segment
 })
 
 const projectLabel = computed(() => {
-  const labels = {
-    'kubevirt': 'KubeVirt',
-    'containerized-data-importer': 'CDI',
-    'monitoring': 'Monitoring',
-    'common-instancetypes': 'Instancetypes',
-    'node-maintenance-operator': 'NMO',
-    'forklift': 'Forklift',
-    'netbox': 'NetBox',
-    'kubernetes': 'Kubernetes',
-    'multus-cni': 'Multus CNI',
-  }
-  return labels[currentProject.value] || '全域'
+  const project = currentProject.value
+  if (!project) return '全域'
+  // Convert kebab-case to title case, e.g. "node-maintenance-operator" → "Node Maintenance Operator"
+  return project.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
 })
 
 function renderMarkdown(text) {
