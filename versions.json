@@ -170,6 +170,39 @@
         }
       }
     },
+    "kubernetes": {
+      "repo": "https://github.com/kubernetes/kubernetes",
+      "branch": "master",
+      "analyzed_commit": "6e753bd2b4793152b55ad9cefd3130169fb1a749",
+      "analyzed_date": "2026-04-08",
+      "focus": "PV/PVC storage subsystem",
+      "pages": {
+        "pv-pvc-architecture": {
+          "source_paths": ["staging/src/k8s.io/api/core/v1/types.go", "pkg/controller/volume/persistentvolume/", "pkg/kubelet/volumemanager/", "pkg/volume/"],
+          "doc_files": ["docs-site/kubernetes/pv-pvc-architecture.md"]
+        },
+        "pv-pvc-lifecycle": {
+          "source_paths": ["pkg/controller/volume/persistentvolume/controller.go", "pkg/controller/volume/persistentvolume/binder_controller.go", "pkg/controller/volume/persistentvolume/scheduler_binder.go"],
+          "doc_files": ["docs-site/kubernetes/pv-pvc-lifecycle.md"]
+        },
+        "storageclass-provisioning": {
+          "source_paths": ["pkg/controller/volume/persistentvolume/", "pkg/controller/volume/expand/", "plugin/pkg/admission/storage/"],
+          "doc_files": ["docs-site/kubernetes/storageclass-provisioning.md"]
+        },
+        "csi-integration": {
+          "source_paths": ["pkg/volume/csi/", "staging/src/k8s.io/csi-translation-lib/", "pkg/controller/volume/attachdetach/"],
+          "doc_files": ["docs-site/kubernetes/csi-integration.md"]
+        },
+        "access-modes-reclaim": {
+          "source_paths": ["staging/src/k8s.io/api/core/v1/types.go", "pkg/volume/", "plugin/pkg/admission/storage/"],
+          "doc_files": ["docs-site/kubernetes/access-modes-reclaim.md"]
+        },
+        "troubleshooting": {
+          "source_paths": ["pkg/controller/volume/", "pkg/kubelet/volumemanager/", "pkg/volume/csi/"],
+          "doc_files": ["docs-site/kubernetes/troubleshooting.md"]
+        }
+      }
+    },
     "multus-cni": {
       "repo": "https://github.com/k8snetworkplumbingwg/multus-cni",
       "branch": "master",
