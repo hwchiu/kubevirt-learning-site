@@ -6,8 +6,16 @@
       @click.self="close"
       @wheel.prevent="onWheel"
     >
-      <button class="mermaid-zoom-close" @click="close" aria-label="關閉">&times;</button>
-      <div class="mermaid-zoom-hint">滾輪縮放 · 拖曳移動</div>
+      <!-- Toolbar: zoom controls + close -->
+      <div class="mermaid-zoom-toolbar">
+        <button class="mermaid-zoom-btn" @click="zoomIn" aria-label="放大" title="放大">＋</button>
+        <span class="mermaid-zoom-level">{{ zoomPercent }}%</span>
+        <button class="mermaid-zoom-btn" @click="zoomOut" aria-label="縮小" title="縮小">－</button>
+        <button class="mermaid-zoom-btn" @click="resetView" aria-label="重置" title="重置檢視">⟳</button>
+        <div class="mermaid-zoom-separator" />
+        <button class="mermaid-zoom-btn mermaid-zoom-btn-close" @click="close" aria-label="關閉" title="關閉">&times;</button>
+      </div>
+      <div class="mermaid-zoom-hint">滾輪縮放 · 拖曳移動 · 按鈕放大縮小</div>
       <div
         ref="container"
         class="mermaid-zoom-container"
@@ -42,12 +50,29 @@ const dragStartTY = ref(0)
 
 const MIN_SCALE = 0.2
 const MAX_SCALE = 5
+const ZOOM_STEP = 0.25
+
+const zoomPercent = computed(() => Math.round(scale.value * 100))
 
 const contentStyle = computed(() => ({
   transform: `translate(${translateX.value}px, ${translateY.value}px) scale(${scale.value})`,
   transformOrigin: 'center center',
   cursor: dragging.value ? 'grabbing' : 'grab',
 }))
+
+function zoomIn() {
+  scale.value = Math.min(MAX_SCALE, scale.value + ZOOM_STEP)
+}
+
+function zoomOut() {
+  scale.value = Math.max(MIN_SCALE, scale.value - ZOOM_STEP)
+}
+
+function resetView() {
+  scale.value = 1
+  translateX.value = 0
+  translateY.value = 0
+}
 
 function open(svgHtml) {
   // Content comes from same-page mermaid-rendered SVGs (already sanitized by the plugin)
@@ -167,49 +192,94 @@ onUnmounted(() => {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: rgba(0, 0, 0, 0.8);
+  background: #1a1a1a;
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(4px);
 }
 
-.mermaid-zoom-close {
+/* ── Toolbar ── */
+.mermaid-zoom-toolbar {
   position: fixed;
-  top: 16px;
-  right: 16px;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 10001;
-  width: 44px;
-  height: 44px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  background: #1a1a1a;
+  padding: 0 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mermaid-zoom-btn {
+  width: 36px;
+  height: 36px;
   border: none;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  background: transparent;
   color: #fff;
-  font-size: 28px;
+  font-size: 20px;
   line-height: 1;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
+  transition: background 0.15s;
+  user-select: none;
 }
 
-.mermaid-zoom-close:hover {
-  background: rgba(255, 255, 255, 0.35);
+.mermaid-zoom-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
 }
 
+.mermaid-zoom-btn:active {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.mermaid-zoom-btn-close {
+  font-size: 24px;
+}
+
+.mermaid-zoom-level {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  min-width: 44px;
+  text-align: center;
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.mermaid-zoom-separator {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0 4px;
+}
+
+/* ── Hint ── */
 .mermaid-zoom-hint {
   position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 10001;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 13px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1a1a;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
   pointer-events: none;
   user-select: none;
 }
 
+/* ── Content area — fill the entire viewport ── */
 .mermaid-zoom-container {
   width: 100%;
   height: 100%;
@@ -217,18 +287,20 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background: #fff;
+  margin: 48px 0 36px 0;
 }
 
 .mermaid-zoom-content {
   transition: transform 0.1s ease-out;
-  background: #fff;
-  border-radius: 8px;
-  padding: 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  padding: 16px;
 }
 
 .mermaid-zoom-content :deep(svg) {
-  max-width: 100%;
+  display: block;
+  max-width: 98vw;
+  max-height: 90vh;
+  width: auto;
   height: auto;
 }
 </style>
