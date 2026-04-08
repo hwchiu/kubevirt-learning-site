@@ -8,7 +8,6 @@ import { resolve } from 'path'
 export function localLlmChatPlugin(options = {}) {
   const projectRoot = options.projectRoot || process.cwd()
   const cliCommand = options.cliCommand || 'claude'
-  const defaultModel = options.model || 'sonnet'
 
   return {
     name: 'local-llm-chat',
@@ -70,7 +69,6 @@ export function localLlmChatPlugin(options = {}) {
           '-p', fullPrompt,
           '--append-system-prompt', systemPrompt,
           '--output-format', 'json',
-          '--model', defaultModel,
         ]
 
         if (project) {

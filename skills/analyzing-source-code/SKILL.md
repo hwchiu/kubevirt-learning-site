@@ -33,12 +33,13 @@ digraph workflow {
 
   setup [label="Phase 1: Setup\n(submodule + dirs)"];
   explore [label="Phase 2: Explore\n(5 parallel agents)"];
-  write [label="Phase 3: Write\n(4 parallel agents)"];
-  integrate [label="Phase 4: Integrate\n(config + build)"];
+  plan [label="Phase 2.5: Structure Planner\n(classify + page decomposition)"];
+  write [label="Phase 3: Write\n(N parallel agents, per Structure Planner)"];
+  integrate [label="Phase 4: Integrate\n(multi-section sidebar + build)"];
   verify [label="Phase 5: Verify\n(build + preview)"];
   update [label="Phase 6: Update\n(version bump + re-analyze)"];
 
-  setup -> explore -> write -> integrate -> verify;
+  setup -> explore -> plan -> write -> integrate -> verify;
   verify -> update [label="未來更新時", style=dashed];
 }
 ```
@@ -147,6 +148,157 @@ digraph classify {
 - **Web 應用平台** → `data-models.md`：ORM 資料模型深度分析（ERD、Mixin 模式、Migration）；`api-reference.md`：REST API 與 GraphQL 端點完整參考
 :::
 
+### Structure Planner: 動態頁面架構規劃
+
+**在類型分類完成後，必須執行 Structure Planner，決定本專案應產生哪些頁面、每頁涵蓋哪些主題。** 固定模板只是底線，Structure Planner 會根據複雜度信號向上擴充。
+
+#### 步驟一：計算複雜度分數
+
+從探索結果中提取以下信號，加總得到 **Complexity Score (CS)**：
+
+| 信號 | 條件 | 加分 |
+|------|------|------|
+| 控制器數量 | 每個 Reconciler / controller +1 | +1 per |
+| CRD / 資料模型數量 | 每個 CRD 或 ORM Model +0.5 | +0.5 per |
+| 二進位 / 服務數量 | 每個獨立 `cmd/` entry point +0.5 | +0.5 per |
+| 外部整合數量 | 每個外部系統（DB、佇列、雲端 API）+0.5 | +0.5 per |
+| 獨特演算法 | 狀態機、排程、CBT、guest conversion 等 +2 each | +2 per |
+| Webhook 系統 | Validating + Mutating 皆存在 | +2 |
+| 多來源支援 | 支援 ≥ 3 種不同 provider/backend | +3 |
+| 非同步工作流 | Background jobs、queue、lease 協調 | +2 |
+| API 介面多樣性 | REST + GraphQL 同時存在 | +2 |
+| 插件/擴充框架 | Plugin system、custom scripts、hooks | +2 |
+
+**參考基準（已驗證）：**
+
+| 專案 | CS | 建議頁數 |
+|------|----|---------|
+| NMO（1 controller, 1 CRD, lease + webhook） | ~10 | 11 頁 |
+| Forklift（9 controllers, 9 CRDs, 7 providers, virt-v2v, CBT） | ~30 | 20 頁 |
+| NetBox（10 apps, 26+ models, REST+GraphQL, plugins） | ~45 | 35 頁 |
+
+**頁數公式：**
+```
+建議頁數 = max(固定底線頁數, floor(CS × 0.7) + 固定底線頁數)
+```
+
+固定底線頁數依類型：Controller Operator = 4、大型平台 = 6、Web 應用平台 = 8、其他 = 4。
+
+---
+
+#### 步驟二：特徵萃取 — 識別「值得獨立成頁」的特性
+
+遍歷探索結果，對每個獨特特性回答以下問題：
+1. **深度（Depth）**：理解此特性是否需要超過 500 字的說明？
+2. **獨立性（Independence）**：此特性能否獨立閱讀，不強依賴其他頁面？
+3. **使用者價值（User Value）**：哪種讀者（開發者/運維/架構師）會需要查閱這個主題？
+
+若三題皆「是」，則獨立成頁；若只有兩題，則合併到最相關的既有頁面內的獨立 `##` 小節。
+
+**常見觸發獨立成頁的特性清單：**
+
+| 特性信號 | 建議頁面名稱 |
+|---------|------------|
+| 有 lease / 分散式協調機制 | `coordination.md` |
+| 有 taint 管理且邏輯複雜 | `node-management.md` |
+| 有 Webhook 且邏輯超過 200 行 | `webhooks.md` |
+| 有 warm migration / CBT / 增量備份 | `warm-migration.md` |
+| 有 guest OS conversion（virt-v2v 等） | `guest-conversion.md` |
+| 有多種 volume populator 實作 | `volume-populators.md` |
+| 有跨叢集 / multi-cluster 流程 | `remote-cluster.md` |
+| 有 Django app 區分的 domain model | 每個 domain 一頁 `models-{domain}.md` |
+| 有 REST API 且端點超過 20 個 | `api-reference.md` |
+| 有 GraphQL schema | `graphql-api.md` |
+| 有插件開發框架 | `plugin-development.md` |
+| 有 RBAC 且涉及多個 API group | `rbac-permissions.md` |
+| 有 CLI 工具且指令超過 5 個 | `cli-reference.md` |
+| 有 Prometheus metrics 且自定義超過 10 個 | `observability.md` |
+| 有多種 provider / backend 類型 | `provider-types.md` |
+| 有 pre/post hook 執行框架 | `hooks.md` |
+| 有 validation / pre-flight check 系統 | `validations.md` |
+| 有背景任務 / 排程 / queue | `background-jobs.md` |
+| 有 change log / audit trail | `audit-logging.md` |
+| 有 troubleshooting 複雜度 ≥ 中等 | `troubleshooting.md` |
+
+---
+
+#### 步驟三：建立頁面清單
+
+整合固定底線頁面與步驟二識別的獨立頁面，產生完整清單。格式如下：
+
+```
+## 頁面規劃清單（{專案名稱}）
+
+### 固定底線頁面
+1. index.md — 專案總覽與導覽
+2. architecture.md — 系統架構
+3. core-features.md — 核心功能
+4. integration.md — 外部整合
+[+ 依類型的條件頁面]
+
+### Structure Planner 擴充頁面
+5. {filename}.md — {標題}
+   理由：{說明為何獨立成頁，參照哪個特性信號}
+   主題：{3-5 個主要涵蓋項目}
+...
+```
+
+---
+
+#### 步驟四：確認分區（Section）
+
+當擴充頁面總數 ≥ 8 時，必須將頁面分組為區塊（Section），避免 sidebar 過長。分區準則：
+
+| 區塊名稱建議 | 收納頁面類型 |
+|-------------|------------|
+| 系統架構 | architecture, overview, deployment |
+| 核心概念 | CRD spec, data models, workflows |
+| 進階功能 | 專案特有的深度特性頁面 |
+| API 與整合 | REST, GraphQL, webhooks, external integrations |
+| 維運操作 | installation, RBAC, troubleshooting, performance |
+| 開發指南 | controller implementation, testing, extensibility |
+
+---
+
+#### Structure Planner 輸出格式
+
+Structure Planner 完成後，必須輸出以下格式供 Phase 3 agent 使用：
+
+```markdown
+## Structure Planner 輸出：{專案名稱}
+
+**Complexity Score:** {N}
+**專案類型:** {類型}
+**建議頁數:** {N} 頁，{M} 個 Section
+
+### 頁面清單
+
+| # | 檔名 | 標題 | Section | 理由摘要 |
+|---|------|------|---------|---------|
+| 1 | index.md | 專案總覽 | 概述 | 固定底線 |
+| 2 | architecture.md | 系統架構 | 概述 | 固定底線 |
+| ... | ... | ... | ... | ... |
+| N | {filename}.md | {標題} | {section} | {特性信號} |
+
+### 各頁面詳細規劃
+
+#### {filename}.md — {標題}
+- **Section:** {區塊名稱}
+- **目標讀者:** 開發者 / 運維 / 架構師
+- **主要涵蓋主題:**
+  1. {主題 1}
+  2. {主題 2}
+  3. {主題 3}
+- **關鍵原始碼參考:** {檔案路徑}
+```
+
+::: tip Structure Planner 的目標
+不是為了多寫頁面而寫，而是確保每個重要概念都有足夠的空間被深入解釋。
+頁面過少 → 重要細節被壓縮 → 讀者看不懂。
+頁面過多 → 內容碎片化 → 讀者不知從何讀起。
+Structure Planner 就是在這兩個極端之間找到最適合該專案的平衡點。
+:::
+
 ### Conditional Analysis Dimensions
 
 根據專案特性，探索與撰寫階段需額外涵蓋以下內容：
@@ -230,36 +382,163 @@ flowchart TD
 \```
 ```
 
-### Phase 3: Documentation Writing (3+1 Parallel Agents)
+### Phase 3: Documentation Writing (依 Structure Planner 動態啟動)
 
-Launch agents to write markdown pages based on exploration findings. **第四頁依專案類型不同。**
+**Phase 3 不再使用固定 4 頁模板。** 必須先讀取 Phase 2.5 Structure Planner 的輸出清單，再依清單中每一頁啟動對應的 `general-purpose` agent 平行撰寫。
 
 See [doc-templates.md](./doc-templates.md) for the complete page templates.
 
-#### 必要頁面（所有專案）
+#### 啟動原則
 
-| Page | Content |
-|------|---------|
-| **architecture.md** | Project overview, system architecture (Mermaid), binary/tool table, directory structure, build system, state machines |
-| **core-features.md** | Key features with real code snippets, processing pipelines, algorithms, configurations |
-| **integration.md** | External integrations, auth mechanisms, RBAC, CI/CD, ecosystem connections |
+1. **每一頁獨立一個 agent**：不同頁面之間無依賴，全部平行啟動
+2. **agent prompt 必須包含：**
+   - Structure Planner 對該頁面的詳細規劃（主題清單、目標讀者、關鍵原始碼路徑）
+   - 探索階段相關 agent 的輸出摘要
+   - Zero Fabrication Rule（所有程式碼必須附 file path）
+   - 目標語言 zh-TW
+3. **頁面數量沒有上限**：Structure Planner 說幾頁就寫幾頁
 
-#### 條件頁面（依專案類型選擇一個）
+#### Agent 啟動範例
 
-| 專案類型 | 條件頁面 | Content |
-|----------|----------|---------|
-| Controller Operator / 大型平台 | **controllers-api.md** | Controllers, CRD type definitions, webhooks, validation, REST API, HTTP status codes |
-| 監控型 | **metrics-alerts.md** | Tool implementations, metrics catalog, alert rules, dashboard inventory, PromQL examples |
-| 資源定義型 | **resource-catalog.md** | YAML resource definitions, type catalog, classification, label conventions, validation tests |
-| 工具/函式庫 | **cli-reference.md** | Command list, parameters, usage examples, public API surface |
-| Web 應用平台 | **data-models.md** | ORM 資料模型深度分析（ERD、Mixin 模式、Migration） |
-| Web 應用平台 | **api-reference.md** | REST API 與 GraphQL 端點完整參考 |
+```
+# Structure Planner 輸出 11 頁 → 啟動 11 個 agent
+
+agent-01: index.md          — 專案總覽與文件導覽
+agent-02: architecture.md   — 系統架構 & 狀態機
+agent-03: crd-spec.md       — CRD 規格與欄位說明
+agent-04: node-drainage.md  — 節點排空工作流程
+agent-05: webhooks.md       — Admission Validation
+agent-06: coordination.md   — Lease 分散式協調
+agent-07: taints.md         — Taint 管理與 Cordoning
+agent-08: installation.md   — 部署與設定
+agent-09: rbac.md           — 權限與 RBAC
+agent-10: troubleshooting.md— 故障排除
+agent-11: observability.md  — 事件與 Metrics
+```
+
+#### 每個 agent 的 prompt 框架
+
+```
+你是一位技術文件撰寫專家，負責撰寫 {專案名稱} 的文件頁面。
+
+## 目標頁面
+- 檔名：{filename}.md
+- 標題：{標題}
+- 目標讀者：{讀者類型}
+
+## Structure Planner 規劃的主題
+{從 Structure Planner 輸出貼入該頁面的詳細規劃}
+
+## 相關探索結果
+{貼入 Phase 2 中與此頁面相關的 agent 輸出片段}
+
+## 撰寫規範
+- 語言：zh-TW（技術詞彙保留英文）
+- 每個程式碼區塊第一行必須是 `// 檔案: {實際路徑}`
+- 使用 Mermaid diagram 說明流程與架構
+- 使用 ::: tip / ::: warning / ::: info 容器增加可讀性
+- frontmatter 必須包含 `layout: doc`
+- 頁首格式：`# {Project} — {Topic}`
+- 結尾加入 `::: info 相關章節` 交叉連結
+- 禁止捏造任何程式碼或行為
+```
+
+#### 頁面寫作品質標準
+
+每頁應包含以下要素，缺少任何一項視為品質不足：
+
+| 要素 | 說明 |
+|------|------|
+| **Mermaid 圖** | 至少 1 張流程圖或架構圖（flowchart / stateDiagram / sequenceDiagram） |
+| **程式碼片段** | ≥ 2 段，每段附真實 file path |
+| **資料表格** | 欄位說明、設定選項、狀態對應等用表格呈現 |
+| **Callout 容器** | ≥ 1 個 ::: tip 或 ::: warning 強調重點 |
+| **交叉連結** | 結尾 ::: info 相關章節 連結至同專案其他頁面 |
 
 ### Phase 4: Site Integration (Sequential)
 
-1. Update sidebar in `config.js` with all 5 entries (index + 4 pages)
-2. Update `index.md` to link to all pages (remove any 🚧 placeholders)
-3. Update homepage `docs-site/index.md` with new project card and table row
+Structure Planner 決定了頁面數量與分區，Phase 4 必須將這個結構完整反映到 VitePress sidebar。
+
+#### 4.1 多 Section Sidebar 設定
+
+當 Structure Planner 規劃 ≥ 2 個 Section 時，sidebar 必須使用分組結構：
+
+```js
+// docs-site/.vitepress/config.js
+// ✅ 多 Section 範例（Structure Planner 輸出 6 sections）
+{
+  text: '{專案名稱}',
+  items: [
+    { text: '專案總覽', link: '/{project}/index' }
+  ]
+},
+{
+  text: '系統架構',
+  collapsed: false,
+  items: [
+    { text: '架構概覽', link: '/{project}/architecture' },
+    { text: '部署與設定', link: '/{project}/installation' },
+  ]
+},
+{
+  text: '核心概念',
+  collapsed: false,
+  items: [
+    { text: 'CRD 規格', link: '/{project}/crd-spec' },
+    { text: '遷移工作流程', link: '/{project}/migration-workflow' },
+  ]
+},
+{
+  text: '進階功能',
+  collapsed: true,          // 進階頁面預設收合
+  items: [
+    { text: 'Warm Migration', link: '/{project}/warm-migration' },
+    { text: 'Guest OS 轉換', link: '/{project}/guest-conversion' },
+    { text: 'Volume Populators', link: '/{project}/volume-populators' },
+  ]
+},
+// ... 其餘 section
+```
+
+**Section 對應規則（來自 Structure Planner 步驟四）：**
+
+| Section 名稱 | `collapsed` 預設值 | 說明 |
+|-------------|-----------------|------|
+| 系統架構 | `false` | 必讀，不收合 |
+| 核心概念 | `false` | 必讀，不收合 |
+| 進階功能 | `true` | 選讀，預設收合 |
+| API 與整合 | `true` | 依需求查閱 |
+| 維運操作 | `true` | 依需求查閱 |
+| 開發指南 | `true` | 貢獻者用，收合 |
+
+#### 4.2 index.md 導覽表
+
+`index.md` 必須包含完整的文件導覽表，列出所有 Section 與頁面：
+
+```markdown
+## 文件導覽
+
+### 系統架構
+| 頁面 | 說明 |
+|------|------|
+| [架構概覽](./architecture) | 系統元件、狀態機、資料流 |
+| [部署與設定](./installation) | 安裝方式、環境變數、RBAC |
+
+### 核心概念
+| 頁面 | 說明 |
+|------|------|
+| [CRD 規格](./crd-spec) | 所有自定義資源欄位說明 |
+| ...  | ... |
+
+### 進階功能
+...
+```
+
+#### 4.3 其他整合項目
+
+1. 更新 `docs-site/index.md` 首頁的專案卡片與功能表格
+2. 確認 nav dropdown「📦 專案」已加入新條目
+3. 確認所有 `index.md` 中的 🚧 佔位符已替換為真實連結
 
 ### Phase 5: Verification
 
@@ -349,8 +628,9 @@ Summary of what was covered and key takeaways.
 |------|--------|-------------|-------|
 | Setup | Submodule + directories + index.md | Sequential | git, create |
 | Explore | 5 agents analyzing source code | All parallel | explore agent |
-| Write | 4 documentation pages | All parallel | general-purpose agent |
-| Integrate | Config + homepage + sidebar | Sequential | edit |
+| **Plan** | **Structure Planner: classify + score + page decomposition** | **Sequential** | **（主 agent 執行）** |
+| Write | N pages per Structure Planner output | All parallel | general-purpose agent |
+| Integrate | Multi-section sidebar + homepage + nav | Sequential | edit |
 | Verify | Build + preview + commit | Sequential | bash |
 
 ## Common Mistakes
@@ -362,6 +642,8 @@ Summary of what was covered and key takeaways.
 | Shallow directory listing without reading code | Read `main.go`, reconciler, types.go — not just `ls` |
 | Copy-paste from README without verification | README can be outdated; verify against actual source |
 | Assuming standard operator structure | Check first — some projects are YAML-based, tools, or libraries |
+| **跳過 Structure Planner 直接寫 4 頁** | **必須先執行 Structure Planner，頁數由複雜度決定** |
+| **所有頁面平鋪在一個 sidebar section** | **≥ 8 頁時必須分組為多個 Section，進階/開發頁面預設 collapsed** |
 | Forgetting to update all 3 config points | Sidebar array + nav dropdown + sidebar route mapping |
 | Not building before committing | Always `npm run build` to catch broken links or syntax |
 | Missing `layout: doc` frontmatter | Every page must start with `---\nlayout: doc\n---` |

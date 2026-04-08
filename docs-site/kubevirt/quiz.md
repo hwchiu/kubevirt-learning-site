@@ -277,12 +277,279 @@ layout: doc
 
 ---
 
+## 🚀 進階主題
+
+### 🔀 Live Migration
+
+<QuizQuestion
+  question="21. 哪些情況可以觸發 KubeVirt 的 Live Migration？"
+  :options="[
+    '只有手動建立 VirtualMachineInstanceMigration CR 時',
+    '手動建立 VMIM CR、節點被標記 kubevirt.io/evacuate，或搭配 NodeMaintenanceOperator 進行節點維護',
+    '只有節點執行 kubectl drain 時自動觸發',
+    '只有 virt-operator 升級時才會觸發',
+  ]"
+  :answer="1"
+  explanation="Live Migration 可由多種方式觸發：1) 手動建立 VirtualMachineInstanceMigration CR；2) 節點被標記 kubevirt.io/evacuate annotation，Evacuation Controller 自動建立 VMIM；3) 搭配 NodeMaintenanceOperator 進行節點維護時自動疏散 VM。"
+/>
+
+<QuizQuestion
+  question="22. Live Migration 流程中，哪個元件負責在目標節點建立新的 virt-launcher Pod？"
+  :options="[
+    '來源節點的 virt-handler',
+    'virt-api',
+    'virt-controller 的 Migration Controller',
+    'kube-scheduler',
+  ]"
+  :answer="2"
+  explanation="當偵測到 VirtualMachineInstanceMigration CR 時，virt-controller 的 Migration Controller 負責在目標節點建立新的 virt-launcher Pod（target pod），並協調整個 Live Migration 流程的狀態機轉換。"
+/>
+
+<QuizQuestion
+  question="23. KubeVirt Live Migration 預設使用哪種記憶體遷移模式？"
+  :options="[
+    'Post-copy（先切換到目標節點，再從來源補傳記憶體）',
+    'Cold migration（先關機再複製磁碟與記憶體映像）',
+    'Pre-copy（VM 持續執行的同時迭代複製記憶體，最後短暫停機完成同步）',
+    'Checkpoint-based（定期建立 checkpoint，再以最後一個 checkpoint 遷移）',
+  ]"
+  :answer="2"
+  explanation="KubeVirt Live Migration 預設使用 Pre-copy 模式：VM 在來源節點持續執行的同時，記憶體頁面逐步複製到目標節點；當髒頁（dirty pages）數量縮小到閾值以下後，短暫停機完成最後同步，再於目標節點恢復執行，確保服務中斷時間最短。"
+/>
+
+<QuizQuestion
+  question="24. 來源節點的 virt-handler 在 Live Migration 完成後，主要負責什麼工作？"
+  :options="[
+    '繼續監控來源節點上的舊 domain，確保雙活',
+    '呼叫 libvirt migrate API 啟動記憶體複製，並在遷移完成後清理來源 domain',
+    '將 VMI CR 的 nodeName 欄位從來源節點改為目標節點',
+    '向 kube-scheduler 申請目標節點的 CPU/Memory 資源',
+  ]"
+  :answer="1"
+  explanation="來源節點的 virt-handler 透過 libvirt 的 migrate API 驅動記憶體頁面的迭代複製（pre-copy）。遷移完成、VM 在目標節點成功啟動後，來源節點的 virt-handler 負責清理來源 domain（virDomainDestroy），釋放資源。"
+/>
+
+### 💾 Storage
+
+<QuizQuestion
+  question="25. DataVolume (DV) 在 KubeVirt 中的作用是什麼？"
+  :options="[
+    '直接儲存 VM 的磁碟映像檔，本身就是儲存後端',
+    '是 Containerized Data Importer (CDI) 提供的 CRD，自動化「建立 PVC + 填充資料」的完整流程',
+    '管理 VM 使用的 StorageClass 和 QoS 策略',
+    '提供 VM 之間共享記憶體（shared memory）的機制',
+  ]"
+  :answer="1"
+  explanation="DataVolume 是 Containerized Data Importer (CDI) 提供的 CRD，封裝了「建立 PVC + 匯入資料」的流程。使用者指定資料來源（HTTP URL、容器映像、現有 PVC 等），CDI 會自動建立對應 PVC 並將資料填充進去，簡化 VM 磁碟準備工作。"
+/>
+
+<QuizQuestion
+  question="26. VMI spec 中的 containerDisk volume 類型有什麼特點？"
+  :options="[
+    '資料持久保存於 PVC，VM 刪除後仍然存在',
+    '將磁碟映像打包在 OCI container image 中，每次 VM 啟動都是全新副本，資料不持久化',
+    '必須搭配特定 StorageClass 才能運作',
+    '只能用於 Windows VM 的系統磁碟',
+  ]"
+  :answer="1"
+  explanation="containerDisk 將磁碟映像打包在 OCI container image 中。VM 啟動時，映像會被複製到節點的暫存目錄，資料不會持久化，VM 刪除後資料消失。適合無狀態的測試環境、唯讀的基底映像層，或搭配 PVC 作為額外的 ephemeral 磁碟使用。"
+/>
+
+<QuizQuestion
+  question="27. cloudInitNoCloud volume 的主要用途是什麼？"
+  :options="[
+    '直接連線到公有雲的物件儲存（S3、GCS）下載 VM 映像',
+    '提供 cloud-init 的 NoCloud 資料來源，讓 VM 在首次啟動時執行使用者自訂的初始化腳本',
+    '僅用於 OpenStack 環境中提供 instance metadata',
+    '管理 KubeVirt 與 cloud provider 的 CSI 整合設定',
+  ]"
+  :answer="1"
+  explanation="cloudInitNoCloud volume 提供 cloud-init 的 NoCloud 資料來源，可在 VMI spec 中直接嵌入 userData（啟動腳本）和 networkData（網路配置）。VM 啟動時，cloud-init 讀取這些資料執行初始化，常用於設定使用者密碼、SSH key、安裝套件等。"
+/>
+
+### 🌐 Network
+
+<QuizQuestion
+  question="28. KubeVirt VM 預設使用哪種網路繫結方式（binding）？"
+  :options="[
+    'bridge — 直接橋接到宿主機物理網路介面',
+    'masquerade — 透過 NAT 讓 VM 流量經由 Pod 網路命名空間路由',
+    'SR-IOV — 直接使用物理 NIC 的 Virtual Function',
+    'macvlan — 在宿主機 NIC 上建立獨立的 MAC 位址',
+  ]"
+  :answer="1"
+  explanation="KubeVirt VM 預設使用 masquerade 繫結方式，透過 NAT/iptables 讓 VM 的流量經由 virt-launcher Pod 的網路命名空間路由。這讓 VM 完全整合 Kubernetes 的 Service、NetworkPolicy 等功能，且不需要特殊的宿主機網路設定。"
+/>
+
+<QuizQuestion
+  question="29. Multus CNI 在 KubeVirt 中扮演什麼角色？"
+  :options="[
+    '取代 Kubernetes 預設 CNI，提供效能更高的 overlay 網路',
+    '讓 VM 能同時擁有多個網路介面（pod network + 額外的 NetworkAttachmentDefinition）',
+    '僅用於 SR-IOV 網路的 VF 分配',
+    '管理 VM 之間的 NetworkPolicy 規則',
+  ]"
+  :answer="1"
+  explanation="Multus CNI 是 meta-CNI plugin，允許 Pod（及 KubeVirt VM）同時擁有多個網路介面。VM 可保有一個主要的 pod network，再透過 NetworkAttachmentDefinition 附加額外網路（如 VLAN、macvlan、SR-IOV VF 等），滿足多網卡的企業級需求。"
+/>
+
+<QuizQuestion
+  question="30. SR-IOV 在 KubeVirt 網路場景中的主要優勢是什麼？"
+  :options="[
+    '提供更完善的網路隔離，防止 VM 之間的流量外洩',
+    '讓 VM 直接使用物理 NIC 的 Virtual Function (VF)，繞過 software networking 層，獲得接近裸機的網路效能',
+    '自動管理 VM 的 Security Group 和防火牆規則',
+    '簡化 Kubernetes Service 的 LoadBalancer 配置流程',
+  ]"
+  :answer="1"
+  explanation="SR-IOV (Single Root I/O Virtualization) 讓一張物理 NIC 虛擬化為多個 Virtual Function (VF)，VM 可直接使用 VF 繞過 kernel networking stack，獲得高頻寬、低延遲、低 CPU 開銷的網路效能，適合需要高效能網路的工作負載（如 NFV、HPC）。"
+/>
+
+### 📸 Snapshot / Restore
+
+<QuizQuestion
+  question="31. VirtualMachineSnapshot 建立了什麼內容？"
+  :options="[
+    '只備份 VM 的 spec 設定，不包含磁碟資料',
+    'VM spec 設定 + 相關所有 PVC 的 VolumeSnapshot，提供完整時間點快照',
+    '將 VM 的記憶體狀態（RAM）備份到遠端物件儲存',
+    '建立 VM 的完整 OCI container image',
+  ]"
+  :answer="1"
+  explanation="VirtualMachineSnapshot 建立 VM 的時間點快照，包含 VM spec 以及所有相關 PVC 的 VolumeSnapshot（底層儲存快照）。搭配 VirtualMachineRestore 可將 VM 完整還原到快照建立時的狀態，是 VM 備份與災難恢復的核心機制。"
+/>
+
+<QuizQuestion
+  question="32. 使用 VirtualMachineSnapshot 功能的必要前提條件是什麼？"
+  :options="[
+    'VM 必須先關機（Stopped 狀態）才能建立快照',
+    '叢集必須安裝支援 CSI VolumeSnapshot 的 storage driver',
+    '必須先安裝 Velero 備份工具',
+    '只有 virt-operator 管理員才能建立快照',
+  ]"
+  :answer="1"
+  explanation="VirtualMachineSnapshot 依賴底層儲存的 VolumeSnapshot 功能（CSI 標準介面），因此叢集必須安裝支援 CSI VolumeSnapshot 的 storage driver（如 Longhorn、Ceph CSI 等）。VM 可在 Running 或 Stopped 狀態下建立快照，Running 狀態下建議搭配 QEMU guest agent 以確保磁碟資料一致性。"
+/>
+
+### 🖥️ Resource Management
+
+<QuizQuestion
+  question="33. 如何在 KubeVirt VMI spec 中設定 VM 的 CPU 拓撲？"
+  :options="[
+    '直接修改 QEMU 的命令列參數 -smp',
+    '在 domain.cpu 中設定 cores、sockets、threads，KubeVirt 自動對應到 virt-launcher Pod 的 CPU requests/limits',
+    '直接設定 Kubernetes Node 的 CPU 配額（ResourceQuota）',
+    'CPU 拓撲由 KubeVirt 根據節點剩餘資源自動決定，使用者無法設定',
+  ]"
+  :answer="1"
+  explanation="VMI spec 的 domain.cpu 欄位可設定 CPU 拓撲（cores、sockets、threads），KubeVirt 根據這些值計算總 vCPU 數量，並對應設定 virt-launcher Pod 的 CPU requests/limits，讓 kube-scheduler 能正確考量 VM 的 CPU 資源需求進行排程。"
+/>
+
+<QuizQuestion
+  question="34. CPU model 設定（如 host-model vs host-passthrough）對 Live Migration 有什麼影響？"
+  :options="[
+    'CPU model 只影響 VM 開機速度，與 Live Migration 無關',
+    'host-passthrough 獲得最佳效能但限制可遷移的目標節點（目標節點 CPU 須相同或更新），host-model 相容性較佳',
+    'host-model 無法進行 Live Migration，只有 host-passthrough 才支援',
+    'CPU model 設定越新，Live Migration 成功率越高',
+  ]"
+  :answer="1"
+  explanation="CPU model 決定 VM 內看到的 CPU 功能集（CPUID）。host-passthrough 直接透傳宿主機 CPU 能力，效能最佳，但目標節點 CPU 必須具備相同或更多的 CPU features，限制了可遷移的節點範圍。host-model 使用通用 CPU model 提升跨節點相容性，是 Live Migration 場景的推薦選項。"
+/>
+
+### 🔄 VMI Phase 詳解
+
+<QuizQuestion
+  question="35. VMI 的 Succeeded 和 Failed 終止狀態有什麼不同？"
+  :options="[
+    'Succeeded 代表 VM 正常執行中，Failed 代表 VM 啟動失敗',
+    'Succeeded 代表 VM 正常關機（graceful shutdown），Failed 代表 VM 異常終止（crash、OOM 等）',
+    'Succeeded 代表 Live Migration 成功，Failed 代表 Live Migration 失敗',
+    'Succeeded 和 Failed 意義相同，都表示 VM 已停止執行',
+  ]"
+  :answer="1"
+  explanation="Succeeded 代表 VM 正常完成其生命週期（VM 內部執行 poweroff 等正常關機）；Failed 代表 VM 異常終止（程序崩潰、OOM killed 等）。RunStrategy 為 RerunOnFailure 時，Failed 的 VMI 會被重啟；Succeeded 的不會，讓 KubeVirt 能管理批次工作負載型 VM（run-to-completion）。"
+/>
+
+<QuizQuestion
+  question="36. VMI 進入 Paused 狀態的方式是什麼？"
+  :options="[
+    '叢集資源不足時，KubeVirt 自動暫停優先權較低的 VM',
+    '透過 virtctl pause vm <name> 指令，virt-handler 呼叫 libvirt virDomainSuspend API 暫停 QEMU 程序',
+    '在 VMI spec 中將 running 欄位設為 false',
+    'VM 磁碟空間耗盡時系統自動觸發 Pause',
+  ]"
+  :answer="1"
+  explanation="VMI 可透過 virtctl pause vm <name> 指令進入 Paused 狀態，virt-handler 呼叫 libvirt 的 virDomainSuspend API 暫停 QEMU 程序執行。Paused 狀態下 VM 資料保留在記憶體，可用 virtctl unpause vm <name> 恢復執行，適合需要暫停檢查但不想關機的維護場景。"
+/>
+
+### 🔧 virt-handler 操作細節
+
+<QuizQuestion
+  question="37. virt-handler 如何知道本節點上有哪些 VMI 需要管理？"
+  :options="[
+    'virt-controller 定期透過 HTTP API 推送任務清單給 virt-handler',
+    'virt-handler watch Kubernetes API Server 上 nodeName 為本節點的 VMI CR 變更',
+    'virt-handler 直接掃描節點上的 QEMU 程序清單',
+    'virt-handler 透過 etcd 訂閱 VMI 事件',
+  ]"
+  :answer="1"
+  explanation="virt-handler 透過 informer/watch 機制監控 Kubernetes API Server，只處理 spec.nodeName 等於本節點的 VMI CR。當 VMI CR 發生變更（建立、更新、刪除）時，virt-handler 的 reconcile loop 會依據期望狀態呼叫 libvirt API 進行相應操作。"
+/>
+
+<QuizQuestion
+  question="38. virt-handler 將 VMI spec 轉換為什麼格式，再交給 libvirtd 執行？"
+  :options="[
+    'YAML 格式的 QEMU 設定檔',
+    'JSON 格式的 container runtime spec (OCI)',
+    'libvirt domain XML，描述 VM 的硬體設備、CPU、記憶體、磁碟、網路等設定',
+    '直接組合 QEMU 命令列參數字串',
+  ]"
+  :answer="2"
+  explanation="virt-handler 從 virt-launcher 取得 VMI spec 後，透過 virt-launcher 內建的轉換邏輯將其轉換為 libvirt domain XML 格式，再呼叫 libvirtd 的 API（virDomainDefineXML + virDomainCreate）啟動對應的 QEMU 程序，實現 Kubernetes 資源宣告到 hypervisor 執行的橋接。"
+/>
+
+### 🛡️ Eviction 與節點維護
+
+<QuizQuestion
+  question="39. 執行 kubectl drain 對 KubeVirt virt-launcher Pod 的影響是什麼？"
+  :options="[
+    'drain 會立即刪除 virt-launcher Pod，VM 直接停機',
+    'drain 會被 virt-launcher Pod 的 PodDisruptionBudget (PDB) 阻擋，無法直接驅逐 VM Pod',
+    'drain 對 VM 完全沒有影響，VM 會持續執行',
+    'drain 會自動觸發 Live Migration 並等待完成',
+  ]"
+  :answer="1"
+  explanation="KubeVirt 為每個 virt-launcher Pod 自動建立 PodDisruptionBudget (PDB)，阻止 kubectl drain 直接驅逐 VM Pod，避免 VM 意外停機。正確的節點維護流程應使用 NodeMaintenanceOperator，它會先透過 Evacuation Controller 觸發 Live Migration 疏散所有 VM，再允許節點維護。"
+/>
+
+<QuizQuestion
+  question="40. LiveMigrationPolicy（MigrationPolicy CRD）的用途是什麼？"
+  :options="[
+    '全域強制要求所有 VMI 必須支援 Live Migration',
+    '為不同的 VM 群組（透過 label selector）設定客製化的 Live Migration 策略，如頻寬限制、完成逾時、允許 post-copy 等',
+    '全域關閉叢集的 Live Migration 功能',
+    '管理 Live Migration 流量的網路路由和 QoS 策略',
+  ]"
+  :answer="1"
+  explanation="LiveMigrationPolicy（MigrationPolicy CRD）讓管理員透過 label selector 為不同 VM 群組套用客製化的 Live Migration 策略，包含：頻寬限制（bandwidthPerMigration）、完成逾時（completionTimeoutPerGiB）、允許 post-copy 轉換、允許自動切換至 post-copy 等精細控制，無需修改全域 KubeVirt 設定。"
+/>
+
+---
+
 ::: tip 🎯 完成測驗
-恭喜你完成了 KubeVirt 架構測驗！如果有答錯的題目，建議回頭閱讀相關章節加深理解。
+恭喜你完成了 KubeVirt 完整 40 題架構測驗！如果有答錯的題目，建議回頭閱讀相關章節加深理解。
 
 重點複習：
 - **五大元件**的角色與部署型態
 - **VM/VMI** 的關係與生命週期
 - **協作模式**的設計理念
 - **KubeVirt Razor** 設計準則
+- **Live Migration** 流程、觸發條件與 virt-handler 角色
+- **Storage**：DataVolume / containerDisk / cloudInitNoCloud
+- **Network**：masquerade、Multus CNI、SR-IOV
+- **Snapshot/Restore**：CSI VolumeSnapshot 依賴
+- **Resource Management**：CPU topology 與 CPU model 對遷移的影響
+- **VMI Phase**：Succeeded vs Failed、Paused 狀態
+- **節點維護**：PDB 保護、Evacuation Controller、NodeMaintenanceOperator
 :::
