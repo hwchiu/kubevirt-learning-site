@@ -7,7 +7,7 @@ const route = useRoute()
 const { isDark } = useData()
 
 const isDev = import.meta.env.DEV
-const timeFormatter = new Intl.DateTimeFormat('zh-TW', {
+const hourMinuteFormatter = new Intl.DateTimeFormat('zh-TW', {
   hour: '2-digit',
   minute: '2-digit',
 })
@@ -82,7 +82,7 @@ const inputLength = computed(() => question.value.trim().length)
 
 function createMessage(role, content, extra = {}) {
   return {
-    id: `${role}-${Date.now()}-${++messageSequence}`,
+    id: globalThis.crypto?.randomUUID?.() ?? `${role}-${Date.now()}-${++messageSequence}`,
     role,
     content,
     createdAt: new Date(),
@@ -96,11 +96,12 @@ function renderMarkdown(text) {
 }
 
 function normalizeAssistantMarkdown(text) {
+  // Render Mermaid fences as plain text blocks because the chat bubble only supports Markdown HTML.
   return text.replace(/```mermaid(\s*\r?\n)/gi, '```text$1')
 }
 
 function formatTime(date) {
-  return timeFormatter.format(new Date(date))
+  return hourMinuteFormatter.format(new Date(date))
 }
 
 async function scrollToBottom() {
@@ -203,7 +204,7 @@ async function sendMessage() {
               messages.value.push(createMessage('assistant', `❌ 錯誤：${data.error}`, { isError: true }))
             }
           } catch (err) {
-            console.debug('Failed to parse chat SSE payload', err)
+            console.debug('Failed to parse chat SSE payload:', line, err)
           }
         }
       }
@@ -310,7 +311,7 @@ function quickAsk(q) {
                   <div class="hero-badge">情境式原始碼分析</div>
                   <h2>把文件與原始碼一起問到底</h2>
                   <p>
-                    從 <strong>{{ projectLabel }}</strong> 的原始碼、分析文件與資料流脈絡中整理答案，
+                    從 <strong class="project-emphasis">{{ projectLabel }}</strong> 的原始碼、分析文件與資料流脈絡中整理答案，
                     適合拿來快速建立心智模型，或一路追問到實作細節。
                   </p>
                   <div class="feature-pills">
@@ -350,11 +351,11 @@ function quickAsk(q) {
                     </div>
 
                     <div class="message-bubble" :class="{ loading: msg.isLoading, error: msg.isError }">
-                      <div v-if="msg.isLoading" class="loading-state">
+                      <div v-if="msg.isLoading" class="loading-state" role="status" aria-live="polite">
                         <span class="loading-dots" aria-hidden="true">
-                          <i></i>
-                          <i></i>
-                          <i></i>
+                          <span></span>
+                          <span></span>
+                          <span></span>
                         </span>
                         <span>{{ msg.content }}</span>
                       </div>
@@ -383,7 +384,7 @@ function quickAsk(q) {
                     @input="autoResizeTextarea"
                     @keydown="handleKeydown"
                     :disabled="isLoading"
-                    placeholder="試著詢問：這個專案的 `reconciliation` 流程是怎麼串起來的？"
+                    placeholder="試著詢問：這個專案的 reconciliation 流程是怎麼串起來的？"
                     rows="1"
                   />
 
@@ -792,6 +793,11 @@ function quickAsk(q) {
   border: 1px solid rgba(148, 163, 184, 0.12);
 }
 
+.project-emphasis {
+  color: var(--vp-c-text-1);
+  font-weight: 800;
+}
+
 .suggestions-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -998,7 +1004,7 @@ function quickAsk(q) {
   gap: 5px;
 }
 
-.loading-dots i {
+.loading-dots span {
   width: 7px;
   height: 7px;
   border-radius: 50%;
@@ -1007,8 +1013,8 @@ function quickAsk(q) {
   animation: dot-wave 1s ease-in-out infinite;
 }
 
-.loading-dots i:nth-child(2) { animation-delay: 0.12s; }
-.loading-dots i:nth-child(3) { animation-delay: 0.24s; }
+.loading-dots span:nth-child(2) { animation-delay: 0.12s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.24s; }
 
 @keyframes dot-wave {
   0%, 100% { opacity: 0.28; transform: translateY(0); }
