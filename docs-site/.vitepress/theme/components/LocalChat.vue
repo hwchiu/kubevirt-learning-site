@@ -43,6 +43,7 @@ function renderMarkdown(text) {
 }
 
 function normalizeAssistantMarkdown(text) {
+  // Also normalize the common "marmaid" typo from model output into a regular code block.
   return text.replace(/```(?:mermaid|marmaid)([\t ]*\r?\n)/gi, '```text$1')
 }
 
