@@ -54,6 +54,7 @@ const messages = ref([])
 const isLoading = ref(false)
 const elapsedSeconds = ref(0)
 let elapsedTimer = null
+let messageSequence = 0
 const messagesContainer = ref(null)
 const textareaRef = ref(null)
 
@@ -81,7 +82,7 @@ const inputLength = computed(() => question.value.trim().length)
 
 function createMessage(role, content, extra = {}) {
   return {
-    id: `${role}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    id: `${role}-${Date.now()}-${++messageSequence}`,
     role,
     content,
     createdAt: new Date(),
@@ -95,7 +96,7 @@ function renderMarkdown(text) {
 }
 
 function normalizeAssistantMarkdown(text) {
-  return text.replace(/```mermaid([\t ]*\r?\n)/gi, '```text$1')
+  return text.replace(/```mermaid(\s*\r?\n)/gi, '```text$1')
 }
 
 function formatTime(date) {
@@ -201,7 +202,8 @@ async function sendMessage() {
               if (idx !== -1) messages.value.splice(idx, 1)
               messages.value.push(createMessage('assistant', `❌ 錯誤：${data.error}`, { isError: true }))
             }
-          } catch {
+          } catch (err) {
+            console.debug('Failed to parse chat SSE payload', err)
           }
         }
       }
