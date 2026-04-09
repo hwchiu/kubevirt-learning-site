@@ -34,6 +34,7 @@ export const siteConfig = {
     { text: 'Forklift',                          link: '/forklift/' },
     { text: 'NetBox',                            link: '/netbox/' },
     { text: 'Multus CNI',                        link: '/multus-cni/' },
+    { text: 'MinIO',                             link: '/minio/' },
     { text: 'TiDB',                              link: '/tidb/' },
     { text: 'Apache Kafka',                      link: '/kafka/' },
     { text: 'Kubernetes PV/PVC',                 link: '/kubernetes/' },
