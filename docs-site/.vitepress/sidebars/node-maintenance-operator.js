@@ -3,6 +3,7 @@ export default [
     text: '📖 Node Maintenance Operator',
     items: [
       { text: '專案總覽', link: '/node-maintenance-operator/' },
+      { text: '設計動機與存在價值', link: '/node-maintenance-operator/design-motivation' },
     ]
   },
   {
