@@ -94,7 +94,7 @@ function renderMarkdown(text) {
 }
 
 function normalizeAssistantMarkdown(text) {
-  return text.replace(/```(?:mermaid|marmaid)([\t ]*\r?\n)/gi, '```text$1')
+  return text.replace(/```(?:mermaid|m[ae]rmaid)([\t ]*\r?\n)/gi, '```text$1')
 }
 
 function formatTime(date) {
@@ -150,7 +150,6 @@ async function sendMessage() {
 
   const thinkingMsg = createMessage('assistant', '正在分析原始碼與文件脈絡...', {
     isLoading: true,
-    statusLabel: 'Analyzing context',
   })
   messages.value.push(thinkingMsg)
   elapsedSeconds.value = 0
@@ -202,7 +201,6 @@ async function sendMessage() {
               messages.value.push(createMessage('assistant', `❌ 錯誤：${data.error}`, { isError: true }))
             }
           } catch {
-            // Ignore non-JSON SSE lines.
           }
         }
       }
@@ -270,7 +268,7 @@ function quickAsk(q) {
                   <span>🤖</span>
                 </div>
                 <div class="header-copy">
-                  <p class="header-eyebrow">AI Source Guide</p>
+                  <p class="header-eyebrow">AI 原始碼助手</p>
                   <div class="header-main">
                     <span class="header-title">原始碼助手</span>
                     <span class="project-badge">{{ projectLabel }}</span>
@@ -306,7 +304,7 @@ function quickAsk(q) {
             <div ref="messagesContainer" class="overlay-messages" :class="{ empty: !hasMessages }">
               <div v-if="!hasMessages" class="empty-state">
                 <div class="empty-hero">
-                  <div class="hero-badge">Context-aware analysis</div>
+                  <div class="hero-badge">情境式原始碼分析</div>
                   <h2>把文件與原始碼一起問到底</h2>
                   <p>
                     從 <strong>{{ projectLabel }}</strong> 的原始碼、分析文件與資料流脈絡中整理答案，
@@ -333,7 +331,7 @@ function quickAsk(q) {
 
               <template v-else>
                 <div class="conversation-banner">
-                  <span class="conversation-pill">Source-grounded answers</span>
+                  <span class="conversation-pill">基於原始碼的回答</span>
                   <p>建議持續追問「在哪個檔案」、「資料怎麼流動」或「Controller 如何協作」。</p>
                 </div>
 
