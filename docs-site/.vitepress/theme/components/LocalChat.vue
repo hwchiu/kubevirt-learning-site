@@ -54,7 +54,7 @@ const messages = ref([])
 const isLoading = ref(false)
 const elapsedSeconds = ref(0)
 let elapsedTimer = null
-let messageSequence = 0
+let messageCounter = 0
 const messagesContainer = ref(null)
 const textareaRef = ref(null)
 
@@ -82,7 +82,7 @@ const inputLength = computed(() => question.value.trim().length)
 
 function createMessage(role, content, extra = {}) {
   return {
-    id: globalThis.crypto?.randomUUID?.() ?? `${role}-${Date.now()}-${++messageSequence}-${Math.random().toString(36).slice(2, 8)}`,
+    id: globalThis.crypto?.randomUUID?.() ?? `${role}-${Date.now()}-${++messageCounter}-${Math.random().toString(36).slice(2, 8)}`,
     role,
     content,
     createdAt: new Date(),
@@ -207,7 +207,7 @@ async function sendMessage() {
               messages.value.push(createMessage('assistant', `❌ 錯誤：${data.error}`, { isError: true }))
             }
           } catch (err) {
-            console.debug('Failed to parse SSE payload - Line:', line, 'Error:', err?.message ?? err)
+            console.debug('Failed to parse SSE payload as JSON - Line:', line, 'Error:', err?.message ?? err)
           }
         }
       }
