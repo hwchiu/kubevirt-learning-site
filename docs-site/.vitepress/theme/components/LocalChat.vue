@@ -230,7 +230,9 @@ function clearChat() {
 }
 
 function handleKeydown(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
+  // e.isComposing is true while an IME (Chinese/Japanese/Korean) is composing
+  // — do not submit yet, let the user finish selecting the character
+  if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) {
     e.preventDefault()
     sendMessage()
   }
