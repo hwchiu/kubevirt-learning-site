@@ -21,6 +21,7 @@ import nmo from './sidebars/node-maintenance-operator.js'
 import forklift from './sidebars/forklift.js'
 import netbox from './sidebars/netbox.js'
 import multus from './sidebars/multus-cni.js'
+import minio from './sidebars/minio.js'
 import tidb from './sidebars/tidb.js'
 import kafka from './sidebars/kafka.js'
 import kubernetes from './sidebars/kubernetes.js'
@@ -58,6 +59,7 @@ export default withMermaid(defineConfig({
       '/forklift/': forklift,
       '/netbox/': netbox,
       '/multus-cni/': multus,
+      '/minio/': minio,
       '/tidb/': tidb,
       '/kafka/': kafka,
       '/kubernetes/': kubernetes,

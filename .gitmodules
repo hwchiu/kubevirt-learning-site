@@ -34,3 +34,7 @@
 	path = kubernetes
 	url = https://github.com/kubernetes/kubernetes.git
 	branch = master
+[submodule "minio"]
+	path = minio
+	url = https://github.com/minio/minio.git
+	branch = master
