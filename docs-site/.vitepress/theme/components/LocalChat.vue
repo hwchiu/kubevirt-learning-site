@@ -39,7 +39,11 @@ const projectLabel = computed(() => {
 
 function renderMarkdown(text) {
   if (!text) return ''
-  return marked.parse(text)
+  return marked.parse(normalizeAssistantMarkdown(text))
+}
+
+function normalizeAssistantMarkdown(text) {
+  return text.replace(/```(?:mermaid|marmaid)([\t ]*\r?\n)/gi, '```text$1')
 }
 
 async function scrollToBottom() {

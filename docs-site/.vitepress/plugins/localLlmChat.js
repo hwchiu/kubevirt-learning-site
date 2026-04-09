@@ -57,6 +57,7 @@ export function localLlmChatPlugin(options = {}) {
           '請用 zh-TW（繁體中文）回答，技術術語保持英文。',
           '回答時請引用具體的檔案路徑與程式碼片段。',
           '如果不確定，請誠實說明而非猜測。',
+          '請用標準 Markdown 回答，禁止使用 Mermaid 或 marmaid 圖表語法；若要表達流程或架構，改用標題、清單、表格或一般程式碼區塊。',
         ].join('\n')
 
         const contextHint = project
