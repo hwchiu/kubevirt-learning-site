@@ -82,7 +82,7 @@ const inputLength = computed(() => question.value.trim().length)
 
 function createMessage(role, content, extra = {}) {
   return {
-    id: globalThis.crypto?.randomUUID?.() ?? `${role}-${Date.now()}-${++messageSequence}`,
+    id: globalThis.crypto?.randomUUID?.() ?? `${role}-${Date.now()}-${++messageSequence}-${Math.random().toString(36).slice(2, 8)}`,
     role,
     content,
     createdAt: new Date(),
@@ -101,7 +101,10 @@ function normalizeAssistantMarkdown(text) {
 }
 
 function formatTime(date) {
-  return hourMinuteFormatter.format(new Date(date))
+  if (!date) return ''
+  const parsedDate = new Date(date)
+  if (Number.isNaN(parsedDate.getTime())) return ''
+  return hourMinuteFormatter.format(parsedDate)
 }
 
 async function scrollToBottom() {
@@ -204,7 +207,7 @@ async function sendMessage() {
               messages.value.push(createMessage('assistant', `❌ 錯誤：${data.error}`, { isError: true }))
             }
           } catch (err) {
-            console.debug('Failed to parse chat SSE payload:', line, err)
+            console.debug('Failed to parse SSE payload - Line:', line, 'Error:', err?.message ?? err)
           }
         }
       }
