@@ -502,39 +502,27 @@ function quickAsk(q) {
   inset: 0;
   z-index: 9000;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  flex-direction: column;
   font-family: var(--vp-font-family-base);
+  background: var(--vp-c-bg);
 }
 
 .overlay-backdrop {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at top, rgba(99, 102, 241, 0.18), transparent 35%),
-    rgba(15, 23, 42, 0.52);
-  backdrop-filter: blur(20px);
+  display: none;
 }
 
 .chat-shell {
   position: relative;
-  width: min(1120px, 100%);
-  height: min(860px, calc(100vh - 40px));
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(148, 163, 184, 0.22);
-  border-radius: 28px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.82));
-  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.3);
+  background: var(--vp-c-bg);
   overflow: hidden;
 }
 
 .chat-overlay.dark .chat-shell {
-  background:
-    linear-gradient(180deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.88));
-  border-color: rgba(148, 163, 184, 0.16);
+  background: var(--vp-c-bg);
 }
 
 .shell-noise {
@@ -1261,8 +1249,7 @@ function quickAsk(q) {
 
   .chat-shell {
     width: 100%;
-    height: calc(100vh - 24px);
-    border-radius: 24px;
+    height: 100%;
   }
 
   .empty-state {
