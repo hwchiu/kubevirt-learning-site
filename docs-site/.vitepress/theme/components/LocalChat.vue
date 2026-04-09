@@ -11,6 +11,7 @@ const timeFormatter = new Intl.DateTimeFormat('zh-TW', {
   hour: '2-digit',
   minute: '2-digit',
 })
+const MAX_TEXTAREA_HEIGHT = 180
 
 const quickPrompts = [
   {
@@ -94,7 +95,7 @@ function renderMarkdown(text) {
 }
 
 function normalizeAssistantMarkdown(text) {
-  return text.replace(/```(?:mermaid|m[ae]rmaid)([\t ]*\r?\n)/gi, '```text$1')
+  return text.replace(/```mermaid([\t ]*\r?\n)/gi, '```text$1')
 }
 
 function formatTime(date) {
@@ -111,7 +112,7 @@ async function scrollToBottom() {
 function autoResizeTextarea() {
   if (!textareaRef.value) return
   textareaRef.value.style.height = 'auto'
-  textareaRef.value.style.height = `${Math.min(textareaRef.value.scrollHeight, 180)}px`
+  textareaRef.value.style.height = `${Math.min(textareaRef.value.scrollHeight, MAX_TEXTAREA_HEIGHT)}px`
 }
 
 function openOverlay() {
@@ -380,7 +381,7 @@ function quickAsk(q) {
                     @input="autoResizeTextarea"
                     @keydown="handleKeydown"
                     :disabled="isLoading"
-                    placeholder="試著詢問：這個專案的 reconciliation 流程是怎麼串起來的？"
+                    placeholder="試著詢問：這個專案的 `reconciliation` 流程是怎麼串起來的？"
                     rows="1"
                   />
 
