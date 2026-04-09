@@ -73,8 +73,11 @@ export default [
       { text: 'Windows VM 最佳化', link: '/kubevirt/deep-dive/windows-optimization' },
       { text: 'Live Migration 實作', link: '/kubevirt/deep-dive/migration-internals' },
       { text: '效能調校指南', link: '/kubevirt/deep-dive/performance-tuning' },
+      { text: 'VM 最佳化進階指南', link: '/kubevirt/deep-dive/vm-optimization' },
       { text: '安全架構', link: '/kubevirt/deep-dive/security' },
       { text: 'GPU/vGPU 直通', link: '/kubevirt/deep-dive/gpu-passthrough' },
+      { text: '升級策略與機制', link: '/kubevirt/deep-dive/upgrade-strategy' },
+      { text: 'VM 初始化深入分析', link: '/kubevirt/deep-dive/vm-initialization' },
     ]
   },
   {
