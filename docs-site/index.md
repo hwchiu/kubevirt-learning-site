@@ -36,6 +36,9 @@ hero:
     - theme: alt
       text: 🗄️ TiDB
       link: /tidb/
+    - theme: alt
+      text: 🪣 MinIO
+      link: /minio/
 
 features:
   - icon: 🖥️
@@ -91,6 +94,12 @@ features:
     details: 分散式 HTAP SQL 資料庫 — Go 實作，MySQL 相容、TiKV 行式儲存、TiFlash 列式儲存、Raft 多副本強一致性、水平擴展。
     link: /tidb/
     linkText: 開始閱讀
+
+  - icon: 🪣
+    title: MinIO
+    details: 高效能 S3 相容物件儲存 — Go 實作，Reed-Solomon Erasure Coding、Bitrot 防護、自動 Healing、Bucket/Site Replication、分散式架構。
+    link: /minio/
+    linkText: 開始閱讀
 ---
 
 ## 📚 專案總覽
@@ -108,6 +117,7 @@ features:
 | [NetBox](/netbox/) | 網路基礎設施管理平台（IPAM / DCIM） | ✅ 完整分析 |
 | [Apache Kafka](/kafka/) | 分散式事件串流平台 | ✅ 完整分析 |
 | [TiDB](/tidb/) | 分散式 HTAP SQL 資料庫 | ✅ 完整分析 |
+| [MinIO](/minio/) | 高效能 S3 相容物件儲存系統 | ✅ 完整分析 |
 
 ## 🔗 原始碼連結
 
@@ -122,3 +132,4 @@ features:
 - **NetBox**: [github.com/netbox-community/netbox](https://github.com/netbox-community/netbox)
 - **Apache Kafka**: [github.com/apache/kafka](https://github.com/apache/kafka)
 - **TiDB**: [github.com/pingcap/tidb](https://github.com/pingcap/tidb)
+- **MinIO**: [github.com/minio/minio](https://github.com/minio/minio)

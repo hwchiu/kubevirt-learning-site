@@ -226,6 +226,43 @@
           "doc_files": ["docs-site/multus-cni/configuration.md"]
         }
       }
+    },
+    "minio": {
+      "repo": "https://github.com/minio/minio",
+      "branch": "master",
+      "analyzed_commit": "7aac2a2c5b7c882e68c1ce017d8256be2feea27f",
+      "analyzed_date": "2026-04-09",
+      "focus": "data replication and disk I/O",
+      "pages": {
+        "architecture": {
+          "source_paths": ["cmd/server-main.go", "cmd/object-api-interface.go", "cmd/erasure-server-pool.go", "cmd/api-router.go"],
+          "doc_files": ["docs-site/minio/architecture.md"]
+        },
+        "erasure-coding": {
+          "source_paths": ["cmd/erasure-coding.go", "cmd/erasure-encode.go", "cmd/erasure-decode.go", "cmd/erasure-sets.go", "cmd/erasure-server-pool.go"],
+          "doc_files": ["docs-site/minio/erasure-coding.md"]
+        },
+        "disk-io": {
+          "source_paths": ["cmd/xl-storage.go", "cmd/xl-storage-format-v2.go", "cmd/erasure-object.go"],
+          "doc_files": ["docs-site/minio/disk-io.md"]
+        },
+        "object-lifecycle": {
+          "source_paths": ["cmd/object-handlers.go", "cmd/erasure-object.go", "cmd/erasure-multipart.go"],
+          "doc_files": ["docs-site/minio/object-lifecycle.md"]
+        },
+        "data-replication": {
+          "source_paths": ["cmd/bucket-replication.go", "cmd/bucket-replication-utils.go", "cmd/site-replication.go"],
+          "doc_files": ["docs-site/minio/data-replication.md"]
+        },
+        "healing": {
+          "source_paths": ["cmd/erasure-healing.go", "cmd/background-heal-ops.go", "cmd/bitrot.go", "cmd/bitrot-streaming.go"],
+          "doc_files": ["docs-site/minio/healing.md"]
+        },
+        "integration": {
+          "source_paths": ["cmd/api-router.go", "cmd/metrics-v3.go", "cmd/event-notification.go", "cmd/iam.go"],
+          "doc_files": ["docs-site/minio/integration.md"]
+        }
+      }
     }
   }
 }
