@@ -18,6 +18,8 @@ export default [
     items: [
       { text: '網路架構', link: '/cilium/networking' },
       { text: '負載均衡與 kube-proxy 替代', link: '/cilium/load-balancing' },
+      { text: 'BGP 控制平面', link: '/cilium/bgp' },
+      { text: 'ClusterMesh 多叢集架構', link: '/cilium/clustermesh' },
     ]
   },
   {
