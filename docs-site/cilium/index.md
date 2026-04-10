@@ -7,7 +7,7 @@ title: Cilium — 專案總覽
 
 Cilium 是 CNCF 畢業的開源專案，基於 Linux 核心的 **eBPF** 技術，為 Kubernetes 叢集提供高效能的網路、安全性與可觀測性解決方案。相較於傳統 iptables 方案，Cilium 直接在核心層攔截並處理封包，大幅降低延遲並提升吞吐量。
 
-> **版本**: v1.20.0-dev｜**授權**: Apache-2.0｜**CNCF 狀態**: Graduated
+> **版本**: v1.20.0-dev | **授權**: Apache-2.0 | **CNCF 狀態**: Graduated
 
 ## 核心特性
 
