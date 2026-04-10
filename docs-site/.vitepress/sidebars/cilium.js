@@ -13,4 +13,11 @@ export default [
       { text: '身份識別與安全模型', link: '/cilium/identity-security' },
     ]
   },
+  {
+    text: '🌐 網路核心',
+    items: [
+      { text: '網路架構', link: '/cilium/networking' },
+      { text: '負載均衡與 kube-proxy 替代', link: '/cilium/load-balancing' },
+    ]
+  },
 ]
