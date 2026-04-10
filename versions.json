@@ -227,6 +227,25 @@
         }
       }
     },
+    "cilium": {
+      "repo": "https://github.com/cilium/cilium",
+      "branch": "main",
+      "analyzed_commit": "27d914ec5acec895161f16ae613e2544571af69f",
+      "analyzed_date": "2026-04-10",
+      "pages": {
+        "architecture": { "source_paths": ["daemon/cmd/cells.go", "daemon/cmd/daemon.go", "operator/cmd/root.go"], "doc_files": ["docs-site/cilium/architecture.md"] },
+        "ebpf-datapath": { "source_paths": ["bpf/", "pkg/datapath/"], "doc_files": ["docs-site/cilium/ebpf-datapath.md"] },
+        "identity-security": { "source_paths": ["pkg/identity/", "pkg/ipcache/", "pkg/policy/"], "doc_files": ["docs-site/cilium/identity-security.md"] },
+        "networking": { "source_paths": ["plugins/", "pkg/datapath/linux/", "bpf/bpf_lxc.c"], "doc_files": ["docs-site/cilium/networking.md"] },
+        "load-balancing": { "source_paths": ["pkg/loadbalancer/", "bpf/lib/lb.h"], "doc_files": ["docs-site/cilium/load-balancing.md"] },
+        "policy": { "source_paths": ["pkg/policy/", "pkg/fqdn/", "pkg/k8s/apis/cilium.io/v2/cnp_types.go"], "doc_files": ["docs-site/cilium/policy.md"] },
+        "hubble": { "source_paths": ["pkg/hubble/", "hubble-relay/"], "doc_files": ["docs-site/cilium/hubble.md"] },
+        "bgp": { "source_paths": ["pkg/bgp/", "operator/pkg/bgp/"], "doc_files": ["docs-site/cilium/bgp.md"] },
+        "clustermesh": { "source_paths": ["pkg/clustermesh/", "clustermesh-apiserver/"], "doc_files": ["docs-site/cilium/clustermesh.md"] },
+        "encryption": { "source_paths": ["pkg/wireguard/"], "doc_files": ["docs-site/cilium/encryption.md"] },
+        "crd-reference": { "source_paths": ["pkg/k8s/apis/cilium.io/"], "doc_files": ["docs-site/cilium/crd-reference.md"] }
+      }
+    },
     "minio": {
       "repo": "https://github.com/minio/minio",
       "branch": "master",

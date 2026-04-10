@@ -38,6 +38,7 @@ export const siteConfig = {
     { text: 'TiDB',                              link: '/tidb/' },
     { text: 'Apache Kafka',                      link: '/kafka/' },
     { text: 'Kubernetes PV/PVC',                 link: '/kubernetes/' },
+    { text: 'Cilium',                            link: '/cilium/' },
   ],
 
   /** 頁腳文字 */

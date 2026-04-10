@@ -38,3 +38,7 @@
 	path = minio
 	url = https://github.com/minio/minio.git
 	branch = master
+[submodule "cilium"]
+	path = cilium
+	url = https://github.com/cilium/cilium
+	branch = main

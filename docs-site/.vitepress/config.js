@@ -25,6 +25,7 @@ import minio from './sidebars/minio.js'
 import tidb from './sidebars/tidb.js'
 import kafka from './sidebars/kafka.js'
 import kubernetes from './sidebars/kubernetes.js'
+import cilium from './sidebars/cilium.js'
 
 export default withMermaid(defineConfig({
   base: siteConfig.base,
@@ -63,6 +64,7 @@ export default withMermaid(defineConfig({
       '/tidb/': tidb,
       '/kafka/': kafka,
       '/kubernetes/': kubernetes,
+      '/cilium/': cilium,
     },
     socialLinks: [
       { icon: 'github', link: siteConfig.githubLink }
