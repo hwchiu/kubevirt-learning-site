@@ -506,35 +506,443 @@ spec:
 
 ---
 
-## 尾聲：阿明的六個月後
+## 第十二章：「這張網卡不夠用——SR-IOV 上場」
 
-六個月後，阿明的評估報告早已通過，所有 VM 都已在生產環境的 KubeVirt 上穩定運行——包括那台最難搞的 Windows Server。
+第一批 VM 上線一個月後，有一個新的需求找上門了。
+
+負責網路封包處理的團隊想把一個舊的 DPDK 應用從實體機搬進來。阿明看了一下這個應用的需求：它需要直接操作網卡的 DMA，繞過 kernel network stack，延遲要求在微秒級。
+
+阿明皺起眉頭。這個不是普通的 VM，這是一個對網路效能有極端要求的工作負載。他試了一下用 masquerade 跑，延遲爆到毫秒級，完全不行。bridge 模式好一些，但仍然有軟體轉發的開銷。
+
+同事說：「能不能用 SR-IOV？」
+
+阿明這才認真去研究 SR-IOV 的原理。SR-IOV（Single Root I/O Virtualization）是一個 PCIe 規格，讓一張實體網卡（PF，Physical Function）可以切出多個虛擬網卡（VF，Virtual Function），每個 VF 可以直接分配給一個 VM，讓 VM 的網路流量完全繞過 hypervisor 的虛擬化層，直接和硬體對話。延遲可以逼近裸機，幾乎沒有 overhead。
+
+代價是靈活性——SR-IOV 的 VF 綁定在特定的 Node 和 PF 上，VM 就沒辦法 live migrate 到一個沒有相同 SR-IOV 設備的 Node。另外，設定比 masquerade 複雜很多：要先在 Node 上開啟 SR-IOV、設定 VF 數量、讓 K8s 的 device plugin 管理這些 VF，最後才能在 VM spec 裡宣告要用 SR-IOV 的網卡。
+
+阿明和網路團隊花了整整一天配置環境，踩到了一個坑：Node 上的 BIOS 預設沒開 SR-IOV，要進 BIOS 手動開。這件事在文件上寫得很隱晦，是靠一個 Stack Overflow 的回答才找到解法的。
+
+最後 DPDK 應用跑起來，延遲降到了 50 微秒。網路團隊的人站在螢幕前說：「比我預期的好。」阿明難得得意地笑了一下。
+
+---
+
+> ### 📚 去這裡深入了解
+> SR-IOV 的設定涉及 Node 層的硬體配置，值得從頭讀清楚再動手：
+>
+> - [SR-IOV 與進階網路](/kubevirt/networking/sriov) — SR-IOV 的工作原理、K8s device plugin 的角色、VM spec 的設定方式、Live Migration 限制與替代方案
+>
+> 讀完後，你應該能判斷什麼時候需要 SR-IOV、什麼時候 bridge 已經夠用。
+
+---
+
+## 第十三章：「資料庫 VM 快撐不住了——能不能不停機加磁碟？」
+
+某個週三下午，DBA 傳訊息給阿明：「那台 PostgreSQL VM 的磁碟用了 90% 了，要快點擴容，但今天晚上有個重要的報表要跑，不能停機。」
+
+阿明的第一直覺是 PVC resize——K8s 支援在線擴大 PVC 的容量，只要 StorageClass 支援 `allowVolumeExpansion`。他試了一下，成功把 PVC 從 200GB 擴到 300GB，VM 裡的磁碟也自動擴大了，問題暫時解決。
+
+但 DBA 的下一個需求更有趣：「我想在不停機的情況下，把備份用的 log 磁碟接到 VM 上——這樣備份不會佔用主要磁碟的 IOPS。能做嗎？」
+
+阿明去查了 KubeVirt 的 **Hotplug** 功能——它讓你可以在 VM 運行中動態掛載或卸除磁碟，不需要重啟。操作方式是用 `virtctl`：
+
+```bash
+# 先建立一個 PVC 作為備份磁碟
+kubectl apply -f backup-pvc.yaml
+
+# 在 VM 運行中熱插拔
+virtctl addvolume postgres-vm --volume-name=backup-disk \
+  --claim-name=backup-pvc --persist
+```
+
+`--persist` 參數讓這個磁碟在 VM 重啟後還在，否則重開機就消失了。VM 裡面會看到一顆新的磁碟 `/dev/vdb`，DBA 自己 `fdisk` 分割、`mkfs`、`mount`——完全不用重開機。
+
+「這跟在實體機上插熱插拔硬碟一樣，」DBA 說，「沒想到 VM 也可以。」
+
+阿明有點自豪——這個功能他以前在 VMware 上也用過，但沒想到 KubeVirt 也實作了類似的體驗。而且 KubeVirt 的 hotplug 完全透過 API 操作，可以納進 GitOps 流程：加磁碟這件事，現在也可以開一個 PR 來做。
+
+---
+
+> ### 📚 去這裡深入了解
+> 熱插拔是一個實用但容易忽略的功能，在緊急擴容時特別好用：
+>
+> - [熱插拔磁碟 (Hotplug)](/kubevirt/storage/hotplug) — Hotplug 的工作原理、`virtctl addvolume` 的完整參數、persist vs 非 persist 的差異、支援的 volume 類型限制
+>
+> 讀完後，你應該能在不停機的情況下，替 VM 動態新增或移除磁碟。
+
+---
+
+## 第十四章：「每次建 VM 都要複製一大段 YAML，煩死了」
+
+遷移計畫推進到第三個月，阿明開始幫各個部門建 VM。
+
+每次有人要一台新 VM，他就複製一份舊的 YAML，改改名稱和資源配置。漸漸地，他的 VM YAML template 資料夾裡有了十幾種不同的「標準配置」：`small-linux.yaml`、`medium-linux.yaml`、`large-linux-cpu-pinned.yaml`、`medium-windows.yaml`……
+
+每次有人問：「我要一台 4 core 8GB 的 Linux VM」，阿明都要手動去找對應的 template，改個名字，apply 上去。這個流程不到三分鐘，但阿明覺得可以更好。
+
+他發現了 **Instancetype** 和 **Preference** 這兩個 KubeVirt 的 API 資源。
+
+**`VirtualMachineInstancetype`** 定義了 VM 的**硬體規格**（有點像 AWS 的 EC2 instance type）：CPU 數量、記憶體大小、CPU Pinning 設定。你可以定義一批標準規格，然後讓 VM 直接引用，而不是在每份 YAML 裡重複寫：
+
+```yaml
+apiVersion: instancetype.kubevirt.io/v1beta1
+kind: VirtualMachineInstancetype
+metadata:
+  name: medium
+spec:
+  cpu:
+    guest: 4
+  memory:
+    guest: 8Gi
+```
+
+**`VirtualMachinePreference`** 定義的則是 VM 的**軟體偏好**——用什麼 disk bus（virtio 還是 sata）、什麼網卡型號、預設的 clock 設定、適合 Linux 還是 Windows。兩者分開讓你可以自由組合：`medium` instancetype + `linux` preference，或是 `large` instancetype + `windows` preference。
+
+阿明花了一個下午定義好公司的標準 instancetype 和 preference 清單，存進公司的 GitOps repo，然後在公司 wiki 上貼了一張表：「想要什麼規格的 VM，對著這張表填，三行 YAML 就搞定。」
+
+部門的人拿到這張表，第一反應是：「這就像選 EC2 機型一樣，但跑在我們自己的 K8s 上。」
+
+---
+
+> ### 📚 去這裡深入了解
+> Instancetype 是讓 KubeVirt 「平台化」的關鍵功能——讓使用者不需要懂 VM spec 細節：
+>
+> - [Instancetype & Preference](/kubevirt/api-resources/instancetype) — VirtualMachineInstancetype vs VirtualMachineClusterInstancetype 的差異、Preference 的欄位設計、如何用 `virtctl` 查詢可用的 instancetype、官方預設的 common-instancetypes 清單
+>
+> 讀完後，你應該能為自己的組織設計一套標準的 VM 規格清單，讓使用者用最簡潔的方式開 VM。
+
+---
+
+## 第十五章：「QA 說他們需要同時跑二十台一樣的 VM」
+
+QA 團隊找到阿明，需求很直接：「我們要做壓力測試，需要同時跑 20 台相同規格的 Linux VM，測完可以全部刪掉。下次測試可能要 30 台，或 50 台。」
+
+阿明的第一個念頭是：「那我手動建 20 次？」他立刻否定了這個想法。
+
+他去查了 KubeVirt 的文件，找到了 **`VirtualMachinePool`**（以及更底層的 `VirtualMachineInstanceReplicaSet`）。這是 KubeVirt 參考 K8s ReplicaSet 設計的資源：你定義一個 VM 的 template，然後設定 `replicas: 20`，KubeVirt 就會幫你建出 20 台完全相同的 VM，還會維持這個數量（如果有 VM 掛掉，就自動補起來）。
+
+```yaml
+apiVersion: pool.kubevirt.io/v1alpha1
+kind: VirtualMachinePool
+metadata:
+  name: qa-load-test
+spec:
+  replicas: 20
+  selector:
+    matchLabels:
+      kubevirt.io/vmpool: qa-load-test
+  virtualMachineTemplate:
+    spec:
+      instancetype:
+        name: small
+      preference:
+        name: linux
+      # ... 其他設定
+```
+
+QA 的壓測跑了四個小時，20 台 VM 同時在跑。結束後，`kubectl delete vmpool qa-load-test` 一條指令，20 台 VM 全部消失。
+
+「這就是我要的，」QA 的 Lead 說，「下次測試我自己來。」
+
+阿明心裡想：*這才是 VM 管理應該有的體驗——宣告式、可重複、可自動化。VMware 的時代，建 20 台 VM 要手動點好幾個小時。*
+
+---
+
+> ### 📚 去這裡深入了解
+> VM Pool 讓 VM 的彈性伸縮成為可能，適合測試、CI/CD、或有批次需求的場景：
+>
+> - [ReplicaSet 與 Pool](/kubevirt/api-resources/replica-pool) — VirtualMachineInstanceReplicaSet 和 VirtualMachinePool 的差異、selector 設計、scale up/down 的行為、與 HPA 的整合可能性
+>
+> 讀完後，你應該能用 Pool 快速建立和清理一批相同規格的 VM。
+
+---
+
+## 第十六章：「資安說，virt-launcher 的權限太高了」
+
+季度安全審查。
+
+資安工程師 Julie 找到阿明，打開一份報告：「你知道 virt-launcher Pod 用了哪些 capability 嗎？我看到 `SYS_PTRACE`、`NET_ADMIN`，在我們的安全政策下這些都是 high risk。」
+
+阿明承認他之前沒認真想過這件事。他知道 virt-launcher 需要特殊的 privilege 才能跑 QEMU，但具體是什麼 capability，為什麼需要，他說不清楚。
+
+他開始研究 KubeVirt 的安全架構。
+
+首先是 **virt-launcher 的最小化 privilege 原則**。KubeVirt 的設計目標是「用盡量少的 privilege 跑 QEMU」，但 QEMU 本身需要一些 Linux capability 才能做到虛擬化該做的事：
+- `NET_ADMIN`：配置 VM 的網路介面
+- `SYS_PTRACE`：讓 virt-handler 可以監控 QEMU 進程的狀態
+- `SYS_NICE`：設定 QEMU vCPU 執行緒的優先權（Realtime VM 需要）
+
+KubeVirt 新版已經引入了更嚴格的 **seccomp profile**，把 QEMU 允許的 syscall 限制在必要的最小集合，大幅縮減了攻擊面。另外，`virt-launcher` 也支援用 **user namespace** 進一步隔離，讓 VM 裡的 root 和宿主機的 root 不是同一個 UID——這是容器安全的基本防線，KubeVirt 把它帶進了 VM 的世界。
+
+阿明把這些發現整理成一份回覆給 Julie：「這些 capability 是 QEMU 正常運作的最低需求，但我們可以確認你們公司的 KubeVirt 部署有開啟 seccomp profile 和 user namespace 隔離——以下是確認步驟。」
+
+Julie 讀完，點點頭：「好，這樣我能寫進 exception 裡，加上 compensating control。謝謝你解釋清楚。」
+
+阿明想到，如果當初他也不懂，這個問題可能就會演變成一場「資安說要關掉，業務說不能停」的拉鋸戰。懂底層讓他能精確地說明風險在哪裡、緩解措施是什麼，而不是含糊地說「應該沒問題吧」。
+
+---
+
+> ### 📚 去這裡深入了解
+> 安全架構是生產環境部署前必須弄清楚的事：
+>
+> - [安全架構](/kubevirt/deep-dive/security) — virt-launcher 的 capability 清單與必要性分析、seccomp profile 的設定方式、user namespace 隔離、NetworkPolicy 在 VM 流量上的適用性、常見的安全加固配置
+>
+> 讀完後，你應該能用具體的技術語言跟資安團隊解釋 KubeVirt 的安全模型，而不是「應該沒問題」。
+
+---
+
+## 第十七章：「AI 團隊說他們需要 GPU」
+
+公司的 ML 團隊一直在用雲端 GPU 訓練模型，成本高得嚇人。有人提議：「我們機房裡有幾張 A100，能不能讓 AI 團隊的 VM 直接用這些 GPU 來訓練？」
+
+這個需求找到了阿明。他看了一下那幾台 Node 的硬體規格，確認了有 NVIDIA A100。然後開始研究 KubeVirt 的 GPU 支援。
+
+KubeVirt 支援兩種 GPU 使用方式：
+
+**GPU Passthrough（直通）**：把整張 GPU 完整地分配給一台 VM。VM 裡的 driver 直接和 GPU 硬體溝通，效能接近裸機，但一張 GPU 只能給一台 VM 用，無法共享。
+
+**vGPU（虛擬 GPU）**：用 NVIDIA 的 MIG（Multi-Instance GPU）或 vGPU 技術，把一張 GPU 切成多個虛擬 GPU，每個 VM 可以拿到一份虛擬 GPU。效能比 passthrough 稍低，但可以讓多台 VM 共用同一張卡，提高硬體使用率。
+
+要在 KubeVirt 裡用 GPU，需要：
+1. 在 Node 上安裝 NVIDIA GPU Operator
+2. 讓 K8s 的 device plugin 把 GPU 作為可分配的資源暴露出來
+3. 在 VM spec 裡宣告需要 GPU
+
+```yaml
+spec:
+  domain:
+    devices:
+      gpus:
+        - deviceName: nvidia.com/GA100_A100_PCIE_40GB
+          name: gpu1
+```
+
+阿明配置好後，ML 工程師在 VM 裡跑 `nvidia-smi`，看到了 A100，眼睛一亮。第一次訓練任務跑完，比雲端快了 30%，而且成本只有雲端的零頭。
+
+「以後訓練任務在這裡跑，」ML 的 Lead 說，「阿明，謝謝你。」
+
+阿明悄悄把「GPU Passthrough 設定 SOP」加進了公司的 GitBook，想到以後如果有人問，他可以直接丟連結。
+
+---
+
+> ### 📚 去這裡深入了解
+> GPU 支援讓 KubeVirt 可以服務 ML/AI 這類計算密集型工作負載：
+>
+> - [GPU/vGPU 直通](/kubevirt/deep-dive/gpu-passthrough) — GPU Passthrough 和 vGPU 的配置差異、NVIDIA GPU Operator 的角色、device plugin 的工作原理、常見的設定錯誤與排查方法
+>
+> 讀完後，你應該能替需要 GPU 的 VM 設定硬體直通，並了解 GPU 共享方案的取捨。
+
+---
+
+## 第十八章：「VM 出問題了，我要去哪裡找線索？」
+
+六個月下來，阿明已經是組裡唯一一個真正懂 KubeVirt 的人。每次有 VM 出問題，最後都會找到他。
+
+他在處理過幾十次不同類型的問題後，總結出了一套**排查順序**，每次出問題都照這個順序走，很少找不到原因：
+
+**第一層：K8s 事件**
+```bash
+kubectl describe vmi <vmi-name>
+kubectl get events --field-selector involvedObject.name=<vmi-name>
+```
+大多數問題在這一層就有線索——調度失敗、PVC 沒 bound、網路設定錯誤，都會在 events 裡出現。
+
+**第二層：virt-launcher Pod**
+```bash
+kubectl logs virt-launcher-<hash> -c compute
+kubectl exec -it virt-launcher-<hash> -c compute -- virsh list --all
+```
+VM 在 running 狀態但行為異常，通常要去 virt-launcher 的 log 找。`virsh` 指令可以在 launcher 裡直接查 libvirt domain 的狀態。
+
+**第三層：virt-handler**
+```bash
+kubectl logs -n kubevirt -l kubevirt.io=virt-handler --follow
+```
+如果是 VM 無法啟動、網路設定沒生效、Node 層的問題，通常要去 virt-handler 看。
+
+**第四層：QEMU log**
+```bash
+kubectl exec -it virt-launcher-<hash> -c compute -- \
+  cat /var/run/libvirt/qemu/<domain>.log
+```
+這是最底層的日誌，QEMU 本身的 error message。如果看到 `Device not found` 或 `Failed to initialize`，通常是 VM spec 的設備設定有問題。
+
+阿明把這個排查流程寫成了公司的 runbook，配合真實案例——那個 OOM 的凌晨 2 點、那次 bridge + Calico 衝突、那次 Windows virtio 驅動沒裝——每個案例都附上了當時的症狀、查到的日誌、最後的解法。
+
+「有了這份 runbook，」他想，「就算我哪天請假，別人也能自己查。」
+
+---
+
+> ### 📚 去這裡深入了解
+> 系統性的排查方法是 on-call 工程師最值錢的技能：
+>
+> - [故障排除手冊](/kubevirt/guides/troubleshooting) — 按問題類型分類的排查流程、各層級 log 的位置與解讀方式、常見錯誤 message 的對照表、`virtctl` 和 `virsh` 的實用除錯指令
+>
+> 讀完後，你應該能系統性地定位 VM 問題，而不是靠直覺亂猜。
+
+---
+
+## 第十九章：「阿明，我們能不能做一個自訂的 VM 初始化動作？」
+
+DevOps 團隊找來了一個新需求：每台新建的 VM 啟動時，要自動執行一個 registration script，把 VM 的資訊（hostname、IP、服務類型）回報給公司的 CMDB（Configuration Management Database）。
+
+這個需求讓阿明思考：「我要怎麼在 VM 啟動時注入一段自訂的邏輯，但又不要去改每一份 VM YAML？」
+
+他查到了 **Hook Sidecar** 機制。
+
+Hook Sidecar 是 KubeVirt 提供的一個擴充點：你可以在 `virt-launcher` Pod 旁邊掛一個 sidecar container，這個 sidecar 可以攔截 VM 生命週期中的特定時間點（Hook），執行自訂的邏輯，甚至修改 VM domain 的 XML 定義（在 QEMU 啟動前）。
+
+可以攔截的 hook 包括：
+- `onDefineDomain`：在 libvirt domain XML 被建立時觸發，可以修改 XML（例如注入特殊的 CPU feature 或 device 設定）
+- `postStartCommand`：VM 啟動後執行自訂命令
+
+阿明用 `postStartCommand` hook 實現了 CMDB registration：sidecar container 等 VM 的 agent 回應後，呼叫公司內部的 API 把 VM 資訊寫進 CMDB，整個過程不需要改任何 VM spec，只要在需要 registration 的 VM namespace 上掛這個 hook。
+
+「這就像 K8s 的 Admission Webhook，但是給 VM 的，」阿明解釋給同事聽，「你可以在不碰 VM spec 的情況下，在特定時間點插入自訂邏輯。」
+
+他想到了更多應用場景：自動修改 QEMU 的 CPU feature、在 VM 啟動後自動更新 inventory、在 VM 關機前執行 cleanup script。Hook Sidecar 開了一扇門，讓 KubeVirt 的行為變得可以高度客製化，而且不需要改 KubeVirt 本身的程式碼。
+
+---
+
+> ### 📚 去這裡深入了解
+> Hook Sidecar 是 KubeVirt 裡最強大的擴充機制之一，但文件相對隱晦：
+>
+> - [Hook Sidecar 機制](/kubevirt/components/hook-sidecars) — Hook 的種類（onDefineDomain、postStartCommand）、sidecar 的開發方式、annotation 的設定、實際的使用案例
+>
+> 讀完後，你應該能為組織設計客製化的 VM 生命週期擴充，而不需要 fork KubeVirt。
+
+---
+
+## 第二十章：「原來 VMware 遷移有專門的工具……」
+
+計畫進入尾聲，剩最後五台 VMware VM 要遷移。
+
+這幾台 VM 的情況最複雜——有的有多塊磁碟、有的用了 VMware 特有的設備驅動、有的 VMDK 超過 500GB。阿明一直用手動的方式：把 VMDK 匯出成 QCOW2，透過 DataVolume 的 HTTP source 把 image 拉進來，再建 VM 掛上去。這個流程每台要花一到兩天。
+
+直到有個同事說：「你知道有 Forklift 這個工具嗎？」
+
+阿明查了一下，才發現自己一直在用「蠻力」解決一個其實有工具解法的問題。**Forklift** 是一個 K8s-native 的 VM 遷移工具，專為把 VMware（以及其他 hypervisor）的 VM 遷移到 KubeVirt 而設計。它可以：
+- 直接連進 vSphere，列出所有的 VM 和資源
+- 分析 VM 的相容性，提前告訴你哪些設備在 KubeVirt 上需要調整
+- 自動把 VMDK 轉換格式、建立對應的 DataVolume、建立 KubeVirt VM
+- 支援熱遷移（不停機直接把 VMware VM 搬過來）
+
+阿明看著 Forklift 的 UI，心裡五味雜陳。「如果我三個月前就知道這個工具，應該可以省下很多時間。」
+
+他花了一天設定好 Forklift，把最後五台 VM 用圖形化介面直接遷移過來——整個過程幾乎是自動的，每台只需要幾個小時。
+
+「好吧，」他苦笑，「至少我用手動方式學到了很多底層細節。現在用工具，我知道工具在做什麼，遇到問題也知道從哪裡查。」
+
+他在公司 wiki 的 KubeVirt 頁面最頂端加了一條：**「如果你是從 VMware 遷移的，請先閱讀 VMware to KubeVirt 遷移指南，以及 Forklift 工具說明。」**
+
+---
+
+> ### 📚 去這裡深入了解
+> 如果你的遷移來源是 VMware，這裡有專門的路線：
+>
+> - [VMware 到 KubeVirt 遷移指南](/kubevirt/guides/vmware-to-kubevirt) — VMware 和 KubeVirt 概念的對照表、VMDK 格式轉換的方法、常見的相容性問題與解法、Forklift 工具的使用流程
+>
+> 讀完後，你應該能規劃一個系統性的 VMware to KubeVirt 遷移計畫，而不是一台一台用手動方式硬搬。
+
+---
+
+## 第二十一章：「我想看看 KubeVirt 的原始碼」
+
+遷移計畫正式結束後的某個下午，阿明發現了一個奇怪的問題。
+
+在特定情況下，VMI 的狀態有時候會卡在 `Scheduling` 超過預期的時間，但最後還是能起來。這不是 bug，但他覺得哪裡怪怪的，文件上沒有解釋清楚。
+
+他決定去看原始碼。
+
+他以前覺得 Go 語言的大型專案很難看懂，但上手之後發現 KubeVirt 的程式碼結構其實很清晰：
+
+```
+pkg/
+  virt-api/      → API 和 Webhook 的實作
+  virt-controller/ → 各種 Reconcile loop
+  virt-handler/  → 節點層邏輯
+  virt-launcher/ → QEMU 管理邏輯
+  virtctl/       → CLI 工具
+```
+
+他找到了 `virt-controller/watch/` 目錄，裡面有針對每種資源的 controller，`virtualmachine.go` 就是 VM reconcile loop 的入口。他一行一行讀，找到了那個 `Scheduling` 狀態的邏輯——原來是當 virt-handler 還沒有在目標 Node 準備好（`virt-handler` 的 annotation 還沒更新），controller 就會暫停，等待一個 backoff 重試。那個「卡住」其實是正常的等待機制，只是 timeout 設得比他預期的長。
+
+謎題解開了。但更重要的是，他發現自己**看得懂 KubeVirt 的程式碼了**。
+
+他開了一個 KubeVirt 的 GitHub issue，描述了那個 timeout 設定可能讓人困惑的問題，建議加一個更清楚的 event message。maintainer 回覆了：「好建議，歡迎送 PR。」
+
+阿明盯著那行字。*歡迎送 PR。*
+
+他從沒想過自己有一天會對一個 CNCF 專案送 PR。但他現在的理解程度——從概念到實作，從 API 到原始碼——已經足夠讓他做這件事了。
+
+他打開 VS Code，clone 了 KubeVirt 的 repo，開始設定開發環境。
+
+---
+
+> ### 📚 去這裡深入了解
+> 如果你想更深入地理解 KubeVirt，甚至參與貢獻，這裡是起點：
+>
+> - [程式碼架構導覽](/kubevirt/dev-guide/code-structure) — 整個 repo 的目錄結構解說、各個套件的職責分工、如何快速定位某個功能的實作位置
+> - [開發環境設置](/kubevirt/dev-guide/getting-started) — 如何在本機跑 KubeVirt 開發環境、測試的方法、如何準備你的第一個 PR
+>
+> 讀完後，你應該能在 KubeVirt 的原始碼裡找到你想找的功能，甚至開始貢獻。
+
+---
+
+## 尾聲：阿明的一年後
+
+一年後，阿明的評估報告早已通過，所有 VM 都已在生產環境的 KubeVirt 上穩定運行——包括那台最難搞的 Windows Server、那幾台掛著 SR-IOV 網卡的 DPDK 應用、ML 團隊的 GPU 訓練工作站、以及 QA 用 VM Pool 拉起來的壓測叢集。
 
 他坐在同一張椅子上，喝著同一個位置倒的咖啡，但已經是另一個人了。
 
 那封改變他命運的信，現在讀起來感覺很輕。「把 VMware VM 搬進 K8s」——他當時覺得這是一個謎，現在它只是他日常工作的一部分。
 
-六個月來他真正學到的，不只是 KubeVirt 的 API 和指令，而是一種**把陌生系統拆開來看的方法**：先找到概念模型（VM vs VMI），再追蹤資料流（apply 之後發生什麼），然後一個一個解決具體的問題——網路、儲存、效能、可觀測性、備份、升版、Windows。這個方法論不只適用於 KubeVirt，也適用於下一個他從沒用過的技術。
+一年來他真正學到的，不只是 KubeVirt 的 API 和指令，而是一種**把陌生系統拆開來看的方法**：先找到概念模型，再追蹤資料流，然後一個一個解決具體的問題。這個方法論不只適用於 KubeVirt，也適用於下一個他從沒用過的技術。
 
 現在的他能做到的事：
-- 用 `kubectl` 和 `virtctl` 管理幾十台 VM，VM 的 lifecycle 管理已接進公司現有的 GitOps pipeline
-- 為不同需求的 VM 設計不同的網路策略：普通服務走 masquerade，需要直接存取的走 bridge + Multus
-- 規劃儲存方案，讓需要 live migration 的 VM 使用 RWX StorageClass，讓測試 VM 走 containerDisk
-- 針對計算密集的 VM 開 CPU Pinning，把 virtio 設備選型寫進 production checklist，讓效能問題在上線前就解決
-- 有 Prometheus + Grafana 全覆蓋的 VM 監控，凌晨 2 點的故障現在幾分鐘內就知道——不再是最後一個知道的人
-- 定期對關鍵 VM 做 snapshot，可以隨時把資料庫 VM clone 成 staging 環境給 QA 用
-- 在 KubeVirt 升版時，靠 WorkloadUpdateController 讓大部分 VM 靜靜地 live migrate 到新版本，業務無感
-- 獨立完成 Windows Server VM 的遷移，從 virtio-win 驅動到 cloudbase-init，每個坑都有 runbook
 
-他最近開始幫新進的同事介紹 KubeVirt。他發現最難解釋的不是技術細節，而是最初的那個問題：「為什麼要把 VM 跑在 K8s 上？」
+**基礎管理**
+- 用 `kubectl` 和 `virtctl` 管理幾十台 VM，lifecycle 管理已接進公司現有的 GitOps pipeline
+- 用 Instancetype 和 Preference 定義公司標準規格，讓使用者三行 YAML 就能開 VM
+- 用 VM Pool 讓 QA 在幾分鐘內拉起 20-50 台相同規格的測試 VM
 
-他現在的答案是：「因為你不想管兩套東西。當 VM 能用 `kubectl` 管、能用 Helm chart 部署、能接進你現有的監控和告警——那它就真的成為 K8s 生態的一部分了，而不是一個旁邊的孤島。」
+**網路與效能**
+- 為不同需求的 VM 設計網路策略：普通服務走 masquerade，需要直接存取走 bridge + Multus，極致效能的 DPDK 應用走 SR-IOV
+- 針對計算密集的 VM 開 CPU Pinning、NUMA Topology Policy，把效能問題在上線前就解決
+- 替 ML 團隊的訓練 VM 配置 GPU Passthrough，讓 A100 直通給 QEMU，成本降到雲端的零頭
+
+**儲存與備份**
+- 規劃儲存方案：需要 live migration 的 VM 用 RWX StorageClass，測試 VM 走 containerDisk，緊急擴容用 Hotplug
+- 定期對關鍵 VM 做 VirtualMachineSnapshot，可以隨時把資料庫 VM clone 成 staging 環境
+
+**可觀測性與維運**
+- 有 Prometheus + Grafana 全覆蓋的 VM 監控，凌晨 2 點的故障幾分鐘內就知道
+- 有一份按問題類型整理的 runbook，每個曾踩過的坑都有對應的排查步驟
+- 在 KubeVirt 升版時，靠 WorkloadUpdateController 讓 VM 靜靜地 live migrate，業務無感
+
+**安全與合規**
+- 能用技術語言跟資安團隊解釋 virt-launcher 的 capability 需求和 seccomp 緩解措施
+- 知道 KubeVirt 的安全邊界在哪裡，能評估什麼需要額外加固
+
+**進階功能**
+- 透過 Hook Sidecar 替 VM 注入自訂的生命週期邏輯
+- 用 Forklift 系統性地處理 VMware 遷移，而不是一台一台手動搬
+- 看得懂 KubeVirt 的原始碼，能在 issue tracker 上提出有意義的改善建議
+
+他最近把公司一個新進的工程師交給他帶。那個工程師問：「KubeVirt 要從哪裡開始學？」
+
+阿明想了一秒，說：「先讀我整理的這份文件。你會遇到阿明——他跟你一樣，第一次面對 KubeVirt，什麼都不懂，然後一個問題、一個問題地把它搞懂了。」
+
+他沒說那個阿明就是他自己。
 
 站在終點回頭看起點，他覺得學習的路其實沒有那麼長——只是一開始不知道地圖在哪裡。
 
-他打開 Slack，給那位六個月前寄信給他的 VP Engineering 回了一封短信：「Q3 目標完成。全部 VM 已遷移至 KubeVirt，維運成本降低估計達 40%，詳見附件報告。」
+他打開 Slack，給那位一年前寄信給他的 VP Engineering 回了一封短信：「遷移計畫一年前完成。目前 KubeVirt 平台已支援 Linux / Windows / GPU / DPDK 工作負載，下季準備開放給更多業務部門使用。附件是這一年的回顧報告。」
 
 他按下送出，端起那杯終於不再涼掉的咖啡，喝了一口。
+
+在角落，他的 GitHub notifications 頁面有一條新訊息——KubeVirt maintainer 剛剛 review 了他的 PR。
+
+他微笑了。
 
 ---
 
