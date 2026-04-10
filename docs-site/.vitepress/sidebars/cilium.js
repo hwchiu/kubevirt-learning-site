@@ -26,6 +26,13 @@ export default [
     text: '🔐 安全與政策',
     items: [
       { text: '網路政策 (NetworkPolicy)', link: '/cilium/policy' },
+      { text: '加密傳輸 (WireGuard & IPSec)', link: '/cilium/encryption' },
+    ]
+  },
+  {
+    text: '📋 參考資料',
+    items: [
+      { text: 'CRD 規格完整參考', link: '/cilium/crd-reference' },
     ]
   },
   {
