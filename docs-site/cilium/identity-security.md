@@ -397,7 +397,7 @@ GetEnvoyHTTPRules(l7Rules *api.L7Rules) (*cilium.HttpNetworkPolicyRules, bool)
 ```
 
 - 返回值的 `bool` 表示規則是否支援短路求值
-- 若任何規則有副作用（如 header 修改），必須評估全部規則，`bool` 返回 `false`
+- 若任何規則有副作用（side-effects，例如修改 request/response header、記錄 access log 等非純粹 allow/deny 判斷的操作），必須評估全部規則後才能確定最終結果，此時 `bool` 返回 `false`
 
 ::: info 相關章節
 - [系統架構總覽](./architecture.md) — Cilium Agent 的 Hive 元件結構與啟動流程

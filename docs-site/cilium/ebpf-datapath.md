@@ -92,7 +92,7 @@ flowchart TD
 
 - **`IS_BPF_LXC 1`**：標記本程式為 container endpoint 程式，用於條件編譯
 - **`EFFECTIVE_EP_ID LXC_ID`**：Endpoint ID 對應到容器的 LXC ID（來自 `config/lxc.h`）
-- **`USE_LOOPBACK_LB 1`**：啟用迴路負載均衡，確保叢集內 ClusterIP 流量使用 Random 後端選擇
+- **`USE_LOOPBACK_LB 1`**：啟用迴路負載均衡（loopback LB）——封包在容器本地的 veth 介面上即完成 DNAT，後端 Pod 回應封包直接走 CT 還原，無需經過實體網卡往返
 
 ### LB 後端選擇策略覆寫
 
