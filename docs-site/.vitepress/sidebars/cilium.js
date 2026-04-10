@@ -20,4 +20,16 @@ export default [
       { text: '負載均衡與 kube-proxy 替代', link: '/cilium/load-balancing' },
     ]
   },
+  {
+    text: '🔐 安全與政策',
+    items: [
+      { text: '網路政策 (NetworkPolicy)', link: '/cilium/policy' },
+    ]
+  },
+  {
+    text: '🔭 可觀測性',
+    items: [
+      { text: 'Hubble 可觀測性平台', link: '/cilium/hubble' },
+    ]
+  },
 ]
