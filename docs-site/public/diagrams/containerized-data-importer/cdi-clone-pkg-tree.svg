@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 440" width="860" height="440">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="860" height="440" fill="#ffffff"/>
+  <rect x="24" y="20" width="812" height="54" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="38" y="40" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#bfdbfe" font-weight="600" letter-spacing="0.5">DIRECTORY</text>
+  <text x="38" y="62" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">pkg/controller/clone/</text>
+  <rect x="24" y="76" width="812" height="35" rx="5" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.2"/>
+  <text x="34" y="99" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" fill="#9ca3af">├──</text>
+  <text x="78" y="99" font-family="'SF Mono', 'Fira Mono', monospace" font-size="13" font-weight="700" fill="#bfdbfe">planner.go</text>
+  <text x="230" y="99" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">策略選擇規劃器，ChooseStrategy() 方法</text>
+  <rect x="24" y="114" width="812" height="35" rx="5" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.2"/>
+  <text x="34" y="137" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" fill="#9ca3af">├──</text>
+  <text x="78" y="137" font-family="'SF Mono', 'Fira Mono', monospace" font-size="13" font-weight="500" fill="#111827">csi-clone.go</text>
+  <text x="230" y="137" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">CSI Volume Clone 策略</text>
+  <rect x="24" y="152" width="812" height="35" rx="5" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.2"/>
+  <text x="34" y="175" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" fill="#9ca3af">├──</text>
+  <text x="78" y="175" font-family="'SF Mono', 'Fira Mono', monospace" font-size="13" font-weight="500" fill="#111827">snap-clone.go</text>
+  <text x="230" y="175" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">Snapshot-based Clone 策略</text>
+  <rect x="24" y="190" width="812" height="35" rx="5" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.2"/>
+  <text x="34" y="213" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" fill="#9ca3af">├──</text>
+  <text x="78" y="213" font-family="'SF Mono', 'Fira Mono', monospace" font-size="13" font-weight="500" fill="#111827">host-clone.go</text>
+  <text x="230" y="213" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">Host-Assisted Clone（fallback）</text>
+  <rect x="24" y="228" width="812" height="35" rx="5" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.2"/>
+  <text x="34" y="251" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" fill="#9ca3af">├──</text>
+  <text x="78" y="251" font-family="'SF Mono', 'Fira Mono', monospace" font-size="13" font-weight="500" fill="#111827">common.go</text>
+  <text x="230" y="251" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">通用工具，GetGlobalCloneStrategyOverride()</text>
+  <rect x="24" y="266" width="812" height="35" rx="5" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.2"/>
+  <text x="34" y="289" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" fill="#9ca3af">├──</text>
+  <text x="78" y="289" font-family="'SF Mono', 'Fira Mono', monospace" font-size="13" font-weight="500" fill="#111827">prep-claim.go</text>
+  <text x="230" y="289" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">PVC 準備邏輯</text>
+  <rect x="24" y="304" width="812" height="35" rx="5" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.2"/>
+  <text x="34" y="327" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" fill="#9ca3af">├──</text>
+  <text x="78" y="327" font-family="'SF Mono', 'Fira Mono', monospace" font-size="13" font-weight="500" fill="#111827">snapshot.go</text>
+  <text x="230" y="327" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">Snapshot 處理</text>
+  <rect x="24" y="342" width="812" height="35" rx="5" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.2"/>
+  <text x="34" y="365" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" fill="#9ca3af">├──</text>
+  <text x="78" y="365" font-family="'SF Mono', 'Fira Mono', monospace" font-size="13" font-weight="500" fill="#111827">rebind.go</text>
+  <text x="230" y="365" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">Claim 重新綁定邏輯</text>
+  <rect x="24" y="380" width="812" height="35" rx="5" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.2"/>
+  <text x="34" y="403" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" fill="#9ca3af">└──</text>
+  <text x="78" y="403" font-family="'SF Mono', 'Fira Mono', monospace" font-size="13" font-weight="500" fill="#111827">types.go</text>
+  <text x="230" y="403" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">策略常數定義</text>
+</svg>

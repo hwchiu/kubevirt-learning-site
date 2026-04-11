@@ -1,0 +1,194 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 1261" width="980" height="1261">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="980" height="1261" fill="#ffffff"/>
+  <rect x="24" y="24" width="932" height="56" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="38" y="42" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#c7d2fe" font-weight="600" letter-spacing="0.5">PROJECT ROOT</text>
+  <text x="38" y="68" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#111827">forklift/</text>
+  <text x="76" y="104" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#9ca3af" font-weight="600" letter-spacing="0.5">DIRECTORY / FILE</text>
+  <text x="298" y="104" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#9ca3af" font-weight="600" letter-spacing="0.5">DESCRIPTION</text>
+  <rect x="24" y="112" width="932" height="32" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="34" y="133" font-family="'SF Mono', monospace" font-size="12" fill="#9ca3af">├──</text>
+  <text x="76" y="133" font-family="'SF Mono', 'Fira Mono', monospace" font-size="13.5" font-weight="700" fill="#111827">cmd/</text>
+  <text x="298" y="133" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">所有 Binary 入口點（14 個）</text>
+  <rect x="48" y="146" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="164" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="164" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="164" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">forklift-controller/</text>
+  <text x="298" y="164" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">核心控制器 main.go</text>
+  <rect x="48" y="173" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="191" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="191" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="191" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">forklift-api/</text>
+  <text x="298" y="191" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">REST API + Webhooks</text>
+  <rect x="48" y="200" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="218" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="218" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="218" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">virt-v2v/</text>
+  <text x="298" y="218" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">Guest OS 轉換引擎</text>
+  <rect x="48" y="227" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="245" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="245" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="245" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">virt-v2v-monitor/</text>
+  <text x="298" y="245" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">轉換進度監控</text>
+  <rect x="48" y="254" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="272" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="272" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="272" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">populator-controller/</text>
+  <text x="298" y="272" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">Volume Populator 總控</text>
+  <rect x="48" y="281" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="299" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="299" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="299" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">ovirt-populator/</text>
+  <text x="298" y="299" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">oVirt 磁碟下載</text>
+  <rect x="48" y="308" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="326" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="326" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="326" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">openstack-populator/</text>
+  <text x="298" y="326" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">OpenStack Image 下載</text>
+  <rect x="48" y="335" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="353" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="353" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="353" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">vsphere-copy-offload-populator/</text>
+  <text x="298" y="353" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">vSphere XCOPY</text>
+  <rect x="48" y="362" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="380" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="380" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="380" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">ova-provider-server/</text>
+  <text x="298" y="380" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">OVA Inventory API</text>
+  <rect x="48" y="389" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="407" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="407" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="407" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">ova-proxy/</text>
+  <text x="298" y="407" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">OVA 反向代理</text>
+  <rect x="48" y="416" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="434" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="434" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="434" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">hyperv-provider-server/</text>
+  <text x="298" y="434" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">Hyper-V 驗證服務</text>
+  <rect x="48" y="443" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="461" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="461" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="461" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">image-converter/</text>
+  <text x="298" y="461" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">qemu-img 格式轉換</text>
+  <rect x="48" y="470" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="488" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="488" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="488" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">kubectl-mtv/</text>
+  <text x="298" y="488" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">kubectl CLI 外掛</text>
+  <rect x="48" y="497" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="515" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="515" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">└──</text>
+  <text x="104" y="515" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">provider-common/</text>
+  <text x="298" y="515" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">Provider 共用函式庫</text>
+  <rect x="24" y="528" width="932" height="32" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="34" y="549" font-family="'SF Mono', monospace" font-size="12" fill="#9ca3af">├──</text>
+  <text x="76" y="549" font-family="'SF Mono', 'Fira Mono', monospace" font-size="13.5" font-weight="700" fill="#111827">pkg/</text>
+  <text x="298" y="549" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">核心邏輯</text>
+  <rect x="48" y="562" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="580" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="580" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="580" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">apis/</text>
+  <text x="298" y="580" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">CRD 型別定義（Plan, Migration, Provider...）</text>
+  <rect x="48" y="589" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="607" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="607" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="607" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">controller/</text>
+  <text x="298" y="607" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">所有控制器實作（plan, migration, provider...）</text>
+  <rect x="48" y="616" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="634" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="634" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="634" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">lib/itinerary/</text>
+  <text x="298" y="634" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">Itinerary 狀態機核心（Pipeline + Predicate）</text>
+  <rect x="48" y="643" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="661" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="661" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="661" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">lib-volume-populator/</text>
+  <text x="298" y="661" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">Volume Populator 框架</text>
+  <rect x="48" y="670" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="688" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="688" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="688" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">forklift-api/</text>
+  <text x="298" y="688" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">REST API 與 Webhook 實作</text>
+  <rect x="48" y="697" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="715" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="715" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="715" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">provider/</text>
+  <text x="298" y="715" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">各 Provider Adapter 實作</text>
+  <rect x="48" y="724" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="742" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="742" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="742" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">webhook/</text>
+  <text x="298" y="742" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">Webhook Handler</text>
+  <rect x="48" y="751" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="769" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="769" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="769" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">settings/</text>
+  <text x="298" y="769" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">全域設定</text>
+  <rect x="48" y="778" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="796" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="796" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">└──</text>
+  <text x="104" y="796" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">metrics/</text>
+  <text x="298" y="796" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">Prometheus 指標</text>
+  <rect x="24" y="809" width="932" height="32" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="34" y="830" font-family="'SF Mono', monospace" font-size="12" fill="#9ca3af">├──</text>
+  <text x="76" y="830" font-family="'SF Mono', 'Fira Mono', monospace" font-size="13.5" font-weight="700" fill="#111827">build/</text>
+  <text x="298" y="830" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">Containerfile（16 個元件 × upstream/downstream）</text>
+  <rect x="48" y="843" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="861" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="861" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="861" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">forklift-controller/</text>
+  <text x="298" y="861" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">控制器映像</text>
+  <rect x="48" y="870" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="888" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="888" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="888" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">forklift-api/</text>
+  <text x="298" y="888" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">API 映像</text>
+  <rect x="48" y="897" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="915" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="915" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="915" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">virt-v2v/</text>
+  <text x="298" y="915" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">V2V 映像（含 upstream/fedora/xfs 變體）</text>
+  <rect x="48" y="924" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="942" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="942" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="942" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">forklift-operator/</text>
+  <text x="298" y="942" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">Operator 映像（Ansible-based）</text>
+  <rect x="48" y="951" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="969" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="969" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">├──</text>
+  <text x="104" y="969" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">forklift-operator-bundle/</text>
+  <text x="298" y="969" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">OLM Bundle</text>
+  <rect x="48" y="978" width="908" height="26" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.1"/>
+  <text x="54" y="996" font-family="'SF Mono', monospace" font-size="10.5" fill="#d1d5db">│</text>
+  <text x="68" y="996" font-family="'SF Mono', monospace" font-size="10.5" fill="#9ca3af">└──</text>
+  <text x="104" y="996" font-family="'SF Mono', 'Fira Mono', monospace" font-size="12" font-weight="500" fill="#111827">forklift-operator-index/</text>
+  <text x="298" y="996" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">OLM Catalog Index</text>
+  <rect x="24" y="1009" width="932" height="32" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="34" y="1030" font-family="'SF Mono', monospace" font-size="12" fill="#9ca3af">├──</text>
+  <text x="76" y="1030" font-family="'SF Mono', 'Fira Mono', monospace" font-size="13.5" font-weight="700" fill="#111827">operator/</text>
+  <text x="298" y="1030" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">Ansible Operator 角色與 Playbook</text>
+  <rect x="24" y="1047" width="932" height="32" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="34" y="1068" font-family="'SF Mono', monospace" font-size="12" fill="#9ca3af">├──</text>
+  <text x="76" y="1068" font-family="'SF Mono', 'Fira Mono', monospace" font-size="13.5" font-weight="700" fill="#111827">validation/</text>
+  <text x="298" y="1068" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">OPA（Open Policy Agent）驗證策略</text>
+  <rect x="24" y="1085" width="932" height="32" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="34" y="1106" font-family="'SF Mono', monospace" font-size="12" fill="#9ca3af">├──</text>
+  <text x="76" y="1106" font-family="'SF Mono', 'Fira Mono', monospace" font-size="13.5" font-weight="700" fill="#111827">tests/</text>
+  <text x="298" y="1106" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">E2E 測試（Ginkgo + Gomega）</text>
+  <rect x="24" y="1123" width="932" height="32" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="34" y="1144" font-family="'SF Mono', monospace" font-size="12" fill="#9ca3af">├──</text>
+  <text x="76" y="1144" font-family="'SF Mono', 'Fira Mono', monospace" font-size="13.5" font-weight="700" fill="#111827">hack/</text>
+  <text x="298" y="1144" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">開發輔助腳本</text>
+  <rect x="24" y="1161" width="932" height="32" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="34" y="1182" font-family="'SF Mono', monospace" font-size="12" fill="#9ca3af">├──</text>
+  <text x="76" y="1182" font-family="'SF Mono', 'Fira Mono', monospace" font-size="13.5" font-weight="700" fill="#111827">Makefile</text>
+  <text x="298" y="1182" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">建置入口（CI、映像建置、部署）</text>
+  <rect x="24" y="1199" width="932" height="32" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="34" y="1220" font-family="'SF Mono', monospace" font-size="12" fill="#9ca3af">└──</text>
+  <text x="76" y="1220" font-family="'SF Mono', 'Fira Mono', monospace" font-size="13.5" font-weight="700" fill="#111827">vendor/</text>
+  <text x="298" y="1220" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">vendored 依賴</text>
+</svg>
