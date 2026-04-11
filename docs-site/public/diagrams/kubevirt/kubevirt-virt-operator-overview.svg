@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" width="960" height="500">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow2" markerWidth="9" markerHeight="7" refX="0.5" refY="3.5" orient="auto-start-reverse">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="960" height="500" fill="#ffffff"/>
+  <text x="480" y="22" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280" letter-spacing="0.5">VIRT-OPERATOR — 元件概觀</text>
+  <rect x="330" y="38" width="300" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="64" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">KubeVirt CR</text>
+  <text x="480" y="82" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">使用者建立</text>
+  <line x1="480" y1="82" x2="480" y2="110" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="80" y="110" width="800" height="290" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="92" y="126" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" fill="#c7d2fe" letter-spacing="0.5">VIRT-OPERATOR</text>
+  <text x="480" y="138" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">監聽 KubeVirt CR spec 變更，建立/更新以下資源</text>
+  <rect x="110" y="155" width="150" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="185" y="181" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">CRDs</text>
+  <text x="185" y="199" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">所有 KubeVirt CRD</text>
+  <rect x="280" y="155" width="150" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="355" y="181" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">RBAC</text>
+  <text x="355" y="199" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">ServiceAccount / Role</text>
+  <rect x="450" y="155" width="170" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="535" y="181" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">virt-api Deployment</text>
+  <rect x="640" y="155" width="200" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="740" y="181" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">virt-controller Dep.</text>
+  <rect x="110" y="225" width="170" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="195" y="251" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">virt-handler DaemonSet</text>
+  <rect x="300" y="225" width="150" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="375" y="251" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">Services</text>
+  <text x="375" y="269" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">Webhooks</text>
+  <rect x="470" y="225" width="150" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="545" y="251" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">TLS Secrets</text>
+  <rect x="640" y="225" width="200" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="740" y="251" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">PrometheusRule</text>
+  <text x="740" y="269" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">ServiceMonitor</text>
+  <line x1="480" y1="400" x2="480" y2="428" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="220" y="428" width="520" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="454" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">更新 KubeVirt CR Status</text>
+  <text x="480" y="472" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">Phase: Deploying → Deployed</text>
+</svg>

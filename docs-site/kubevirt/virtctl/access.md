@@ -124,11 +124,7 @@ virtctl vnc my-vm
 
 ### virtctl vnc 工作原理
 
-```
-virtctl vnc → kube-apiserver (WebSocket) → virt-api → VMI → QEMU VNC Server (本地埠)
-     │
-     └→ 本地 VNC Viewer 連線到 WebSocket → VNC 橋接
-```
+![virtctl vnc 工作流程](/diagrams/kubevirt/kubevirt-virtctl-vnc-flow.png)
 
 `virtctl vnc` 的工作流程：
 1. 與 kube-apiserver 建立 WebSocket 連線

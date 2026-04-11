@@ -12,17 +12,7 @@ CPU Pinning 將虛擬 CPU（vCPU）綁定到特定的物理 CPU 核心，避免 
 
 **原理說明：**
 
-```
-未啟用 CPU Pinning：                    啟用 CPU Pinning：
-┌─────────────────────────┐           ┌─────────────────────────┐
-│ Physical CPU 0  CPU 1   │           │ Physical CPU 0  CPU 1   │
-│   ↕     ↕     ↕     ↕   │           │   ║           ║         │
-│ vCPU 0 vCPU 1（隨機調度）│           │ vCPU 0      vCPU 1     │
-│                         │           │  （固定綁定）            │
-└─────────────────────────┘           └─────────────────────────┘
-  → context switch 頻繁                → cache 親和性最佳
-  → L1/L2 cache 失效                  → 延遲更低、更穩定
-```
+![CPU Pinning 效果比較](/diagrams/kubevirt/kubevirt-cpu-pinning.png)
 
 **配置方式：**
 

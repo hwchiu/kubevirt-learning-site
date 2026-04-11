@@ -165,55 +165,7 @@ hyperv.Add(mgr)     // Hyper-V Provider 控制器
 
 ## 4. 目錄結構
 
-```
-forklift/
-├── cmd/                          # 所有 Binary 入口點（14 個）
-│   ├── forklift-controller/      #   核心控制器 main.go
-│   ├── forklift-api/             #   REST API + Webhooks
-│   ├── virt-v2v/                 #   Guest OS 轉換引擎
-│   ├── virt-v2v-monitor/         #   轉換進度監控
-│   ├── populator-controller/     #   Volume Populator 總控
-│   ├── ovirt-populator/          #   oVirt 磁碟下載
-│   ├── openstack-populator/      #   OpenStack Image 下載
-│   ├── vsphere-copy-offload-populator/ # vSphere XCOPY
-│   ├── ova-provider-server/      #   OVA Inventory API
-│   ├── ova-proxy/                #   OVA 反向代理
-│   ├── hyperv-provider-server/   #   Hyper-V 驗證服務
-│   ├── image-converter/          #   qemu-img 格式轉換
-│   ├── kubectl-mtv/              #   kubectl CLI 外掛
-│   └── provider-common/          #   Provider 共用函式庫
-├── pkg/                          # 核心邏輯
-│   ├── apis/                     #   CRD 型別定義（Plan, Migration, Provider...）
-│   ├── controller/               #   所有控制器實作
-│   │   ├── plan/                 #     Plan Controller + Migrator
-│   │   │   └── migrator/         #       base/ (Cold/Warm) + ocp/ (Live)
-│   │   ├── migration/            #     Migration Controller
-│   │   ├── provider/             #     Provider Inventory Controller
-│   │   └── ...                   #     hook, host, map/, ova, hyperv
-│   ├── lib/                      #   共用函式庫
-│   │   └── itinerary/            #     Itinerary 狀態機核心（Pipeline + Predicate）
-│   ├── lib-volume-populator/     #   Volume Populator 框架
-│   ├── forklift-api/             #   REST API 與 Webhook 實作
-│   ├── provider/                 #   各 Provider Adapter 實作
-│   ├── webhook/                  #   Webhook Handler
-│   ├── settings/                 #   全域設定
-│   └── metrics/                  #   Prometheus 指標
-├── build/                        # Containerfile（16 個元件 × upstream/downstream）
-│   ├── forklift-controller/      #   控制器映像
-│   ├── forklift-api/             #   API 映像
-│   ├── virt-v2v/                 #   V2V 映像（含 upstream/fedora/xfs 變體）
-│   ├── forklift-operator/        #   Operator 映像（Ansible-based）
-│   ├── forklift-operator-bundle/ #   OLM Bundle
-│   ├── forklift-operator-index/  #   OLM Catalog Index
-│   └── ...                       #   其餘 Populator / Provider 映像
-├── operator/                     # Ansible Operator 角色與 Playbook
-├── validation/                   # OPA（Open Policy Agent）驗證策略
-├── tests/                        # E2E 測試（Ginkgo + Gomega）
-├── hack/                         # 開發輔助腳本
-├── Makefile                      # 建置入口（CI、映像建置、部署）
-├── go.mod / go.sum               # Go Module 依賴
-└── vendor/                       # vendored 依賴
-```
+![Forklift 專案目錄結構](/diagrams/forklift/forklift-project-tree.png)
 
 ---
 

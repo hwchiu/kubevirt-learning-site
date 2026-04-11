@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 579" width="960" height="579">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow2" markerWidth="9" markerHeight="7" refX="0.5" refY="3.5" orient="auto-start-reverse">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="960" height="579" fill="#ffffff"/>
+  <text x="480" y="22" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280" letter-spacing="0.5">VIRT-OPERATOR — 升級流程</text>
+  <rect x="160" y="45" width="640" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="71" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">1. virt-operator 偵測 KubeVirt CR 變更</text>
+  <line x1="480" y1="89" x2="480" y2="107" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="160" y="107" width="640" height="62" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="133" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">2. 載入新版本 Install Strategy</text>
+  <text x="480" y="151" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">以 ConfigMap 形式存儲</text>
+  <line x1="480" y1="169" x2="480" y2="187" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="160" y="187" width="640" height="62" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="213" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">3. 滾動更新 virt-api Deployment</text>
+  <text x="480" y="231" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">等待新 Pod Ready</text>
+  <line x1="480" y1="249" x2="480" y2="267" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="160" y="267" width="640" height="62" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="293" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">4. 滾動更新 virt-controller Deployment</text>
+  <text x="480" y="311" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">leader election 自動切換</text>
+  <line x1="480" y1="329" x2="480" y2="347" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="160" y="347" width="640" height="62" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="373" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">5. 更新 virt-handler DaemonSet</text>
+  <text x="480" y="391" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">節點逐一更新</text>
+  <line x1="480" y1="409" x2="480" y2="427" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="160" y="427" width="640" height="62" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="453" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">6. 根據 workloadUpdateStrategy 更新執行中 VM</text>
+  <text x="480" y="471" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">LiveMigrate / Evict</text>
+  <line x1="480" y1="489" x2="480" y2="507" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="160" y="507" width="640" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="533" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">7. 更新 KubeVirt CR status.phase → Deployed</text>
+</svg>

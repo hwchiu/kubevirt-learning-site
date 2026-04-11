@@ -7,24 +7,57 @@
       "analyzed_date": "2026-04-04",
       "pages": {
         "architecture": {
-          "source_paths": ["cmd/", "pkg/virt-operator/", "pkg/virt-api/", "pkg/virt-controller/", "pkg/virt-handler/", "pkg/virt-launcher/"],
-          "doc_files": ["docs-site/kubevirt/architecture/"]
+          "source_paths": [
+            "cmd/",
+            "pkg/virt-operator/",
+            "pkg/virt-api/",
+            "pkg/virt-controller/",
+            "pkg/virt-handler/",
+            "pkg/virt-launcher/"
+          ],
+          "doc_files": [
+            "docs-site/kubevirt/architecture/"
+          ]
         },
         "core-components": {
-          "source_paths": ["pkg/virt-operator/", "pkg/virt-api/", "pkg/virt-controller/", "pkg/virt-handler/", "pkg/virt-launcher/"],
-          "doc_files": ["docs-site/kubevirt/components/"]
+          "source_paths": [
+            "pkg/virt-operator/",
+            "pkg/virt-api/",
+            "pkg/virt-controller/",
+            "pkg/virt-handler/",
+            "pkg/virt-launcher/"
+          ],
+          "doc_files": [
+            "docs-site/kubevirt/components/"
+          ]
         },
         "networking": {
-          "source_paths": ["pkg/network/", "pkg/virt-launcher/virtwrap/network/"],
-          "doc_files": ["docs-site/kubevirt/networking/"]
+          "source_paths": [
+            "pkg/network/",
+            "pkg/virt-launcher/virtwrap/network/"
+          ],
+          "doc_files": [
+            "docs-site/kubevirt/networking/"
+          ]
         },
         "storage": {
-          "source_paths": ["pkg/storage/", "pkg/container-disk/", "pkg/hotplug-disk/"],
-          "doc_files": ["docs-site/kubevirt/storage/"]
+          "source_paths": [
+            "pkg/storage/",
+            "pkg/container-disk/",
+            "pkg/hotplug-disk/"
+          ],
+          "doc_files": [
+            "docs-site/kubevirt/storage/"
+          ]
         },
         "api-resources": {
-          "source_paths": ["staging/src/kubevirt.io/api/", "pkg/virt-api/webhooks/"],
-          "doc_files": ["docs-site/kubevirt/api-resources/"]
+          "source_paths": [
+            "staging/src/kubevirt.io/api/",
+            "pkg/virt-api/webhooks/"
+          ],
+          "doc_files": [
+            "docs-site/kubevirt/api-resources/"
+          ]
         }
       }
     },
@@ -34,20 +67,46 @@
       "analyzed_date": "2026-04-04",
       "pages": {
         "architecture": {
-          "source_paths": ["cmd/", "pkg/operator/", "pkg/controller/"],
-          "doc_files": ["docs-site/containerized-data-importer/architecture.md"]
+          "source_paths": [
+            "cmd/",
+            "pkg/operator/",
+            "pkg/controller/"
+          ],
+          "doc_files": [
+            "docs-site/containerized-data-importer/architecture.md"
+          ]
         },
         "core-features": {
-          "source_paths": ["pkg/importer/", "pkg/uploadserver/", "pkg/clone/", "pkg/image/"],
-          "doc_files": ["docs-site/containerized-data-importer/core-features.md"]
+          "source_paths": [
+            "pkg/importer/",
+            "pkg/uploadserver/",
+            "pkg/clone/",
+            "pkg/image/"
+          ],
+          "doc_files": [
+            "docs-site/containerized-data-importer/core-features.md"
+          ]
         },
         "controllers-api": {
-          "source_paths": ["pkg/controller/", "pkg/apis/", "pkg/operator/"],
-          "doc_files": ["docs-site/containerized-data-importer/controllers-api.md"]
+          "source_paths": [
+            "pkg/controller/",
+            "pkg/apis/",
+            "pkg/operator/"
+          ],
+          "doc_files": [
+            "docs-site/containerized-data-importer/controllers-api.md"
+          ]
         },
         "integration": {
-          "source_paths": ["pkg/monitoring/", "pkg/util/", "pkg/token/", "pkg/uploadserver/"],
-          "doc_files": ["docs-site/containerized-data-importer/integration.md"]
+          "source_paths": [
+            "pkg/monitoring/",
+            "pkg/util/",
+            "pkg/token/",
+            "pkg/uploadserver/"
+          ],
+          "doc_files": [
+            "docs-site/containerized-data-importer/integration.md"
+          ]
         }
       }
     },
@@ -57,20 +116,44 @@
       "analyzed_date": "2026-04-04",
       "pages": {
         "architecture": {
-          "source_paths": ["cmd/", "pkg/", "tools/"],
-          "doc_files": ["docs-site/monitoring/architecture.md"]
+          "source_paths": [
+            "cmd/",
+            "pkg/",
+            "tools/"
+          ],
+          "doc_files": [
+            "docs-site/monitoring/architecture.md"
+          ]
         },
         "core-features": {
-          "source_paths": ["docs/runbooks/", "dashboards/", "pkg/rules/"],
-          "doc_files": ["docs-site/monitoring/core-features.md"]
+          "source_paths": [
+            "docs/runbooks/",
+            "dashboards/",
+            "pkg/rules/"
+          ],
+          "doc_files": [
+            "docs-site/monitoring/core-features.md"
+          ]
         },
         "metrics-alerts": {
-          "source_paths": ["docs/runbooks/", "pkg/rules/", "dashboards/grafana/"],
-          "doc_files": ["docs-site/monitoring/metrics-alerts.md"]
+          "source_paths": [
+            "docs/runbooks/",
+            "pkg/rules/",
+            "dashboards/grafana/"
+          ],
+          "doc_files": [
+            "docs-site/monitoring/metrics-alerts.md"
+          ]
         },
         "integration": {
-          "source_paths": ["tools/", "hack/", "Makefile"],
-          "doc_files": ["docs-site/monitoring/integration.md"]
+          "source_paths": [
+            "tools/",
+            "hack/",
+            "Makefile"
+          ],
+          "doc_files": [
+            "docs-site/monitoring/integration.md"
+          ]
         }
       }
     },
@@ -80,20 +163,42 @@
       "analyzed_date": "2026-04-04",
       "pages": {
         "architecture": {
-          "source_paths": ["_VirtualMachineInstancetype/", "_VirtualMachinePreference/", "tools/"],
-          "doc_files": ["docs-site/common-instancetypes/architecture.md"]
+          "source_paths": [
+            "_VirtualMachineInstancetype/",
+            "_VirtualMachinePreference/",
+            "tools/"
+          ],
+          "doc_files": [
+            "docs-site/common-instancetypes/architecture.md"
+          ]
         },
         "core-features": {
-          "source_paths": ["_VirtualMachineInstancetype/", "_VirtualMachinePreference/"],
-          "doc_files": ["docs-site/common-instancetypes/core-features.md"]
+          "source_paths": [
+            "_VirtualMachineInstancetype/",
+            "_VirtualMachinePreference/"
+          ],
+          "doc_files": [
+            "docs-site/common-instancetypes/core-features.md"
+          ]
         },
         "resource-catalog": {
-          "source_paths": ["_VirtualMachineInstancetype/", "_VirtualMachinePreference/"],
-          "doc_files": ["docs-site/common-instancetypes/resource-catalog.md"]
+          "source_paths": [
+            "_VirtualMachineInstancetype/",
+            "_VirtualMachinePreference/"
+          ],
+          "doc_files": [
+            "docs-site/common-instancetypes/resource-catalog.md"
+          ]
         },
         "integration": {
-          "source_paths": ["tools/", "hack/", "Makefile"],
-          "doc_files": ["docs-site/common-instancetypes/integration.md"]
+          "source_paths": [
+            "tools/",
+            "hack/",
+            "Makefile"
+          ],
+          "doc_files": [
+            "docs-site/common-instancetypes/integration.md"
+          ]
         }
       }
     },
@@ -103,20 +208,45 @@
       "analyzed_date": "2026-04-04",
       "pages": {
         "architecture": {
-          "source_paths": ["cmd/", "controllers/", "api/", "config/"],
-          "doc_files": ["docs-site/node-maintenance-operator/architecture.md"]
+          "source_paths": [
+            "cmd/",
+            "controllers/",
+            "api/",
+            "config/"
+          ],
+          "doc_files": [
+            "docs-site/node-maintenance-operator/architecture.md"
+          ]
         },
         "core-features": {
-          "source_paths": ["controllers/", "pkg/"],
-          "doc_files": ["docs-site/node-maintenance-operator/core-features.md"]
+          "source_paths": [
+            "controllers/",
+            "pkg/"
+          ],
+          "doc_files": [
+            "docs-site/node-maintenance-operator/core-features.md"
+          ]
         },
         "controllers-api": {
-          "source_paths": ["controllers/", "api/", "config/crd/"],
-          "doc_files": ["docs-site/node-maintenance-operator/controllers-api.md"]
+          "source_paths": [
+            "controllers/",
+            "api/",
+            "config/crd/"
+          ],
+          "doc_files": [
+            "docs-site/node-maintenance-operator/controllers-api.md"
+          ]
         },
         "integration": {
-          "source_paths": ["config/", "hack/", "Makefile", "bundle/"],
-          "doc_files": ["docs-site/node-maintenance-operator/integration.md"]
+          "source_paths": [
+            "config/",
+            "hack/",
+            "Makefile",
+            "bundle/"
+          ],
+          "doc_files": [
+            "docs-site/node-maintenance-operator/integration.md"
+          ]
         }
       }
     },
@@ -126,20 +256,46 @@
       "analyzed_date": "2026-04-04",
       "pages": {
         "architecture": {
-          "source_paths": ["cmd/", "pkg/controller/", "pkg/lib/", "operator/"],
-          "doc_files": ["docs-site/forklift/architecture.md"]
+          "source_paths": [
+            "cmd/",
+            "pkg/controller/",
+            "pkg/lib/",
+            "operator/"
+          ],
+          "doc_files": [
+            "docs-site/forklift/architecture.md"
+          ]
         },
         "core-features": {
-          "source_paths": ["pkg/controller/plan/", "pkg/controller/provider/", "virt-v2v/"],
-          "doc_files": ["docs-site/forklift/core-features.md"]
+          "source_paths": [
+            "pkg/controller/plan/",
+            "pkg/controller/provider/",
+            "virt-v2v/"
+          ],
+          "doc_files": [
+            "docs-site/forklift/core-features.md"
+          ]
         },
         "controllers-api": {
-          "source_paths": ["pkg/controller/", "pkg/apis/", "pkg/webhook/", "operator/"],
-          "doc_files": ["docs-site/forklift/controllers-api.md"]
+          "source_paths": [
+            "pkg/controller/",
+            "pkg/apis/",
+            "pkg/webhook/",
+            "operator/"
+          ],
+          "doc_files": [
+            "docs-site/forklift/controllers-api.md"
+          ]
         },
         "integration": {
-          "source_paths": ["pkg/controller/provider/", "pkg/lib/inventory/", "validation/"],
-          "doc_files": ["docs-site/forklift/integration.md"]
+          "source_paths": [
+            "pkg/controller/provider/",
+            "pkg/lib/inventory/",
+            "validation/"
+          ],
+          "doc_files": [
+            "docs-site/forklift/integration.md"
+          ]
         }
       }
     },
@@ -149,57 +305,65 @@
       "analyzed_date": "2026-04-04",
       "pages": {
         "architecture": {
-          "source_paths": ["netbox/netbox/", "netbox/core/", "netbox/utilities/"],
-          "doc_files": ["docs-site/netbox/architecture.md"]
+          "source_paths": [
+            "netbox/netbox/",
+            "netbox/core/",
+            "netbox/utilities/"
+          ],
+          "doc_files": [
+            "docs-site/netbox/architecture.md"
+          ]
         },
         "core-features": {
-          "source_paths": ["netbox/dcim/", "netbox/ipam/", "netbox/circuits/", "netbox/virtualization/", "netbox/wireless/", "netbox/vpn/"],
-          "doc_files": ["docs-site/netbox/core-features.md"]
+          "source_paths": [
+            "netbox/dcim/",
+            "netbox/ipam/",
+            "netbox/circuits/",
+            "netbox/virtualization/",
+            "netbox/wireless/",
+            "netbox/vpn/"
+          ],
+          "doc_files": [
+            "docs-site/netbox/core-features.md"
+          ]
         },
         "data-models": {
-          "source_paths": ["netbox/dcim/models/", "netbox/ipam/models/", "netbox/extras/models/", "netbox/tenancy/models/", "netbox/users/models/", "netbox/circuits/models/", "netbox/virtualization/models/"],
-          "doc_files": ["docs-site/netbox/data-models.md"]
+          "source_paths": [
+            "netbox/dcim/models/",
+            "netbox/ipam/models/",
+            "netbox/extras/models/",
+            "netbox/tenancy/models/",
+            "netbox/users/models/",
+            "netbox/circuits/models/",
+            "netbox/virtualization/models/"
+          ],
+          "doc_files": [
+            "docs-site/netbox/data-models.md"
+          ]
         },
         "api-reference": {
-          "source_paths": ["netbox/netbox/api/", "netbox/dcim/api/", "netbox/ipam/api/", "netbox/extras/api/", "netbox/netbox/graphql/", "netbox/netbox/authentication.py"],
-          "doc_files": ["docs-site/netbox/api-reference.md"]
+          "source_paths": [
+            "netbox/netbox/api/",
+            "netbox/dcim/api/",
+            "netbox/ipam/api/",
+            "netbox/extras/api/",
+            "netbox/netbox/graphql/",
+            "netbox/netbox/authentication.py"
+          ],
+          "doc_files": [
+            "docs-site/netbox/api-reference.md"
+          ]
         },
         "integration": {
-          "source_paths": ["netbox/extras/", "netbox/core/", "netbox/netbox/plugins/", "netbox/netbox/settings.py"],
-          "doc_files": ["docs-site/netbox/integration.md"]
-        }
-      }
-    },
-    "kubernetes": {
-      "repo": "https://github.com/kubernetes/kubernetes",
-      "branch": "master",
-      "analyzed_commit": "6e753bd2b4793152b55ad9cefd3130169fb1a749",
-      "analyzed_date": "2026-04-08",
-      "focus": "PV/PVC storage subsystem",
-      "pages": {
-        "pv-pvc-architecture": {
-          "source_paths": ["staging/src/k8s.io/api/core/v1/types.go", "pkg/controller/volume/persistentvolume/", "pkg/kubelet/volumemanager/", "pkg/volume/"],
-          "doc_files": ["docs-site/kubernetes/pv-pvc-architecture.md"]
-        },
-        "pv-pvc-lifecycle": {
-          "source_paths": ["pkg/controller/volume/persistentvolume/controller.go", "pkg/controller/volume/persistentvolume/binder_controller.go", "pkg/controller/volume/persistentvolume/scheduler_binder.go"],
-          "doc_files": ["docs-site/kubernetes/pv-pvc-lifecycle.md"]
-        },
-        "storageclass-provisioning": {
-          "source_paths": ["pkg/controller/volume/persistentvolume/", "pkg/controller/volume/expand/", "plugin/pkg/admission/storage/"],
-          "doc_files": ["docs-site/kubernetes/storageclass-provisioning.md"]
-        },
-        "csi-integration": {
-          "source_paths": ["pkg/volume/csi/", "staging/src/k8s.io/csi-translation-lib/", "pkg/controller/volume/attachdetach/"],
-          "doc_files": ["docs-site/kubernetes/csi-integration.md"]
-        },
-        "access-modes-reclaim": {
-          "source_paths": ["staging/src/k8s.io/api/core/v1/types.go", "pkg/volume/", "plugin/pkg/admission/storage/"],
-          "doc_files": ["docs-site/kubernetes/access-modes-reclaim.md"]
-        },
-        "troubleshooting": {
-          "source_paths": ["pkg/controller/volume/", "pkg/kubelet/volumemanager/", "pkg/volume/csi/"],
-          "doc_files": ["docs-site/kubernetes/troubleshooting.md"]
+          "source_paths": [
+            "netbox/extras/",
+            "netbox/core/",
+            "netbox/netbox/plugins/",
+            "netbox/netbox/settings.py"
+          ],
+          "doc_files": [
+            "docs-site/netbox/integration.md"
+          ]
         }
       }
     },
@@ -210,76 +374,49 @@
       "analyzed_date": "2026-04-07",
       "pages": {
         "architecture": {
-          "source_paths": ["cmd/", "pkg/multus/", "pkg/server/", "pkg/types/", "deployments/"],
-          "doc_files": ["docs-site/multus-cni/architecture.md"]
+          "source_paths": [
+            "cmd/",
+            "pkg/multus/",
+            "pkg/server/",
+            "pkg/types/",
+            "deployments/"
+          ],
+          "doc_files": [
+            "docs-site/multus-cni/architecture.md"
+          ]
         },
         "core-features": {
-          "source_paths": ["pkg/multus/", "pkg/k8sclient/", "pkg/types/", "pkg/checkpoint/"],
-          "doc_files": ["docs-site/multus-cni/core-features.md"]
+          "source_paths": [
+            "pkg/multus/",
+            "pkg/k8sclient/",
+            "pkg/types/",
+            "pkg/checkpoint/"
+          ],
+          "doc_files": [
+            "docs-site/multus-cni/core-features.md"
+          ]
         },
         "thick-plugin": {
-          "source_paths": ["cmd/multus-daemon/", "cmd/multus-shim/", "pkg/server/", "pkg/server/api/", "pkg/server/config/"],
-          "doc_files": ["docs-site/multus-cni/thick-plugin.md"]
+          "source_paths": [
+            "cmd/multus-daemon/",
+            "cmd/multus-shim/",
+            "pkg/server/",
+            "pkg/server/api/",
+            "pkg/server/config/"
+          ],
+          "doc_files": [
+            "docs-site/multus-cni/thick-plugin.md"
+          ]
         },
         "configuration": {
-          "source_paths": ["pkg/types/types.go", "pkg/types/conf.go", "pkg/server/types.go"],
-          "doc_files": ["docs-site/multus-cni/configuration.md"]
-        }
-      }
-    },
-    "cilium": {
-      "repo": "https://github.com/cilium/cilium",
-      "branch": "main",
-      "analyzed_commit": "27d914ec5acec895161f16ae613e2544571af69f",
-      "analyzed_date": "2026-04-10",
-      "pages": {
-        "architecture": { "source_paths": ["daemon/cmd/cells.go", "daemon/cmd/daemon.go", "operator/cmd/root.go"], "doc_files": ["docs-site/cilium/architecture.md"] },
-        "ebpf-datapath": { "source_paths": ["bpf/", "pkg/datapath/"], "doc_files": ["docs-site/cilium/ebpf-datapath.md"] },
-        "identity-security": { "source_paths": ["pkg/identity/", "pkg/ipcache/", "pkg/policy/"], "doc_files": ["docs-site/cilium/identity-security.md"] },
-        "networking": { "source_paths": ["plugins/", "pkg/datapath/linux/", "bpf/bpf_lxc.c"], "doc_files": ["docs-site/cilium/networking.md"] },
-        "load-balancing": { "source_paths": ["pkg/loadbalancer/", "bpf/lib/lb.h"], "doc_files": ["docs-site/cilium/load-balancing.md"] },
-        "policy": { "source_paths": ["pkg/policy/", "pkg/fqdn/", "pkg/k8s/apis/cilium.io/v2/cnp_types.go"], "doc_files": ["docs-site/cilium/policy.md"] },
-        "hubble": { "source_paths": ["pkg/hubble/", "hubble-relay/"], "doc_files": ["docs-site/cilium/hubble.md"] },
-        "bgp": { "source_paths": ["pkg/bgp/", "operator/pkg/bgp/"], "doc_files": ["docs-site/cilium/bgp.md"] },
-        "clustermesh": { "source_paths": ["pkg/clustermesh/", "clustermesh-apiserver/"], "doc_files": ["docs-site/cilium/clustermesh.md"] },
-        "encryption": { "source_paths": ["pkg/wireguard/"], "doc_files": ["docs-site/cilium/encryption.md"] },
-        "crd-reference": { "source_paths": ["pkg/k8s/apis/cilium.io/"], "doc_files": ["docs-site/cilium/crd-reference.md"] }
-      }
-    },
-    "minio": {
-      "repo": "https://github.com/minio/minio",
-      "branch": "master",
-      "analyzed_commit": "7aac2a2c5b7c882e68c1ce017d8256be2feea27f",
-      "analyzed_date": "2026-04-09",
-      "focus": "data replication and disk I/O",
-      "pages": {
-        "architecture": {
-          "source_paths": ["cmd/server-main.go", "cmd/object-api-interface.go", "cmd/erasure-server-pool.go", "cmd/api-router.go"],
-          "doc_files": ["docs-site/minio/architecture.md"]
-        },
-        "erasure-coding": {
-          "source_paths": ["cmd/erasure-coding.go", "cmd/erasure-encode.go", "cmd/erasure-decode.go", "cmd/erasure-sets.go", "cmd/erasure-server-pool.go"],
-          "doc_files": ["docs-site/minio/erasure-coding.md"]
-        },
-        "disk-io": {
-          "source_paths": ["cmd/xl-storage.go", "cmd/xl-storage-format-v2.go", "cmd/erasure-object.go"],
-          "doc_files": ["docs-site/minio/disk-io.md"]
-        },
-        "object-lifecycle": {
-          "source_paths": ["cmd/object-handlers.go", "cmd/erasure-object.go", "cmd/erasure-multipart.go"],
-          "doc_files": ["docs-site/minio/object-lifecycle.md"]
-        },
-        "data-replication": {
-          "source_paths": ["cmd/bucket-replication.go", "cmd/bucket-replication-utils.go", "cmd/site-replication.go"],
-          "doc_files": ["docs-site/minio/data-replication.md"]
-        },
-        "healing": {
-          "source_paths": ["cmd/erasure-healing.go", "cmd/background-heal-ops.go", "cmd/bitrot.go", "cmd/bitrot-streaming.go"],
-          "doc_files": ["docs-site/minio/healing.md"]
-        },
-        "integration": {
-          "source_paths": ["cmd/api-router.go", "cmd/metrics-v3.go", "cmd/event-notification.go", "cmd/iam.go"],
-          "doc_files": ["docs-site/minio/integration.md"]
+          "source_paths": [
+            "pkg/types/types.go",
+            "pkg/types/conf.go",
+            "pkg/server/types.go"
+          ],
+          "doc_files": [
+            "docs-site/multus-cni/configuration.md"
+          ]
         }
       }
     }

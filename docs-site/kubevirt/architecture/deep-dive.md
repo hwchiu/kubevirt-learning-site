@@ -77,13 +77,7 @@ _, err = podInformer.AddEventHandler(cache.ResourceEventHandlerFuncs{
 
 #### 事件處理流程
 
-```
-SharedInformer ──► EventHandler ──► 萃取 Key ──► Work Queue ──► Worker ──► Reconcile
-     │                                              │
-     │  cache.MetaNamespaceKeyFunc()                │  exponential backoff
-     │  格式: "namespace/name"                       │  失敗時重新入隊
-     └──────────────────────────────────────────────┘
-```
+![事件處理流程 — SharedInformer 到 Work Queue](/diagrams/kubevirt/kubevirt-deep-dive-informer-flow.png)
 
 ### 1.3 UIDTrackingControllerExpectations
 
@@ -114,19 +108,7 @@ vmiExpectations: controller.NewUIDTrackingControllerExpectations(
 3. **Reconcile 時檢查**：只有當所有 expectations 都已滿足時，才繼續執行建立邏輯
 4. **超時保護**：Expectations 有 TTL，避免因事件遺失而永久阻塞
 
-```
-Controller                    API Server                 Informer Cache
-    │                              │                          │
-    ├─── ExpectCreation(uid) ──►   │                          │
-    ├─── Create Pod ──────────────►│                          │
-    │                              ├── Pod Created ──────────►│
-    │                              │                          ├── Add Event
-    │◄─────────────────────────────┤                          │
-    ├─── CreationObserved(uid) ◄───┤                          │
-    │                              │                          │
-    ├─── SatisfiedExpectations() ──► true ✓                   │
-    └─── 繼續下一輪 Reconcile                                  │
-```
+![UIDTrackingControllerExpectations 時序圖](/diagrams/kubevirt/kubevirt-deep-dive-expectation.png)
 
 ### 1.4 Rate-Limited Work Queue
 

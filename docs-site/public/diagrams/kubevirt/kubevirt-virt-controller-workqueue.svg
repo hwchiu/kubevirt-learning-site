@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 469" width="960" height="469">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow2" markerWidth="9" markerHeight="7" refX="0.5" refY="3.5" orient="auto-start-reverse">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="960" height="469" fill="#ffffff"/>
+  <text x="480" y="22" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280" letter-spacing="0.5">VIRT-CONTROLLER — WORK QUEUE 機制</text>
+  <rect x="240" y="45" width="480" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="71" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">事件觸發 (Add/Update/Delete)</text>
+  <line x1="480" y1="89" x2="480" y2="107" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="240" y="107" width="480" height="62" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="133" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">Informer Callback</text>
+  <text x="480" y="151" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">將 namespace/name 加入 Queue</text>
+  <line x1="480" y1="169" x2="480" y2="187" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="240" y="187" width="480" height="62" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="213" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">Work Queue</text>
+  <text x="480" y="231" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">Rate Limiting: 指數退避</text>
+  <line x1="480" y1="249" x2="480" y2="267" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="240" y="267" width="480" height="62" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="293" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">Worker Goroutine</text>
+  <text x="480" y="311" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">取出 key，執行協調邏輯</text>
+  <line x1="480" y1="329" x2="480" y2="347" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="240" y="347" width="480" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="373" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">Execute() → sync()</text>
+  <line x1="480" y1="409" x2="680" y2="429" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="580" y="411" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#3b82f6">成功</text>
+  <text x="730" y="439" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">不重新入列</text>
+  <line x1="480" y1="409" x2="280" y2="429" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="380" y="411" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#3b82f6">失敗</text>
+  <text x="220" y="439" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">重新入列 (backoff)</text>
+</svg>

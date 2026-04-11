@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow2" markerWidth="9" markerHeight="7" refX="0.5" refY="3.5" orient="auto-start-reverse">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="960" height="540" fill="#ffffff"/>
+  <text x="480" y="22" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280" letter-spacing="0.5">HOOK SIDECAR — 架構與執行流程</text>
+  <rect x="350" y="40" width="260" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="66" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">使用者</text>
+  <line x1="480" y1="84" x2="480" y2="112" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="230" y="112" width="500" height="56" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="138" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">VMI (with hook annotation)</text>
+  <text x="480" y="156" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">annotations: hooks.kubevirt.io/hookSidecars</text>
+  <line x1="480" y1="168" x2="480" y2="196" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="230" y="196" width="500" height="56" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="222" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">virt-controller</text>
+  <text x="480" y="240" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">建立 virt-launcher Pod + hook sidecar containers</text>
+  <line x1="480" y1="252" x2="480" y2="280" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="60" y="280" width="840" height="240" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="72" y="296" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" fill="#c7d2fe" letter-spacing="0.5">VIRT-LAUNCHER POD</text>
+  <rect x="90" y="305" width="280" height="200" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="102" y="321" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" fill="#c7d2fe" letter-spacing="0.5">VIRT-LAUNCHER</text>
+  <text x="105" y="330" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">1. 掃描 /var/run/kubevirt-hooks/</text>
+  <text x="105" y="352" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">2. 呼叫 Info() RPC</text>
+  <text x="105" y="374" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">3. 呼叫 Hook (OnDefineDomain)</text>
+  <text x="105" y="396" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">4. 啟動 QEMU</text>
+  <rect x="400" y="305" width="230" height="90" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="412" y="321" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" fill="#c7d2fe" letter-spacing="0.5">HOOK-SIDECAR-1</text>
+  <text x="415" y="338" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">gRPC server</text>
+  <text x="415" y="354" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">/var/run/kubevirt-hooks/</text>
+  <text x="415" y="368" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">   sidecar-1.sock</text>
+  <rect x="650" y="305" width="230" height="90" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="662" y="321" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" fill="#c7d2fe" letter-spacing="0.5">HOOK-SIDECAR-2</text>
+  <text x="665" y="338" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">gRPC server</text>
+  <text x="665" y="354" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">/var/run/kubevirt-hooks/</text>
+  <text x="665" y="368" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">   sidecar-2.sock</text>
+  <line x1="370" y1="370" x2="400" y2="360" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="385" y="357" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#3b82f6">gRPC</text>
+  <line x1="370" y1="380" x2="650" y2="370" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="510" y="367" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#3b82f6">gRPC</text>
+</svg>
