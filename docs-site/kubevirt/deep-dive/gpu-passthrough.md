@@ -22,31 +22,7 @@ KubeVirt 利用 Linux **VFIO（Virtual Function I/O）** 框架與 Kubernetes **
 
 ### 架構總覽
 
-```
-┌──────────────────────────────────────────────────────────┐
-│                    Kubernetes Control Plane               │
-│  ┌──────────────────┐    ┌─────────────────────────────┐ │
-│  │  KubeVirt CR      │    │  Kubelet                    │ │
-│  │  (Permitted       │    │  ├─ Device Plugin Manager   │ │
-│  │   HostDevices)    │    │  └─ Topology Manager        │ │
-│  └────────┬─────────┘    └──────────┬──────────────────┘ │
-│           │                         │                     │
-├───────────┼─────────────────────────┼─────────────────────┤
-│  Node     │                         │                     │
-│  ┌────────▼─────────┐    ┌─────────▼──────────────────┐  │
-│  │  virt-handler     │    │  Device Plugins             │  │
-│  │  DeviceController │───▶│  ├─ PCI Device Plugin       │  │
-│  │                   │    │  ├─ MDEV Device Plugin      │  │
-│  │                   │    │  └─ USB Device Plugin       │  │
-│  └────────┬─────────┘    └──────────┬─────────────────┘  │
-│           │                         │                     │
-│  ┌────────▼─────────┐    ┌─────────▼──────────────────┐  │
-│  │  virt-launcher     │    │  /sys/bus/pci/devices/     │  │
-│  │  (QEMU/libvirt)   │    │  /sys/bus/mdev/devices/    │  │
-│  │                   │    │  /dev/vfio/{iommuGroup}    │  │
-│  └───────────────────┘    └───────────────────────────┘  │
-└──────────────────────────────────────────────────────────┘
-```
+![GPU Passthrough 架構總覽](/diagrams/kubevirt/kubevirt-gpu-architecture.png)
 
 ---
 
@@ -56,19 +32,7 @@ KubeVirt 利用 Linux **VFIO（Virtual Function I/O）** 框架與 Kubernetes **
 
 VFIO（Virtual Function I/O）是 Linux 核心提供的使用者空間裝置驅動框架。它透過 **IOMMU**（Input-Output Memory Management Unit）實現安全的裝置直通，確保虛擬機只能存取被分配的裝置記憶體區域，無法越界存取主機或其他 VM 的記憶體。
 
-```
-Host Kernel                        QEMU/KVM Guest
-┌─────────────┐                  ┌─────────────────┐
-│  vfio-pci    │  ← DMA 隔離 →   │  nvidia driver   │
-│  driver      │                  │  （Guest 內）     │
-│  ┌─────────┐ │                  └────────┬────────┘
-│  │ IOMMU   │ │                           │
-│  │ Group   │ │◄──── PCIe BAR 直接映射 ───┘
-│  └─────────┘ │
-└──────┬──────┘
-       │
-  /dev/vfio/{groupId}
-```
+![VFIO 框架原理](/diagrams/kubevirt/kubevirt-gpu-vfio.png)
 
 ### DeviceHandler 介面
 

@@ -35,30 +35,13 @@ KubeVirt 的設計目標是讓 VM 的網路行為盡可能與 Kubernetes Pod 一
 
 ### Pod 網路的工作方式
 
-```
-    Pod                     Node
-┌──────────┐           ┌──────────┐
-│  eth0    │           │  cni0    │
-│  (veth)  │◄─veth─────►  (bridge)│◄──── 其他 Pod/外網
-└──────────┘           └──────────┘
-Container Process                  CNI Plugin 負責
-直接使用 eth0                      建立 veth pair
-```
+![Pod 網路工作方式](/diagrams/kubevirt/kubevirt-network-pod.png)
 
 ### VM 網路的工作方式
 
 VM 的網路需要**額外一層橋接或 NAT**，將 Pod 的網路介面連接到 QEMU 模擬的虛擬網卡：
 
-```
-    VM Guest              virt-launcher Pod        Node
-┌──────────────┐       ┌──────────────────┐   ┌──────────┐
-│  eth0 (VM)   │       │  tap0 / bridge   │   │  cni0    │
-│  virtio-net  │◄─tap──►  (L2 bridge)     │◄──►  (bridge)│
-│  192.168.x.x │       │  eth0 (Pod)      │   │          │
-└──────────────┘       └──────────────────┘   └──────────┘
-   QEMU 模擬              KubeVirt 設定的          CNI Plugin
-   虛擬硬體               網路橋接/NAT              管理的介面
-```
+![VM 網路工作方式](/diagrams/kubevirt/kubevirt-network-vm.png)
 
 ### virt-launcher 的角色
 
