@@ -14,24 +14,8 @@ KubeVirt 的每一個 VM 實際上執行在一個 Kubernetes Pod 內（稱為 **
 - Kubernetes 的所有網路策略（NetworkPolicy）對 virt-launcher pod 同樣有效
 - 叢集的 CNI 插件（Calico、Cilium、Flannel 等）繼續負責 Pod 層級的網路
 
-```
-┌─────────────────────────────────────────────────┐
-│  Kubernetes Node                                │
-│  ┌──────────────────────────────────────────┐   │
-│  │  virt-launcher Pod                       │   │
-│  │  ┌──────────────────────────────────┐    │   │
-│  │  │  QEMU Process (Virtual Machine)  │    │   │
-│  │  │  ┌────────────────────────────┐  │    │   │
-│  │  │  │  Guest OS (Linux/Windows)  │  │    │   │
-│  │  │  │  eth0: 192.168.100.10/24   │  │    │   │
-│  │  │  └────────────────────────────┘  │    │   │
-│  │  │  Virtual NIC (virtio-net)        │    │   │
-│  │  └──────────────────────────────────┘    │   │
-│  │  eth0: 10.244.1.5/24  (Pod IP)           │   │
-│  └──────────────────────────────────────────┘   │
-│  Node eth0: 192.168.1.10/24                     │
-└─────────────────────────────────────────────────┘
-```
+![VM 網路架構](/diagrams/kubevirt/kubevirt-network-stack.png)
+
 
 ### 使用 Kubernetes CNI 基礎架構
 
