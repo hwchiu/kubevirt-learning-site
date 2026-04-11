@@ -103,56 +103,7 @@ flowchart LR
 
 ## 目錄結構
 
-```
-common-instancetypes/
-├── kustomization.yaml                       # 根入口：引用 instancetypes + preferences
-├── Makefile                                 # 建置、驗證、部署指令
-├── README.md                                # 資源清單總表
-│
-├── instancetypes/                           # ── Instance Type 定義 ──
-│   ├── kustomization.yaml                   # 聚合 7 個系列
-│   ├── cx/                                  # Compute Exclusive
-│   ├── d/                                   # Dedicated
-│   ├── m/                                   # Memory
-│   ├── n/                                   # Network (DPDK)
-│   ├── o/                                   # Overcommitted
-│   ├── rt/                                  # Realtime
-│   └── u/                                   # Universal (通用)
-│
-├── preferences/                             # ── Preference 定義 ──
-│   ├── kustomization.yaml                   # 聚合 16 個 OS 類別
-│   ├── base/                                # 空白模板
-│   ├── linux/                               # 通用 Linux
-│   ├── alpine/ centos/ debian/ fedora/      # Linux 發行版
-│   ├── rhel/ ubuntu/ opensuse/ sles/        # Linux 發行版 (續)
-│   ├── oraclelinux/                         # Oracle Linux
-│   ├── windows/                             # Windows (20 個變體)
-│   ├── cirros/ legacy/                      # 輕量 / 傳統
-│   ├── linux-efi/ linux-virtio-transitional/
-│   └── components/                          # 26 個可重用元件
-│       ├── efi/ efi-persisted/ secureboot/ tpm/
-│       ├── hyperv/ virtio-transitional/
-│       ├── cpu-topology-sockets/ cpu-topology-spread/ cpu-topology-spread-4/
-│       ├── diskbus-virtio-blk/ diskbus-sata/ diskbus-scsi/
-│       ├── disk-dedicatediothread/
-│       ├── interfacemodel-virtio-net/ interfacemodel-e1000/ interfacemodel-e1000e/
-│       ├── interfacemodel-rtl8139/ interface-multiqueue/
-│       ├── preferred-architecture/ required-architecture/
-│       ├── rng/ pcihole64/ tablet-usb/ tablet-virtio/
-│       ├── termination-grace-period/ deprecated/
-│       └── ...
-│
-├── VirtualMachineClusterInstancetypes/      # 過濾：僅 Cluster 範圍 instancetypes
-├── VirtualMachineInstancetypes/             # 過濾：僅 Namespace 範圍 instancetypes
-├── VirtualMachineClusterPreferences/        # 過濾：僅 Cluster 範圍 preferences
-├── VirtualMachinePreferences/               # 過濾：僅 Namespace 範圍 preferences
-│
-├── scripts/                                 # 建置與部署腳本
-├── tests/                                   # Go 單元測試 + 功能測試
-├── docs/                                    # 發布與標籤文件
-├── tools/                                   # Go 工具依賴 (vendored)
-└── _build/                                  # (產出) Bundle YAML + 校驗碼
-```
+![common-instancetypes 目錄結構](/diagrams/common-instancetypes/instancetypes-dir-structure.png)
 
 ### Instance Type 系列特性比較
 
@@ -170,18 +121,7 @@ common-instancetypes/
 
 以 `cx/`（Compute Exclusive）為例：
 
-```
-instancetypes/cx/
-├── kustomization.yaml                       # 聚合 Cluster + Namespace 變體
-├── 1/                                       # 版本 1
-│   ├── kustomization.yaml                   # resources: sizes.yaml + patches: cx1.yaml
-│   ├── cx1.yaml                             # 系列基礎定義 (CPU/NUMA/IO 設定)
-│   └── sizes.yaml                           # 尺寸變體 (medium ~ 8xlarge)
-├── VirtualMachineClusterInstancetype/
-│   └── kustomization.yaml                   # 直接引用 ../1
-└── VirtualMachineInstancetype/
-    └── kustomization.yaml                   # 引用 ../1 + patch 轉換 kind
-```
+![instancetypes/cx/ 目錄結構](/diagrams/common-instancetypes/instancetypes-cx-structure.png)
 
 ## Kustomize 建置系統
 

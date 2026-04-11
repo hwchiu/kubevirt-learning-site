@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 190" width="700" height="190">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow2" markerWidth="9" markerHeight="7" refX="0.5" refY="3.5" orient="auto-start-reverse">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="700" height="190" fill="#ffffff"/>
+  <rect x="0" y="0" width="700" height="190" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <rect x="0" y="0" width="700" height="48" rx="12" fill="#f8fafc" stroke="#e5e7eb" stroke-width="1.5"/>
+  <rect x="0" y="44" width="700" height="4" fill="#f8fafc"/>
+  <circle cx="16" cy="24" r="6" fill="#ef4444"/>
+  <circle cx="36" cy="24" r="6" fill="#f59e0b"/>
+  <circle cx="56" cy="24" r="6" fill="#22c55e"/>
+  <text x="350" y="29" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#6b7280">dashboards/ 目錄結構</text>
+  <line x1="0" y1="48" x2="700" y2="48" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="32" y="79" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#111827">dashboards/</text>
+  <text x="32" y="101" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#94a3b8">├── </text>
+  <text x="66" y="101" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#111827">grafana/</text>
+  <text x="32" y="123" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#94a3b8">│   └── </text>
+  <text x="100" y="123" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#111827">kubevirt-control-plane.json    </text>
+  <text x="366" y="123" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#9ca3af">← 控制面板效能監控</text>
+  <text x="32" y="145" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#94a3b8">└── </text>
+  <text x="66" y="145" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#111827">openshift/</text>
+  <text x="32" y="167" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#94a3b8">    └── </text>
+  <text x="100" y="167" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#111827">kubevirt-top-consumers.json    </text>
+  <text x="366" y="167" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#9ca3af">← VM 資源消耗排行</text>
+</svg>

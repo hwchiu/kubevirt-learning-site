@@ -228,13 +228,7 @@ kubevirt_vmi_network_transmit_packets_total  (Counter)
 
 Recording Rule 使用冒號分隔的三段式命名 `level:metric:operations`：
 
-```
-cluster:kubevirt_hpp_operator_up:sum
-  │       │                       │
-  │       │                       └── operations: 使用的 Prometheus 運算
-  │       └── metric: 底層指標名稱（需含 operator 前綴）
-  └── level: 聚合層級（cluster / namespace / node）
-```
+![Recording Rule 命名規範](/diagrams/monitoring/monitoring-recording-rule-naming.png)
 
 ---
 
@@ -242,13 +236,7 @@ cluster:kubevirt_hpp_operator_up:sum
 
 `dashboards/` 目錄提供兩組預建儀表板，分別針對 Grafana 原生環境與 OpenShift Console。
 
-```
-dashboards/
-├── grafana/
-│   └── kubevirt-control-plane.json    ← 控制面板效能監控
-└── openshift/
-    └── kubevirt-top-consumers.json    ← VM 資源消耗排行
-```
+![dashboards/ 目錄結構](/diagrams/monitoring/monitoring-dashboards-structure.png)
 
 ### kubevirt-control-plane.json
 

@@ -197,61 +197,7 @@ podman run -i "quay.io/kubevirt/prom-metrics-linter:<tag>" \
 
 ## 目錄結構
 
-```
-kubevirt/monitoring/
-├── dashboards/                         # Grafana 儀表板定義
-│   ├── grafana/
-│   │   └── kubevirt-control-plane.json   # Grafana 原生格式
-│   └── openshift/
-│       └── kubevirt-top-consumers.json   # OpenShift Console 格式
-├── docs/
-│   ├── runbooks/                       # 70+ Prometheus 告警 Runbook
-│   │   ├── CDIDataImportCronOutdated.md
-│   │   ├── KubeVirtCRModified.md
-│   │   ├── VirtAPIDown.md
-│   │   └── ...
-│   ├── deprecated_runbooks/            # 已廢棄的 runbook
-│   ├── metrics.md                      # 自動產生的指標彙整文件
-│   └── ghpages.json                    # GitHub Pages 設定
-├── monitoringlinter/                   # 靜態分析 Linter
-│   ├── analyzer.go                       # 核心分析邏輯
-│   ├── analyzer_test.go                  # 單元測試
-│   ├── cmd/monitoringlinter/main.go      # CLI 進入點
-│   ├── testdata/                         # 測試用的 Go 原始碼
-│   └── tests/                            # E2E 測試腳本
-├── pkg/
-│   └── metrics/
-│       └── parser/                     # 共用指標解析器
-│           └── metrics_parser.go         # Metric → MetricFamily 轉換
-├── tools/
-│   ├── metricsdocs/                    # 指標文件產生器
-│   │   ├── metricsdocs.go                # 主程式邏輯
-│   │   ├── types.go                      # 專案資訊與資料結構
-│   │   ├── git.go                        # Git 操作
-│   │   ├── metrics.tmpl                  # Markdown 模板
-│   │   └── config                        # 版本設定檔
-│   ├── runbook-sync-downstream/        # Runbook 同步工具
-│   │   ├── main.go                       # 主程式：同步與 PR 管理
-│   │   ├── runbook.go                    # Runbook 差異比對
-│   │   ├── worktree.go                   # Git worktree 操作
-│   │   ├── setup.go                      # 儲存庫設定
-│   │   ├── commitdate.go                 # commit 日期解析
-│   │   ├── cmd/preview/main.go           # Runbook 預覽工具
-│   │   └── templates/                    # 廢棄通知模板
-│   └── ghpages/                        # GitHub Pages 建置腳本
-│       └── main.py                       # Python 建置工具
-├── test/
-│   └── metrics/
-│       └── prom-metrics-linter/        # 指標命名 Linter
-│           ├── metric_name_linter.go     # 進入點與 JSON 解析
-│           ├── custom_linter_rules.go    # 自定義驗證規則
-│           ├── allowlist.json            # 允許清單
-│           └── Dockerfile                # 多架構容器映像
-├── .github/workflows/                  # 6 個 CI/CD 工作流程
-├── go.mod                              # 根模組定義
-├── Makefile                            # 建置指令
-└── monitoring-guidelines.md            # 監控準則
-```
+![kubevirt/monitoring/ 目錄結構](/diagrams/monitoring/monitoring-dir-structure.png)
 
 ## 建置系統
 

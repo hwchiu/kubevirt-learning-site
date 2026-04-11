@@ -418,12 +418,7 @@ done
 
 ### 驗證流程
 
-```
-swagger.json ──→ openapi2jsonschema ──→ _schemas/main/*.json
-                                              │
-kustomize build ──→ YAML output ──────────────→ kubeconform ──→ Pass/Fail
-_build/*-bundle.yaml ─────────────────────────→ kubeconform ──→ Pass/Fail
-```
+![Schema 驗證流程](/diagrams/common-instancetypes/instancetypes-validation-flow.png)
 
 驗證重點：
 

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 300" width="780" height="300">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow2" markerWidth="9" markerHeight="7" refX="0.5" refY="3.5" orient="auto-start-reverse">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="780" height="300" fill="#ffffff"/>
+  <rect x="0" y="0" width="780" height="300" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="390" y="32" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827">prom-metrics-linter Recording Rule 結構</text>
+  <text x="390" y="52" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">格式：level:metric:operations</text>
+  <rect x="30" y="62" width="720" height="44" rx="6" fill="#f1f5f9" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="50" y="90" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="16" font-weight="700" fill="#111827">level:metric:operations</text>
+  <line x1="50" y1="104" x2="98.0" y2="104" stroke="#3b82f6" stroke-width="3" stroke-linecap="round"/>
+  <line x1="74.0" y1="106" x2="74.0" y2="132" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <circle cx="74.0" cy="140" r="4" fill="#3b82f6"/>
+  <text x="88.0" y="145" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#3b82f6">level</text>
+  <text x="138.0" y="145" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#6b7280">聚合層級（cluster / namespace / node）</text>
+  <line x1="107.6" y1="104" x2="165.2" y2="104" stroke="#8b5cf6" stroke-width="3" stroke-linecap="round"/>
+  <line x1="136.39999999999998" y1="106" x2="136.39999999999998" y2="182" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <circle cx="136.39999999999998" cy="190" r="4" fill="#8b5cf6"/>
+  <text x="150.39999999999998" y="195" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#8b5cf6">metric</text>
+  <text x="208.39999999999998" y="195" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#6b7280">底層指標名稱（需含 operator 前綴）</text>
+  <line x1="174.79999999999998" y1="104" x2="270.79999999999995" y2="104" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+  <line x1="222.79999999999995" y1="106" x2="222.79999999999995" y2="232" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <circle cx="222.79999999999995" cy="240" r="4" fill="#10b981"/>
+  <text x="236.79999999999995" y="245" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#10b981">operations</text>
+  <text x="326.79999999999995" y="245" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#6b7280">使用的 Prometheus 運算（operations）</text>
+</svg>
