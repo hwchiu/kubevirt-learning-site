@@ -152,46 +152,7 @@ INSTALLED_APPS = [
 
 ## 4. 目錄結構
 
-```
-netbox/                          # Git Repository 根目錄
-├── netbox/                      # Django 專案根目錄
-│   ├── manage.py                # Django CLI 入口
-│   ├── netbox/                  # Core settings module
-│   │   ├── settings.py          # 主要設定檔
-│   │   ├── urls.py              # URL routing
-│   │   ├── wsgi.py              # WSGI entry point
-│   │   ├── middleware.py        # 自訂 Middleware
-│   │   ├── plugins/             # Plugin 框架
-│   │   ├── graphql/             # GraphQL schema (Strawberry)
-│   │   ├── api/                 # 共用 API 基礎類別
-│   │   └── authentication/      # 認證後端
-│   ├── dcim/                    # 53 models — 資料中心基礎設施
-│   ├── ipam/                    # 18 models — IP 位址管理
-│   ├── extras/                  # 19 models — 擴充功能（Webhook、CustomField）
-│   ├── circuits/                # 10 models — 線路管理
-│   ├── virtualization/          # 7 models — 虛擬化
-│   ├── vpn/                     # 10 models — VPN 管理
-│   ├── tenancy/                 # 6 models — 多租戶
-│   ├── users/                   # 6 models — 使用者管理
-│   ├── wireless/                # 4 models — 無線網路
-│   ├── core/                    # 7 models — 核心功能
-│   ├── account/                 # Proxy model — 帳戶管理
-│   ├── utilities/               # 無 Model — 工具函式庫
-│   ├── templates/               # 全域 Django templates
-│   └── translations/            # i18n 翻譯檔
-├── contrib/                     # 部署設定
-│   ├── gunicorn.py              # Gunicorn WSGI 設定
-│   ├── nginx.conf               # Nginx 反向代理設定
-│   ├── netbox.service           # systemd — Gunicorn 服務
-│   ├── netbox-rq.service        # systemd — RQ Worker 服務
-│   ├── apache.conf              # Apache 設定（替代方案）
-│   └── uwsgi.ini               # uWSGI 設定（替代方案）
-├── docs/                        # MkDocs 文件
-├── scripts/                     # 管理腳本
-├── upgrade.sh                   # 升級腳本
-├── requirements.txt             # Python 依賴
-└── pyproject.toml               # 專案 metadata (v4.5.7)
-```
+![NetBox 儲存庫目錄結構](/diagrams/netbox/netbox-dir-tree.png)
 
 ---
 

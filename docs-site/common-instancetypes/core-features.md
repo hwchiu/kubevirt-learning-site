@@ -592,19 +592,7 @@ components:
 
 ### Preference 繼承關係
 
-```
-preferences/base/
-├── linux/                       ← base + virtio-blk + virtio-net + rng
-│   ├── rhel/base/               ← linux（改名 rhel）
-│   │   └── rhel/9/amd64/        ← + secureboot + dedicatediothread + arch
-│   ├── fedora/amd64/            ← linux + secureboot + arch
-│   ├── ubuntu/                  ← linux + ...
-│   └── ...
-└── windows/base/                ← base + hyperv + sata + e1000e + tablet + grace-period
-    ├── windows/2k22/            ← + efi-persisted + tpm + secureboot
-    ├── windows/2k25/            ← + efi-persisted + tpm + secureboot
-    └── ...
-```
+![Preference 繼承關係](/diagrams/common-instancetypes/instancetypes-preference-inheritance.png)
 
 ### OS Preference 元件組合對照表
 

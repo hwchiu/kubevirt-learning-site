@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 838 322" width="838" height="322">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow2" markerWidth="9" markerHeight="7" refX="0.5" refY="3.5" orient="auto-start-reverse">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="838" height="322" fill="#ffffff"/>
+  <rect x="0" y="0" width="838" height="322" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <rect x="0" y="0" width="838" height="48" rx="12" fill="#f8fafc" stroke="#e5e7eb" stroke-width="1.5"/>
+  <rect x="0" y="44" width="838" height="4" fill="#f8fafc"/>
+  <circle cx="16" cy="24" r="6" fill="#ef4444"/>
+  <circle cx="36" cy="24" r="6" fill="#f59e0b"/>
+  <circle cx="56" cy="24" r="6" fill="#22c55e"/>
+  <text x="419" y="29" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#6b7280">Preference 繼承關係</text>
+  <line x1="0" y1="48" x2="838" y2="48" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="32" y="79" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#111827">preferences/base/</text>
+  <text x="32" y="101" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#94a3b8">├── </text>
+  <text x="67" y="101" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#111827">linux/                       </text>
+  <text x="322" y="101" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#9ca3af">← base + virtio-blk + virtio-net + rng</text>
+  <text x="32" y="123" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#94a3b8">│   ├── </text>
+  <text x="102" y="123" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#111827">rhel/base/               </text>
+  <text x="322" y="123" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#9ca3af">← linux（改名 rhel）</text>
+  <text x="32" y="145" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#94a3b8">│   │   └── </text>
+  <text x="137" y="145" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#111827">rhel/9/amd64/        </text>
+  <text x="321" y="145" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#9ca3af">← + secureboot + dedicatediothread + arch</text>
+  <text x="32" y="167" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#94a3b8">│   ├── </text>
+  <text x="102" y="167" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#111827">fedora/amd64/            </text>
+  <text x="322" y="167" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#9ca3af">← linux + secureboot + arch</text>
+  <text x="32" y="189" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#94a3b8">│   ├── </text>
+  <text x="102" y="189" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#111827">ubuntu/                  </text>
+  <text x="322" y="189" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#9ca3af">← linux + ...</text>
+  <text x="32" y="211" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#94a3b8">│   └── </text>
+  <text x="102" y="211" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#111827">...</text>
+  <text x="32" y="233" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#94a3b8">└── </text>
+  <text x="67" y="233" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#111827">windows/base/                </text>
+  <text x="322" y="233" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#9ca3af">← base + hyperv + sata + e1000e + tablet + grace-period</text>
+  <text x="32" y="255" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#94a3b8">    ├── </text>
+  <text x="102" y="255" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#111827">windows/2k22/            </text>
+  <text x="322" y="255" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#9ca3af">← + efi-persisted + tpm + secureboot</text>
+  <text x="32" y="277" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#94a3b8">    ├── </text>
+  <text x="102" y="277" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#111827">windows/2k25/            </text>
+  <text x="322" y="277" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#9ca3af">← + efi-persisted + tpm + secureboot</text>
+  <text x="32" y="299" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#94a3b8">    └── </text>
+  <text x="102" y="299" font-family="'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace" font-size="13" fill="#111827">...</text>
+</svg>

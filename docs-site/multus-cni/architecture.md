@@ -84,22 +84,7 @@ Multus CNI 在 `cmd/` 目錄下定義了 8 個二進位執行檔：
 
 ## 核心套件結構（`pkg/`）
 
-```
-pkg/
-├── multus/             # 核心 CNI 邏輯（CmdAdd、CmdDel、CmdCheck、CmdGC、CmdStatus）
-├── server/             # Thick Plugin 伺服器（HTTP over Unix Socket）
-│   ├── api/            # 客戶端 API 及 Shim 通訊協定
-│   └── config/         # 設定管理器（自動產生 multus CNI 設定）
-├── types/              # 型別定義（NetConf、DelegateNetConf、NetworkSelectionElement）
-├── k8sclient/          # Kubernetes 客戶端（Pod/NAD 查詢）
-├── checkpoint/         # kubelet 裝置分配 checkpoint 讀取（SR-IOV）
-├── cmdutils/           # 命令列工具函式
-├── kubeletclient/      # kubelet Pod Resource API 客戶端
-├── logging/            # 結構化日誌
-├── netutils/           # 網路工具函式
-├── signals/            # OS 訊號處理
-└── testing/            # 測試工具（Mock CNI exec）
-```
+![Multus CNI 核心套件結構](/diagrams/multus-cni/multus-pkg-tree.png)
 
 ### pkg/multus/ — 核心 CNI 邏輯
 

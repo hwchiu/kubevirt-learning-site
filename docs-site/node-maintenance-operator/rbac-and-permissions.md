@@ -63,41 +63,7 @@ layout: doc
 
 以下流程圖說明每個維護階段實際使用哪些 RBAC 權限：
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│ 維護工作流程                         使用權限                    │
-├─────────────────────────────────────────────────────────────────┤
-│ 1. 讀取 NodeMaintenance CR      → nodemaintenances: get/watch   │
-│         │                                                        │
-│         ▼                                                        │
-│ 2. 新增 finalizer               → nodemaintenances: update      │
-│         │                                                        │
-│         ▼                                                        │
-│ 3. 取得節點資訊                 → nodes: get                    │
-│         │                                                        │
-│         ▼                                                        │
-│ 4. RequestLease                 → leases: create/update         │
-│         │                                                        │
-│         ▼                                                        │
-│ 5. 套用 taint                   → nodes: patch                  │
-│         │                                                        │
-│         ▼                                                        │
-│ 6. Cordon                       → nodes: update                 │
-│         │                                                        │
-│         ▼                                                        │
-│ 7. 列出 Pod                     → pods: list                    │
-│         │                                                        │
-│         ▼                                                        │
-│ 8. 驅逐 Pod                     → pods/eviction: create         │
-│         │                          poddisruptionbudgets: get     │
-│         ▼                                                        │
-│ 9. 更新進度                     → nodemaintenances/status: patch│
-│         │                                                        │
-│         ▼                                                        │
-│ 10. 移除 finalizer              → nodemaintenances/finalizers:  │
-│                                      update                      │
-└─────────────────────────────────────────────────────────────────┘
-```
+![NMO 維護工作流程對應權限](/diagrams/node-maintenance-operator/nmo-rbac-workflow.png)
 
 步驟 7–8 會迴圈執行，直到節點上所有符合條件的 Pod 均被驅逐或逾時。DaemonSet 管理的 Pod 在步驟 7 識別擁有者後會直接跳過驅逐（需要 `apps` 群組的 `daemonsets: get` 權限）。
 

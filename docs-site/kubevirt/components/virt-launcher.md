@@ -4,21 +4,7 @@ virt-launcher 是 KubeVirt 中**每個 VM 專屬的執行容器**，在 virt-lau
 
 ## 職責概述
 
-```
-virt-launcher Pod (每個 VMI 一個)
-│
-├── virt-launcher 程序
-│   ├── 接收 virt-handler 的 gRPC 命令
-│   ├── 呼叫 libvirtd API 管理 VM
-│   ├── 監控 domain 狀態變化
-│   ├── 轉發 Kubernetes termination signal 給 VM
-│   └── 延遲 Pod 終止直到 VM 優雅關機
-│
-└── libvirtd 程序
-    ├── 管理 QEMU 程序生命週期
-    ├── 接收 libvirt domain XML 定義
-    └── 提供 VNC/Console socket
-```
+![virt-launcher Pod 結構](/diagrams/kubevirt/kubevirt-virt-launcher-pod.png)
 
 ## 部署資訊
 

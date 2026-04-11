@@ -52,22 +52,7 @@ sequenceDiagram
 
 ### 關鍵程式碼路徑（`pkg/multus/multus.go`）
 
-```
-CmdAdd()
- ├── types.LoadNetConf()              # 載入 multus 設定
- ├── logging.SetLogLevel()            # 設定日誌等級
- ├── types.GetReadinessIndicatorFile() # 等待就緒指示檔
- ├── k8s.GetK8sClient()              # 建立 k8s 客戶端
- ├── k8s.GetPod()                    # 查詢 Pod 物件
- ├── k8s.GetPodNetwork()             # 解析 k8s.v1.cni.cncf.io/networks
- ├── k8s.GetAllDelegates()           # 取得所有委派設定（含預設網路）
- ├── 迴圈處理每個 DelegateNetConf
- │    ├── validateIfName()           # 驗證介面名稱不重複
- │    ├── DelegateAdd()              # 呼叫委派外掛
- │    └── nadutils.SaveNetworkStatus()  # 更新網路狀態 Annotation
- ├── saveDelegates()                 # 儲存快取供 DEL 使用
- └── 回傳主要介面（eth0）的 CNI 結果
-```
+![Multus CNI CmdAdd() 程式碼路徑](/diagrams/multus-cni/multus-cmdadd-tree.png)
 
 ## NetworkAttachmentDefinition（NAD）
 

@@ -741,13 +741,7 @@ for _, problem := range problems {
 
 **Recording Rule 名稱結構要求**：
 
-```
-level:metric:operations
-  │      │       │
-  │      │       └── 聚合操作，如 sum, avg, rate5m
-  │      └── 指標名稱，需以 operator_suboperator 開頭
-  └── 聚合層級，如 cluster, node, namespace
-```
+![prom-metrics-linter Recording Rule 命名結構](/diagrams/monitoring/monitoring-rule-naming-prom-linter.png)
 
 **操作偵測**：工具用正則從 PromQL 表達式中偵測聚合與時間操作：
 

@@ -22,18 +22,7 @@ title: KubeVirt — VM 最佳化進階指南
 
 虛擬 CPU 拓樸由三個層次組成，對應到真實 CPU 的硬體模型：
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│  物理機視角                        虛擬機視角 (lscpu)             │
-│                                                                 │
-│  Socket 0           Socket 1      sockets: 2                   │
-│  ┌──────────────┐   ┌──────────┐  cores per socket: 4          │
-│  │ Core 0  Core 1│   │ Core 2  │  threads per core: 2          │
-│  │ [HT0][HT1]   │   │ [HT0]   │  ─────────────────────────    │
-│  │ [HT0][HT1]   │   │ [HT1]   │  Total vCPUs = 2×4×2 = 16    │
-│  └──────────────┘   └──────────┘                               │
-└─────────────────────────────────────────────────────────────────┘
-```
+![CPU 拓樸：物理機視角與虛擬機視角](/diagrams/kubevirt/kubevirt-cpu-topology.png)
 
 | 層次 | 說明 | YAML 欄位 |
 |------|------|-----------|
@@ -60,17 +49,7 @@ NUMA node(s):        1
 
 拓樸設計直接影響 Guest OS 的排程行為與記憶體存取模式：
 
-```
-低效拓樸（多 Socket）：            高效拓樸（單 Socket 多 Core）：
-┌──────────────────────────┐      ┌──────────────────────────┐
-│ Socket 0 │ Socket 1 │ …  │      │       Socket 0            │
-│ 1 core   │ 1 core   │   │      │ Core0 Core1 Core2 Core3   │
-│  ↕跨NUMA  │  ↕跨NUMA  │   │      │  ↕L2共享   ↕L2共享        │
-│ 高延遲通訊 │ 高延遲通訊 │   │      │ 低延遲 L3 Cache 共享      │
-└──────────────────────────┘      └──────────────────────────┘
-  → 容易觸發 vNUMA 複雜度             → 所有核心共享同一 LLC
-  → 多數應用效能下降                  → 適合大多數工作負載
-```
+![Socket 拓樸對效能的影響](/diagrams/kubevirt/kubevirt-cpu-socket-topology.png)
 
 **NUMA-aware 拓樸的重要性：**
 - 當 vCPU 數量超過單一 NUMA 節點的核心數時，Guest OS 會看到多個 vNUMA 節點
