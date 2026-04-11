@@ -23,11 +23,15 @@
         @mousedown.prevent="startDrag"
         @touchstart.prevent="onTouchStart"
       >
-        <div
-          class="mermaid-zoom-content"
-          :style="contentStyle"
-          v-html="svgContent"
-        />
+        <div class="mermaid-zoom-content" :style="contentStyle">
+          <div v-if="svgContent" v-html="svgContent" />
+          <img
+            v-else-if="imgSrc"
+            :src="imgSrc"
+            :alt="imgAlt"
+            class="mermaid-zoom-img"
+          />
+        </div>
       </div>
     </div>
   </Teleport>
@@ -41,6 +45,8 @@ const { isDark } = useData()
 
 const visible = ref(false)
 const svgContent = ref('')
+const imgSrc = ref('')
+const imgAlt = ref('')
 const scale = ref(1)
 const translateX = ref(0)
 const translateY = ref(0)
@@ -110,8 +116,20 @@ function processSvgHtml(svgHtml) {
 }
 
 function open(svgHtml) {
-  // Content comes from same-page mermaid-rendered SVGs (already sanitized by the plugin)
   svgContent.value = processSvgHtml(svgHtml)
+  imgSrc.value = ''
+  imgAlt.value = ''
+  scale.value = 1
+  translateX.value = 0
+  translateY.value = 0
+  visible.value = true
+  document.body.style.overflow = 'hidden'
+}
+
+function openImage(src, alt) {
+  imgSrc.value = src
+  imgAlt.value = alt || ''
+  svgContent.value = ''
   scale.value = 1
   translateX.value = 0
   translateY.value = 0
@@ -122,6 +140,7 @@ function open(svgHtml) {
 function close() {
   visible.value = false
   svgContent.value = ''
+  imgSrc.value = ''
   document.body.style.overflow = ''
 }
 
@@ -200,17 +219,34 @@ function attachListeners() {
   })
 }
 
+// Attach click listeners to doc images (PNG/JPG diagrams)
+function attachImageListeners() {
+  document.querySelectorAll('.vp-doc img').forEach((el) => {
+    if (el.dataset.zoomBound) return
+    el.dataset.zoomBound = 'true'
+    el.style.cursor = 'zoom-in'
+    el.title = '點擊放大檢視'
+    el.addEventListener('click', () => {
+      openImage(el.src, el.alt)
+    })
+  })
+}
+
 let observer = null
 
 onMounted(() => {
   window.addEventListener('keydown', onKeydown)
 
   // Initial attach
-  nextTick(() => attachListeners())
+  nextTick(() => {
+    attachListeners()
+    attachImageListeners()
+  })
 
   // Watch for dynamically rendered mermaid diagrams
   observer = new MutationObserver(() => {
     attachListeners()
+    attachImageListeners()
   })
   observer.observe(document.body, { childList: true, subtree: true })
 })
@@ -337,5 +373,12 @@ onUnmounted(() => {
 
 .mermaid-zoom-content :deep(svg) {
   display: block;
+}
+
+.mermaid-zoom-img {
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 116px);
+  display: block;
+  border-radius: 4px;
 }
 </style>
