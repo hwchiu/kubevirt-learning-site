@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540">
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+  </marker>
+  <marker id="arrowg" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#9ca3af"/>
+  </marker>
+</defs>
+<rect width="1200" height="540" fill="#ffffff"/>
+<text x="600" y="30" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#111827" text-anchor="middle" font-weight="700">VMI Live Migration 必要條件檢查</text>
+<polygon points="420,170 510,200 420,230 330,200" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+<text x="420" y="194" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" font-weight="700">VMI</text>
+<text x="420" y="210" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" font-weight="700">可以 Live Migrate?</text>
+<rect x="610" y="33" width="340" height="54" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="780" y="51" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" font-weight="600">✅ 使用 Shared Storage</text>
+<text x="780" y="69" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">(RWX PVC 或 containerDisk)</text>
+<rect x="610" y="123" width="340" height="54" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="780" y="150" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">✅ 未使用 SR-IOV 介面</text>
+<rect x="610" y="213" width="340" height="54" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="780" y="231" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" font-weight="600">✅ 未使用 PCI Passthrough</text>
+<text x="780" y="249" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">(HostDevices / GPU 直通)</text>
+<rect x="610" y="303" width="340" height="54" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="780" y="321" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" font-weight="600">✅ 未使用 HostDisk</text>
+<text x="780" y="339" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">(非共享的 host 路徑)</text>
+<rect x="610" y="393" width="340" height="54" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="780" y="411" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" font-weight="600">✅ 未使用 dedicatedCpuPlacement</text>
+<text x="780" y="429" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">(或目標節點也有 CPU Manager)</text>
+<path d="M 510 200 Q 570 200 610 60" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M 510 200 Q 570 200 610 150" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M 510 200 Q 570 200 610 240" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M 510 200 Q 570 200 610 330" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M 510 200 Q 570 200 610 420" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="520" y="186" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">必要條件</text>
+<rect x="290" y="415" width="260" height="50" rx="24" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.5"/>
+<text x="420" y="445" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">IsMigratable = True</text>
+<path d="M 780 91 Q 740 420 550 440" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M 780 181 Q 740 420 550 440" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M 780 271 Q 740 420 550 440" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M 780 361 Q 740 420 550 440" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M 780 451 Q 740 420 550 440" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+</svg>

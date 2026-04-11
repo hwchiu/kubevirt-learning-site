@@ -32,58 +32,7 @@ layout: doc
 
 以下展示 monitoring 專案中四個核心工具與外部系統之間的關係：
 
-```mermaid
-graph TB
-    subgraph "kubevirt/monitoring 儲存庫"
-        ML["monitoringlinter<br/>靜態分析 Linter"]
-        MD["metricsdocs<br/>指標文件產生器"]
-        RS["runbook-sync-downstream<br/>Runbook 同步工具"]
-        PL["prom-metrics-linter<br/>指標命名 Linter"]
-        MP["pkg/metrics/parser<br/>指標解析器"]
-        DB["dashboards/<br/>Grafana 儀表板"]
-        RB["docs/runbooks/<br/>Runbook 文件"]
-    end
-
-    subgraph "KubeVirt 子專案"
-        KV["kubevirt/kubevirt"]
-        CDI["kubevirt/containerized-data-importer"]
-        SSP["kubevirt/ssp-operator"]
-        HCO["kubevirt/hyperconverged-cluster-operator"]
-        CNAO["kubevirt/cluster-network-addons-operator"]
-        OTHER["其他子專案..."]
-    end
-
-    subgraph "外部系統"
-        PROM["Prometheus"]
-        GRAF["Grafana"]
-        GH["GitHub Actions"]
-        QUAY["quay.io Registry"]
-        DS["openshift/runbooks<br/>下游儲存庫"]
-    end
-
-    ML -->|"檢查 operator 專案<br/>監控程式碼規範"| KV
-    ML -->|"檢查 operator 專案<br/>監控程式碼規範"| CDI
-
-    MD -->|"clone 並解析<br/>各專案的 metrics.md"| KV
-    MD -->|"clone 並解析<br/>各專案的 metrics.md"| CDI
-    MD -->|"clone 並解析<br/>各專案的 metrics.md"| SSP
-    MD -->|"clone 並解析<br/>各專案的 metrics.md"| HCO
-    MD -->|"clone 並解析<br/>各專案的 metrics.md"| OTHER
-
-    PL -->|"在 CI 中驗證<br/>指標命名規範"| KV
-    PL -->|"在 CI 中驗證<br/>指標命名規範"| CDI
-    MP -->|"提供解析輔助"| PL
-
-    RS -->|"同步 runbook"| RB
-    RS -->|"建立 PR 同步"| DS
-
-    DB -->|"匯入"| GRAF
-    PL -.->|"Docker image 發布"| QUAY
-    GH -->|"CI/CD 自動化"| MD
-    GH -->|"CI/CD 自動化"| RS
-    GH -->|"CI/CD 自動化"| PL
-    PROM -->|"告警觸發參照"| RB
-```
+![系統架構圖 — kubevirt/monitoring 與外部系統整合](/diagrams/monitoring/monitoring-system-arch.png)
 
 ## 核心工具
 
@@ -232,47 +181,13 @@ podman run -i "quay.io/kubevirt/prom-metrics-linter:<tag>" \
 | `runbook_sync_downstream.yaml` | Run runbook-sync-downstream | 每日排程 `04:30 UTC` | 自動將 runbook 同步至 `openshift/runbooks` 下游儲存庫 |
 | `update_metrics_docs.yaml` | Auto-Update Metrics Documentation | 每日排程 `05:00 UTC` | 自動更新指標文件並建立 PR |
 
-```mermaid
-graph LR
-    subgraph "Pull Request 觸發"
-        A["sanity.yaml<br/>Markdown Lint"] 
-        B["runbook-preview.yaml<br/>Runbook 預覽"]
-    end
-
-    subgraph "Push to main"
-        C["publish.yaml<br/>GitHub Pages 發布"]
-    end
-
-    subgraph "每日排程"
-        D["update_metrics_docs.yaml<br/>指標文件更新<br/>⏰ 05:00 UTC"]
-        E["runbook_sync_downstream.yaml<br/>Runbook 同步<br/>⏰ 04:30 UTC"]
-    end
-
-    subgraph "Release 發布"
-        F["prom-metrics-linter.yaml<br/>Docker 映像推送<br/>→ quay.io"]
-    end
-```
+![GitHub Actions 工作流程 — 依觸發類型分組](/diagrams/monitoring/monitoring-cicd-workflows.png)
 
 ## Go Module 架構
 
 專案採用 **多 Go Module** 設計，共有 **5 個獨立的 `go.mod`**，各工具擁有獨立的依賴管理：
 
-```mermaid
-graph TB
-    ROOT["根模組<br/>github.com/kubevirt/monitoring<br/>go 1.23.6"]
-    MD["tools/metricsdocs<br/>go 1.16"]
-    RS["tools/runbook-sync-downstream<br/>go 1.22.1"]
-    PL["test/metrics/prom-metrics-linter<br/>go 1.20"]
-    MP["pkg/metrics/parser<br/>go 1.20"]
-
-    ROOT -->|"包含"| ML["monitoringlinter/"]
-    
-    style ROOT fill:#e1f5fe
-    style MD fill:#f3e5f5
-    style RS fill:#f3e5f5
-    style PL fill:#f3e5f5
-    style MP fill:#fff3e0
-```
+![多 Go Module 架構設計](/diagrams/monitoring/monitoring-go-modules.png)
 
 | 模組路徑 | Go 版本 | 主要依賴 | 用途 |
 |---------|---------|---------|------|

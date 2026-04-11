@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="780" viewBox="0 0 1300 780">
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+  </marker>
+  <marker id="arrowg" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#9ca3af"/>
+  </marker>
+</defs>
+<rect width="1300" height="780" fill="#ffffff"/>
+<rect x="200" y="80" width="260" height="570" rx="12" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1" opacity="0.5"/>
+<text x="320" y="70" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">正常路徑</text>
+<circle cx="320" cy="50" r="12" fill="#111827"/>
+<rect x="210" y="108" width="220" height="44" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="320" y="135" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">Pending</text>
+<rect x="210" y="218" width="220" height="44" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="320" y="245" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">PreparingTarget</text>
+<rect x="210" y="328" width="220" height="44" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="320" y="355" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">TargetReady</text>
+<rect x="210" y="438" width="220" height="44" rx="20" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+<text x="320" y="465" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">Running</text>
+<rect x="210" y="598" width="220" height="44" rx="20" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.5"/>
+<text x="320" y="625" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">Succeeded</text>
+<rect x="750" y="328" width="200" height="44" rx="20" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+<text x="850" y="355" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">Failed</text>
+<rect x="950" y="508" width="200" height="44" rx="20" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.5"/>
+<text x="1050" y="535" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">Cancelled</text>
+<circle cx="320" cy="700" r="12" fill="#ffffff" stroke="#111827" stroke-width="3"/><circle cx="320" cy="700" r="7" fill="#111827"/>
+<circle cx="850" cy="430" r="12" fill="#ffffff" stroke="#111827" stroke-width="3"/><circle cx="850" cy="430" r="7" fill="#111827"/>
+<circle cx="1050" cy="610" r="12" fill="#ffffff" stroke="#111827" stroke-width="3"/><circle cx="1050" cy="610" r="7" fill="#111827"/>
+<line x1="320" y1="62" x2="320" y2="108" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="440" y="85" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">建立 VirtualMachineInstanceMigration</text>
+<line x1="320" y1="152" x2="320" y2="218" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="320" y1="262" x2="320" y2="328" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="320" y1="372" x2="320" y2="438" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="320" y1="482" x2="320" y2="598" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="440" y="185" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">選定目標節點，開始準備</text>
+<text x="440" y="295" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">目標節點 virt-launcher 就緒</text>
+<text x="440" y="405" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">開始傳輸 VM 記憶體頁面</text>
+<text x="440" y="530" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">所有資料同步完成，完成 Cut-over</text>
+<line x1="320" y1="642" x2="320" y2="688" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="850" y1="372" x2="850" y2="418" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="1050" y1="552" x2="1050" y2="598" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 430 130 C 790 130, 770 310, 750 350" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="620" y="112" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#ef4444" text-anchor="middle">無法選定目標節點</text>
+<path d="M 430 240 C 810 240, 790 330, 750 350" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="640" y="222" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#ef4444" text-anchor="middle">目標準備失敗</text>
+<path d="M 430 350 C 1010 350, 990 490, 950 530" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="800" y="332" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#f59e0b" text-anchor="middle">使用者取消</text>
+<path d="M 430 460 C 830 460, 790 380, 750 350" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="640" y="444" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#ef4444" text-anchor="middle">超時或傳輸錯誤</text>
+<path d="M 430 470 C 1030 470, 1010 490, 950 530" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="900" y="452" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#f59e0b" text-anchor="middle">使用者取消</text>
+<text x="650" y="30" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#111827" text-anchor="middle" font-weight="700">VirtualMachineInstanceMigration 狀態轉換</text>
+</svg>

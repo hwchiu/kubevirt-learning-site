@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="360" viewBox="0 0 820 360">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#6b7280"/>
+    </marker>
+    <marker id="arrow-dash" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="820" height="360" fill="#ffffff"/>
+  <text x="410" y="28" text-anchor="middle" fill="#111827" font-size="15" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">GitHub Actions 工作流程</text>
+  <rect x="30" y="50" width="370" height="130" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="215" y="68" text-anchor="middle" fill="#6b7280" font-size="11" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Pull Request 觸發</text>
+  <rect x="50" y="79" width="160" height="52" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="130" y="100.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">sanity.yaml</text>
+  <text x="130" y="117.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Markdown Lint</text>
+  <rect x="240" y="79" width="160" height="52" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="320" y="100.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">runbook-preview.yaml</text>
+  <text x="320" y="117.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Runbook 預覽</text>
+  <rect x="420" y="50" width="370" height="130" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="605" y="68" text-anchor="middle" fill="#6b7280" font-size="11" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Push to main</text>
+  <rect x="505" y="79" width="200" height="52" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="605" y="100.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">publish.yaml</text>
+  <text x="605" y="117.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">GitHub Pages 發布</text>
+  <rect x="30" y="200" width="370" height="140" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="215" y="218" text-anchor="middle" fill="#6b7280" font-size="11" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">每日排程</text>
+  <rect x="50" y="228" width="160" height="60" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="130" y="245.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">update_metrics_docs.yaml</text>
+  <text x="130" y="262.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">指標文件更新</text>
+  <text x="130" y="279.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">⏰ 05:00 UTC</text>
+  <rect x="240" y="228" width="160" height="60" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="320" y="245.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">runbook_sync_downstream.yaml</text>
+  <text x="320" y="262.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Runbook 同步</text>
+  <text x="320" y="279.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">⏰ 04:30 UTC</text>
+  <rect x="420" y="200" width="370" height="140" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="605" y="218" text-anchor="middle" fill="#6b7280" font-size="11" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Release 發布</text>
+  <rect x="495" y="228" width="220" height="60" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="605" y="245.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">prom-metrics-linter.yaml</text>
+  <text x="605" y="262.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Docker 映像推送</text>
+  <text x="605" y="279.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">→ quay.io</text>
+  <text x="410" y="352" text-anchor="middle" fill="#6b7280" font-size="10" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">各工作流程依觸發類型分組</text>
+</svg>

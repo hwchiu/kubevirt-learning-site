@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="680" viewBox="0 0 900 680">
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+  </marker>
+  <marker id="arrowg" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#9ca3af"/>
+  </marker>
+</defs>
+<rect width="900" height="680" fill="#ffffff"/>
+<text x="450" y="30" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#111827" text-anchor="middle" font-weight="700">Migration 傳輸模式比較</text>
+<rect x="120" y="50" width="160" height="50" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+<text x="200" y="72" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="700">Source</text>
+<text x="200" y="90" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">來源節點</text>
+<rect x="600" y="50" width="160" height="50" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+<text x="680" y="72" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="700">Target</text>
+<text x="680" y="90" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">目標節點</text>
+<line x1="200" y1="100" x2="200" y2="650" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="6,4"/>
+<line x1="680" y1="100" x2="680" y2="650" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="6,4"/>
+<rect x="120" y="130" width="640" height="30" rx="4" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1"/>
+<text x="440" y="150" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" font-weight="600">Pre-Copy 模式（預設，較安全）</text>
+<line x1="200" y1="180" x2="680" y2="180" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="440" y="174" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">第1輪：複製所有記憶體頁面</text>
+<line x1="200" y1="225" x2="680" y2="225" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="440" y="219" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">第2輪：複製修改過的頁面（dirty pages）</text>
+<line x1="200" y1="270" x2="680" y2="270" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="440" y="264" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">第N輪：持續迭代直到 dirty rate 夠低</text>
+<line x1="200" y1="315" x2="680" y2="315" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="440" y="309" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">Cut-over：停止 Source，複製最後剩餘頁面</text>
+<line x1="680" y1="360" x2="200" y2="360" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowg)"/>
+<text x="440" y="354" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">VM 在 Target 繼續執行</text>
+<rect x="120" y="420" width="640" height="30" rx="4" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1"/>
+<text x="440" y="440" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" font-weight="600">Post-Copy 模式（更快完成，但風險高）</text>
+<line x1="200" y1="470" x2="680" y2="470" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="440" y="464" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">複製 CPU 狀態和少量記憶體</text>
+<line x1="200" y1="515" x2="680" y2="515" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="440" y="509" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">Cut-over：停止 Source，切換控制</text>
+<line x1="680" y1="560" x2="200" y2="560" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="440" y="554" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">按需請求缺少的記憶體頁面（page fault）</text>
+<line x1="680" y1="605" x2="200" y2="605" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowg)"/>
+<text x="440" y="599" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">VM 在 Target 繼續執行（逐漸取得記憶體）</text>
+</svg>
