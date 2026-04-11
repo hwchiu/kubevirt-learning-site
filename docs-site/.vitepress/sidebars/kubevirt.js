@@ -3,9 +3,7 @@ export default [
     text: '🗺️ 學習路徑',
     items: [
       { text: '學習路徑入口', link: '/kubevirt/learning-path/' },
-      { text: 'A：Roadmap 式', link: '/kubevirt/learning-path/roadmap' },
       { text: 'B：故事驅動式', link: '/kubevirt/learning-path/story' },
-      { text: 'D：整合式', link: '/kubevirt/learning-path/mixed' },
     ]
   },
   {

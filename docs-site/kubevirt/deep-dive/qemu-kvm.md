@@ -8,52 +8,13 @@
 
 KubeVirt 採用三層架構來管理虛擬機：
 
-```
-┌─────────────────────────────────────────────────┐
-│                 Kubernetes API                    │
-│       VirtualMachineInstance (VMI) Spec           │
-└──────────────────┬──────────────────────────────┘
-                   │ Convert_v1_VirtualMachineInstance_To_api_Domain()
-                   ▼
-┌─────────────────────────────────────────────────┐
-│           Converter (Configurator 模式)           │
-│   CPU / Memory / Network / Disk / HyperV / ...    │
-└──────────────────┬──────────────────────────────┘
-                   │ DomainDefineXML()
-                   ▼
-┌─────────────────────────────────────────────────┐
-│         libvirt Domain XML → QEMU/KVM             │
-│    libvirtd 解析 XML 並啟動 qemu-system-x86_64    │
-└─────────────────────────────────────────────────┘
-```
+![QEMU/KVM 三層架構](/diagrams/kubevirt/kubevirt-qemu-three-layer.png)
 
 ### virt-launcher Pod 內部結構
 
 每個 VMI 都在獨立的 Pod 中運行，Pod 內部有三個關鍵程序：
 
-```
-┌──────────────────── virt-launcher Pod ────────────────────┐
-│                                                            │
-│  ┌──────────────┐    gRPC     ┌─────────────────────┐     │
-│  │ virt-handler │◄──────────►│ virt-launcher (Go)    │     │
-│  │  (DaemonSet) │            │  - CMD Server         │     │
-│  └──────────────┘            │  - Domain Notifier    │     │
-│                              │  - Agent Poller       │     │
-│                              └──────┬────────────────┘     │
-│                                     │ libvirt API          │
-│                              ┌──────▼────────────────┐     │
-│                              │ libvirtd / virtqemud   │     │
-│                              │  - Domain XML 管理     │     │
-│                              │  - 事件處理            │     │
-│                              └──────┬────────────────┘     │
-│                                     │ fork + exec          │
-│                              ┌──────▼────────────────┐     │
-│                              │ qemu-system-x86_64     │     │
-│                              │  - 虛擬機實際執行      │     │
-│                              │  - Guest Agent 通訊    │     │
-│                              └────────────────────────┘     │
-└────────────────────────────────────────────────────────────┘
-```
+![virt-launcher Pod 內部結構](/diagrams/kubevirt/kubevirt-virt-launcher-pod.png)
 
 ::: info 為什麼選用 libvirt？
 KubeVirt 選用 libvirt 而非直接操作 QEMU 的原因：

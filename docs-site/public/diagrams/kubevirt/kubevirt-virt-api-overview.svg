@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 510" width="960" height="510">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow2" markerWidth="9" markerHeight="7" refX="0.5" refY="3.5" orient="auto-start-reverse">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="960" height="510" fill="#ffffff"/>
+  <text x="480" y="22" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280" letter-spacing="0.5">VIRT-API — 元件概觀</text>
+  <rect x="330" y="38" width="300" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="64" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">外部請求</text>
+  <text x="480" y="82" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">kubectl / virtctl / REST</text>
+  <line x1="480" y1="82" x2="480" y2="110" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="60" y="110" width="840" height="380" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="72" y="126" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" fill="#c7d2fe" letter-spacing="0.5">VIRT-API (PORT 443 / 8443)</text>
+  <rect x="90" y="135" width="360" height="330" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="102" y="151" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" fill="#c7d2fe" letter-spacing="0.5">ADMISSION WEBHOOKS</text>
+  <rect x="110" y="158" width="320" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="270" y="184" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">Mutating Webhook</text>
+  <text x="270" y="202" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">自動補齊預設值</text>
+  <rect x="110" y="218" width="320" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="270" y="244" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#111827">Validating Webhook</text>
+  <text x="270" y="262" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">驗證 spec 正確性</text>
+  <rect x="480" y="135" width="400" height="330" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="492" y="151" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" fill="#c7d2fe" letter-spacing="0.5">REST SUBRESOURCES</text>
+  <text x="500" y="158" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">/console → WebSocket 串流</text>
+  <text x="500" y="178" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">/vnc → VNC 代理</text>
+  <text x="500" y="198" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">/portforward → TCP 端口轉發</text>
+  <text x="500" y="218" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">/migrate → 觸發 Migration</text>
+  <text x="500" y="238" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">/start /stop /restart</text>
+  <text x="500" y="258" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">/pause /unpause /memorydump</text>
+</svg>

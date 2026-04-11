@@ -233,16 +233,7 @@ KubeVirt 不提供官方 Windows ContainerDisk 映像（因商業授權限制）
 
 ContainerDisk 的設計天然支援多個 VM 共享同一個基礎映像，行為類似於 ReadOnlyMany（ROX）的 PVC，但每個 VM 有獨立的寫入層：
 
-```
-ContainerDisk 映像（Registry）
-         │
-         ├──── Node A ─────────────────────────────────────────
-         │       ├── VM-1 (emptyDir-1) ── QEMU overlay-1 (RW)
-         │       └── VM-2 (emptyDir-2) ── QEMU overlay-2 (RW)
-         │
-         └──── Node B ─────────────────────────────────────────
-                 └── VM-3 (emptyDir-3) ── QEMU overlay-3 (RW)
-```
+![ContainerDisk 多 VM 共享映像架構](/diagrams/kubevirt/kubevirt-containerdisk-sharing.png)
 
 **節省頻寬的機制**：
 - 同一個節點上的多個 VM 使用同一個 ContainerDisk 映像時，容器 runtime（如 containerd）只需拉取一次映像層
@@ -256,25 +247,7 @@ ContainerDisk 映像（Registry）
 
 ### 標準組合架構
 
-```
-┌─────────────────────────────────────────┐
-│             VirtualMachine              │
-│                                         │
-│  volumes:                               │
-│  ┌─────────────────────────────────┐   │
-│  │  ContainerDisk (OS 基礎映像)    │   │
-│  │  - Ubuntu/Fedora/Cirros etc.    │   │
-│  │  - 唯讀基礎層                   │   │
-│  └─────────────────────────────────┘   │
-│  ┌─────────────────────────────────┐   │
-│  │  CloudInitNoCloud (初始化配置)  │   │
-│  │  - SSH Key 注入                 │   │
-│  │  - 使用者/密碼設定              │   │
-│  │  - Hostname 設定                │   │
-│  │  - 套件安裝腳本                  │   │
-│  └─────────────────────────────────┘   │
-└─────────────────────────────────────────┘
-```
+![VirtualMachine ContainerDisk + CloudInit 組合架構](/diagrams/kubevirt/kubevirt-containerdisk-vm-spec.png)
 
 ### cloud-init 可設定的內容
 
