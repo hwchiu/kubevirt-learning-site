@@ -231,25 +231,7 @@ func (c *Controller) sync(migration *v1.VirtualMachineInstanceMigration) error {
 
 所有控制器都使用 Kubernetes 的 **Rate-Limiting Work Queue**：
 
-```
-事件觸發 (Add/Update/Delete)
-    │
-    ▼
-Informer Callback
-    │ 將 "namespace/name" 加入 Queue
-    ▼
-Work Queue
-    │ (有 Rate Limiting: 指數退避)
-    ▼
-Worker Goroutine
-    │ 取出 key，執行協調邏輯
-    ▼
-Execute() → sync()
-    │
-    ▼
-成功 → 不重新入列
-失敗 → 重新入列 (with backoff)
-```
+![Work Queue 機制](/diagrams/kubevirt/kubevirt-virt-controller-workqueue.png)
 
 **指數退避範例：**
 ```

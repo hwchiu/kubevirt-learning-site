@@ -4,29 +4,7 @@ virt-operator 是 KubeVirt 的**安裝與生命週期管理元件**，負責在 
 
 ## 職責概述
 
-```
-KubeVirt CR (使用者建立)
-        │
-        ▼
-  virt-operator
-  ┌────────────────────────────────────┐
-  │ 監聽 KubeVirt CR 的 spec 變更       │
-  │                                    │
-  │ 建立/更新以下資源：                  │
-  │  ● CRD (所有 KubeVirt 自定義資源)   │
-  │  ● RBAC (ServiceAccount, Role...)  │
-  │  ● virt-api Deployment             │
-  │  ● virt-controller Deployment      │
-  │  ● virt-handler DaemonSet          │
-  │  ● Services, Webhooks              │
-  │  ● TLS Secrets                     │
-  │  ● PrometheusRule, ServiceMonitor  │
-  └────────────────────────────────────┘
-        │
-        ▼
-  更新 KubeVirt CR Status
-  (Phase: Deploying → Deployed)
-```
+![virt-operator 元件概觀](/diagrams/kubevirt/kubevirt-virt-operator-overview.png)
 
 ## 部署資訊
 
@@ -196,30 +174,7 @@ status:
 
 當使用者更新 KubeVirt CR 的 `imageTag` 時：
 
-```
-1. virt-operator 偵測 KubeVirt CR 變更
-        │
-        ▼
-2. 載入新版本的 Install Strategy
-   (以 ConfigMap 形式存儲在 kubevirt namespace)
-        │
-        ▼
-3. 滾動更新 virt-api Deployment
-        │
-        ▼
-4. 滾動更新 virt-controller Deployment
-        │
-        ▼
-5. 更新 virt-handler DaemonSet
-        │
-        ▼
-6. 根據 workloadUpdateStrategy 更新執行中的 VM
-   ● LiveMigrate：將 VM live migrate 到新版 virt-launcher
-   ● Evict：驅逐 VM pod，等待重排
-        │
-        ▼
-7. 更新 KubeVirt CR status.phase → Deployed
-```
+![virt-operator 升級流程](/diagrams/kubevirt/kubevirt-virt-operator-upgrade.png)
 
 ## 重要原始碼位置
 

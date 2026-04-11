@@ -186,18 +186,7 @@ KubeVirt 的 ContainerDisk 機制將磁碟映像打包在 OCI 容器中，
 
 ### 運作機制
 
-```
-                                    Kubernetes Log System
-                                          ▲
-                                          │ stdout
-┌─────────────┐    ┌─────────────┐    ┌───┴──────────┐
-│   QEMU VM   │───▶│ serial port │───▶│  virt-tail   │
-│  (Guest OS) │    │   log file  │    │ (tail -f)    │
-└─────────────┘    └─────────────┘    └──────────────┘
-                         │
-            /var/run/kubevirt/private/
-            <vmi-uid>/virt-serial0-log
-```
+![virt-tail 串列主控台日誌流程](/diagrams/kubevirt/kubevirt-virt-tail-flow.png)
 
 ### 啟用條件
 
