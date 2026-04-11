@@ -33,19 +33,7 @@ layout: doc
 
 ## 運作流程
 
-```
-使用者建立 NodeMaintenance CR
-        │
-        ▼
-Operator 監聽到 CR（Reconcile 觸發）
-        │
-        ├─► 封鎖節點（cordon）
-        ├─► 套用 taint（NoSchedule / NoExecute）
-        ├─► 驅逐所有 Pod（eviction loop）
-        │
-        ▼
-CR 刪除時：取消封鎖、移除 taint
-```
+![Node Maintenance Operator 運作流程](/diagrams/node-maintenance-operator/nmo-workflow.png)
 
 ## 快速開始
 

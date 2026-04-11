@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 460" width="660" height="460">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowbranch" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="660" height="460" fill="#ffffff"/>
+  <text x="330" y="36" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">Node Maintenance Operator — 運作流程</text>
+  <text x="330" y="58" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">從建立 CR 到節點維護完成的完整流程</text>
+  <rect x="155" y="80" width="350" height="44" rx="7" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="330" y="100" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827">使用者建立 NodeMaintenance CR</text>
+  <rect x="155" y="172" width="350" height="44" rx="7" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+  <text x="330" y="188" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827">Operator 監聽到 CR</text>
+  <text x="330" y="205" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">Reconcile 觸發</text>
+  <rect x="155" y="360" width="350" height="44" rx="7" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+  <text x="330" y="376" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827">CR 刪除時</text>
+  <text x="330" y="393" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">取消封鎖（uncordon）、移除 taint</text>
+  <line x1="330" y1="124" x2="330" y2="172" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="150" y="250" width="360" height="28" rx="5" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.5"/>
+  <text x="168" y="269" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="600" fill="#111827">封鎖節點（cordon）</text>
+  <rect x="150" y="284" width="360" height="28" rx="5" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.5"/>
+  <text x="168" y="303" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="600" fill="#111827">套用 taint（NoSchedule / NoExecute）</text>
+  <rect x="150" y="318" width="360" height="28" rx="5" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.5"/>
+  <text x="168" y="337" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="600" fill="#111827">驅逐所有 Pod（eviction loop）</text>
+  <line x1="330" y1="216" x2="330" y2="250" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="330" y1="352" x2="330" y2="360" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>

@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 660" width="880" height="660">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowbranch" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="880" height="660" fill="#ffffff"/>
+  <text x="440" y="36" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">NetBox — 儲存庫目錄結構</text>
+  <text x="440" y="58" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">Git Repository 根目錄</text>
+  <rect x="20" y="74" width="416" height="24" rx="4" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="28" y="90" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#1e40af">netbox/</text>
+  <text x="90" y="90" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">Git Repository 根目錄</text>
+  <rect x="38" y="102" width="398" height="24" rx="4" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1"/>
+  <text x="46" y="118" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#065f46">netbox/</text>
+  <text x="108" y="118" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">Django 專案根目錄</text>
+  <rect x="56" y="130" width="380" height="24" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="64" y="146" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#6b7280">manage.py</text>
+  <text x="142" y="146" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">Django CLI 入口</text>
+  <rect x="56" y="158" width="380" height="24" rx="4" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+  <text x="64" y="174" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#7c3aed">netbox/</text>
+  <text x="126" y="174" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">Core settings module</text>
+  <rect x="74" y="186" width="362" height="24" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="82" y="202" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#6b7280">settings.py</text>
+  <text x="176" y="202" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">主要設定檔</text>
+  <rect x="74" y="214" width="362" height="24" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="82" y="230" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#6b7280">urls.py</text>
+  <text x="144" y="230" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">URL routing</text>
+  <rect x="74" y="242" width="362" height="24" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="82" y="258" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#6b7280">wsgi.py</text>
+  <text x="144" y="258" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">WSGI entry point</text>
+  <rect x="74" y="270" width="362" height="24" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="82" y="286" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#6b7280">middleware.py</text>
+  <text x="192" y="286" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">自訂 Middleware</text>
+  <rect x="74" y="298" width="362" height="24" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="82" y="314" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#374151">plugins/</text>
+  <text x="152" y="314" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">Plugin 框架</text>
+  <rect x="74" y="326" width="362" height="24" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="82" y="342" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#374151">graphql/</text>
+  <text x="152" y="342" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">GraphQL schema (Strawberry)</text>
+  <rect x="74" y="354" width="362" height="24" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="82" y="370" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#374151">api/</text>
+  <text x="120" y="370" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">共用 API 基礎類別</text>
+  <rect x="74" y="382" width="362" height="24" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="82" y="398" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#374151">authentication/</text>
+  <text x="208" y="398" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">認證後端</text>
+  <rect x="56" y="410" width="380" height="24" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="64" y="426" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#1d4ed8">dcim/</text>
+  <text x="110" y="426" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">53 models — 資料中心基礎設施</text>
+  <rect x="56" y="438" width="380" height="24" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="64" y="454" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#1d4ed8">ipam/</text>
+  <text x="110" y="454" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">18 models — IP 位址管理</text>
+  <rect x="56" y="466" width="380" height="24" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="64" y="482" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#1d4ed8">extras/</text>
+  <text x="126" y="482" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">19 models — 擴充功能（Webhook、CustomField）</text>
+  <rect x="56" y="494" width="380" height="24" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="64" y="510" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#1d4ed8">circuits/</text>
+  <text x="142" y="510" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">10 models — 線路管理</text>
+  <rect x="486" y="74" width="380" height="24" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="494" y="90" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#1d4ed8">virtualization/</text>
+  <text x="620" y="90" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">7 models — 虛擬化</text>
+  <rect x="486" y="102" width="380" height="24" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="494" y="118" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#1d4ed8">vpn/</text>
+  <text x="532" y="118" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">10 models — VPN 管理</text>
+  <rect x="486" y="130" width="380" height="24" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="494" y="146" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#1d4ed8">tenancy/</text>
+  <text x="564" y="146" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">6 models — 多租戶</text>
+  <rect x="486" y="158" width="380" height="24" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="494" y="174" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#1d4ed8">users/</text>
+  <text x="548" y="174" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">6 models — 使用者管理</text>
+  <rect x="486" y="186" width="380" height="24" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="494" y="202" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#1d4ed8">wireless/</text>
+  <text x="572" y="202" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">4 models — 無線網路</text>
+  <rect x="486" y="214" width="380" height="24" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="494" y="230" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#1d4ed8">core/</text>
+  <text x="540" y="230" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">7 models — 核心功能</text>
+  <rect x="486" y="242" width="380" height="24" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="494" y="258" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#1d4ed8">utilities/</text>
+  <text x="580" y="258" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">無 Model — 工具函式庫</text>
+  <rect x="468" y="270" width="398" height="24" rx="4" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1"/>
+  <text x="476" y="286" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#065f46">contrib/</text>
+  <text x="546" y="286" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">部署設定</text>
+  <rect x="486" y="298" width="380" height="24" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="494" y="314" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#6b7280">gunicorn.py</text>
+  <text x="588" y="314" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">Gunicorn WSGI 設定</text>
+  <rect x="486" y="326" width="380" height="24" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="494" y="342" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#6b7280">nginx.conf</text>
+  <text x="580" y="342" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">Nginx 反向代理設定</text>
+  <rect x="486" y="354" width="380" height="24" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="494" y="370" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#6b7280">netbox.service</text>
+  <text x="612" y="370" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">systemd — Gunicorn 服務</text>
+  <rect x="486" y="382" width="380" height="24" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="494" y="398" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#6b7280">netbox-rq.service</text>
+  <text x="636" y="398" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">systemd — RQ Worker 服務</text>
+  <rect x="468" y="410" width="398" height="24" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="476" y="426" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#6b7280">requirements.txt</text>
+  <text x="610" y="426" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">Python 依賴</text>
+  <rect x="468" y="438" width="398" height="24" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="476" y="454" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#6b7280">pyproject.toml</text>
+  <text x="594" y="454" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280">專案 metadata (v4.5.7)</text>
+</svg>
