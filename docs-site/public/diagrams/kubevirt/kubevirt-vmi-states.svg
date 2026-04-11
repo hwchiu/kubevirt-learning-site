@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="960" height="520">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow2" markerWidth="9" markerHeight="7" refX="0.5" refY="3.5" orient="auto-start-reverse">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="960" height="520" fill="#ffffff"/>
+  <text x="480" y="22" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280" letter-spacing="0.5">VMI 狀態轉換圖</text>
+  <rect x="60" y="50" width="160" height="64" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="140" y="78" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="600" fill="#111827">Pending</text>
+  <text x="140" y="96" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">等待 Pod 調度</text>
+  <rect x="280" y="50" width="160" height="64" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="360" y="78" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="600" fill="#111827">Scheduling</text>
+  <text x="360" y="96" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">virt-handler 處理</text>
+  <rect x="500" y="50" width="160" height="64" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="580" y="78" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="600" fill="#111827">Scheduled</text>
+  <text x="580" y="96" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">Domain XML 完成</text>
+  <rect x="380" y="200" width="160" height="64" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="460" y="228" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="600" fill="#111827">Running</text>
+  <text x="460" y="246" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">VM 正常執行</text>
+  <rect x="60" y="360" width="160" height="64" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="140" y="388" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="600" fill="#111827">Migrating</text>
+  <text x="140" y="406" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">Live Migration</text>
+  <rect x="280" y="360" width="160" height="64" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="360" y="388" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="600" fill="#111827">Paused</text>
+  <text x="360" y="406" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">已暫停</text>
+  <rect x="500" y="360" width="160" height="64" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="580" y="388" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="600" fill="#111827">Succeeded</text>
+  <text x="580" y="406" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">正常關機</text>
+  <rect x="720" y="360" width="160" height="64" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="800" y="388" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="600" fill="#111827">Failed</text>
+  <text x="800" y="406" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">異常終止</text>
+  <line x1="220" y1="82" x2="280" y2="82" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="250" y="74" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#3b82f6">Pod 調度</text>
+  <line x1="440" y1="82" x2="500" y2="82" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="470" y="74" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#3b82f6">節點就緒</text>
+  <path d="M580,114 L460,200" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="540" y="165" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#3b82f6">QEMU 啟動</text>
+  <path d="M380,232 C250,232 140,360 140,360" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="200" y="294" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#3b82f6">Live Migration</text>
+  <path d="M460,264 L360,360" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="385" y="295" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#3b82f6">virsh pause</text>
+  <path d="M540,232 C560,232 580,360 580,360" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="600" y="294" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#3b82f6">正常關機</text>
+  <path d="M540,216 C700,200 800,360 800,360" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="700" y="180" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#3b82f6">崩潰/錯誤</text>
+  <text x="140" y="442" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">→ 新節點上繼續執行</text>
+  <text x="360" y="442" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">→ unpause 後恢復</text>
+</svg>

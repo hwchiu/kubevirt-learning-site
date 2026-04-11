@@ -29,42 +29,7 @@ VirtualMachine (VM)
 
 ## VMI 狀態轉換圖
 
-```
-                   kubectl apply VM
-                        │
-                        ▼
-                   ┌─────────┐
-                   │ Pending  │  ← virt-controller 建立 Pod，等待調度
-                   └────┬────┘
-                        │ Pod 被調度到節點
-                        ▼
-                 ┌────────────┐
-                 │ Scheduling  │  ← virt-handler 開始處理
-                 └─────┬──────┘
-                       │ 節點準備完成
-                       ▼
-                 ┌───────────┐
-                 │ Scheduled  │  ← libvirt domain 定義完成
-                 └─────┬─────┘
-                       │ QEMU 啟動
-                       ▼
-                 ┌─────────┐
-                 │ Running  │  ← VM 正常執行
-                 └────┬────┘
-                      │
-          ┌───────────┼───────────┐
-          ▼           ▼           ▼
-    ┌──────────┐ ┌─────────┐ ┌──────────┐
-    │ Migrating│ │ Paused  │ │Succeeded │
-    └────┬─────┘ └────┬────┘ └──────────┘
-         │            │
-         ▼            ▼
-      Running      Running
-   (新節點上)    (unpause 後)
-                             ┌──────────┐
-                             │  Failed  │
-                             └──────────┘
-```
+![VMI 狀態轉換圖](/diagrams/kubevirt/kubevirt-vmi-states.png)
 
 ## VM 可列印狀態 (PrintableStatus)
 

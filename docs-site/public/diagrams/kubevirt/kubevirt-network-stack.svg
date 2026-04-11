@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 590" width="960" height="590">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow2" markerWidth="9" markerHeight="7" refX="0.5" refY="3.5" orient="auto-start-reverse">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="960" height="590" fill="#ffffff"/>
+  <text x="480" y="22" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280" letter-spacing="0.5">VM 網路架構</text>
+  <rect x="30" y="40" width="900" height="530" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="50" y="62" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" font-weight="600" fill="#64748b" letter-spacing="0.5">KUBERNETES NODE</text>
+  <text x="930" y="540" text-anchor="end" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#94a3b8">eth0: 192.168.1.10/24 (Node IP)</text>
+  <rect x="80" y="80" width="750" height="420" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="100" y="100" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" font-weight="600" fill="#6366f1" letter-spacing="0.5">VIRT-LAUNCHER POD</text>
+  <text x="810" y="470" text-anchor="end" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">eth0: 10.244.1.5/24 (Pod IP)</text>
+  <rect x="130" y="120" width="620" height="320" rx="6" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.5"/>
+  <text x="150" y="140" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" font-weight="600" fill="#ea580c" letter-spacing="0.5">QEMU PROCESS</text>
+  <rect x="180" y="160" width="480" height="200" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <text x="200" y="180" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" font-weight="600" fill="#16a34a" letter-spacing="0.5">GUEST OS (LINUX / WINDOWS)</text>
+  <rect x="220" y="195" width="400" height="50" rx="5" fill="#ffffff" stroke="#86efac" stroke-width="1"/>
+  <text x="420" y="217" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">eth0</text>
+  <text x="420" y="235" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">192.168.100.10/24 (Guest IP)</text>
+  <rect x="220" y="270" width="400" height="42" rx="5" fill="#ffffff" stroke="#86efac" stroke-width="1"/>
+  <text x="420" y="296" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">virtio-net（KVM 虛擬網卡）</text>
+  <line x1="420" y1="245" x2="420" y2="270" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="180" y="385" width="480" height="42" rx="5" fill="#fff7ed" stroke="#fed7aa" stroke-width="1"/>
+  <text x="420" y="406" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#ea580c">tap0 / Linux Bridge</text>
+  <text x="420" y="420" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">L2 橋接：連結 Guest NIC 與 Pod eth0</text>
+  <line x1="420" y1="360" x2="420" y2="385" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="130" y="460" width="620" height="28" rx="5" fill="#ffffff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="440" y="479" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">Pod eth0（veth pair）— CNI Plugin 管理</text>
+  <line x1="420" y1="427" x2="420" y2="460" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="30" y="490" width="900" height="30" rx="5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+  <text x="480" y="510" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#475569">Node CNI (Calico / Cilium / Flannel) — 管理叢集層級網路</text>
+  <line x1="420" y1="488" x2="420" y2="490" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>

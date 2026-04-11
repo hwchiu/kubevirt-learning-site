@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 820" width="960" height="820">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow2" markerWidth="9" markerHeight="7" refX="0.5" refY="3.5" orient="auto-start-reverse">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="960" height="820" fill="#ffffff"/>
+  <text x="480" y="22" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#6b7280" letter-spacing="0.5">VM 建立資料流</text>
+  <rect x="20" y="46" width="160" height="28" rx="5" fill="#e0f2fe" stroke="#7dd3fc" stroke-width="1.2"/>
+  <text x="100" y="65" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#111827">使用者</text>
+  <rect x="200" y="42" width="560" height="72" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="66" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="600" fill="#111827">kubectl apply -f my-vm.yaml</text>
+  <circle cx="182" cy="78" r="13" fill="#3b82f6"/>
+  <text x="182" y="83" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#ffffff">1</text>
+  <line x1="480" y1="114" x2="480" y2="130" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="20" y="134" width="160" height="28" rx="5" fill="#f0fdf4" stroke="#86efac" stroke-width="1.2"/>
+  <text x="100" y="153" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#111827">virt-api</text>
+  <rect x="200" y="130" width="560" height="102" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="154" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="600" fill="#111827">Webhook 驗證 &amp; 補值</text>
+  <text x="480" y="172" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">Mutating → 補齊預設值</text>
+  <text x="480" y="188" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">Validating → 驗證 Spec</text>
+  <circle cx="182" cy="181" r="13" fill="#3b82f6"/>
+  <text x="182" y="186" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#ffffff">2</text>
+  <line x1="480" y1="232" x2="480" y2="248" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="20" y="222" width="160" height="28" rx="5" fill="#fef9c3" stroke="#fde047" stroke-width="1.2"/>
+  <text x="100" y="241" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#111827">virt-controller</text>
+  <rect x="200" y="218" width="560" height="87" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="242" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="600" fill="#111827">建立 VirtualMachineInstance (VMI)</text>
+  <text x="480" y="260" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">VM Controller 監聽 VM CR</text>
+  <circle cx="182" cy="261" r="13" fill="#3b82f6"/>
+  <text x="182" y="266" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#ffffff">3</text>
+  <line x1="480" y1="305" x2="480" y2="321" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="20" y="310" width="160" height="28" rx="5" fill="#fef9c3" stroke="#fde047" stroke-width="1.2"/>
+  <text x="100" y="329" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#111827">virt-controller</text>
+  <rect x="200" y="306" width="560" height="102" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="330" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="600" fill="#111827">建立 virt-launcher Pod</text>
+  <text x="480" y="348" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">VMI Controller 監聽 VMI CR</text>
+  <text x="480" y="364" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">包含 libvirt / QEMU 容器</text>
+  <circle cx="182" cy="357" r="13" fill="#3b82f6"/>
+  <text x="182" y="362" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#ffffff">4</text>
+  <line x1="480" y1="408" x2="480" y2="424" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="20" y="398" width="160" height="28" rx="5" fill="#fdf2f8" stroke="#f0abfc" stroke-width="1.2"/>
+  <text x="100" y="417" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#111827">kube-scheduler</text>
+  <rect x="200" y="394" width="560" height="87" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="418" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="600" fill="#111827">調度到目標節點</text>
+  <text x="480" y="436" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">kubelet 拉起 virt-launcher Pod</text>
+  <circle cx="182" cy="437" r="13" fill="#3b82f6"/>
+  <text x="182" y="442" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#ffffff">5</text>
+  <line x1="480" y1="481" x2="480" y2="497" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="20" y="486" width="160" height="28" rx="5" fill="#fef9c3" stroke="#fde047" stroke-width="1.2"/>
+  <text x="100" y="505" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#111827">virt-controller</text>
+  <rect x="200" y="482" width="560" height="87" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="506" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="600" fill="#111827">更新 VMI.spec.nodeName</text>
+  <text x="480" y="524" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">Pod Running → 更新節點資訊</text>
+  <circle cx="182" cy="525" r="13" fill="#3b82f6"/>
+  <text x="182" y="530" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#ffffff">6</text>
+  <line x1="480" y1="569" x2="480" y2="585" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="20" y="574" width="160" height="28" rx="5" fill="#fff7ed" stroke="#fdba74" stroke-width="1.2"/>
+  <text x="100" y="593" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#111827">virt-handler</text>
+  <rect x="200" y="570" width="560" height="102" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="480" y="594" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="600" fill="#111827">建立 libvirt Domain 並啟動 QEMU</text>
+  <text x="480" y="612" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">讀取 VMI Spec → 轉為 domain XML</text>
+  <text x="480" y="628" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6b7280">呼叫 libvirtd → QEMU 程序啟動</text>
+  <circle cx="182" cy="621" r="13" fill="#3b82f6"/>
+  <text x="182" y="626" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#ffffff">7</text>
+</svg>
