@@ -40,46 +40,7 @@ VERSION = RELEASE.full_version  # Retained for backward compatibility
 
 下圖展示 NetBox 的完整部署架構，從使用者請求到後端各元件之間的互動關係：
 
-```mermaid
-graph TB
-    subgraph Client["使用者端"]
-        Browser["瀏覽器 / API Client"]
-    end
-
-    subgraph ReverseProxy["反向代理層"]
-        Nginx["Nginx<br/>:443 SSL → :80 redirect<br/>靜態檔案 /static/"]
-    end
-
-    subgraph AppServer["應用伺服器層"]
-        Gunicorn["Gunicorn WSGI<br/>127.0.0.1:8001<br/>5 workers × 3 threads"]
-        Django["Django 5.2.12<br/>Middleware Pipeline"]
-    end
-
-    subgraph DataStore["資料儲存層"]
-        PostgreSQL[("PostgreSQL<br/>主要資料庫")]
-        Redis[("Redis<br/>Cache + Queue Broker")]
-    end
-
-    subgraph BackgroundWorker["背景工作層"]
-        RQWorker["RQ Worker<br/>high / default / low queues"]
-    end
-
-    subgraph APILayer["API 層"]
-        REST["REST API<br/>DRF 3.16.1"]
-        GraphQL["GraphQL<br/>Strawberry"]
-    end
-
-    Browser -->|HTTPS :443| Nginx
-    Nginx -->|proxy_pass :8001| Gunicorn
-    Gunicorn --> Django
-    Django --> REST
-    Django --> GraphQL
-    Django -->|ORM| PostgreSQL
-    Django -->|Cache| Redis
-    RQWorker -->|Dequeue Jobs| Redis
-    RQWorker -->|ORM| PostgreSQL
-    Django -->|Enqueue Jobs| Redis
-```
+![NetBox 系統部署架構](/diagrams/netbox/netbox-arch-1.png)
 
 ---
 
@@ -194,23 +155,7 @@ if METRICS_ENABLED:
 
 ### Middleware 處理流程
 
-```mermaid
-graph LR
-    Req["HTTP Request"] --> CORS["CorsMiddleware"]
-    CORS --> Session["SessionMiddleware"]
-    Session --> Locale["LocaleMiddleware"]
-    Locale --> Common["CommonMiddleware"]
-    Common --> CSRF["CsrfViewMiddleware"]
-    CSRF --> Auth["AuthenticationMiddleware"]
-    Auth --> Message["MessageMiddleware"]
-    Message --> XFrame["XFrameOptionsMiddleware"]
-    XFrame --> Security["SecurityMiddleware"]
-    Security --> HTMX["HtmxMiddleware"]
-    HTMX --> Remote["RemoteUserMiddleware"]
-    Remote --> Core["CoreMiddleware"]
-    Core --> Maint["MaintenanceModeMiddleware"]
-    Maint --> View["Django View"]
-```
+![Middleware 處理流程](/diagrams/netbox/netbox-arch-2.png)
 
 > **注意：** 若啟用 Prometheus metrics，會在 Pipeline 的最前方及最後方各加入一個 Middleware 來計算請求處理時間。Plugin 也可以透過 `middleware` 屬性注入自訂 Middleware。
 
@@ -324,28 +269,7 @@ for plugin_name in PLUGINS:
 
 ### 6.4 Plugin 整合點一覽
 
-```mermaid
-graph TB
-    Plugin["Plugin (PluginConfig)"]
-
-    Plugin --> MW["middleware<br/>注入 MIDDLEWARE 列表"]
-    Plugin --> Queue["queues<br/>建立 RQ 佇列<br/>{plugin}.{queue}"]
-    Plugin --> Events["events_pipeline<br/>事件處理管線"]
-    Plugin --> Search["search_indexes<br/>全文搜尋索引"]
-    Plugin --> GQL["graphql_schema<br/>擴充 GraphQL Schema"]
-    Plugin --> Menu["menu / menu_items<br/>導航選單"]
-    Plugin --> TPL["template_extensions<br/>模板擴充"]
-    Plugin --> Pref["user_preferences<br/>使用者偏好"]
-    Plugin --> Backend["data_backends<br/>資料後端"]
-
-    subgraph URL["URL Routing"]
-        WebURL["/plugins/{name}/"]
-        APIURL["/api/plugins/{name}/"]
-    end
-
-    Plugin --> WebURL
-    Plugin --> APIURL
-```
+![Plugin 整合點一覽](/diagrams/netbox/netbox-arch-3.png)
 
 ---
 
@@ -468,25 +392,7 @@ server {
 
 `upgrade.sh` 是 NetBox 官方提供的一鍵升級腳本，支援 `--readonly` 旗標跳過資料庫變更：
 
-```mermaid
-graph TD
-    A["1. 檢查 Python ≥ 3.12"] --> B["2. 建立 / 重建 virtualenv"]
-    B --> C["3. 升級 pip"]
-    C --> D["4. 安裝 wheel"]
-    D --> E["5. 安裝 requirements.txt"]
-    E --> F["6. 安裝 local_requirements.txt<br/>（若存在）"]
-    F --> G{"--readonly?"}
-    G -->|No| H["7. 執行 Database Migrations"]
-    G -->|Yes| I["跳過資料庫變更"]
-    H --> J["8. Trace 遺漏的 Cable Paths"]
-    I --> J
-    J --> K["9. 建構 MkDocs 文件"]
-    K --> L["10. collectstatic 收集靜態檔案"]
-    L --> M["11. 移除過期 Content Types"]
-    M --> N["12. 重建搜尋索引（lazy）"]
-    N --> O["13. 清除過期 Sessions"]
-    O --> P["14. 完成，提示重啟服務"]
-```
+![upgrade.sh 升級流程](/diagrams/netbox/netbox-arch-4.png)
 
 ---
 
@@ -524,15 +430,7 @@ except ModuleNotFoundError as e:
 
 部分設定可透過 Web UI 動態修改，儲存在資料庫的 `ConfigRevision` model 中，無需重啟服務：
 
-```mermaid
-graph LR
-    Static["configuration.py<br/>（靜態設定）<br/>SECRET_KEY, DATABASE, REDIS"]
-    Dynamic["ConfigRevision (DB)<br/>（動態設定）<br/>UI 可修改的參數"]
-    Settings["Django settings.py<br/>合併載入"]
-
-    Static --> Settings
-    Dynamic --> Settings
-```
+![動態設定管理架構](/diagrams/netbox/netbox-arch-5.png)
 
 靜態設定（如資料庫連線、密鑰）必須寫在 `configuration.py` 中；而顯示相關、功能開關等參數可在 Admin UI 中即時調整，由 `ConfigRevision` model 管理版本歷史。
 

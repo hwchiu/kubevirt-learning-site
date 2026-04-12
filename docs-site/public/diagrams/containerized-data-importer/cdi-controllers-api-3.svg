@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="720" viewBox="0 0 820 720">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5,8.5 3.5,0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="820" height="720" fill="#ffffff"/>
+  <rect x="240" y="30" width="340" height="42" rx="6" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="410" y="57" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">收到 DataVolume Admission Request</text>
+  <line x1="410.0" y1="72.0" x2="410.0" y2="100.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <polygon points="410,93 490,120 410,147 330,120" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="410" y="124" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">Delete 操作?</text>
+  <rect x="620" y="100" width="120" height="42" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="680" y="127" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">跳過，允許</text>
+  <line x1="490.0" y1="120.0" x2="620.0" y2="121.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="545.2" y="107.5" width="19.5" height="13" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="555.0" y="118.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">是</text>
+  <rect x="240" y="175" width="340" height="42" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="410" y="202" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">SubjectAccessReview 授權檢查</text>
+  <line x1="410.0" y1="147.0" x2="410.0" y2="175.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="400.2" y="148.0" width="19.5" height="13" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="410.0" y="159.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">否</text>
+  <line x1="410.0" y1="217.0" x2="410.0" y2="260.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <polygon points="410,253 490,280 410,307 330,280" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="410" y="284" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">Create 操作?</text>
+  <rect x="620" y="260" width="120" height="42" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="680" y="287" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">允許</text>
+  <line x1="490.0" y1="280.0" x2="620.0" y2="281.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="545.2" y="267.5" width="19.5" height="13" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="555.0" y="278.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">否</text>
+  <line x1="410.0" y1="307.0" x2="410.0" y2="375.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <polygon points="410,368 520,395 410,422 300,395" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="410" y="399" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="600" text-anchor="middle" fill="#111827">來源是 PVC/Snapshot clone?</text>
+  <line x1="520.0" y1="395.0" x2="620.0" y2="330.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="620.0" y1="330.0" x2="620.0" y2="281.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="240" y="460" width="340" height="42" rx="6" fill="#fef9c3" stroke="#fde68a" stroke-width="1.5"/>
+  <text x="410" y="487" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">產生 Clone Token</text>
+  <line x1="410.0" y1="422.0" x2="410.0" y2="460.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="400.2" y="428.0" width="19.5" height="13" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="410.0" y="439.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">是</text>
+  <rect x="240" y="535" width="340" height="42" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="410" y="562" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">設定 annotation: AnnCloneToken</text>
+  <line x1="410.0" y1="502.0" x2="410.0" y2="535.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="240" y="615" width="340" height="42" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="410" y="642" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">允許</text>
+  <line x1="410.0" y1="577.0" x2="410.0" y2="615.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="620" y1="281" x2="680" y2="281" stroke="#3b82f6" stroke-width="1.5"/>
+  <line x1="680" y1="281" x2="680" y2="634" stroke="#3b82f6" stroke-width="1.5"/>
+  <line x1="680.0" y1="634.0" x2="580.0" y2="634.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="410" y="708" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#6b7280">DataVolume Mutating Webhook 流程</text>
+</svg>

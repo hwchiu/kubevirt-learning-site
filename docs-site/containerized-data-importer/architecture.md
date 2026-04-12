@@ -32,70 +32,7 @@ CDI 支援多種資料來源匯入，包括 HTTP/HTTPS、S3、GCS、Container Re
 
 ## 系統架構圖
 
-```mermaid
-graph TB
-    subgraph "Control Plane"
-        OP[cdi-operator]
-        CTRL[cdi-controller]
-        API[cdi-apiserver]
-    end
-
-    subgraph "Data Plane - Worker Pods"
-        IMP[cdi-importer Pod]
-        CLN[cdi-cloner Pod]
-        UPS[cdi-uploadserver Pod]
-    end
-
-    subgraph "Proxy Layer"
-        UPP[cdi-uploadproxy]
-    end
-
-    subgraph "Volume Populators"
-        OVP[ovirt-populator]
-        OSP[openstack-populator]
-    end
-
-    subgraph "Kubernetes Resources"
-        K8S[Kubernetes API Server]
-        PVC[PVC]
-        VS[VolumeSnapshot]
-        SC[StorageClass]
-    end
-
-    subgraph "External Sources"
-        HTTP[HTTP/S3/GCS]
-        REG[Container Registry]
-        IMAGEIO[oVirt ImageIO]
-        VDDK[VMware VDDK]
-        CLIENT[Upload Client]
-    end
-
-    OP -->|部署與管理| CTRL
-    OP -->|部署與管理| API
-    OP -->|部署與管理| UPP
-    CTRL -->|建立 Worker Pod| IMP
-    CTRL -->|建立 Worker Pod| CLN
-    CTRL -->|建立 Worker Pod| UPS
-    CTRL -->|監控| K8S
-    API -->|Webhook 驗證| K8S
-    API -->|簽發 Upload Token| UPP
-
-    IMP -->|寫入資料| PVC
-    CLN -->|讀取/寫入| PVC
-    CLN -->|建立| VS
-    UPS -->|寫入資料| PVC
-    UPP -->|轉發請求| UPS
-    OVP -->|寫入資料| PVC
-    OSP -->|寫入資料| PVC
-
-    IMP --- HTTP
-    IMP --- REG
-    IMP --- IMAGEIO
-    IMP --- VDDK
-    CLIENT -->|上傳| UPP
-
-    CTRL -->|讀取| SC
-```
+![CDI 系統架構圖](/diagrams/containerized-data-importer/cdi-architecture-1.png)
 
 ::: tip 架構要點
 CDI 採用典型的 Kubernetes Operator 模式：**控制平面**（Operator、Controller、API Server）負責協調，**資料平面**（Importer、Cloner、Upload Server）以短生命週期 Pod 執行實際資料搬移。
@@ -228,51 +165,7 @@ CDI 採用 **Bazel + Make** 混合建置系統。專案中包含大量 `BUILD.ba
 
 DataVolume 的狀態（Phase）定義於 `staging/src/kubevirt.io/containerized-data-importer-api/pkg/apis/core/v1beta1/types.go`，共計 21 種狀態：
 
-```mermaid
-stateDiagram-v2
-    [*] --> Pending : 建立 DataVolume
-
-    Pending --> PVCBound : PVC 已綁定
-    Pending --> WaitForFirstConsumer : StorageClass 為 WaitForFirstConsumer
-    WaitForFirstConsumer --> PVCBound : Consumer Pod 排程後綁定
-
-    state "Import 路徑" as import_path {
-        ImportScheduled --> ImportInProgress : Worker Pod 啟動
-        ImportInProgress --> Succeeded : 匯入完成
-    }
-    PVCBound --> ImportScheduled : 排程匯入
-
-    state "Clone 路徑" as clone_path {
-        CloneScheduled --> CSICloneInProgress : CSI Clone
-        CloneScheduled --> SnapshotForSmartCloneInProgress : Snapshot Clone
-        CloneScheduled --> CloneInProgress : Host-Assisted Clone
-        SnapshotForSmartCloneInProgress --> CloneFromSnapshotSourceInProgress
-        CloneFromSnapshotSourceInProgress --> SmartClonePVCInProgress
-        SmartClonePVCInProgress --> Succeeded
-        CSICloneInProgress --> Succeeded
-        CloneInProgress --> Succeeded
-    }
-    PVCBound --> CloneScheduled : 排程複製
-
-    state "Upload 路徑" as upload_path {
-        UploadScheduled --> UploadReady : Upload Server 就緒
-        UploadReady --> Succeeded : 上傳完成
-    }
-    PVCBound --> UploadScheduled : 排程上傳
-
-    state "其他路徑" as other_path {
-        ExpansionInProgress --> Succeeded : 擴展完成
-        NamespaceTransferInProgress --> Succeeded : 傳輸完成
-        PendingPopulation --> Succeeded : Populator 完成
-    }
-
-    Pending --> Paused : 暫停
-    ImportInProgress --> Failed : 匯入失敗
-    CloneInProgress --> Failed : 複製失敗
-    UploadReady --> Failed : 上傳失敗
-    Failed --> Pending : 重試
-    Paused --> Pending : 恢復
-```
+![DataVolume 生命週期狀態機](/diagrams/containerized-data-importer/cdi-architecture-2.png)
 
 ### 狀態完整列表
 

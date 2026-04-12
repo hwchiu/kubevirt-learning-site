@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="680" viewBox="0 0 960 680">
+<defs>
+  <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <path d="M0,0 L0,6 L8,3 z" fill="#3b82f6"/>
+  </marker>
+  <marker id="arr_ret" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <path d="M0,0 L0,6 L8,3 z" fill="#94a3b8"/>
+  </marker>
+</defs>
+<rect width="960" height="680" fill="#ffffff"/>
+<rect x="60" y="20" width="120" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="120" y="47" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" font-weight="600">main()</text>
+<rect x="220" y="20" width="120" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="280" y="47" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" font-weight="600">git.go</text>
+<rect x="380" y="20" width="120" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="440" y="47" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" font-weight="600">parseMetrics</text>
+<rect x="540" y="20" width="120" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="600" y="47" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" font-weight="600">metrics.tmpl</text>
+<rect x="700" y="20" width="120" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="760" y="47" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" font-weight="600">GitHub API</text>
+<line x1="120" y1="64" x2="120" y2="650" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4"/>
+<line x1="280" y1="64" x2="280" y2="650" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4"/>
+<line x1="440" y1="64" x2="440" y2="650" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4"/>
+<line x1="600" y1="64" x2="600" y2="650" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4"/>
+<line x1="760" y1="64" x2="760" y2="650" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4"/>
+<path d="M120,90 L160,90 L160,118 L122,118" stroke="#3b82f6" stroke-width="1.5" fill="none"  marker-end="url(#arr)"/>
+<text x="166" y="104" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">parseArguments()</text>
+<text x="166" y="118" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">讀取 --config-file, --cache-dir</text>
+<line x1="120" y1="140" x2="280" y2="140" stroke="#3b82f6" stroke-width="1.5"  marker-end="url(#arr)"/>
+<text x="200" y="135" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">checkoutProjects()</text>
+<path d="M280,190 L320,190 L320,218 L282,218" stroke="#3b82f6" stroke-width="1.5" fill="none"  marker-end="url(#arr)"/>
+<text x="326" y="204" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">gitCheckoutUpstream()</text>
+<text x="326" y="218" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">clone 或 pull</text>
+<path d="M280,240 L320,240 L320,268 L282,268" stroke="#3b82f6" stroke-width="1.5" fill="none"  marker-end="url(#arr)"/>
+<text x="326" y="254" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">gitSwitchToBranch(version)</text>
+<rect x="200" y="170" width="160" height="115" rx="6" fill="#fef9f0" stroke="#fcd34d" stroke-width="1" stroke-dasharray="5,3"/>
+<rect x="200" y="170" width="48" height="18" rx="4" fill="#fcd34d"/>
+<text x="224" y="183" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="white" font-weight="600">loop</text>
+<text x="258" y="183" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">每個專案</text>
+<line x1="120" y1="305" x2="440" y2="305" stroke="#3b82f6" stroke-width="1.5"  marker-end="url(#arr)"/>
+<text x="280" y="300" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">parseMetrics()</text>
+<path d="M440,355 L480,355 L480,383 L442,383" stroke="#3b82f6" stroke-width="1.5" fill="none"  marker-end="url(#arr)"/>
+<text x="486" y="369" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">readLines(metricsDocPath)</text>
+<path d="M440,405 L480,405 L480,433 L442,433" stroke="#3b82f6" stroke-width="1.5" fill="none"  marker-end="url(#arr)"/>
+<text x="486" y="419" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">parseMetricsDoc(content)</text>
+<text x="486" y="433" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">解析 markdown 表格</text>
+<rect x="360" y="335" width="160" height="120" rx="6" fill="#fef9f0" stroke="#fcd34d" stroke-width="1" stroke-dasharray="5,3"/>
+<rect x="360" y="335" width="48" height="18" rx="4" fill="#fcd34d"/>
+<text x="384" y="348" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="white" font-weight="600">loop</text>
+<text x="418" y="348" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">每個專案</text>
+<path d="M120,475 L160,475 L160,503 L122,503" stroke="#3b82f6" stroke-width="1.5" fill="none"  marker-end="url(#arr)"/>
+<text x="166" y="489" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">writeMetrics(metrics)</text>
+<path d="M120,525 L160,525 L160,553 L122,553" stroke="#3b82f6" stroke-width="1.5" fill="none"  marker-end="url(#arr)"/>
+<text x="166" y="539" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">sortMetrics()</text>
+<text x="166" y="553" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">kubevirt 排首位</text>
+<line x1="120" y1="605" x2="760" y2="605" stroke="#3b82f6" stroke-width="1.5"  marker-end="url(#arr)"/>
+<text x="440" y="600" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">HTTP GET release info / 建立連結</text>
+<rect x="40" y="585" width="800" height="60" rx="6" fill="#fef9f0" stroke="#fcd34d" stroke-width="1" stroke-dasharray="5,3"/>
+<rect x="40" y="585" width="48" height="18" rx="4" fill="#fcd34d"/>
+<text x="64" y="598" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="white" font-weight="600">loop</text>
+<text x="98" y="598" text-anchor="start" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">每個 operator</text>
+<line x1="120" y1="665" x2="600" y2="665" stroke="#3b82f6" stroke-width="1.5"  marker-end="url(#arr)"/>
+<text x="360" y="660" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">Execute(templateData)</text>
+<line x1="600" y1="695" x2="120" y2="695" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arr_ret)"/>
+<text x="360" y="690" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">寫入 docs/metrics.md</text>
+</svg>

@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="580" viewBox="0 0 960 580">
+<rect width="960" height="580" fill="#ffffff"/>
+<defs>
+  <marker id="arr" markerWidth="10" markerHeight="8" refX="8" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6" />
+  </marker>
+  <marker id="arr_dash" markerWidth="10" markerHeight="8" refX="8" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6" />
+  </marker>
+</defs>
+<text x="480" y="36" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">KubeVirt Live Migration Architecture</text>
+<rect x="330" y="60" width="300" height="110" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="344" y="80" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#3b82f6">Control Plane</text>
+<rect x="340" y="82" width="130" height="40" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="405" y="94" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">virt-controller</text>
+<text x="405" y="112" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">Migration Controller</text>
+<rect x="482" y="82" width="130" height="40" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="547" y="107" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">K8s API Server</text>
+<rect x="30" y="220" width="270" height="280" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="44" y="240" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#3b82f6">Source Node</text>
+<rect x="50" y="250" width="110" height="40" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="105" y="262" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">virt-handler</text>
+<text x="105" y="280" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">Source</text>
+<rect x="170" y="250" width="110" height="40" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="225" y="262" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">virt-launcher</text>
+<text x="225" y="280" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">Source</text>
+<rect x="50" y="310" width="110" height="40" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="105" y="322" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">libvirtd</text>
+<text x="105" y="340" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">Source</text>
+<rect x="50" y="380" width="230" height="40" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="165" y="392" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">Migration Proxy</text>
+<text x="165" y="410" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">Unix Socket → TCP</text>
+<rect x="660" y="220" width="270" height="280" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="674" y="240" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#3b82f6">Target Node</text>
+<rect x="670" y="250" width="110" height="40" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="725" y="262" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">virt-handler</text>
+<text x="725" y="280" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">Target</text>
+<rect x="790" y="250" width="110" height="40" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="845" y="262" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">virt-launcher</text>
+<text x="845" y="280" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">Target</text>
+<rect x="670" y="310" width="110" height="40" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="725" y="322" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">libvirtd</text>
+<text x="725" y="340" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">Target</text>
+<rect x="670" y="380" width="230" height="40" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="785" y="392" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">Migration Proxy</text>
+<text x="785" y="410" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">TCP → Unix Socket</text>
+<line x1="470" y1="102" x2="482" y2="102" stroke="#3b82f6" stroke-width="1.5"  marker-end="url(#arr)"/>
+<line x1="405" y1="122" x2="405" y2="145" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="415" y="138" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">1. 建立 Target Pod</text>
+<line x1="612" y1="102" x2="720" y2="240" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="680" y="168" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">2. 排程到 Target</text>
+<line x1="780" y1="270" x2="790" y2="270" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="782" y="263" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">3. 準備 Domain</text>
+<line x1="845" y1="250" x2="612" y2="115" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="760" y="188" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">4. TargetReady</text>
+<line x1="330" y1="102" x2="155" y2="240" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="218" y="168" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">5. 觸發遷移</text>
+<line x1="160" y1="270" x2="170" y2="270" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="142" y="263" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">6. 開始遷移</text>
+<line x1="160" y1="270" x2="170" y2="270" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="105" y1="290" x2="105" y2="310" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="780" y1="270" x2="790" y2="270" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="725" y1="290" x2="725" y2="310" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="105" y1="350" x2="105" y2="380" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arr)"/>
+<line x1="280" y1="400" x2="660" y2="400" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arr)"/>
+<text x="470" y="393" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">記憶體資料流 TCP/TLS</text>
+<line x1="725" y1="380" x2="725" y2="350" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arr)"/>
+</svg>

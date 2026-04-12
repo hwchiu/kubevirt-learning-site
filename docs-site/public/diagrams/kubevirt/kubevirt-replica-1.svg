@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380">
+  <rect width="960" height="380" fill="#ffffff" />
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#3b82f6" />
+    </marker>
+  </defs>
+  <text x="480" y="28" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="17" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="bold">HPA 與 VMIRS/VirtualMachinePool 自動擴縮架構</text>
+  <rect x="60" y="150" width="180" height="70" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" rx="10" />
+  <text x="150" y="176" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">HPA</text>
+  <text x="150" y="194" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">(HorizontalPodAutoscaler)</text>
+  <rect x="320" y="60" width="200" height="60" fill="#fefce8" stroke="#fde68a" stroke-width="1.5" rx="10" />
+  <text x="420" y="81" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">Metrics Server</text>
+  <text x="420" y="99" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">或 Custom Metrics API</text>
+  <rect x="320" y="250" width="200" height="60" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" rx="10" />
+  <text x="420" y="271" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">VMIRS / VirtualMachinePool</text>
+  <text x="420" y="289" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">副本集控制器</text>
+  <rect x="600" y="150" width="90" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="10" />
+  <text x="645" y="175" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">VMI-0</text>
+  <rect x="720" y="150" width="90" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="10" />
+  <text x="765" y="175" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">VMI-1</text>
+  <rect x="840" y="150" width="90" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="10" />
+  <text x="885" y="175" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">VMI-N</text>
+  <line x1="240" y1="180" x2="320" y2="90" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
+  <text x="250" y="121" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">查詢 metrics</text>
+  <line x1="240" y1="195" x2="320" y2="280" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
+  <text x="250" y="251" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">調整 replicas</text>
+  <line x1="520" y1="280" x2="600" y2="200" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
+  <text x="560" y="228" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">管理</text>
+  <line x1="520" y1="280" x2="720" y2="200" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
+  <text x="620" y="228" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">管理</text>
+  <line x1="520" y1="280" x2="840" y2="200" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
+  <text x="680" y="228" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">管理</text>
+  <line x1="420" y1="120" x2="645" y2="150" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
+  <text x="532" y="123" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">收集自</text>
+  <line x1="420" y1="120" x2="765" y2="150" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
+  <text x="592" y="123" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">收集自</text>
+  <line x1="420" y1="120" x2="885" y2="150" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
+  <text x="652" y="123" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">收集自</text>
+</svg>

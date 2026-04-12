@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="580" viewBox="0 0 1100 580">
+<defs>
+  <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <path d="M0,0 L0,6 L8,3 z" fill="#3b82f6"/>
+  </marker>
+</defs>
+<rect width="1100" height="580" fill="#ffffff"/>
+<rect x="20" y="20" width="700" height="460" rx="12" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="34" y="38" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" font-weight="600">kubevirt/monitoring 核心工具</text>
+<rect x="40" y="45" width="150" height="100" rx="8" fill="rgba(255,255,255,0.7)" stroke="#c7d2fe" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="48" y="59" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">靜態分析</text>
+<rect x="55" y="65" width="120" height="60" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="115" y="85" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" font-weight="600">monitoringlinter</text>
+<text x="115" y="105" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">Go AST 分析器</text>
+<rect x="210" y="45" width="150" height="160" rx="8" fill="rgba(255,255,255,0.7)" stroke="#c7d2fe" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="218" y="59" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">文件生成</text>
+<rect x="225" y="65" width="120" height="55" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="285" y="82" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" font-weight="600">metricsdocs</text>
+<text x="285" y="102" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">指標文件彙整</text>
+<rect x="225" y="135" width="120" height="55" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="285" y="152" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" font-weight="600">metrics parser</text>
+<text x="285" y="172" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">Prometheus 指標解析</text>
+<rect x="380" y="45" width="160" height="100" rx="8" fill="rgba(255,255,255,0.7)" stroke="#c7d2fe" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="388" y="59" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">同步工具</text>
+<rect x="395" y="65" width="130" height="60" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="460" y="85" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" font-weight="600">runbook-sync-downstream</text>
+<text x="460" y="105" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">Runbook 下游同步</text>
+<rect x="40" y="195" width="150" height="100" rx="8" fill="rgba(255,255,255,0.7)" stroke="#c7d2fe" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="48" y="209" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">品質驗證</text>
+<rect x="55" y="215" width="120" height="60" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="115" y="235" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" font-weight="600">prom-metrics-linter</text>
+<text x="115" y="255" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">指標命名規範</text>
+<rect x="800" y="100" width="160" height="65" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="880" y="137" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" font-weight="600">各 KubeVirt Operator</text>
+<rect x="800" y="220" width="160" height="65" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="880" y="257" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" font-weight="600">docs/metrics.md</text>
+<rect x="800" y="340" width="160" height="65" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="880" y="377" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" font-weight="600">openshift/runbooks</text>
+<path d="M175,95 Q490,60 800,132" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+<text x="490" y="45" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">限制 prometheus.Register 到 pkg/monitoring</text>
+<path d="M360,92 Q600,180 800,252" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+<text x="600" y="168" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">克隆 9 個專案 / 解析指標表格</text>
+<line x1="345" y1="162" x2="175" y2="245" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="260" y="190" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">Metric → MetricFamily</text>
+<path d="M540,95 Q700,260 800,372" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+<text x="700" y="248" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">upstream → downstream / 自動建 PR</text>
+<path d="M175,275 Q490,350 800,165" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+<text x="490" y="365" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">前綴/後綴驗證</text>
+</svg>

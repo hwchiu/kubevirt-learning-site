@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="680" viewBox="0 0 900 680">
+<rect width="900" height="680" fill="#ffffff"/>
+<defs>
+  <marker id="arr" markerWidth="10" markerHeight="8" refX="8" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6" />
+  </marker>
+</defs>
+<text x="450" y="36" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">Migration Phase State Machine</text>
+<rect x="340" y="60" width="220" height="44" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="87" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">MigrationPhaseUnset</text>
+<rect x="340" y="140" width="220" height="44" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="167" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">MigrationPending</text>
+<rect x="340" y="220" width="220" height="44" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="247" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">MigrationScheduling</text>
+<rect x="340" y="300" width="220" height="44" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="327" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">MigrationScheduled</text>
+<rect x="340" y="380" width="220" height="44" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="407" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">MigrationPreparingTarget</text>
+<rect x="340" y="460" width="220" height="44" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="487" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">MigrationTargetReady</text>
+<rect x="340" y="540" width="220" height="44" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="567" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">MigrationRunning</text>
+<rect x="680" y="540" width="160" height="44" rx="20" fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+<text x="760" y="567" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">Succeeded</text>
+<rect x="680" y="340" width="160" height="44" rx="20" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5"/>
+<text x="760" y="367" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">Failed</text>
+<circle cx="450" cy="50" r="8" fill="#3b82f6"/>
+<line x1="450" y1="58" x2="450" y2="60" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="450" y1="104" x2="450" y2="140" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="450" y1="184" x2="450" y2="220" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="450" y1="264" x2="450" y2="300" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="450" y1="344" x2="450" y2="380" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="450" y1="424" x2="450" y2="460" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="450" y1="504" x2="450" y2="540" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="560" y1="82" x2="680" y2="362" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="540" y="185" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">VMI 不可遷移</text>
+<line x1="560" y1="242" x2="680" y2="362" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="590" y="248" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">排程失敗</text>
+<line x1="560" y1="322" x2="680" y2="362" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="590" y="325" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">超時/錯誤</text>
+<line x1="560" y1="402" x2="680" y2="362" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="590" y="403" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">準備失敗</text>
+<line x1="560" y1="482" x2="680" y2="362" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="590" y="455" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">啟動失敗</text>
+<line x1="560" y1="562" x2="680" y2="384" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="590" y="542" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">逾時/錯誤</text>
+<line x1="560" y1="562" x2="680" y2="562" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="570" y="555" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">傳輸完成</text>
+<circle cx="760" cy="630" r="10" fill="#111827"/>
+<circle cx="760" cy="630" r="6" fill="#ffffff"/>
+<line x1="760" y1="384" x2="760" y2="620" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="760" y1="584" x2="760" y2="620" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+</svg>

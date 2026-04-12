@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="540" viewBox="0 0 860 540">
+<rect width="860" height="540" fill="#ffffff"/>
+<defs><marker id="arr" markerWidth="10" markerHeight="8" refX="8" refY="3.5" orient="auto"><polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/></marker></defs>
+<text x="430" y="30" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827">Migration Abort &amp; Cleanup Flow</text>
+<rect x="330" y="50" width="200" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="430" y="77" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">Abort 請求</text>
+<polygon points="430,120 530,150 430,180 330,150" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="430" y="155" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#4c1d95">遷移階段?</text>
+<line x1="430" y1="94" x2="430" y2="120" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<rect x="80" y="230" width="160" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="160" y="257" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#111827">刪除 Target Pod</text>
+<line x1="350" y1="150" x2="240" y2="230" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="240" y="188" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">Pre-Running</text>
+<rect x="600" y="230" width="160" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="680" y="257" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#111827">dom.AbortJob</text>
+<line x1="510" y1="150" x2="640" y2="230" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="560" y="188" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">Running</text>
+<polygon points="680,315 770,345 680,375 590,345" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="680" y="350" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#4c1d95">Abort 成功?</text>
+<line x1="680" y1="274" x2="680" y2="315" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<rect x="550" y="420" width="160" height="44" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+<text x="630" y="447" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" fill="#111827">AbortStatus = Succeeded</text>
+<line x1="600" y1="345" x2="610" y2="420" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="584" y="381" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">是</text>
+<rect x="740" y="420" width="160" height="44" rx="6" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5"/>
+<text x="820" y="447" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" fill="#111827">AbortStatus = Failed</text>
+<line x1="760" y1="345" x2="820" y2="420" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="786" y="381" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">否</text>
+<rect x="550" y="490" width="160" height="40" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="630" y="515" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" fill="#111827">清理 Target Pod</text>
+<line x1="630" y1="464" x2="630" y2="490" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<rect x="740" y="490" width="160" height="40" rx="6" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5"/>
+<text x="820" y="515" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" fill="#111827">重試或標記失敗</text>
+<line x1="820" y1="464" x2="820" y2="490" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<rect x="100" y="340" width="200" height="44" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+<text x="200" y="367" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#111827">VMI 繼續在源端運行</text>
+<line x1="160" y1="274" x2="200" y2="340" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="630" y1="530" x2="200" y2="362" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+</svg>

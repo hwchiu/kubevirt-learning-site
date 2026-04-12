@@ -230,26 +230,7 @@ spec:
 | **RollingUpdate** | 滾動更新，按順序更新每個 VM | 需要高可用的服務群 |
 | **OnDelete** | 僅在 VM 被手動刪除時才更新 | 需要手動控制更新節奏 |
 
-```mermaid
-sequenceDiagram
-    participant Admin
-    participant Pool as VirtualMachinePool Controller
-    participant VM0 as my-pool-0
-    participant VM1 as my-pool-1
-    participant VM2 as my-pool-2
-
-    Admin->>Pool: 更新 spec.template（新 image）
-    Pool->>VM2: 停止並刪除 VM2
-    Pool->>VM2: 建立新 VM2（新 template）
-    VM2-->>Pool: VM2 Running
-    Pool->>VM1: 停止並刪除 VM1
-    Pool->>VM1: 建立新 VM1（新 template）
-    VM1-->>Pool: VM1 Running
-    Pool->>VM0: 停止並刪除 VM0
-    Pool->>VM0: 建立新 VM0（新 template）
-    VM0-->>Pool: VM0 Running
-    Pool-->>Admin: 滾動更新完成
-```
+![VirtualMachinePool 滾動更新流程](/diagrams/kubevirt/kubevirt-vmpool-sequence.png)
 
 ---
 
@@ -288,17 +269,7 @@ HorizontalPodAutoscaler 可根據指標自動調整 VMIRS 或 VirtualMachinePool
 
 ### HPA 如何與 VMIRS/Pool 搭配
 
-```mermaid
-graph LR
-    HPA["HPA\n(HorizontalPodAutoscaler)"] -->|"查詢 metrics"| MetricsServer["Metrics Server\n或 Custom Metrics API"]
-    HPA -->|"調整 replicas"| VMIRS["VMIRS / VirtualMachinePool"]
-    VMIRS -->|"管理"| VMI1["VMI-0"]
-    VMIRS -->|"管理"| VMI2["VMI-1"]
-    VMIRS -->|"管理"| VMI3["VMI-N"]
-    MetricsServer -->|"收集自"| VMI1
-    MetricsServer -->|"收集自"| VMI2
-    MetricsServer -->|"收集自"| VMI3
-```
+![HPA 與 VMIRS/VirtualMachinePool 自動擴縮架構](/diagrams/kubevirt/kubevirt-replica-1.png)
 
 :::info HPA 的 scaleTargetRef
 HPA 的 `scaleTargetRef` 需要指向 VMIRS 或 VirtualMachinePool，KubeVirt 已實作對應的 Scale subresource。

@@ -14,40 +14,7 @@
 
 SR-IOV（Single Root I/O Virtualization）是一種 PCI Express 硬體虛擬化技術，允許一張實體網卡（Physical Function，PF）分裂為多個虛擬功能（Virtual Function，VF），每個 VF 可以**直接分配給一個 VM**，無需經過軟體 hypervisor 的網路棧。
 
-```mermaid
-graph TB
-    subgraph "實體主機"
-        PF["網卡 PF<br/>（Physical Function）<br/>enp1s0f0"]
-        VF1["VF 0<br/>（Virtual Function）"]
-        VF2["VF 1<br/>（Virtual Function）"]
-        VF3["VF 2<br/>（Virtual Function）"]
-        VF4["VF 3<br/>（Virtual Function）"]
-        PF --> VF1
-        PF --> VF2
-        PF --> VF3
-        PF --> VF4
-
-        IOMMU["IOMMU<br/>（記憶體保護）"]
-        VFIO["VFIO Driver<br/>（使用者態存取）"]
-        VF1 --> IOMMU
-        VF2 --> IOMMU
-        IOMMU --> VFIO
-    end
-
-    subgraph "Kubernetes Pods"
-        VM1["VM 1<br/>（持有 VF 0）"]
-        VM2["VM 2<br/>（持有 VF 1）"]
-    end
-
-    VFIO -->|"直通 VF 給 VM"| VM1
-    VFIO -->|"直通 VF 給 VM"| VM2
-
-    style PF fill:#4a9eff,color:#fff
-    style VF1 fill:#5cb85c,color:#fff
-    style VF2 fill:#5cb85c,color:#fff
-    style IOMMU fill:#f0ad4e,color:#fff
-    style VFIO fill:#d9534f,color:#fff
-```
+![SR-IOV PF / VF 架構](/diagrams/kubevirt/kubevirt-net-sriov-1.png)
 
 ### IOMMU 的必要性
 
@@ -80,25 +47,7 @@ dmesg | grep -i iommu | head -20
 
 VFIO（Virtual Function I/O）提供安全的使用者態裝置存取機制：
 
-```mermaid
-graph LR
-    subgraph "核心態 Kernel Space"
-        VFIO_K["VFIO Kernel Module<br/>（vfio, vfio-pci）"]
-        IOMMU_G["IOMMU Group<br/>（裝置隔離邊界）"]
-        VFIO_K --> IOMMU_G
-    end
-
-    subgraph "使用者態 User Space"
-        QEMU["QEMU/KVM<br/>（VM Hypervisor）"]
-        VFIO_U["VFIO User API<br/>/dev/vfio/"]
-    end
-
-    IOMMU_G -->|"安全 DMA"| VFIO_U
-    VFIO_U --> QEMU
-
-    style VFIO_K fill:#4a9eff,color:#fff
-    style QEMU fill:#5cb85c,color:#fff
-```
+![VFIO 驅動架構](/diagrams/kubevirt/kubevirt-net-sriov-2.png)
 
 ### 效能優勢
 
