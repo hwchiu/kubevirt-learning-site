@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="480" viewBox="0 0 860 480">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#6b7280"/>
+    </marker>
+    <marker id="arrow-dash" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="860" height="480" fill="#ffffff"/>
+  <text x="430" y="26" text-anchor="middle" fill="#111827" font-size="15" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">指標收集流程 — metricsdocs 工具</text>
+  <rect x="25" y="53" width="130" height="34" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="90" y="74.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">kubevirt</text>
+  <rect x="25" y="97" width="130" height="34" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="90" y="118.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">CDI</text>
+  <rect x="25" y="141" width="130" height="34" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="90" y="162.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">CNAO</text>
+  <rect x="25" y="185" width="130" height="34" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="90" y="206.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">SSP</text>
+  <rect x="25" y="229" width="130" height="34" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="90" y="250.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">NMO</text>
+  <rect x="25" y="273" width="130" height="34" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="90" y="294.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">HPPO</text>
+  <rect x="25" y="317" width="130" height="34" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="90" y="338.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">HPP</text>
+  <rect x="25" y="361" width="130" height="34" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="90" y="382.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">HCO</text>
+  <rect x="25" y="405" width="130" height="34" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="90" y="426.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">KMP</text>
+  <rect x="270" y="45" width="380" height="420" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="460" y="62" text-anchor="middle" fill="#6b7280" font-size="11" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">metricsdocs 工具</text>
+  <rect x="360" y="77" width="200" height="46" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="460" y="95.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">config 設定檔</text>
+  <text x="460" y="112.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">讀取版本號</text>
+  <rect x="360" y="167" width="200" height="46" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="460" y="185.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">git clone/pull</text>
+  <text x="460" y="202.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">各 Operator 原始碼</text>
+  <rect x="360" y="257" width="200" height="46" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="460" y="275.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">解析 metrics.md</text>
+  <text x="460" y="292.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">表格格式</text>
+  <rect x="360" y="357" width="200" height="46" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="460" y="375.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">metrics.tmpl</text>
+  <text x="460" y="392.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">合併輸出</text>
+  <line x1="460" y1="123" x2="460" y2="167" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="460" y1="213" x2="460" y2="257" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="460" y1="303" x2="460" y2="357" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="155" y1="70" x2="360" y2="190" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="155" y1="114" x2="360" y2="190" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="155" y1="158" x2="360" y2="190" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="155" y1="202" x2="360" y2="190" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="155" y1="246" x2="360" y2="190" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="155" y1="290" x2="360" y2="190" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="155" y1="334" x2="360" y2="190" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="155" y1="378" x2="360" y2="190" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="155" y1="422" x2="360" y2="190" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="560" y1="403" x2="700" y2="240" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="705" y="218" width="150" height="44" rx="6" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="780" y="235.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">docs/metrics.md</text>
+  <text x="780" y="252.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">統一指標文件</text>
+  <line x1="710" y1="240" x2="705" y2="240" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="430" y="468" text-anchor="middle" fill="#6b7280" font-size="10" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">自動聚合 9 個 KubeVirt 子專案的指標文件</text>
+</svg>

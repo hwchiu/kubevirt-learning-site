@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1000" viewBox="0 0 1400 1000">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5,8.5 3.5,0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="1400" height="1000" fill="#ffffff"/>
+  <circle cx="700" cy="50" r="14" fill="#3b82f6"/>
+  <circle cx="700" cy="50" r="8" fill="#ffffff"/>
+  <rect x="640" y="85" width="120" height="38" rx="6" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="700" y="110" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">Pending</text>
+  <line x1="700.0" y1="64.0" x2="700.0" y2="85.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="682.4" y="61.5" width="35.2" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="700.0" y="72.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">建立DV</text>
+  <rect x="640" y="175" width="120" height="38" rx="6" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="700" y="200" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">PVCBound</text>
+  <rect x="460" y="155" width="135" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="528" y="172" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">WaitForFirst</text>
+  <text x="528" y="188" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="400" text-anchor="middle" fill="#111827">Consumer</text>
+  <line x1="700.0" y1="123.0" x2="700.0" y2="175.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="676.6" y="136.0" width="46.8" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="700.0" y="147.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">PVC已綁定</text>
+  <line x1="700.0" y1="123.0" x2="528.0" y2="155.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="596.4" y="126.0" width="35.2" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="614.0" y="137.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">延遲綁定</text>
+  <line x1="528.0" y1="193.0" x2="640.0" y2="193.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="549.0" y="180.0" width="70.0" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="584.0" y="191.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">Consumer排程</text>
+  <rect x="80" y="250" width="400" height="180" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="92" y="269" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#6b7280">Import 路徑</text>
+  <rect x="100" y="280" width="155" height="38" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="178" y="305" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">ImportScheduled</text>
+  <rect x="280" y="280" width="165" height="38" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="362" y="305" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">ImportInProgress</text>
+  <rect x="280" y="355" width="165" height="38" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="362" y="380" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">Succeeded</text>
+  <line x1="255.0" y1="299.0" x2="280.0" y2="299.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="238.3" y="286.0" width="58.4" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="267.5" y="297.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">Worker啟動</text>
+  <line x1="362.0" y1="318.0" x2="362.0" y2="355.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="344.4" y="323.5" width="35.2" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="362.0" y="334.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">匯入完成</text>
+  <line x1="700.0" y1="213.0" x2="178.0" y2="280.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="421.4" y="233.5" width="35.2" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="439.0" y="244.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">排程匯入</text>
+  <rect x="80" y="460" width="700" height="280" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="92" y="479" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#6b7280">Clone 路徑</text>
+  <rect x="100" y="495" width="145" height="38" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="172" y="520" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">CloneScheduled</text>
+  <rect x="100" y="555" width="145" height="38" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="172" y="580" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">CloneInProgress</text>
+  <rect x="280" y="495" width="155" height="38" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="358" y="520" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="600" text-anchor="middle" fill="#111827">CSICloneInProgress</text>
+  <rect x="460" y="495" width="175" height="38" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="548" y="512" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="600" text-anchor="middle" fill="#111827">SnapshotForSmart</text>
+  <text x="548" y="528" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="400" text-anchor="middle" fill="#111827">CloneInProgress</text>
+  <rect x="460" y="555" width="175" height="38" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="548" y="572" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="600" text-anchor="middle" fill="#111827">CloneFromSnapshot</text>
+  <text x="548" y="588" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="400" text-anchor="middle" fill="#111827">SourceInProgress</text>
+  <rect x="460" y="620" width="175" height="38" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="548" y="637" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="600" text-anchor="middle" fill="#111827">SmartClonePVC</text>
+  <text x="548" y="653" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="400" text-anchor="middle" fill="#111827">InProgress</text>
+  <rect x="640" y="555" width="100" height="38" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="690" y="580" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">Succeeded</text>
+  <line x1="245.0" y1="514.0" x2="280.0" y2="514.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="247.8" y="501.0" width="29.4" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="262.5" y="512.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">CSI</text>
+  <line x1="245.0" y1="514.0" x2="460.0" y2="514.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="323.3" y="501.0" width="58.4" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="352.5" y="512.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">Snapshot</text>
+  <line x1="172.0" y1="533.0" x2="172.0" y2="555.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="128.3" y="531.0" width="87.4" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="172.0" y="542.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">Host-Assisted</text>
+  <line x1="172.0" y1="593.0" x2="172.0" y2="620.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="100" y="620" width="145" height="38" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="172" y="645" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">Succeeded</text>
+  <line x1="460.0" y1="514.0" x2="740.0" y2="574.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="548.0" y1="593.0" x2="548.0" y2="620.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="548.0" y1="658.0" x2="690.0" y2="574.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="280.0" y1="514.0" x2="690.0" y2="574.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="700.0" y1="213.0" x2="172.0" y2="495.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="418.4" y="341.0" width="35.2" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="436.0" y="352.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">排程複製</text>
+  <rect x="820" y="250" width="380" height="180" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="832" y="269" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#6b7280">Upload 路徑</text>
+  <rect x="840" y="280" width="155" height="38" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="918" y="305" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">UploadScheduled</text>
+  <rect x="1010" y="280" width="155" height="38" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="1088" y="305" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">UploadReady</text>
+  <rect x="1010" y="355" width="155" height="38" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="1088" y="380" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">Succeeded</text>
+  <line x1="995.0" y1="299.0" x2="1010.0" y2="299.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="973.3" y="286.0" width="58.4" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="1002.5" y="297.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">Server就緒</text>
+  <line x1="1088.0" y1="318.0" x2="1088.0" y2="355.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="1070.4" y="323.5" width="35.2" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="1088.0" y="334.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">上傳完成</text>
+  <line x1="700.0" y1="213.0" x2="917.0" y2="280.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="790.9" y="233.5" width="35.2" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="808.5" y="244.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">排程上傳</text>
+  <rect x="820" y="460" width="380" height="160" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="832" y="479" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#6b7280">其他路徑</text>
+  <rect x="840" y="490" width="155" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="918" y="515" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="600" text-anchor="middle" fill="#111827">ExpansionInProgress</text>
+  <rect x="840" y="545" width="155" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="918" y="562" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="600" text-anchor="middle" fill="#111827">NamespaceTransfer</text>
+  <text x="918" y="578" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="400" text-anchor="middle" fill="#111827">InProgress</text>
+  <rect x="1010" y="510" width="155" height="38" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="1088" y="535" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">Succeeded</text>
+  <line x1="995.0" y1="509.0" x2="1010.0" y2="519.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="990.7" y="501.0" width="23.6" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="1002.5" y="512.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">完成</text>
+  <line x1="917.0" y1="528.0" x2="917.0" y2="545.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="820" y="145" width="110" height="38" rx="6" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="875" y="170" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">Paused</text>
+  <line x1="700.0" y1="104.0" x2="820.0" y2="163.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="748.2" y="120.5" width="23.6" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="760.0" y="131.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">暫停</text>
+  <line x1="820.0" y1="183.0" x2="700.0" y2="192.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="748.2" y="174.5" width="23.6" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="760.0" y="185.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">恢復</text>
+  <rect x="840" y="780" width="120" height="38" rx="6" fill="#fee2e2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text x="900" y="805" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">Failed</text>
+  <line x1="362.0" y1="393.0" x2="900.0" y2="780.0" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="613.4" y="573.5" width="35.2" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="631.0" y="584.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">匯入失敗</text>
+  <line x1="172.0" y1="658.0" x2="900.0" y2="780.0" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="518.4" y="706.0" width="35.2" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="536.0" y="717.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">複製失敗</text>
+  <line x1="1088.0" y1="393.0" x2="960.0" y2="780.0" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="1006.4" y="573.5" width="35.2" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="1024.0" y="584.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">上傳失敗</text>
+  <line x1="900.0" y1="780.0" x2="700.0" y2="123.0" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="788.2" y="438.5" width="23.6" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="800.0" y="449.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">重試</text>
+  <rect x="460" y="280" width="150" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="535" y="305" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="600" text-anchor="middle" fill="#111827">PendingPopulation</text>
+  <line x1="700.0" y1="213.0" x2="535.0" y2="280.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="585.4" y="233.5" width="64.2" height="12" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="617.5" y="244.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9.5" text-anchor="middle" fill="#6b7280">Populator</text>
+  <line x1="535.0" y1="318.0" x2="690.0" y2="374.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="700" y="968" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#6b7280">DataVolume 生命週期狀態機</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="560" viewBox="0 0 1100 560">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5,8.5 3.5,0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="rarr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5,8.5 3.5,0 6.5" fill="#6b7280"/>
+    </marker>
+  </defs>
+  <rect width="1100" height="560" fill="#ffffff"/>
+  <rect x="30" y="30" width="180" height="55" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="120" y="54" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#111827">kubectl/virtctl</text>
+  <text x="120" y="74" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" text-anchor="middle" fill="#6b7280">(Client)</text>
+  <line x1="120" y1="100" x2="120" y2="490" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <rect x="290" y="30" width="180" height="55" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="380" y="54" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#111827">CDI API Server</text>
+  <text x="380" y="74" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" text-anchor="middle" fill="#6b7280">(API)</text>
+  <line x1="380" y1="100" x2="380" y2="490" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <rect x="550" y="30" width="180" height="55" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="640" y="54" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#111827">CdiAPIAuthorizer</text>
+  <text x="640" y="74" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" text-anchor="middle" fill="#6b7280">(Auth)</text>
+  <line x1="640" y1="100" x2="640" y2="490" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <rect x="810" y="30" width="180" height="55" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="900" y="54" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#111827">TokenGenerator</text>
+  <text x="900" y="74" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" text-anchor="middle" fill="#6b7280">(Token)</text>
+  <line x1="900" y1="100" x2="900" y2="490" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <line x1="120" y1="170" x2="380" y2="170" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="123.1" y="154.0" width="253.8" height="14" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="250.0" y="166.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" text-anchor="middle" fill="#3b82f6">POST /namespaces/{ns}/uploadtokenrequests</text>
+  <line x1="380" y1="240" x2="640" y2="240" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="386.0" y="224.0" width="248.0" height="14" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="510.0" y="236.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" text-anchor="middle" fill="#3b82f6">Authorize(request) - SubjectAccessReview</text>
+  <line x1="640" y1="310" x2="380" y2="310" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#rarr)"/>
+  <rect x="467.2" y="294.0" width="85.6" height="14" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="510.0" y="306.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" text-anchor="middle" fill="#6b7280">allowed=true</text>
+  <line x1="380" y1="380" x2="900" y2="380" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="489.9" y="364.0" width="300.2" height="14" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="640.0" y="376.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" text-anchor="middle" fill="#3b82f6">Generate(Payload{Operation:Upload, Resource:PVC})</text>
+  <line x1="900" y1="450" x2="380" y2="450" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#rarr)"/>
+  <rect x="579.8" y="434.0" width="120.4" height="14" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="640.0" y="446.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" text-anchor="middle" fill="#6b7280">JWT Token (5 分鐘有效)</text>
+  <line x1="380" y1="510" x2="120" y2="510" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#rarr)"/>
+  <rect x="146.3" y="494.0" width="207.4" height="14" rx="3" fill="#ffffff" opacity="0.9"/>
+  <text x="250.0" y="506.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" text-anchor="middle" fill="#6b7280">UploadTokenRequest{Status: Token}</text>
+  <text x="550" y="548" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#6b7280">Upload Token 產生時序圖</text>
+</svg>

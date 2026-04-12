@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="500" viewBox="0 0 700 500">
+<rect width="700" height="500" fill="#ffffff"/>
+<defs><marker id="arr" markerWidth="10" markerHeight="8" refX="8" refY="3.5" orient="auto"><polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/></marker></defs>
+<text x="350" y="20" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827">Post-copy Migration</text>
+<rect x="85" y="30" width="130" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="150" y="57" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">Source</text>
+<rect x="485" y="30" width="130" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="550" y="57" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">Target</text>
+<line x1="150" y1="74" x2="150" y2="460" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="6,4"/>
+<line x1="550" y1="74" x2="550" y2="460" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="6,4"/>
+<rect x="80" y="100" width="540" height="26" rx="4" fill="#fef9c3" stroke="#fde68a" stroke-width="1"/>
+<text x="350" y="117" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" fill="#92400e">第 1 輪：傳送最少量必要頁面</text>
+<line x1="150" y1="140" x2="550" y2="140" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="350" y="134" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">傳送 VM 狀態 + 部分記憶體</text>
+<rect x="470" y="160" width="160" height="30" rx="6" fill="#f9fafb" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="550" y="179" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">VM 在目標端開始執行</text>
+<rect x="80" y="210" width="540" height="26" rx="4" fill="#fef9c3" stroke="#fde68a" stroke-width="1"/>
+<text x="350" y="227" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" fill="#92400e">按需請求頁面（Page Fault）</text>
+<line x1="550" y1="248" x2="150" y2="248" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="350" y="242" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">Page Fault! 需要頁面 0x1234</text>
+<line x1="150" y1="278" x2="550" y2="278" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="350" y="272" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">傳送頁面 0x1234</text>
+<line x1="550" y1="318" x2="150" y2="318" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="350" y="312" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">Page Fault! 需要頁面 0x5678</text>
+<line x1="150" y1="348" x2="550" y2="348" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="350" y="342" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">傳送頁面 0x5678</text>
+<rect x="80" y="380" width="540" height="26" rx="4" fill="#fef9c3" stroke="#fde68a" stroke-width="1"/>
+<text x="350" y="397" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" fill="#92400e">持續按需傳送，直到所有頁面都到達目標端</text>
+</svg>

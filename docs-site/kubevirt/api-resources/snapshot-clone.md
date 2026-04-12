@@ -282,20 +282,7 @@ spec:
 
 ### Status Phase 完整說明
 
-```mermaid
-stateDiagram-v2
-    [*] --> Pending : 建立 VirtualMachineClone
-    Pending --> SnapshotInProgress : 若來源是 VM，先建立臨時快照
-    SnapshotInProgress --> CreatingTargetVM : 快照完成，開始建立目標 VM
-    Pending --> CreatingTargetVM : 若來源已是 Snapshot，直接建立 VM
-    CreatingTargetVM --> RestoreInProgress : VM 框架建立完成，開始還原磁碟
-    RestoreInProgress --> Succeeded : 所有磁碟還原完成
-    SnapshotInProgress --> Failed : 快照建立失敗
-    CreatingTargetVM --> Failed : VM 建立失敗
-    RestoreInProgress --> Failed : 磁碟還原失敗
-    Succeeded --> [*]
-    Failed --> [*]
-```
+![VirtualMachineClone Phase 狀態機](/diagrams/kubevirt/kubevirt-snapshot-clone-1.png)
 
 | Phase | 說明 |
 |-------|------|
@@ -486,47 +473,7 @@ kubectl describe vmsnapshot <name> -n <namespace>
 
 ## 完整操作流程
 
-```mermaid
-sequenceDiagram
-    participant User as 使用者
-    participant K8s as Kubernetes API
-    participant KV as KubeVirt
-    participant CSI as CSI Driver
-    participant VM as 虛擬機器
-
-    Note over User,VM: 建立快照流程
-    User->>K8s: 建立 VirtualMachineSnapshot
-    K8s->>KV: 觸發 snapshot controller
-    KV->>VM: 通知 guest agent 執行 fsfreeze
-    VM-->>KV: fsfreeze 完成
-    KV->>CSI: 建立 VolumeSnapshot（每個磁碟）
-    CSI-->>KV: VolumeSnapshot 就緒
-    KV->>VM: 通知 guest agent 執行 fsthaw
-    VM-->>KV: fsthaw 完成
-    KV->>K8s: 更新 VirtualMachineSnapshotContent
-    K8s-->>User: status.readyToUse = true
-
-    Note over User,VM: 原地還原流程
-    User->>K8s: 停止 VM（runStrategy: Halted）
-    User->>K8s: 建立 VirtualMachineRestore
-    K8s->>KV: 觸發 restore controller
-    KV->>CSI: 從 VolumeSnapshot 建立新 PVC
-    CSI-->>KV: PVC 建立完成
-    KV->>K8s: 更新 VM 使用新 PVC
-    K8s-->>User: status.complete = true
-    User->>K8s: 啟動 VM
-
-    Note over User,VM: Clone 流程
-    User->>K8s: 建立 VirtualMachineClone
-    K8s->>KV: 觸發 clone controller
-    KV->>K8s: 建立臨時 VirtualMachineSnapshot
-    K8s-->>KV: 快照就緒
-    KV->>K8s: 建立目標 VM 框架
-    KV->>CSI: 從快照建立新 PVC（新 VM 使用）
-    CSI-->>KV: 新 PVC 就緒
-    KV->>K8s: 更新 Clone status = Succeeded
-    K8s-->>User: 新 VM 可以啟動
-```
+![Snapshot / Restore / Clone 操作流程](/diagrams/kubevirt/kubevirt-snapshot-clone-2.png)
 
 ---
 

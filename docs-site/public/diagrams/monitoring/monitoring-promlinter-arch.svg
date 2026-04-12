@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="220" viewBox="0 0 860 220">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#6b7280"/>
+    </marker>
+    <marker id="arrow-dash" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="860" height="220" fill="#ffffff"/>
+  <text x="430" y="26" text-anchor="middle" fill="#111827" font-size="15" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">prom-metrics-linter 架構 — Flowchart LR</text>
+  <rect x="25" y="94" width="130" height="52" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="90" y="107.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">JSON 輸入</text>
+  <text x="90" y="124.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">metricFamilies</text>
+  <text x="90" y="141.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">+ recordingRules</text>
+  <rect x="165" y="94" width="130" height="52" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="230" y="124.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">parseInput</text>
+  <rect x="295" y="94" width="130" height="52" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="360" y="115.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">promlint.</text>
+  <text x="360" y="132.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">NewWithMetricFamilies</text>
+  <rect x="425" y="94" width="130" height="52" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="490" y="115.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">promlint.Lint</text>
+  <text x="490" y="132.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">標準檢查</text>
+  <rect x="555" y="94" width="130" height="52" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="620" y="115.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">CustomMetrics</text>
+  <text x="620" y="132.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Validation</text>
+  <rect x="695" y="94" width="130" height="52" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="760" y="124.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">排序輸出</text>
+  <line x1="155" y1="120" x2="165" y2="120" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="295" y1="120" x2="295" y2="120" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="425" y1="120" x2="425" y2="120" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="555" y1="120" x2="555" y2="120" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="685" y1="120" x2="695" y2="120" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="295" y="22" width="130" height="36" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="360" y="44.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">allowlist 過濾</text>
+  <line x1="295" y1="120" x2="360" y2="58" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="425" y="22" width="130" height="36" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="490" y="35.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">CustomRecording</text>
+  <text x="490" y="52.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">RuleValidation</text>
+  <line x1="425" y1="58" x2="425" y2="58" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="490" y1="58" x2="760" y2="94" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="430" y="210" text-anchor="middle" fill="#6b7280" font-size="10" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">基於 promlint 加入 KubeVirt 自定義規則的指標命名驗證工具</text>
+</svg>

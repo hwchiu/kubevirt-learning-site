@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="520" viewBox="0 0 820 520">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#6b7280"/>
+    </marker>
+    <marker id="arrow-dash" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="820" height="520" fill="#ffffff"/>
+  <text x="410" y="28" text-anchor="middle" fill="#111827" font-size="15" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">GitHub Actions CI/CD 工作流程總覽</text>
+  <rect x="30" y="48" width="200" height="430" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="130" y="66" text-anchor="middle" fill="#6b7280" font-size="11" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">觸發條件</text>
+  <rect x="48" y="81" width="165" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="130" y="104.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Push to main</text>
+  <rect x="48" y="151" width="165" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="130" y="174.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Pull Request</text>
+  <rect x="48" y="221" width="165" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="130" y="244.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Release 發布</text>
+  <rect x="48" y="291" width="165" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="130" y="314.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">排程觸發</text>
+  <rect x="48" y="361" width="165" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="130" y="384.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">手動觸發</text>
+  <rect x="340" y="48" width="450" height="430" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="565" y="66" text-anchor="middle" fill="#6b7280" font-size="11" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">6 個 Workflow</text>
+  <rect x="440" y="78" width="250" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="565" y="95.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">sanity.yaml</text>
+  <text x="565" y="112.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Markdown Lint</text>
+  <rect x="440" y="148" width="250" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="565" y="165.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">publish.yaml</text>
+  <text x="565" y="182.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">GitHub Pages 部署</text>
+  <rect x="440" y="218" width="250" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="565" y="235.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">prom-metrics-linter.yaml</text>
+  <text x="565" y="252.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Docker 映像發布</text>
+  <rect x="440" y="288" width="250" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="565" y="305.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">update_metrics_docs.yaml</text>
+  <text x="565" y="322.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">指標文件更新</text>
+  <rect x="440" y="358" width="250" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="565" y="375.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">runbook_sync_downstream.yaml</text>
+  <text x="565" y="392.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Runbook 同步</text>
+  <rect x="440" y="428" width="250" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="565" y="445.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">runbook-preview.yaml</text>
+  <text x="565" y="462.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Runbook 預覽</text>
+  <line x1="212" y1="100" x2="440" y2="100" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="212" y1="100" x2="440" y2="170" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="212" y1="170" x2="440" y2="100" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="212" y1="170" x2="440" y2="450" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="212" y1="240" x2="440" y2="240" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="212" y1="310" x2="440" y2="310" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="212" y1="310" x2="440" y2="380" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="212" y1="380" x2="440" y2="170" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="212" y1="380" x2="440" y2="380" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="410" y="508" text-anchor="middle" fill="#6b7280" font-size="10" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">觸發條件與工作流程的對應關係</text>
+</svg>

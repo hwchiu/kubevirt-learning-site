@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="680" viewBox="0 0 980 680">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#6b7280"/>
+    </marker>
+    <marker id="arrow-dash" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="980" height="680" fill="#ffffff"/>
+  <rect x="20" y="30" width="200" height="580" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="120" y="52" text-anchor="middle" fill="#6b7280" font-size="11" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">KubeVirt 子專案</text>
+  <rect x="40" y="71" width="160" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="120" y="94.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">kubevirt</text>
+  <rect x="40" y="151" width="160" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="120" y="174.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">CDI</text>
+  <rect x="40" y="231" width="160" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="120" y="254.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">SSP</text>
+  <rect x="40" y="311" width="160" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="120" y="334.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">HCO</text>
+  <rect x="40" y="391" width="160" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="120" y="414.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">CNAO</text>
+  <rect x="40" y="471" width="160" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="120" y="494.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">其他子專案</text>
+  <rect x="270" y="30" width="210" height="580" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="375" y="52" text-anchor="middle" fill="#6b7280" font-size="10" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">kubevirt/monitoring 儲存庫</text>
+  <rect x="280" y="76" width="190" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="375" y="90.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">monitoringlinter</text>
+  <text x="375" y="107.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">靜態分析 Linter</text>
+  <rect x="280" y="166" width="190" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="375" y="180.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">metricsdocs</text>
+  <text x="375" y="197.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">文件產生器</text>
+  <rect x="280" y="256" width="190" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="375" y="270.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">runbook-sync-downstream</text>
+  <text x="375" y="287.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Runbook 同步工具</text>
+  <rect x="280" y="346" width="190" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="375" y="360.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">prom-metrics-linter</text>
+  <text x="375" y="377.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">指標命名 Linter</text>
+  <rect x="280" y="436" width="190" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="375" y="450.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">pkg/metrics/parser</text>
+  <text x="375" y="467.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">指標解析器</text>
+  <rect x="280" y="511" width="190" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="375" y="525.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">dashboards/</text>
+  <text x="375" y="542.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Grafana 儀表板</text>
+  <rect x="280" y="571" width="190" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="375" y="585.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">docs/runbooks/</text>
+  <text x="375" y="602.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Runbook 文件</text>
+  <rect x="540" y="30" width="210" height="580" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="645" y="52" text-anchor="middle" fill="#6b7280" font-size="11" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">外部系統</text>
+  <rect x="550" y="71" width="190" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="645" y="94.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Prometheus</text>
+  <rect x="550" y="161" width="190" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="645" y="184.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Grafana</text>
+  <rect x="550" y="251" width="190" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="645" y="274.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">GitHub Actions</text>
+  <rect x="550" y="341" width="190" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="645" y="364.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">quay.io Registry</text>
+  <rect x="550" y="431" width="190" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="645" y="454.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">openshift/runbooks</text>
+  <rect x="800" y="30" width="160" height="360" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="880" y="52" text-anchor="middle" fill="#6b7280" font-size="11" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">CI/CD 整合</text>
+  <rect x="810" y="72" width="140" height="36" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="880" y="94.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">GitHub Actions</text>
+  <rect x="810" y="142" width="140" height="36" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="880" y="164.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">自動化觸發</text>
+  <rect x="810" y="212" width="140" height="36" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="880" y="234.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">PR 建立</text>
+  <rect x="810" y="282" width="140" height="36" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="880" y="304.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">版本發布</text>
+  <line x1="280" y1="95" x2="200" y2="90" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="280" y1="95" x2="200" y2="170" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="280" y1="185" x2="200" y2="90" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="280" y1="185" x2="200" y2="170" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="280" y1="185" x2="200" y2="250" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="280" y1="185" x2="200" y2="330" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="280" y1="365" x2="200" y2="90" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="280" y1="365" x2="200" y2="170" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="470" y1="275" x2="540" y2="450" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="470" y1="530" x2="540" y2="180" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="470" y1="365" x2="540" y2="360" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+  <line x1="540" y1="270" x2="470" y2="185" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="540" y1="270" x2="470" y2="275" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="540" y1="270" x2="470" y2="365" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="540" y1="90" x2="470" y2="590" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="490" y="660" text-anchor="middle" fill="#6b7280" font-size="11" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">系統架構圖 — kubevirt/monitoring 與外部系統整合</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="780" viewBox="0 0 1300 780">
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+  </marker>
+  <marker id="arrowg" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#9ca3af"/>
+  </marker>
+</defs>
+<rect width="1300" height="780" fill="#ffffff"/>
+<text x="650" y="30" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#111827" text-anchor="middle" font-weight="700">VirtualMachineClone 狀態轉換</text>
+<rect x="190" y="80" width="280" height="560" rx="12" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1" opacity="0.4"/>
+<text x="330" y="70" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">正常路徑</text>
+<circle cx="330" cy="60" r="12" fill="#111827"/>
+<rect x="220" y="108" width="220" height="44" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="330" y="135" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">Pending</text>
+<rect x="220" y="218" width="220" height="44" rx="20" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+<text x="330" y="245" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">SnapshotInProgress</text>
+<rect x="220" y="328" width="220" height="44" rx="20" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+<text x="330" y="355" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">CreatingTargetVM</text>
+<rect x="220" y="438" width="220" height="44" rx="20" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+<text x="330" y="465" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">RestoreInProgress</text>
+<rect x="220" y="578" width="220" height="44" rx="20" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.5"/>
+<text x="330" y="605" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">Succeeded</text>
+<rect x="750" y="368" width="200" height="44" rx="20" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+<text x="850" y="395" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">Failed</text>
+<circle cx="330" cy="680" r="12" fill="#ffffff" stroke="#111827" stroke-width="3"/><circle cx="330" cy="680" r="7" fill="#111827"/>
+<circle cx="850" cy="470" r="12" fill="#ffffff" stroke="#111827" stroke-width="3"/><circle cx="850" cy="470" r="7" fill="#111827"/>
+<line x1="330" y1="72" x2="330" y2="108" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="450" y="92" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">建立 VirtualMachineClone</text>
+<line x1="330" y1="152" x2="330" y2="218" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="450" y="186" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">若來源是 VM，先建立臨時快照</text>
+<line x1="330" y1="262" x2="330" y2="328" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="460" y="296" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">快照完成，開始建立目標 VM</text>
+<line x1="330" y1="372" x2="330" y2="438" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="450" y="406" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">VM 框架建立完成，開始還原磁碟</text>
+<line x1="330" y1="482" x2="330" y2="578" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="450" y="530" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">所有磁碟還原完成</text>
+<line x1="330" y1="622" x2="330" y2="668" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 220 350 L 180 350 L 180 130 L 220 130" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M 214 260 C 210 280 210 330 220 350" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="170" y="305" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">若來源已是 Snapshot</text>
+<path d="M 440 240 C 720 240 720 370 750 390" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="700" y="226" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#ef4444" text-anchor="middle">快照建立失敗</text>
+<path d="M 440 350 C 720 350 720 375 750 390" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="700" y="336" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#ef4444" text-anchor="middle">VM 建立失敗</text>
+<path d="M 440 460 C 720 460 720 405 750 390" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="700" y="446" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#ef4444" text-anchor="middle">磁碟還原失敗</text>
+<line x1="850" y1="412" x2="850" y2="458" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>

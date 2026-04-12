@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="380" viewBox="0 0 880 380">
+  <rect width="880" height="380" fill="#ffffff" />
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#3b82f6" />
+    </marker>
+  </defs>
+  <text x="440" y="28" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="18" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="bold">VM / VMI 資源關係圖</text>
+  <rect x="60" y="130" width="160" height="70" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" rx="10" />
+  <text x="140" y="156" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">VirtualMachine (VM)</text>
+  <text x="140" y="174" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">宣告式資源</text>
+  <rect x="270" y="130" width="160" height="70" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="10" />
+  <text x="350" y="156" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">VirtualMachineInstance</text>
+  <text x="350" y="174" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">(VMI) 執行實體</text>
+  <rect x="490" y="130" width="160" height="70" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="10" />
+  <text x="570" y="156" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">virt-launcher Pod</text>
+  <text x="570" y="174" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">(per VMI)</text>
+  <rect x="700" y="130" width="160" height="70" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="10" />
+  <text x="780" y="156" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">QEMU/KVM</text>
+  <text x="780" y="174" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">Process</text>
+  <rect x="60" y="280" width="160" height="70" fill="#fefce8" stroke="#fde68a" stroke-width="1.5" rx="10" />
+  <text x="140" y="306" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">DataVolume / PVC</text>
+  <text x="140" y="324" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">儲存資源</text>
+  <line x1="220" y1="165" x2="270" y2="165" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
+  <text x="245" y="151" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">creates/deletes</text>
+  <line x1="430" y1="165" x2="490" y2="165" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
+  <text x="460" y="151" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">schedules on</text>
+  <line x1="650" y1="165" x2="700" y2="165" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
+  <text x="675" y="151" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">spawns</text>
+  <line x1="140" y1="200" x2="140" y2="280" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
+  <text x="195" y="240" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">references</text>
+  <line x1="220" y1="315" x2="350" y2="200" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
+  <text x="285" y="243" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">provides disk</text>
+</svg>

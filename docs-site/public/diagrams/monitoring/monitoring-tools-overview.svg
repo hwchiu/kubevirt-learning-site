@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="420" viewBox="0 0 860 420">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#6b7280"/>
+    </marker>
+    <marker id="arrow-dash" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="860" height="420" fill="#ffffff"/>
+  <text x="430" y="28" text-anchor="middle" fill="#111827" font-size="15" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">kubevirt/monitoring 核心工具總覽</text>
+  <rect x="20" y="44" width="820" height="320" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="430" y="62" text-anchor="middle" fill="#6b7280" font-size="11" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">kubevirt/monitoring 核心工具</text>
+  <rect x="-10" y="75" width="185" height="260" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="80" y="92" text-anchor="middle" fill="#6b7280" font-size="11" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">靜態分析</text>
+  <rect x="-2" y="138" width="165" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="80" y="155.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">monitoringlinter</text>
+  <text x="80" y="172.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Go AST 分析器</text>
+  <rect x="200" y="75" width="185" height="260" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="290" y="92" text-anchor="middle" fill="#6b7280" font-size="11" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">文件生成</text>
+  <rect x="208" y="138" width="165" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="290" y="155.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">metricsdocs</text>
+  <text x="290" y="172.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">指標文件彙整</text>
+  <rect x="208" y="228" width="165" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="290" y="245.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">metrics parser</text>
+  <text x="290" y="262.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Prometheus 指標解析</text>
+  <rect x="410" y="75" width="185" height="260" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="500" y="92" text-anchor="middle" fill="#6b7280" font-size="11" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">同步工具</text>
+  <rect x="418" y="138" width="165" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="500" y="155.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">runbook-sync-downstream</text>
+  <text x="500" y="172.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Runbook 下游同步</text>
+  <rect x="610" y="75" width="185" height="260" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="700" y="92" text-anchor="middle" fill="#6b7280" font-size="11" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">品質驗證</text>
+  <rect x="618" y="138" width="165" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="700" y="155.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">prom-metrics-linter</text>
+  <text x="700" y="172.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">指標命名規範</text>
+  <rect x="38" y="351" width="165" height="38" rx="6" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.5"/>
+  <text x="120" y="374.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">各 KubeVirt Operator</text>
+  <rect x="278" y="351" width="165" height="38" rx="6" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+  <text x="360" y="374.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">docs/metrics.md</text>
+  <rect x="478" y="351" width="165" height="38" rx="6" fill="#fdf4ff" stroke="#e9d5ff" stroke-width="1.5"/>
+  <text x="560" y="374.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">openshift/runbooks</text>
+  <rect x="658" y="351" width="165" height="38" rx="6" fill="#fef9c3" stroke="#fde047" stroke-width="1.5"/>
+  <text x="740" y="374.25" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">Operator 指標驗證</text>
+  <line x1="170" y1="182" x2="202" y2="351" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="380" y1="182" x2="442" y2="351" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="590" y1="182" x2="642" y2="351" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="800" y1="182" x2="822" y2="351" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="430" y="408" text-anchor="middle" fill="#6b7280" font-size="10" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">四個核心工具各司其職，協同維護 KubeVirt 監控品質</text>
+</svg>

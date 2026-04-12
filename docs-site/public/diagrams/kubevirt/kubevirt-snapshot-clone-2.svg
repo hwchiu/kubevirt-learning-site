@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="820" viewBox="0 0 1040 820">
+  <rect width="1040" height="820" fill="#ffffff" />
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#3b82f6" />
+    </marker>
+    <marker id="arr2" markerWidth="8" markerHeight="8" refX="2" refY="3" orient="auto">
+      <path d="M8,0 L8,6 L0,3 z" fill="#3b82f6" />
+    </marker>
+  </defs>
+  <text x="520" y="25" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="17" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="bold">Snapshot / Restore / Clone 操作流程</text>
+  <rect x="96" y="47" width="120" height="36" fill="#f0f4ff" stroke="#c7d2fe" rx="6" stroke-width="1.5" />
+  <text x="156" y="65" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="bold">使用者</text>
+  <line x1="156" y1="83" x2="156" y2="800" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4" />
+  <rect x="288" y="47" width="120" height="36" fill="#f0f4ff" stroke="#c7d2fe" rx="6" stroke-width="1.5" />
+  <text x="348" y="65" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="bold">Kubernetes API</text>
+  <line x1="348" y1="83" x2="348" y2="800" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4" />
+  <rect x="480" y="47" width="120" height="36" fill="#f0f4ff" stroke="#c7d2fe" rx="6" stroke-width="1.5" />
+  <text x="540" y="65" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="bold">KubeVirt</text>
+  <line x1="540" y1="83" x2="540" y2="800" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4" />
+  <rect x="672" y="47" width="120" height="36" fill="#f0f4ff" stroke="#c7d2fe" rx="6" stroke-width="1.5" />
+  <text x="732" y="65" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="bold">CSI Driver</text>
+  <line x1="732" y1="83" x2="732" y2="800" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4" />
+  <rect x="864" y="47" width="120" height="36" fill="#f0f4ff" stroke="#c7d2fe" rx="6" stroke-width="1.5" />
+  <text x="924" y="65" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="bold">虛擬機器</text>
+  <line x1="924" y1="83" x2="924" y2="800" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4" />
+  <rect x="30" y="100" width="980" height="22" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1" rx="4" />
+  <text x="520" y="111" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">建立快照流程</text>
+  <line x1="156" y1="138" x2="348" y2="138" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr)" />
+  <text x="252" y="128" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">建立 VirtualMachineSnapshot</text>
+  <line x1="348" y1="166" x2="540" y2="166" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr)" />
+  <text x="444" y="156" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">觸發 snapshot controller</text>
+  <line x1="540" y1="194" x2="924" y2="194" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr)" />
+  <text x="732" y="184" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">通知 guest agent 執行 fsfreeze</text>
+  <line x1="924" y1="222" x2="540" y2="222" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arr)" />
+  <text x="732" y="212" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">fsfreeze 完成</text>
+  <line x1="540" y1="250" x2="732" y2="250" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr)" />
+  <text x="636" y="240" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">建立 VolumeSnapshot（每個磁碟）</text>
+  <line x1="732" y1="278" x2="540" y2="278" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arr)" />
+  <text x="636" y="268" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">VolumeSnapshot 就緒</text>
+  <line x1="540" y1="306" x2="924" y2="306" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr)" />
+  <text x="732" y="296" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">通知 guest agent 執行 fsthaw</text>
+  <line x1="924" y1="334" x2="540" y2="334" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arr)" />
+  <text x="732" y="324" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">fsthaw 完成</text>
+  <line x1="540" y1="362" x2="348" y2="362" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr)" />
+  <text x="444" y="352" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">更新 VirtualMachineSnapshotContent</text>
+  <line x1="348" y1="390" x2="156" y2="390" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arr)" />
+  <text x="252" y="380" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">status.readyToUse = true</text>
+  <rect x="30" y="423" width="980" height="22" fill="#f0fff4" stroke="#86efac" stroke-width="1" rx="4" />
+  <text x="520" y="434" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">原地還原流程</text>
+  <line x1="156" y1="456" x2="348" y2="456" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr)" />
+  <text x="252" y="446" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">停止 VM (runStrategy: Halted)</text>
+  <line x1="156" y1="484" x2="348" y2="484" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr)" />
+  <text x="252" y="474" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">建立 VirtualMachineRestore</text>
+  <line x1="348" y1="512" x2="540" y2="512" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr)" />
+  <text x="444" y="502" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">觸發 restore controller</text>
+  <line x1="540" y1="540" x2="732" y2="540" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr)" />
+  <text x="636" y="530" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">從 VolumeSnapshot 建立新 PVC</text>
+  <line x1="732" y1="568" x2="540" y2="568" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arr)" />
+  <text x="636" y="558" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">PVC 建立完成</text>
+  <line x1="540" y1="596" x2="348" y2="596" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr)" />
+  <text x="444" y="586" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">更新 VM 使用新 PVC</text>
+  <line x1="348" y1="624" x2="156" y2="624" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arr)" />
+  <text x="252" y="614" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">status.complete = true</text>
+  <line x1="156" y1="652" x2="348" y2="652" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr)" />
+  <text x="252" y="642" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">啟動 VM</text>
+  <rect x="30" y="685" width="980" height="22" fill="#fff7ed" stroke="#fed7aa" stroke-width="1" rx="4" />
+  <text x="520" y="696" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">Clone 流程</text>
+  <line x1="156" y1="718" x2="348" y2="718" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr)" />
+  <text x="252" y="708" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">建立 VirtualMachineClone</text>
+  <line x1="348" y1="746" x2="540" y2="746" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr)" />
+  <text x="444" y="736" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">觸發 clone controller</text>
+  <line x1="540" y1="774" x2="348" y2="774" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr)" />
+  <text x="444" y="764" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">建立臨時 VirtualMachineSnapshot</text>
+  <line x1="348" y1="802" x2="540" y2="802" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arr)" />
+  <text x="444" y="792" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">快照就緒</text>
+  <line x1="540" y1="830" x2="348" y2="830" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr)" />
+  <text x="444" y="820" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">建立目標 VM 框架</text>
+  <line x1="540" y1="858" x2="732" y2="858" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr)" />
+  <text x="636" y="848" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">從快照建立新 PVC（新 VM 使用）</text>
+  <line x1="732" y1="886" x2="540" y2="886" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arr)" />
+  <text x="636" y="876" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">新 PVC 就緒</text>
+  <line x1="540" y1="914" x2="348" y2="914" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr)" />
+  <text x="444" y="904" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">更新 Clone status = Succeeded</text>
+  <line x1="348" y1="942" x2="156" y2="942" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arr)" />
+  <text x="252" y="932" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">新 VM 可以啟動</text>
+</svg>

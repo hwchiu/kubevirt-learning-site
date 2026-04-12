@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1300" viewBox="0 0 1800 1300">
+<rect width="1800" height="1300" fill="#ffffff"/>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+  <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+</marker>
+</defs>
+<text x="900" y="28" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">DataVolume 生命週期狀態圖</text>
+<circle cx="405" cy="60" r="10" fill="#3b82f6"/>
+<rect x="330" y="120" width="150" height="40" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="405" y="145" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">Pending</text>
+<rect x="330" y="210" width="150" height="40" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="405" y="235" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">PVCBound</text>
+<rect x="310" y="310" width="170" height="40" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="395" y="335" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">WaitForFirstConsumer</text>
+<rect x="60" y="420" width="150" height="40" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="135" y="445" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">ImportScheduled</text>
+<rect x="60" y="510" width="150" height="40" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="135" y="535" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">ImportInProgress</text>
+<rect x="660" y="420" width="150" height="40" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="735" y="445" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">CloneScheduled</text>
+<rect x="660" y="510" width="170" height="40" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="745" y="535" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">CloneInProgress</text>
+<rect x="660" y="600" width="180" height="40" rx="20" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="750" y="625" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">SnapshotForSmartClone...</text>
+<rect x="660" y="690" width="200" height="40" rx="20" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="760" y="715" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">CloneFromSnapshotSrc...</text>
+<rect x="690" y="690" width="170" height="40" rx="20" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="775" y="715" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">SmartClonePVCInProgress</text>
+<rect x="1100" y="510" width="160" height="40" rx="20" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="1180" y="535" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">CSICloneInProgress</text>
+<rect x="1270" y="420" width="150" height="40" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="1345" y="445" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">UploadScheduled</text>
+<rect x="1270" y="510" width="150" height="40" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="1345" y="535" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">UploadReady</text>
+<rect x="390" y="810" width="190" height="40" rx="20" fill="#d1fae5" stroke="#34d399" stroke-width="1.5"/>
+<text x="485" y="835" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">Succeeded</text>
+<rect x="330" y="900" width="150" height="40" rx="20" fill="#fee2e2" stroke="#f87171" stroke-width="1.5"/>
+<text x="405" y="925" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">Failed</text>
+<rect x="530" y="900" width="150" height="40" rx="20" fill="#fef3c7" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="605" y="925" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">Paused</text>
+<rect x="1400" y="210" width="180" height="40" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="1490" y="235" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">ExpansionInProgress</text>
+<rect x="1400" y="310" width="200" height="40" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="1500" y="335" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">NamespaceTransferInProgress</text>
+<rect x="1400" y="420" width="180" height="40" rx="20" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="1490" y="445" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">PendingPopulation</text>
+<line x1="405" y1="70" x2="405" y2="120" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="373" y="85" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="405" y="97" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">建立 DataVolume</text>
+<line x1="405" y1="160" x2="405" y2="210" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="373" y="175" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="405" y="187" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">PVC 已綁定</text>
+<path d="M405,160 Q325,210 330,330" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="228" y="250" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="260" y="262" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">WFCStorageClass</text>
+<path d="M480,330 Q520,230 480,230" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="518" y="270" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="550" y="282" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">Consumer排程</text>
+<path d="M330,230 Q210,230 135,420" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="123" y="210" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="155" y="222" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">排程匯入</text>
+<path d="M480,230 Q735,230 735,420" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="703" y="210" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="735" y="222" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">排程複製</text>
+<path d="M480,230 Q1345,230 1345,420" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="1313" y="208" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="1345" y="220" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">排程上傳</text>
+<line x1="135" y1="460" x2="135" y2="510" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="103" y="475" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="135" y="487" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">Worker Pod啟動</text>
+<path d="M135,550 Q135,770 505,810" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="143" y="580" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="175" y="592" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">匯入完成</text>
+<path d="M810,440 Q1100,440 1175,510" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="1058" y="420" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="1090" y="432" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">CSI Clone</text>
+<line x1="735" y1="460" x2="735" y2="600" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="703" y="520" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="735" y="532" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">Snapshot Clone</text>
+<line x1="745" y1="460" x2="745" y2="510" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="713" y="475" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="745" y="487" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">Host-Assisted</text>
+<path d="M735,550 Q735,780 505,810" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="628" y="580" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="660" y="592" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">複製完成</text>
+<line x1="735" y1="640" x2="735" y2="690" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="735" y1="730" x2="775" y2="710" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M775,730 Q775,790 505,810" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M1175,550 Q1175,790 505,810" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="1345" y1="460" x2="1345" y2="510" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="1313" y="475" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="1345" y="487" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">Upload Server就緒</text>
+<path d="M1345,550 Q1345,790 505,810" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="1353" y="580" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="1385" y="592" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">上傳完成</text>
+<path d="M1270,530 Q1440,530 480,920" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="1168" y="535" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="1200" y="547" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">上傳失敗</text>
+<path d="M135,550 Q60,920 330,920" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="28" y="570" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="60" y="582" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">匯入失敗</text>
+<path d="M660,530 Q630,920 480,920" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="598" y="540" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="630" y="552" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">複製失敗</text>
+<path d="M405,900 Q230,900 230,140 Q230,140 330,140" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="168" y="500" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="200" y="512" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">重試</text>
+<path d="M480,140 Q540,140 530,900" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="538" y="500" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="570" y="512" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">暫停</text>
+<path d="M605,900 Q635,140 480,140" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="623" y="540" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="655" y="552" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">恢復</text>
+<path d="M1475,250 Q1475,790 505,810" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="1318" y="280" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="1350" y="292" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">擴展完成</text>
+<path d="M1475,350 Q1505,800 505,810" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="1328" y="380" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="1360" y="392" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">傳輸完成</text>
+<path d="M1475,460 Q1505,805 505,810" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="1333" y="490" width="64" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="1365" y="502" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">Populator完成</text>
+<path d="M480,230 Q1475,230 1475,420" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>

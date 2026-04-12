@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="600" viewBox="0 0 1400 600">
+<rect width="1400" height="600" fill="#ffffff"/>
+<defs>
+  <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0.5, 7 3, 0 5.5" fill="#3b82f6"/>
+  </marker>
+</defs>
+<text x="700" y="38" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#111827" text-anchor="middle">VM 磁碟來源分類</text>
+<rect x="600" y="270" width="200" height="60" rx="30" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/><text x="700.0" y="305.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="15" fill="#111827" text-anchor="middle">VM 磁碟來源</text>
+<rect x="100" y="120" width="220" height="44" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/><text x="210.0" y="147.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827" text-anchor="middle">ContainerDisk</text>
+<path d="M320,142 C460,142 460,300 600,300" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<rect x="110" y="179" width="200" height="34" rx="6" fill="#fef3c7" stroke="#e5e7eb" stroke-width="1"/><text x="210.0" y="200.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">OCI 映像包含磁碟</text>
+<line x1="210" y1="164" x2="210" y2="179" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4,3"/>
+<rect x="110" y="221" width="200" height="34" rx="6" fill="#fef3c7" stroke="#e5e7eb" stroke-width="1"/><text x="210.0" y="242.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">Init Container 展開</text>
+<line x1="210" y1="164" x2="210" y2="221" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4,3"/>
+<rect x="110" y="263" width="200" height="34" rx="6" fill="#fef3c7" stroke="#e5e7eb" stroke-width="1"/><text x="210.0" y="284.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">無狀態 / 暫存</text>
+<line x1="210" y1="164" x2="210" y2="263" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4,3"/>
+<rect x="100" y="380" width="220" height="44" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/><text x="210.0" y="407.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827" text-anchor="middle">PVC / DataVolume</text>
+<path d="M320,402 C460,402 460,300 600,300" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<rect x="110" y="439" width="200" height="34" rx="6" fill="#dcfce7" stroke="#e5e7eb" stroke-width="1"/><text x="210.0" y="460.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">持久化儲存</text>
+<line x1="210" y1="424" x2="210" y2="439" stroke="#22c55e" stroke-width="1" stroke-dasharray="4,3"/>
+<rect x="110" y="481" width="200" height="34" rx="6" fill="#dcfce7" stroke="#e5e7eb" stroke-width="1"/><text x="210.0" y="502.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">CDI 自動匯入</text>
+<line x1="210" y1="424" x2="210" y2="481" stroke="#22c55e" stroke-width="1" stroke-dasharray="4,3"/>
+<rect x="110" y="523" width="200" height="34" rx="6" fill="#dcfce7" stroke="#e5e7eb" stroke-width="1"/><text x="210.0" y="544.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">Block / Filesystem 模式</text>
+<line x1="210" y1="424" x2="210" y2="523" stroke="#22c55e" stroke-width="1" stroke-dasharray="4,3"/>
+<rect x="950" y="120" width="220" height="44" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/><text x="1060.0" y="147.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827" text-anchor="middle">CloudInit</text>
+<path d="M800,300 C875,300 875,142 950,142" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<rect x="960" y="179" width="200" height="34" rx="6" fill="#ede9fe" stroke="#e5e7eb" stroke-width="1"/><text x="1060.0" y="200.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">noCloud 模式</text>
+<line x1="1060" y1="164" x2="1060" y2="179" stroke="#8b5cf6" stroke-width="1" stroke-dasharray="4,3"/>
+<rect x="960" y="221" width="200" height="34" rx="6" fill="#ede9fe" stroke="#e5e7eb" stroke-width="1"/><text x="1060.0" y="242.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">ConfigDrive 模式</text>
+<line x1="1060" y1="164" x2="1060" y2="221" stroke="#8b5cf6" stroke-width="1" stroke-dasharray="4,3"/>
+<rect x="960" y="263" width="200" height="34" rx="6" fill="#ede9fe" stroke="#e5e7eb" stroke-width="1"/><text x="1060.0" y="284.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">合成 ISO</text>
+<line x1="1060" y1="164" x2="1060" y2="263" stroke="#8b5cf6" stroke-width="1" stroke-dasharray="4,3"/>
+<rect x="950" y="380" width="220" height="44" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5"/><text x="1060.0" y="407.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827" text-anchor="middle">Sysprep</text>
+<path d="M800,300 C875,300 875,402 950,402" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<rect x="960" y="439" width="200" height="34" rx="6" fill="#fce7f3" stroke="#e5e7eb" stroke-width="1"/><text x="1060.0" y="460.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">Windows 無人值守安裝</text>
+<line x1="1060" y1="424" x2="1060" y2="439" stroke="#ec4899" stroke-width="1" stroke-dasharray="4,3"/>
+<rect x="960" y="481" width="200" height="34" rx="6" fill="#fce7f3" stroke="#e5e7eb" stroke-width="1"/><text x="1060.0" y="502.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">ConfigMap / Secret</text>
+<line x1="1060" y1="424" x2="1060" y2="481" stroke="#ec4899" stroke-width="1" stroke-dasharray="4,3"/>
+<rect x="960" y="523" width="200" height="34" rx="6" fill="#fce7f3" stroke="#e5e7eb" stroke-width="1"/><text x="1060.0" y="544.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">unattend.xml</text>
+<line x1="1060" y1="424" x2="1060" y2="523" stroke="#ec4899" stroke-width="1" stroke-dasharray="4,3"/>
+</svg>

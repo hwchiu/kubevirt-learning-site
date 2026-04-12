@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="340" viewBox="0 0 820 340">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#6b7280"/>
+    </marker>
+    <marker id="arrow-dash" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="820" height="340" fill="#ffffff"/>
+  <text x="410" y="28" text-anchor="middle" fill="#111827" font-size="15" font-weight="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">多 Go Module 架構</text>
+  <rect x="270" y="53" width="280" height="54" rx="6" fill="#e0f2fe" stroke="#7dd3fc" stroke-width="1.5"/>
+  <text x="410" y="75.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">根模組 github.com/kubevirt/monitoring</text>
+  <text x="410" y="92.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">go 1.23.6</text>
+  <line x1="410" y1="107" x2="410" y2="148" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="450" y="140" text-anchor="middle" fill="#6b7280" font-size="10" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">包含</text>
+  <rect x="310" y="151" width="200" height="38" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="410" y="165.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">monitoringlinter/</text>
+  <text x="410" y="182.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">靜態分析器</text>
+  <rect x="13" y="244" width="175" height="52" rx="6" fill="#fdf4ff" stroke="#e9d5ff" stroke-width="1.5"/>
+  <text x="100" y="265.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">tools/metricsdocs</text>
+  <text x="100" y="282.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">go 1.16</text>
+  <path d="M 410 107 L 100 244" stroke="#e5e7eb" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+  <rect x="193" y="244" width="175" height="52" rx="6" fill="#fdf4ff" stroke="#e9d5ff" stroke-width="1.5"/>
+  <text x="280" y="265.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">tools/runbook-sync-downstream</text>
+  <text x="280" y="282.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">go 1.22.1</text>
+  <path d="M 410 107 L 280 244" stroke="#e5e7eb" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+  <rect x="473" y="244" width="175" height="52" rx="6" fill="#fdf4ff" stroke="#e9d5ff" stroke-width="1.5"/>
+  <text x="560" y="265.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">test/metrics/prom-metrics-linter</text>
+  <text x="560" y="282.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">go 1.20</text>
+  <path d="M 410 107 L 560 244" stroke="#e5e7eb" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+  <rect x="653" y="244" width="175" height="52" rx="6" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.5"/>
+  <text x="740" y="265.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">pkg/metrics/parser</text>
+  <text x="740" y="282.75" text-anchor="middle" fill="#111827" font-size="12" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">go 1.20</text>
+  <path d="M 410 107 L 740 244" stroke="#e5e7eb" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+  <text x="410" y="328" text-anchor="middle" fill="#6b7280" font-size="10" font-weight="normal" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">各工具擁有獨立 go.mod，依賴版本互不影響</text>
+</svg>

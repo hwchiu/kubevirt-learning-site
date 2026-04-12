@@ -14,31 +14,7 @@ layout: doc
 
 ## 工具總覽
 
-```mermaid
-graph TB
-    subgraph "kubevirt/monitoring 核心工具"
-        direction TB
-        subgraph "靜態分析"
-            LINTER[monitoringlinter<br/>Go AST 分析器]
-        end
-        subgraph "文件生成"
-            METRICSDOCS[metricsdocs<br/>指標文件彙整]
-            PARSER[metrics parser<br/>Prometheus 指標解析]
-        end
-        subgraph "同步工具"
-            RUNBOOK[runbook-sync-downstream<br/>Runbook 下游同步]
-        end
-        subgraph "品質驗證"
-            PROMLINT[prom-metrics-linter<br/>指標命名規範]
-        end
-    end
-
-    LINTER -->|"限制 prometheus.Register<br/>到 pkg/monitoring"| OPERATOR[各 KubeVirt Operator]
-    METRICSDOCS -->|"克隆 9 個專案<br/>解析指標表格"| DOCS[docs/metrics.md]
-    PARSER -->|"Metric → MetricFamily"| PROMLINT
-    RUNBOOK -->|"upstream → downstream<br/>自動建 PR"| OPENSHIFT[openshift/runbooks]
-    PROMLINT -->|"前綴/後綴驗證"| OPERATOR
-```
+![kubevirt/monitoring 核心工具總覽](/diagrams/monitoring/monitoring-tools-overview-1.png)
 
 ## monitoringlinter 分析器
 
@@ -85,24 +61,7 @@ const (
 
 ### 分析流程
 
-```mermaid
-flowchart TD
-    A[遍歷每個 Go 檔案] --> B{檔案是否 import<br/>監控相關套件?}
-    B -->|否| C[跳過此檔案]
-    B -->|是| D[AST Inspect 所有節點]
-    D --> E{節點是<br/>CallExpr?}
-    E -->|否| F[繼續遍歷]
-    E -->|是| G{是 SelectorExpr<br/>方法呼叫?}
-    G -->|否| F
-    G -->|是| H{使用 prometheus 套件?}
-    H -->|是| I[checkPrometheusMethodCall]
-    H -->|否| J{檔案在<br/>pkg/monitoring 內?}
-    J -->|是| F
-    J -->|否| K{使用 operatormetrics?}
-    K -->|是| L[checkOperatorMetricsMethodCall]
-    K -->|否| M{使用 operatorrules?}
-    M -->|是| N[checkOperatorRulesMethodCall]
-```
+![monitoringlinter 分析流程](/diagrams/monitoring/monitoring-linter-flow-2.png)
 
 ### 規則檢查
 
@@ -255,33 +214,7 @@ if !ok {
 
 ### 生成流程
 
-```mermaid
-sequenceDiagram
-    participant Main as main()
-    participant Git as git.go
-    participant Parser as parseMetrics
-    participant Template as metrics.tmpl
-    participant GH as GitHub API
-
-    Main->>Main: parseArguments()<br/>讀取 --config-file, --cache-dir
-    Main->>Git: checkoutProjects()
-    loop 每個專案
-        Git->>Git: gitCheckoutUpstream()<br/>clone 或 pull
-        Git->>Git: gitSwitchToBranch(version)
-    end
-    Main->>Parser: parseMetrics()
-    loop 每個專案
-        Parser->>Parser: readLines(metricsDocPath)
-        Parser->>Parser: parseMetricsDoc(content)<br/>解析 markdown 表格
-    end
-    Main->>Main: writeMetrics(metrics)
-    Main->>Main: sortMetrics()<br/>kubevirt 排首位
-    loop 每個 operator
-        Main->>GH: HTTP GET release info<br/>建立連結
-    end
-    Main->>Template: Execute(templateData)
-    Template-->>Main: 寫入 docs/metrics.md
-```
+![metricsdocs 生成流程](/diagrams/monitoring/monitoring-metricsdocs-flow-3.png)
 
 ### 指標解析邏輯
 
@@ -402,36 +335,7 @@ func sortMetrics(metrics []Metric) {
 
 ### 同步架構
 
-```mermaid
-flowchart TD
-    A[開始] --> B[setup: 克隆 upstream 與 downstream]
-    B --> C[listRunbooksThatNeedUpdate]
-    C --> D{比對 commit 日期}
-    D -->|upstream 較新| E[runbooksToUpdate]
-    D -->|upstream 不存在| F[runbooksToDeprecate]
-    D -->|已是最新| G[跳過]
-    E --> H[updateRunbook 流程]
-    F --> I[deprecateRunbook 流程]
-
-    subgraph "updateRunbook"
-        H --> H1[檢查 PR 是否已存在]
-        H1 -->|已存在| H2[跳過]
-        H1 -->|不存在| H3[建立新分支]
-        H3 --> H4[copyRunbook + transform]
-        H4 --> H5[commit & push]
-        H5 --> H6[建立 PR]
-        H6 --> H7[關閉過時 PR]
-    end
-
-    subgraph "deprecateRunbook"
-        I --> I1[檢查 PR 是否已存在]
-        I1 -->|已存在| I2[跳過]
-        I1 -->|不存在| I3[建立新分支]
-        I3 --> I4[套用棄用模板]
-        I4 --> I5[commit & push]
-        I5 --> I6[建立 PR]
-    end
-```
+![runbook-sync-downstream 同步架構](/diagrams/monitoring/monitoring-runbook-sync-4.png)
 
 ### 倉庫設定
 

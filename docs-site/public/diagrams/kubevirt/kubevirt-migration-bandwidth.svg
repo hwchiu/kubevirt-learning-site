@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="560" viewBox="0 0 1400 560">
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+  </marker>
+  <marker id="arrowg" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#9ca3af"/>
+  </marker>
+</defs>
+<rect width="1400" height="560" fill="#ffffff"/>
+<text x="700" y="30" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#111827" text-anchor="middle" font-weight="700">Migration 頻寬設定比較</text>
+<rect x="180" y="90" width="1030" height="100" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="192" y="108" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" font-weight="700">低頻寬環境</text>
+<rect x="200" y="117" width="270" height="46" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="335" y="145" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">bandwidthPerMigration: 256Mi</text>
+<line x1="470" y1="140" x2="530" y2="140" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="530" y="117" width="270" height="46" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="665" y="145" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">completionTimeoutPerGiB: 1600</text>
+<line x1="800" y1="140" x2="860" y2="140" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="860" y="117" width="270" height="46" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="995" y="145" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">allowAutoConverge: true</text>
+<rect x="180" y="250" width="1030" height="100" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="192" y="268" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" font-weight="700">高頻寬環境</text>
+<rect x="200" y="277" width="270" height="46" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="335" y="305" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">bandwidthPerMigration: 4Gi</text>
+<line x1="470" y1="300" x2="530" y2="300" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="530" y="277" width="270" height="46" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="665" y="305" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">completionTimeoutPerGiB: 300</text>
+<line x1="800" y1="300" x2="860" y2="300" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="860" y="277" width="270" height="46" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="995" y="305" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">parallelMigrationsPerCluster: 10</text>
+<rect x="180" y="410" width="1030" height="100" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="192" y="428" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" font-weight="700">記憶體密集型 VM</text>
+<rect x="200" y="437" width="270" height="46" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="335" y="465" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">allowAutoConverge: true</text>
+<line x1="470" y1="460" x2="530" y2="460" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="530" y="437" width="270" height="46" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="665" y="465" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">allowPostCopy: true（謹慎）</text>
+<line x1="800" y1="460" x2="860" y2="460" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="860" y="437" width="270" height="46" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="995" y="465" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" font-weight="600">completionTimeoutPerGiB: 2000</text>
+</svg>

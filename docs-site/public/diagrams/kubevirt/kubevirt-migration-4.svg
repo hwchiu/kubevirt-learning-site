@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="480" viewBox="0 0 700 480">
+<rect width="700" height="480" fill="#ffffff"/>
+<defs><marker id="arr" markerWidth="10" markerHeight="8" refX="8" refY="3.5" orient="auto"><polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/></marker></defs>
+<text x="350" y="20" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827">Pre-copy Migration</text>
+<rect x="85" y="30" width="130" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="150" y="57" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">Source</text>
+<rect x="485" y="30" width="130" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="550" y="57" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">Target</text>
+<line x1="150" y1="74" x2="150" y2="450" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="6,4"/>
+<line x1="550" y1="74" x2="550" y2="450" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="6,4"/>
+<rect x="80" y="100" width="540" height="26" rx="4" fill="#fef9c3" stroke="#fde68a" stroke-width="1"/>
+<text x="350" y="117" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" fill="#92400e">第 1 輪：複製所有記憶體頁面</text>
+<line x1="150" y1="140" x2="550" y2="140" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="350" y="134" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">傳送完整記憶體（例如 8 GiB）</text>
+<rect x="80" y="175" width="540" height="26" rx="4" fill="#fef9c3" stroke="#fde68a" stroke-width="1"/>
+<text x="350" y="192" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" fill="#92400e">第 2 輪：複製第 1 輪期間被修改的頁面</text>
+<line x1="150" y1="215" x2="550" y2="215" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="350" y="209" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">傳送 dirty pages（例如 2 GiB）</text>
+<rect x="80" y="250" width="540" height="26" rx="4" fill="#fef9c3" stroke="#fde68a" stroke-width="1"/>
+<text x="350" y="267" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" fill="#92400e">第 3 輪：dirty pages 更少</text>
+<line x1="150" y1="290" x2="550" y2="290" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="350" y="284" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">傳送 dirty pages（例如 200 MiB）</text>
+<rect x="80" y="325" width="540" height="26" rx="4" fill="#fef9c3" stroke="#fde68a" stroke-width="1"/>
+<text x="350" y="342" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" fill="#92400e">第 N 輪：dirty pages 足夠少</text>
+<line x1="150" y1="365" x2="550" y2="365" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="350" y="359" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">最後一批 + 切換執行</text>
+<rect x="470" y="383" width="160" height="36" rx="6" fill="#f9fafb" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="550" y="405" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827">VM 在目標端恢復運行</text>
+</svg>

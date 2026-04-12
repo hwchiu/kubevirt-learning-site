@@ -17,35 +17,7 @@ KubeVirt 的遷移設計遵循 Kubernetes 原生模式——透過建立新的 P
 
 ### 完整架構圖
 
-```mermaid
-graph TB
-    subgraph "Source Node"
-        SH[virt-handler<br/>Source] --> SL[virt-launcher<br/>Source]
-        SL --> LIBVIRT_S[libvirtd<br/>Source]
-        SP[Migration Proxy<br/>Unix Socket → TCP]
-    end
-
-    subgraph "Target Node"
-        TH[virt-handler<br/>Target] --> TL[virt-launcher<br/>Target]
-        TL --> LIBVIRT_T[libvirtd<br/>Target]
-        TP[Migration Proxy<br/>TCP → Unix Socket]
-    end
-
-    subgraph "Control Plane"
-        VC[virt-controller<br/>Migration Controller]
-        API[Kubernetes API Server]
-    end
-
-    VC -->|1. 建立 Target Pod| API
-    API -->|2. 排程到 Target Node| TH
-    TH -->|3. 準備 Domain| TL
-    TL -->|4. TargetReady| API
-    API -->|5. 觸發遷移| SH
-    SH -->|6. 開始遷移| SL
-    LIBVIRT_S -.->|記憶體資料流| SP
-    SP -.->|TCP/TLS| TP
-    TP -.->|Unix Socket| LIBVIRT_T
-```
+![KubeVirt Live Migration Architecture](/diagrams/kubevirt/kubevirt-migration-1.png)
 
 ---
 
@@ -107,33 +79,7 @@ func (c *Controller) processMigrationPhase(
 
 ### Mermaid 狀態機圖
 
-```mermaid
-stateDiagram-v2
-    [*] --> MigrationPhaseUnset: 建立 Migration CR
-
-    MigrationPhaseUnset --> MigrationPending: VMI 可遷移
-    MigrationPhaseUnset --> MigrationFailed: VMI 不可遷移
-
-    MigrationPending --> MigrationScheduling: Target Pod 已建立
-
-    MigrationScheduling --> MigrationScheduled: Target Pod Ready
-    MigrationScheduling --> MigrationFailed: Pod 排程失敗
-
-    MigrationScheduled --> MigrationPreparingTarget: VMI 進入 PreparingTarget
-    MigrationScheduled --> MigrationFailed: 超時或錯誤
-
-    MigrationPreparingTarget --> MigrationTargetReady: 目標 Domain 準備完成
-    MigrationPreparingTarget --> MigrationFailed: 準備失敗
-
-    MigrationTargetReady --> MigrationRunning: 遷移開始執行
-    MigrationTargetReady --> MigrationFailed: 啟動失敗
-
-    MigrationRunning --> MigrationSucceeded: 資料傳輸完成
-    MigrationRunning --> MigrationFailed: 遷移逾時/錯誤
-
-    MigrationFailed --> [*]
-    MigrationSucceeded --> [*]
-```
+![Migration Phase State Machine](/diagrams/kubevirt/kubevirt-migration-2.png)
 
 ### 各 Phase 詳細說明
 
@@ -307,21 +253,7 @@ type ProxyManager interface {
 
 ### Unix Socket ↔ TCP Proxy 架構
 
-```mermaid
-graph LR
-    subgraph "Source Node"
-        LIBVIRT_S[libvirtd Source] -->|Unix Socket| SP[Source Proxy]
-    end
-
-    SP -->|TCP/TLS :隨機 Port| TP
-
-    subgraph "Target Node"
-        TP[Target Proxy] -->|Unix Socket| LIBVIRT_T[libvirtd Target]
-    end
-
-    style SP fill:#f9a825
-    style TP fill:#f9a825
-```
+![Migration Proxy Data Flow](/diagrams/kubevirt/kubevirt-migration-3.png)
 
 遷移資料流的完整路徑：
 
@@ -449,24 +381,7 @@ if err != nil {
 
 Pre-copy 是 KubeVirt 的預設遷移策略。其運作原理為 **迭代式記憶體複製**：
 
-```mermaid
-sequenceDiagram
-    participant S as Source
-    participant T as Target
-
-    Note over S,T: 第 1 輪：複製所有記憶體頁面
-    S->>T: 傳送完整記憶體（例如 8 GiB）
-
-    Note over S,T: 第 2 輪：複製第 1 輪期間被修改的頁面
-    S->>T: 傳送 dirty pages（例如 2 GiB）
-
-    Note over S,T: 第 3 輪：dirty pages 更少
-    S->>T: 傳送 dirty pages（例如 200 MiB）
-
-    Note over S,T: 第 N 輪：dirty pages 足夠少
-    S->>T: 最後一批 + 切換執行
-    Note over T: VM 在目標端恢復運行
-```
+![Pre-copy Migration](/diagrams/kubevirt/kubevirt-migration-4.png)
 
 **優點**：切換瞬間的 downtime 極短（毫秒級）  
 **缺點**：若 dirty rate 高於傳輸速度，可能永遠無法收斂
@@ -475,21 +390,7 @@ sequenceDiagram
 
 Post-copy 採用相反的策略——**先切換執行，再按需取回頁面**：
 
-```mermaid
-sequenceDiagram
-    participant S as Source
-    participant T as Target
-
-    Note over S,T: 第 1 輪：傳送最少量必要頁面
-    S->>T: 傳送 VM 狀態 + 部分記憶體
-
-    Note over T: VM 在目標端開始執行
-    T->>S: Page Fault! 需要頁面 0x1234
-    S->>T: 傳送頁面 0x1234
-    T->>S: Page Fault! 需要頁面 0x5678
-    S->>T: 傳送頁面 0x5678
-    Note over S,T: 持續按需傳送，直到所有頁面都到達目標端
-```
+![Post-copy Migration](/diagrams/kubevirt/kubevirt-migration-5.png)
 
 **優點**：保證收斂（已傳送的頁面不會再變 dirty）  
 **缺點**：切換後存在效能影響，源端 crash 會導致 VM 遺失資料
@@ -962,19 +863,7 @@ const (
 
 ### 清理流程
 
-```mermaid
-graph TD
-    A[Abort 請求] --> B{遷移階段?}
-    B -->|Pre-Running| C[刪除 Target Pod]
-    B -->|Running| D[dom.AbortJob]
-    D --> E{Abort 成功?}
-    E -->|是| F[AbortStatus = Succeeded]
-    E -->|否| G[AbortStatus = Failed]
-    F --> H[清理 Target Pod]
-    G --> I[重試或標記失敗]
-    C --> J[VMI 繼續在源端運行]
-    H --> J
-```
+![Migration Abort &amp; Cleanup Flow](/diagrams/kubevirt/kubevirt-migration-6.png)
 
 ---
 

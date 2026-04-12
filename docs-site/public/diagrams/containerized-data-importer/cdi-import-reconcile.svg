@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1300" viewBox="0 0 900 1300">
+<rect width="900" height="1300" fill="#ffffff"/>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+  <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+</marker>
+</defs>
+<text x="450" y="30" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827">ImportReconciler 調和流程</text>
+<rect x="310" y="60" width="280" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="87" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">Reconcile(ctx, req)</text>
+<rect x="310" y="140" width="280" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="167" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">reconcile(ctx, req, r)</text>
+<rect x="310" y="220" width="280" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="247" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">sync(log, req)</text>
+<rect x="310" y="300" width="280" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="327" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">syncImport(log, req)</text>
+<rect x="310" y="380" width="280" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="407" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">syncCommon(log, req, ...)</text>
+<rect x="540" y="450" width="220" height="44" rx="6" fill="#fee2e2" stroke="#f87171" stroke-width="1.5"/>
+<text x="650" y="477" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">返回</text>
+<rect x="175" y="570" width="250" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="300" y="597" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">reconcileVolumeImportSourceCR()</text>
+<rect x="175" y="660" width="250" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="300" y="687" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">pvcModifier = updatePVCForPopulation</text>
+<rect x="405" y="570" width="250" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="530" y="597" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">pvcModifier = updateAnnotations</text>
+<rect x="290" y="760" width="320" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="787" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">handlePvcCreation(log, syncState, pvcModifier)</text>
+<rect x="130" y="960" width="280" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="270" y="987" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">setVddkAnnotations()</text>
+<rect x="130" y="1060" width="280" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="270" y="1087" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">MaybeSetPvcMultiStageAnnotation()</text>
+<rect x="310" y="1160" width="280" height="44" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="1187" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">syncUpdate(log, syncState)</text>
+<polygon points="450,444 590,480 450,516 310,480" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="450" y="485" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#111827">usePopulator?</text>
+<polygon points="450,824 590,860 450,896 310,860" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="450" y="865" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#111827">pvc != nil 且非 populator?</text>
+<line x1="450" y1="104" x2="450" y2="140" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="450" y1="184" x2="450" y2="220" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="450" y1="264" x2="450" y2="300" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="450" y1="344" x2="450" y2="380" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M450,424 Q600,454 680,450" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="545" y="434" width="70" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="580" y="446" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">error / result!=nil</text>
+<line x1="450" y1="424" x2="450" y2="444" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="455" y="444" width="70" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="490" y="456" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">正常</text>
+<path d="M310,480 Q300,480 300,570" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="220" y="485" width="70" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="255" y="497" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">是</text>
+<line x1="300" y1="614" x2="300" y2="660" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M590,480 Q530,480 530,570" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="540" y="485" width="70" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="575" y="497" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">否</text>
+<path d="M300,704 Q300,740 450,760" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M530,614 Q530,740 450,760" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="450" y1="804" x2="450" y2="824" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M310,860 Q270,860 270,960" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="190" y="865" width="70" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="225" y="877" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">是</text>
+<line x1="270" y1="1004" x2="270" y2="1060" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M270,1104 Q270,1140 450,1160" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M590,860 Q650,860 650,1182 Q650,1182 590,1182" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="635" y="865" width="70" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="670" y="877" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">否</text>
+</svg>

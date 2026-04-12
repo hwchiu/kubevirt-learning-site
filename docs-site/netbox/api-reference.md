@@ -86,33 +86,7 @@ urlpatterns = [
 
 ### 1.3 API 請求流程
 
-```mermaid
-sequenceDiagram
-    participant Client
-    participant Django as Django URL Dispatcher
-    participant Auth as TokenAuthentication
-    participant Perm as TokenPermissions
-    participant ViewSet as NetBoxModelViewSet
-    participant Filter as NetBoxModelFilterSet
-    participant Serializer as NetBoxModelSerializer
-    participant DB as PostgreSQL
-
-    Client->>Django: GET /api/dcim/devices/?site=nyc
-    Django->>Auth: authenticate(request)
-    Auth->>Auth: 驗證 Token (v1/v2)
-    Auth-->>Django: (user, token)
-    Django->>Perm: has_permission(request, view)
-    Perm->>Perm: 檢查 Token write_enabled
-    Perm-->>Django: True
-    Django->>ViewSet: list(request)
-    ViewSet->>ViewSet: queryset.restrict(user, 'view')
-    ViewSet->>Filter: 套用查詢參數
-    Filter->>DB: SQL Query
-    DB-->>Filter: QuerySet
-    Filter-->>ViewSet: 過濾後的 QuerySet
-    ViewSet->>Serializer: 序列化回應資料
-    Serializer-->>Client: JSON Response (200)
-```
+![API 請求處理流程](/diagrams/netbox/netbox-api-1.png)
 
 ## 2. API Endpoint 清單
 
@@ -155,38 +129,7 @@ urlpatterns = router.urls
 
 ### 3.1 繼承鏈
 
-```mermaid
-classDiagram
-    class GenericViewSet {
-        +get_queryset()
-        +get_serializer_class()
-    }
-    class BaseViewSet {
-        +brief: bool
-        +initial(request)
-        +initialize_request(request)
-        +get_queryset()
-        +field_kwargs: dict
-    }
-    class NetBoxReadOnlyModelViewSet {
-        <<RetrieveModelMixin>>
-        <<ListModelMixin>>
-    }
-    class NetBoxModelViewSet {
-        <<BulkUpdateModelMixin>>
-        <<BulkDestroyModelMixin>>
-        <<ObjectValidationMixin>>
-        <<CreateModelMixin>>
-        <<UpdateModelMixin>>
-        <<DestroyModelMixin>>
-        +get_object_with_snapshot()
-        +dispatch(request)
-    }
-
-    GenericViewSet <|-- BaseViewSet
-    BaseViewSet <|-- NetBoxReadOnlyModelViewSet
-    BaseViewSet <|-- NetBoxModelViewSet
-```
+![ViewSet 繼承鏈](/diagrams/netbox/netbox-api-2.png)
 
 ### 3.2 BaseViewSet — 權限控制核心
 
@@ -250,41 +193,7 @@ class BaseViewSet(GenericViewSet):
 
 ### 4.1 繼承體系
 
-```mermaid
-classDiagram
-    class BaseModelSerializer {
-        +url: HyperlinkedIdentityField
-        +display: SerializerMethodField
-        +__init__(nested, fields, omit)
-        +fields: property
-    }
-    class ValidatedModelSerializer {
-        +validate(data)
-        -full_clean() 驗證
-    }
-    class CustomFieldModelSerializer {
-        +custom_fields: CustomFieldsDataField
-    }
-    class TaggableModelSerializer {
-        +tags: NestedTagSerializer
-        +create(validated_data)
-        +update(instance, validated_data)
-    }
-    class ChangeLogMessageSerializer {
-        +changelog_message: str
-    }
-    class NetBoxModelSerializer
-    class PrimaryModelSerializer {
-        <<OwnerMixin>>
-    }
-
-    BaseModelSerializer <|-- ValidatedModelSerializer
-    ValidatedModelSerializer <|-- NetBoxModelSerializer
-    CustomFieldModelSerializer <|-- NetBoxModelSerializer
-    TaggableModelSerializer <|-- NetBoxModelSerializer
-    ChangeLogMessageSerializer <|-- NetBoxModelSerializer
-    NetBoxModelSerializer <|-- PrimaryModelSerializer
-```
+![Serializer 繼承體系](/diagrams/netbox/netbox-api-3.png)
 
 ### 4.2 BaseModelSerializer — 動態欄位
 

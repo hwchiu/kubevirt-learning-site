@@ -16,37 +16,7 @@ layout: doc
 
 CDI 在 `cmd/cdi-controller/controller.go`（約第 248-336 行）中註冊所有控制器。整體可分為五大類：
 
-```mermaid
-graph TB
-    subgraph "cdi-controller 程序"
-        direction TB
-        subgraph "DataVolume Controllers"
-            DV_IMPORT[ImportReconciler]
-            DV_UPLOAD[UploadController]
-            DV_PVC_CLONE[PvcCloneController]
-            DV_SNAP_CLONE[SnapshotCloneController]
-            DV_POP[PopulatorController]
-        end
-        subgraph "Primary Controllers"
-            IMPORT[ImportController - Legacy]
-            CLONE[CloneController - Legacy]
-            UPLOAD[UploadController - Legacy]
-            CONFIG[ConfigController]
-            SP[StorageProfileController]
-            DIC[DataImportCronController]
-            DS[DataSourceController]
-        end
-        subgraph "Populator Controllers"
-            POP_IMPORT[ImportPopulator]
-            POP_UPLOAD[UploadPopulator]
-            POP_CLONE[ClonePopulator]
-            POP_FORK[ForkliftPopulator]
-        end
-        subgraph "Transfer"
-            TRANSFER[ObjectTransferController]
-        end
-    end
-```
+![cdi-controller 控制器架構概覽](/diagrams/containerized-data-importer/cdi-controllers-api-1.png)
 
 ### 控制器註冊表
 
@@ -147,25 +117,7 @@ datavolumeController, err := controller.New(importControllerName, mgr, controlle
 
 ### 調和流程（Reconciliation Flow）
 
-```mermaid
-flowchart TD
-    A["Reconcile(ctx, req)"] --> B["reconcile(ctx, req, r)"]
-    B --> C["sync(log, req)"]
-    C --> D["syncImport(log, req)"]
-    D --> E["syncCommon(log, req, cleanup, nil)"]
-    E -->|error 或 result != nil| F[返回]
-    E -->|正常| G{usePopulator?}
-    G -->|是| H["reconcileVolumeImportSourceCR()"]
-    H --> I["pvcModifier = updatePVCForPopulation"]
-    G -->|否| J["pvcModifier = updateAnnotations"]
-    I --> K["handlePvcCreation(log, syncState, pvcModifier)"]
-    J --> K
-    K --> L{pvc != nil 且非 populator?}
-    L -->|是| M["setVddkAnnotations()"]
-    M --> N["MaybeSetPvcMultiStageAnnotation()"]
-    L -->|否| O["syncUpdate(log, syncState)"]
-    N --> O
-```
+![ImportReconciler 調和流程](/diagrams/containerized-data-importer/cdi-controllers-api-2.png)
 
 ### syncImport 核心邏輯
 
@@ -668,19 +620,7 @@ type dataVolumeMutatingWebhook struct {
 
 **變更邏輯**：
 
-```mermaid
-flowchart TD
-    A[收到 DataVolume Admission Request] --> B{是 Delete 操作?}
-    B -->|是| C[跳過，允許]
-    B -->|否| D[SubjectAccessReview 授權檢查]
-    D --> E{是 Create 操作?}
-    E -->|是| F{來源是 PVC/Snapshot clone?}
-    E -->|否| G[允許]
-    F -->|是| H["產生 Clone Token"]
-    F -->|否| G
-    H --> I["設定 annotation: AnnCloneToken"]
-    I --> G
-```
+![DataVolume Mutating Webhook 流程](/diagrams/containerized-data-importer/cdi-controllers-api-3.png)
 
 ::: warning 跨 Namespace 克隆安全性
 CDI 使用 `SubjectAccessReview` 驗證請求者是否有權讀取來源 namespace 的 PVC/Snapshot。通過驗證後，Mutating Webhook 產生一個帶有 `token.OperationClone` 的 JWT Token 並注入 DataVolume 的 annotation，後續控制器會驗證此 Token。

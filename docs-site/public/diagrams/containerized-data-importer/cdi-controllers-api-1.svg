@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="680" viewBox="0 0 1400 680">
+  <rect width="1400" height="680" fill="#ffffff"/>
+  <rect x="20" y="20" width="1360" height="620" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="32" y="39" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#6b7280">cdi-controller 程序</text>
+  <rect x="50" y="55" width="480" height="230" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="62" y="74" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#6b7280">DataVolume Controllers</text>
+  <rect x="65" y="82" width="210" height="42" rx="6" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="170" y="109" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">ImportReconciler</text>
+  <rect x="295" y="82" width="210" height="42" rx="6" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="400" y="109" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">UploadController</text>
+  <rect x="65" y="147" width="210" height="42" rx="6" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="170" y="174" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">PvcCloneController</text>
+  <rect x="295" y="147" width="210" height="42" rx="6" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="400" y="174" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">SnapshotCloneController</text>
+  <rect x="65" y="212" width="210" height="42" rx="6" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="170" y="239" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">PopulatorController</text>
+  <rect x="180" y="212" width="210" height="42" rx="6" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="285" y="239" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">PopulatorController</text>
+  <rect x="550" y="55" width="420" height="230" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="562" y="74" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#6b7280">Primary Controllers</text>
+  <rect x="565" y="82" width="185" height="42" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="658" y="101" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">ImportController</text>
+  <text x="658" y="117" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="400" text-anchor="middle" fill="#111827">(Legacy)</text>
+  <rect x="565" y="130" width="185" height="42" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="658" y="149" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">CloneController</text>
+  <text x="658" y="165" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="400" text-anchor="middle" fill="#111827">(Legacy)</text>
+  <rect x="565" y="178" width="185" height="42" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="658" y="197" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">UploadController</text>
+  <text x="658" y="213" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="400" text-anchor="middle" fill="#111827">(Legacy)</text>
+  <rect x="785" y="82" width="185" height="42" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="878" y="109" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">ConfigController</text>
+  <rect x="785" y="130" width="185" height="42" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="878" y="157" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">StorageProfileController</text>
+  <rect x="785" y="178" width="185" height="42" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="878" y="205" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">DataImportCronController</text>
+  <rect x="680" y="226" width="185" height="42" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="772" y="253" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">DataSourceController</text>
+  <rect x="50" y="310" width="480" height="160" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="62" y="329" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#6b7280">Populator Controllers</text>
+  <rect x="65" y="335" width="210" height="42" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="170" y="362" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">ImportPopulator</text>
+  <rect x="295" y="335" width="210" height="42" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="400" y="362" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">UploadPopulator</text>
+  <rect x="65" y="400" width="210" height="42" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="170" y="427" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">ClonePopulator</text>
+  <rect x="295" y="400" width="210" height="42" rx="6" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="400" y="427" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">ForkliftPopulator</text>
+  <rect x="550" y="310" width="420" height="160" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="562" y="329" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#6b7280">Transfer</text>
+  <rect x="650" y="360" width="220" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="760" y="391" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">ObjectTransferController</text>
+  <text x="700" y="660" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#6b7280">cdi-controller 控制器架構概覽</text>
+</svg>

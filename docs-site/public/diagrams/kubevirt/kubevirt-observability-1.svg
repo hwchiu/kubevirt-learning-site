@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560">
+  <rect width="960" height="560" fill="#ffffff" />
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#3b82f6" />
+    </marker>
+  </defs>
+  <text x="480" y="30" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="18" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="bold">KubeVirt 日誌架構</text>
+  <rect x="30" y="60" width="340" height="160" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" rx="10" />
+  <text x="200" y="80" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">kubevirt namespace</text>
+  <rect x="50" y="95" width="140" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8" />
+  <text x="120" y="110" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">virt-api</text>
+  <text x="120" y="128" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">Deployment</text>
+  <rect x="210" y="95" width="140" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8" />
+  <text x="280" y="110" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">virt-controller</text>
+  <text x="280" y="128" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">Deployment</text>
+  <rect x="50" y="165" width="140" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8" />
+  <text x="120" y="180" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">virt-operator</text>
+  <text x="120" y="198" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">Deployment</text>
+  <rect x="390" y="60" width="260" height="160" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" rx="10" />
+  <text x="520" y="80" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">每個 Worker Node</text>
+  <rect x="410" y="95" width="140" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8" />
+  <text x="480" y="110" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">virt-handler</text>
+  <text x="480" y="128" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">DaemonSet</text>
+  <rect x="410" y="165" width="140" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8" />
+  <text x="480" y="180" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">virt-launcher Pod</text>
+  <text x="480" y="198" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">(per VM)</text>
+  <rect x="670" y="60" width="260" height="160" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" rx="10" />
+  <text x="800" y="80" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">virt-launcher Pod 內部</text>
+  <rect x="690" y="95" width="140" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8" />
+  <text x="760" y="110" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">libvirtd</text>
+  <text x="760" y="128" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">/var/log/libvirt/</text>
+  <rect x="690" y="165" width="140" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8" />
+  <text x="760" y="180" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">qemu process</text>
+  <text x="760" y="198" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal">/var/log/libvirt/qemu/</text>
+  <rect x="55" y="360" width="130" height="55" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5" rx="6" />
+  <text x="120" y="375" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">virt-api logs</text>
+  <rect x="245" y="360" width="130" height="55" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5" rx="6" />
+  <text x="310" y="375" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">virt-controller</text>
+  <text x="310" y="393" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">logs</text>
+  <rect x="435" y="360" width="130" height="55" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5" rx="6" />
+  <text x="500" y="375" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">virt-handler logs</text>
+  <rect x="635" y="360" width="130" height="55" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5" rx="6" />
+  <text x="700" y="375" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">virt-launcher logs</text>
+  <line x1="120" y1="145" x2="120" y2="360" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
+  <text x="120" y="242" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">API 驗證失敗</text>
+  <line x1="280" y1="120" x2="310" y2="360" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
+  <text x="295" y="230" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">VMI 建立控制</text>
+  <line x1="480" y1="120" x2="500" y2="360" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
+  <text x="490" y="230" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">節點層級操作</text>
+  <line x1="560" y1="145" x2="700" y2="360" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
+  <text x="630" y="242" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">VM 運行狀態</text>
+  <line x1="760" y1="145" x2="700" y2="360" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)" />
+  <text x="730" y="242" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">詳細 VM 日誌</text>
+  <text x="800" y="230" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal">launcher process</text>
+  <rect x="700" y="220" width="140" height="30" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="4" />
+</svg>

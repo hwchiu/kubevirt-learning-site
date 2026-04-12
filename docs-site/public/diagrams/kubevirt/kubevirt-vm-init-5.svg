@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="580" viewBox="0 0 1400 580">
+<rect width="1400" height="580" fill="#ffffff"/>
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+  </marker>
+  <marker id="arrow-ret" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#6b7280"/>
+  </marker>
+</defs>
+<text x="700" y="35" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#111827" text-anchor="middle">ContainerDisk 初始化序列</text>
+<rect x="80" y="55" width="200" height="55" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/><text x="180.0" y="88.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827" text-anchor="middle">Kubernetes</text>
+<rect x="420" y="55" width="200" height="55" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/><text x="520.0" y="80.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827" text-anchor="middle">container-disk</text><text x="520.0" y="95.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827" text-anchor="middle">Init Container</text>
+<rect x="760" y="55" width="200" height="55" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/><text x="860.0" y="80.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827" text-anchor="middle">virt-launcher</text><text x="860.0" y="95.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827" text-anchor="middle">主容器</text>
+<rect x="1100" y="55" width="200" height="55" rx="8" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/><text x="1200.0" y="88.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827" text-anchor="middle">QEMU</text>
+<line x1="180" y1="110" x2="180" y2="550" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="6,4"/>
+<line x1="520" y1="110" x2="520" y2="550" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="6,4"/>
+<line x1="860" y1="110" x2="860" y2="550" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="6,4"/>
+<line x1="1200" y1="110" x2="1200" y2="550" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="6,4"/>
+<line x1="180" y1="145" x2="520" y2="145" stroke="#3b82f6" stroke-width="2"  marker-end="url(#arrow)"/><text x="350.0" y="138" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">啟動 Init Container</text>
+<rect x="430" y="195" width="240" height="28" rx="4" fill="#fef9c3" stroke="#fbbf24" stroke-width="1"/><text x="550.0" y="209" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle">從 OCI Registry 拉取映像</text>
+<path d="M520,243 Q580,243 580,263 Q580,283 520,283" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/><text x="590" y="265" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">掛載 OCI 映像層</text>
+<path d="M520,298 Q580,298 580,318 Q580,338 520,338" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/><text x="590" y="320" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">找到 /disk/disk.img or /disk/disk.qcow2</text>
+<path d="M520,353 Q580,353 580,373 Q580,393 520,393" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/><text x="590" y="375" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">複製到 emptyDir /var/run/kubevirt/container-disks/</text>
+<line x1="520" y1="408" x2="180" y2="408" stroke="#6b7280" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrow-ret)"/>
+<text x="350" y="401" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">Init Container 完成</text>
+<line x1="180" y1="458" x2="860" y2="458" stroke="#3b82f6" stroke-width="2"  marker-end="url(#arrow)"/><text x="520.0" y="451" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">啟動 virt-launcher</text>
+<path d="M860,508 Q920,508 920,528 Q920,548 860,548" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/><text x="930" y="530" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">偵測 emptyDir 中的磁碟</text>
+<path d="M860,558 Q920,558 920,578 Q920,598 860,598" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/><text x="930" y="580" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">Convert() 設定磁碟路徑</text>
+<line x1="860" y1="608" x2="1200" y2="608" stroke="#3b82f6" stroke-width="2"  marker-end="url(#arrow)"/><text x="1030.0" y="601" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">啟動並掛載磁碟</text>
+</svg>

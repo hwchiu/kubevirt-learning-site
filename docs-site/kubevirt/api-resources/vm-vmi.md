@@ -22,14 +22,7 @@ KubeVirt 的兩個最基礎的 API 資源是 **VirtualMachine (VM)** 與 **Virtu
 **VM 是 VMI 的宣告式包裝器**。VM Controller 根據 VM 的 `spec.runStrategy` 決定是否建立、刪除或重建對應的 VMI。一個 VM 同一時間最多對應一個 VMI，名稱相同。
 :::
 
-```mermaid
-graph TD
-    VM["VirtualMachine (VM)\n宣告式資源"] -->|"creates/deletes"| VMI["VirtualMachineInstance (VMI)\n執行實體"]
-    VMI -->|"schedules on"| Pod["virt-launcher Pod\n(per VMI)"]
-    Pod -->|"spawns"| QEMU["QEMU/KVM Process"]
-    VM -->|"references"| DV["DataVolume / PVC"]
-    DV -->|"provides disk"| VMI
-```
+![VM / VMI 資源關係圖](/diagrams/kubevirt/kubevirt-vmvmi-1.png)
 
 ---
 
@@ -546,19 +539,7 @@ domain:
 
 ### Phase 狀態機
 
-```mermaid
-stateDiagram-v2
-    [*] --> Pending : 建立 VMI
-    Pending --> Scheduling : 尋找可用節點
-    Scheduling --> Scheduled : 節點已選定
-    Scheduled --> Running : virt-launcher 啟動完成
-    Running --> Succeeded : Guest 正常關機
-    Running --> Failed : 異常終止
-    Running --> Running : Live Migration 中
-    Succeeded --> [*]
-    Failed --> [*]
-    Unknown --> [*] : 節點失聯
-```
+![VMI Phase 狀態機](/diagrams/kubevirt/kubevirt-vmvmi-2.png)
 
 | Phase | 說明 |
 |---|---|

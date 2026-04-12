@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1400" viewBox="0 0 1800 1400">
+<rect width="1800" height="1400" fill="#ffffff"/>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+  <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+</marker>
+</defs>
+<text x="900" y="28" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">CDI 系統架構</text>
+<rect x="570" y="35" width="640" height="130" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="582" y="55" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#6b7280">Control Plane</text>
+<rect x="50" y="215" width="460" height="160" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="62" y="235" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#6b7280">Data Plane — Worker Pods</text>
+<rect x="570" y="215" width="200" height="100" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="582" y="235" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#6b7280">Proxy Layer</text>
+<rect x="830" y="215" width="360" height="100" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="842" y="235" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#6b7280">Volume Populators</text>
+<rect x="390" y="430" width="640" height="130" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="402" y="450" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#6b7280">Kubernetes Resources</text>
+<rect x="1090" y="430" width="500" height="130" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="1102" y="450" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#6b7280">External Sources</text>
+<rect x="590" y="65" width="150" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="665" y="95" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">cdi-operator</text>
+<rect x="780" y="65" width="160" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="860" y="95" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">cdi-controller</text>
+<rect x="975" y="65" width="150" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="1050" y="95" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">cdi-apiserver</text>
+<rect x="65" y="250" width="130" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="130" y="267" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">cdi-importer</text>
+<text x="130" y="285" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">Pod</text>
+<rect x="220" y="250" width="120" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="280" y="267" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">cdi-cloner</text>
+<text x="280" y="285" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">Pod</text>
+<rect x="360" y="250" width="140" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="430" y="267" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">cdi-uploadserver</text>
+<text x="430" y="285" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">Pod</text>
+<rect x="585" y="245" width="170" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="670" y="275" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">cdi-uploadproxy</text>
+<rect x="845" y="250" width="150" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="920" y="280" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">ovirt-populator</text>
+<rect x="1020" y="250" width="155" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="1097" y="280" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">openstack-populator</text>
+<rect x="410" y="465" width="160" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="490" y="482" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">Kubernetes</text>
+<text x="490" y="500" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">API Server</text>
+<rect x="605" y="465" width="80" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="645" y="495" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">PVC</text>
+<rect x="710" y="465" width="135" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="777" y="495" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">VolumeSnapshot</text>
+<rect x="875" y="465" width="130" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="940" y="495" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">StorageClass</text>
+<rect x="1105" y="460" width="110" height="40" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="1160" y="485" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">HTTP/S3/GCS</text>
+<rect x="1230" y="460" width="140" height="40" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="1300" y="485" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">Container Registry</text>
+<rect x="1385" y="460" width="115" height="40" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="1442" y="485" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">oVirt ImageIO</text>
+<rect x="1515" y="460" width="110" height="40" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="1570" y="485" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">VMware VDDK</text>
+<rect x="50" y="500" width="120" height="45" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="110" y="527" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">Upload Client</text>
+<line x1="740" y1="90" x2="780" y2="90" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="725" y="80" width="70" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="760" y="92" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">部署與管理</text>
+<path d="M665,65 Q665,30 1050,30 Q1050,65 1050,65" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="858" y="25" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">部署與管理</text>
+<path d="M665,115 Q665,180 670,180 Q670,215 670,245" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="690" y="195" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">部署與管理</text>
+<path d="M860,115 Q860,180 550,180 Q130,180 130,250" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="450" y="175" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">建立 Worker Pod</text>
+<path d="M860,115 Q860,200 280,200 Q280,250 280,250" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M860,115 Q860,210 430,210 Q430,250 430,250" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M860,115 Q860,400 490,400 Q490,465 490,465" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="670" y="395" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">監控</text>
+<path d="M940,115 Q940,390 940,465" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="965" y="395" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">讀取</text>
+<path d="M1050,115 Q1050,380 490,380 Q490,465 490,465" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow)"/>
+<text x="800" y="375" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">Webhook 驗證</text>
+<path d="M1050,115 Q1050,155 700,155 Q700,215 700,245" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="870" y="150" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">簽發 Upload Token</text>
+<path d="M130,300 Q130,420 645,420 Q645,465 645,465" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="300" y="415" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">寫入資料</text>
+<path d="M280,300 Q280,430 645,430 Q645,465 645,465" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="400" y="425" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">讀取/寫入</text>
+<path d="M340,275 Q500,275 710,465" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M430,300 Q430,440 645,465" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="510" y="440" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">寫入資料</text>
+<line x1="590" y1="270" x2="500" y2="270" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="510" y="260" width="70" height="16" rx="3" fill="white" opacity="0.9"/>
+<text x="545" y="272" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">轉發請求</text>
+<path d="M920,300 Q920,440 685,465" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="840" y="440" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">寫入資料</text>
+<path d="M1097,300 Q1097,450 685,465" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M110,500 Q110,380 585,270" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="220" y="440" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">上傳</text>
+<line x1="195" y1="265" x2="1105" y2="465" stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.6"/>
+<line x1="195" y1="270" x2="1230" y2="465" stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.6"/>
+<line x1="195" y1="275" x2="1385" y2="465" stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.6"/>
+<line x1="195" y1="280" x2="1515" y2="465" stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.6"/>
+</svg>
