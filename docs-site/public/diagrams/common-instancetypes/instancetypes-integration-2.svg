@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" style="background:#ffffff; font-family:-apple-system, 'Helvetica Neue', Arial, sans-serif;">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+
+  <!-- Step A -->
+  <rect x="300" y="50" width="300" height="45" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="450" y="78" text-anchor="middle" font-size="14" font-weight="700" fill="#111827">kubevirtci.sh up</text>
+  
+  <!-- Step B -->
+  <rect x="300" y="120" width="300" height="45" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="450" y="148" text-anchor="middle" font-size="13" fill="#111827">clone kubevirtci repo</text>
+  
+  <!-- Step C -->
+  <rect x="300" y="190" width="300" height="45" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="450" y="218" text-anchor="middle" font-size="13" fill="#111827">make cluster-up</text>
+  
+  <!-- Step D -->
+  <rect x="300" y="260" width="300" height="45" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="450" y="288" text-anchor="middle" font-size="13" fill="#111827">安裝 KubeVirt operator + CR</text>
+  
+  <!-- Step E -->
+  <rect x="300" y="330" width="300" height="45" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="450" y="358" text-anchor="middle" font-size="13" fill="#111827">等待 KubeVirt Available</text>
+  
+  <!-- Step F -->
+  <rect x="300" y="400" width="300" height="45" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="450" y="428" text-anchor="middle" font-size="13" fill="#111827">停用內建 common-instancetypes 部署</text>
+  
+  <!-- Step G -->
+  <rect x="300" y="470" width="300" height="50" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+  <text x="450" y="502" text-anchor="middle" font-size="15" font-weight="700" fill="#065f46">叢集就緒</text>
+  
+  <!-- Step H -->
+  <rect x="50" y="600" width="220" height="50" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="160" y="632" text-anchor="middle" font-size="14" font-weight="600" fill="#111827">kubevirtci.sh sync</text>
+  
+  <!-- Step I -->
+  <rect x="50" y="680" width="220" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="160" y="700" text-anchor="middle" font-size="12" fill="#111827">sync.sh:</text>
+  <text x="160" y="718" text-anchor="middle" font-size="12" fill="#111827">刪除舊資源</text>
+  
+  <!-- Step J -->
+  <rect x="50" y="760" width="220" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="160" y="780" text-anchor="middle" font-size="12" fill="#111827">重新 apply</text>
+  <text x="160" y="798" text-anchor="middle" font-size="12" fill="#111827">Kustomize 資源</text>
+  
+  <!-- Step K -->
+  <rect x="340" y="600" width="300" height="50" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="490" y="632" text-anchor="middle" font-size="14" font-weight="600" fill="#111827">kubevirtci.sh sync-containerdisks</text>
+  
+  <!-- Step L -->
+  <rect x="340" y="680" width="300" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="490" y="712" text-anchor="middle" font-size="13" fill="#111827">podman pull 測試映像</text>
+  
+  <!-- Step M -->
+  <rect x="340" y="760" width="300" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="490" y="792" text-anchor="middle" font-size="13" fill="#111827">push 到叢集內部 registry</text>
+  
+  <!-- Arrows -->
+  <path d="M 450 95 L 450 120" stroke="#3b82f6" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 450 165 L 450 190" stroke="#3b82f6" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 450 235 L 450 260" stroke="#3b82f6" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 450 305 L 450 330" stroke="#3b82f6" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 450 375 L 450 400" stroke="#3b82f6" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 450 445 L 450 470" stroke="#3b82f6" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- G -> H -->
+  <path d="M 350 520 Q 250 560 160 600" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- G -> K -->
+  <path d="M 450 520 Q 450 560 490 600" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- H -> I -->
+  <path d="M 160 650 L 160 680" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- I -> J -->
+  <path d="M 160 730 L 160 760" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- K -> L -->
+  <path d="M 490 650 L 490 680" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- L -> M -->
+  <path d="M 490 730 L 490 760" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+</svg>

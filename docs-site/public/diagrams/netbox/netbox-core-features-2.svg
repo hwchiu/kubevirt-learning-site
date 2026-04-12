@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <style>
+      .entity { fill: #f9fafb; stroke: #e5e7eb; stroke-width: 2; }
+      .text-entity { fill: #111827; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; font-weight: 700; }
+      .text-rel { fill: #6b7280; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; }
+      .line { stroke: #3b82f6; stroke-width: 2; fill: none; }
+      .cardinality { fill: #111827; font-family: 'Courier New', monospace; font-size: 14px; font-weight: 700; }
+    </style>
+  </defs>
+
+  <!-- VRF (center-top) -->
+  <rect class="entity" x="400" y="50" width="200" height="60" rx="4"/>
+  <text class="text-entity" x="500" y="88" text-anchor="middle">VRF</text>
+
+  <!-- Prefix (left-middle) -->
+  <rect class="entity" x="100" y="250" width="200" height="60" rx="4"/>
+  <text class="text-entity" x="200" y="288" text-anchor="middle">Prefix</text>
+
+  <!-- IPAddress (center-middle) -->
+  <rect class="entity" x="400" y="250" width="200" height="60" rx="4"/>
+  <text class="text-entity" x="500" y="288" text-anchor="middle">IPAddress</text>
+
+  <!-- RouteTarget (right-top) -->
+  <rect class="entity" x="750" y="50" width="200" height="60" rx="4"/>
+  <text class="text-entity" x="850" y="88" text-anchor="middle">RouteTarget</text>
+
+  <!-- IPRange (left-bottom) -->
+  <rect class="entity" x="100" y="450" width="200" height="60" rx="4"/>
+  <text class="text-entity" x="200" y="488" text-anchor="middle">IPRange</text>
+
+  <!-- Aggregate (right-middle) -->
+  <rect class="entity" x="700" y="350" width="200" height="60" rx="4"/>
+  <text class="text-entity" x="800" y="388" text-anchor="middle">Aggregate</text>
+
+  <!-- RIR (right-bottom) -->
+  <rect class="entity" x="700" y="550" width="200" height="60" rx="4"/>
+  <text class="text-entity" x="800" y="588" text-anchor="middle">RIR</text>
+
+  <!-- VRF -> Prefix -->
+  <path class="line" d="M 420 110 L 260 250"/>
+  <text class="cardinality" x="425" y="120">||</text>
+  <text class="cardinality" x="260" y="240">o{</text>
+  <text class="text-rel" x="320" y="170">contains</text>
+
+  <!-- VRF -> IPAddress -->
+  <path class="line" d="M 500 110 L 500 250"/>
+  <text class="cardinality" x="495" y="120">||</text>
+  <text class="cardinality" x="495" y="240">o{</text>
+  <text class="text-rel" x="510" y="180">contains</text>
+
+  <!-- VRF -> RouteTarget (import) -->
+  <path class="line" d="M 600 70 L 750 70"/>
+  <text class="cardinality" x="605" y="75">}o</text>
+  <text class="cardinality" x="740" y="75">o{</text>
+  <text class="text-rel" x="650" y="65">import_targets</text>
+
+  <!-- VRF -> RouteTarget (export) -->
+  <path class="line" d="M 600 90 L 750 90"/>
+  <text class="cardinality" x="605" y="95">}o</text>
+  <text class="cardinality" x="740" y="95">o{</text>
+  <text class="text-rel" x="650" y="105">export_targets</text>
+
+  <!-- Prefix -> IPAddress -->
+  <path class="line" d="M 300 280 L 400 280"/>
+  <text class="cardinality" x="305" y="285">||</text>
+  <text class="cardinality" x="390" y="285">o{</text>
+  <text class="text-rel" x="315" y="275">child IPs</text>
+
+  <!-- Prefix -> IPRange -->
+  <path class="line" d="M 200 310 L 200 450"/>
+  <text class="cardinality" x="195" y="320">||</text>
+  <text class="cardinality" x="195" y="440">o{</text>
+  <text class="text-rel" x="210" y="380">child ranges</text>
+
+  <!-- Prefix -> Aggregate -->
+  <path class="line" d="M 300 280 L 700 380"/>
+  <text class="cardinality" x="305" y="285">}o</text>
+  <text class="cardinality" x="690" y="385">||</text>
+  <text class="text-rel" x="480" y="320">contained by</text>
+
+  <!-- Aggregate -> RIR -->
+  <path class="line" d="M 800 410 L 800 550"/>
+  <text class="cardinality" x="795" y="420">}o</text>
+  <text class="cardinality" x="795" y="540">||</text>
+  <text class="text-rel" x="810" y="480">belongs to</text>
+
+</svg>

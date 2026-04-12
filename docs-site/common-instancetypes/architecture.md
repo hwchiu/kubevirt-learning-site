@@ -24,82 +24,11 @@ layout: doc
 
 ## 系統架構圖
 
-```mermaid
-flowchart TB
-    subgraph Sources["原始碼定義"]
-        direction TB
-        IT["instancetypes/<br/>7 個系列 × 多種尺寸"]
-        PR["preferences/<br/>16 個 OS 類別"]
-        CO["preferences/components/<br/>26 個可重用元件"]
-        CO -->|組合| PR
-    end
-
-    subgraph Kustomize["Kustomize 建置層"]
-        direction TB
-        ROOT["根 kustomization.yaml<br/>resources: instancetypes + preferences"]
-        VMCI["VirtualMachineCluster*/<br/>僅保留 Cluster 範圍資源"]
-        VMI["VirtualMachine*/<br/>僅保留 Namespace 範圍資源"]
-    end
-
-    subgraph Build["建置產出 (_build/)"]
-        direction TB
-        ALL["common-instancetypes-all-bundle.yaml"]
-        CIB["common-clusterinstancetypes-bundle.yaml"]
-        IB["common-instancetypes-bundle.yaml"]
-        CPB["common-clusterpreferences-bundle.yaml"]
-        PB["common-preferences-bundle.yaml"]
-        CHK["CHECKSUMS.sha256"]
-    end
-
-    subgraph Deploy["部署目標"]
-        K8S["KubeVirt 叢集"]
-    end
-
-    Sources --> ROOT
-    ROOT --> ALL
-    IT --> VMCI
-    IT --> VMI
-    PR --> VMCI
-    PR --> VMI
-    VMCI --> CIB
-    VMCI --> CPB
-    VMI --> IB
-    VMI --> PB
-    ALL --> CHK
-    CIB --> CHK
-    IB --> CHK
-    CPB --> CHK
-    PB --> CHK
-    Build -->|"kubectl apply / kustomize build"| K8S
-```
+![Common Instancetypes 系統架構圖](/diagrams/common-instancetypes/instancetypes-arch-1.png)
 
 ### Kustomize 組合模式
 
-```mermaid
-flowchart LR
-    subgraph InstanceType["Instance Type 組合"]
-        SZ["sizes.yaml<br/>定義各尺寸 CPU/Memory"]
-        BASE_IT["cx1.yaml<br/>系列基礎設定 (patch)"]
-        SZ --> KIT["kustomization.yaml<br/>resources + patches"]
-        BASE_IT --> KIT
-    end
-
-    subgraph Preference["Preference 繼承鏈"]
-        BASE_PR["base/<br/>空白模板"]
-        LINUX["linux/<br/>+ virtio-blk, virtio-net, rng"]
-        ALPINE["alpine/<br/>+ metadata, requirements"]
-        BASE_PR --> LINUX
-        LINUX --> ALPINE
-    end
-
-    subgraph Components["可重用元件 (Component)"]
-        EFI["efi/"]
-        HV["hyperv/"]
-        TOPO["cpu-topology-sockets/"]
-    end
-
-    Components -->|"components 引用"| Preference
-```
+![Kustomize 組合模式](/diagrams/common-instancetypes/instancetypes-arch-2.png)
 
 ## 目錄結構
 
@@ -253,21 +182,7 @@ patches:
 
 Preferences 使用 **繼承鏈 + 可重用元件** 的設計模式：
 
-```mermaid
-flowchart TD
-    BASE["base/<br/>空白 VirtualMachineClusterPreference<br/>+ vendor label"]
-    LINUX["linux/<br/>+ diskbus-virtio-blk<br/>+ interfacemodel-virtio-net<br/>+ rng"]
-    ALPINE["alpine/<br/>+ metadata (icon, name)<br/>+ requirements (1 CPU, 512Mi)"]
-    UBUNTU["ubuntu/<br/>+ metadata + requirements"]
-    FEDORA["fedora/<br/>+ metadata + requirements"]
-    WINDOWS["windows/<br/>（獨立繼承鏈）<br/>+ hyperv + efi + tablet-usb"]
-
-    BASE --> LINUX
-    LINUX --> ALPINE
-    LINUX --> UBUNTU
-    LINUX --> FEDORA
-    BASE --> WINDOWS
-```
+![Preference 繼承鏈](/diagrams/common-instancetypes/instancetypes-arch-3.png)
 
 **linux** preference 的 kustomization 範例：
 
@@ -463,14 +378,7 @@ metadata:
 5. 更新 periodic job 將最新 release 同步至 `kubevirt/kubevirt` 主分支
 6. 建立下一個 release cycle 的 `v1.{Y+1}.0` milestone
 
-```mermaid
-flowchart LR
-    A["kubevirt/kubevirt<br/>beta.0 release"] --> B["建立 release-1.Y 分支"]
-    B --> C["Tag v1.Y.0"]
-    C --> D["GitHub Actions<br/>建置 bundles"]
-    D --> E["同步至<br/>kubevirt/kubevirt main"]
-    E --> F["建立 v1.Y+1.0<br/>milestone"]
-```
+![發布流程](/diagrams/common-instancetypes/instancetypes-arch-4.png)
 
 ## 部署方式
 

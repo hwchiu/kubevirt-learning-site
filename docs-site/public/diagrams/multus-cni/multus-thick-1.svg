@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1600">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="1600" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="600" y="40" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="24" fill="#111827" text-anchor="middle" font-weight="600">multus-daemon 啟動流程</text>
+
+  <!-- Start -->
+  <rect x="450" y="80" width="300" height="70" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="600" y="110" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827" text-anchor="middle" font-weight="500">啟動 multus-daemon</text>
+
+  <!-- Step 1 -->
+  <rect x="400" y="190" width="400" height="70" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="600" y="215" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">讀取 daemon-config.json</text>
+  <text x="600" y="240" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">cniServerConfig()</text>
+
+  <!-- Step 2 -->
+  <rect x="400" y="300" width="400" height="70" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="600" y="325" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">解析 multus CNI 設定</text>
+  <text x="600" y="350" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">config.ParseMultusConfig()</text>
+
+  <!-- Decision 1: ReadinessIndicatorFile -->
+  <path d="M 500,425 L 600,395 L 700,425 L 600,455 Z" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="600" y="420" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">ReadinessIndicator</text>
+  <text x="600" y="437" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">File 是否設定？</text>
+
+  <!-- Wait for readiness -->
+  <rect x="850" y="395" width="280" height="60" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="990" y="430" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">等待就緒指示檔存在</text>
+
+  <!-- Decision 2: auto mode -->
+  <path d="M 500,545 L 600,515 L 700,545 L 600,575 Z" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="600" y="540" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">MultusConfigFile</text>
+  <text x="600" y="557" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">== auto？</text>
+
+  <!-- Yes - Create config.Manager -->
+  <rect x="850" y="515" width="280" height="80" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="990" y="540" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">建立 config.Manager</text>
+  <text x="990" y="560" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">自動產生</text>
+  <text x="990" y="580" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">multus CNI 設定</text>
+
+  <!-- No - Copy config -->
+  <rect x="100" y="625" width="280" height="80" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="240" y="650" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">複製使用者提供的</text>
+  <text x="240" y="670" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">multus 設定</text>
+  <text x="240" y="690" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">至 cniConfigDir</text>
+
+  <!-- Start daemon -->
+  <rect x="400" y="760" width="400" height="60" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="600" y="795" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">startMultusDaemon()</text>
+
+  <!-- FilesystemPreRequisites -->
+  <rect x="400" y="860" width="400" height="70" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="600" y="885" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">srv.FilesystemPreRequirements()</text>
+  <text x="600" y="910" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">建立 /run/multus/ 目錄</text>
+
+  <!-- NewCNIServer -->
+  <rect x="400" y="970" width="400" height="70" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="600" y="995" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">srv.NewCNIServer()</text>
+  <text x="600" y="1020" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">建立 HTTP Server + Informers</text>
+
+  <!-- Decision 3: MetricsPort -->
+  <path d="M 500,1100 L 600,1070 L 700,1100 L 600,1130 Z" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="600" y="1095" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">MetricsPort</text>
+  <text x="600" y="1112" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">是否設定？</text>
+
+  <!-- Yes - Start metrics -->
+  <rect x="850" y="1060" width="280" height="80" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="990" y="1085" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">啟動 Prometheus</text>
+  <text x="990" y="1105" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">Metrics HTTP Server</text>
+
+  <!-- GetListener -->
+  <rect x="400" y="1180" width="400" height="70" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="600" y="1205" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">srv.GetListener()</text>
+  <text x="600" y="1230" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">監聽 Unix Socket</text>
+
+  <!-- Start server -->
+  <rect x="400" y="1290" width="400" height="70" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="600" y="1315" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">server.Start()</text>
+  <text x="600" y="1340" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">開始接受請求</text>
+
+  <!-- Wait for signal -->
+  <rect x="400" y="1400" width="400" height="70" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="600" y="1425" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">api.WaitUntilAPIReady()</text>
+  <text x="600" y="1450" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">等待 SIGINT/SIGTERM 訊號</text>
+
+  <!-- Arrows -->
+  <line x1="600" y1="150" x2="600" y2="185" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="600" y1="260" x2="600" y2="295" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="600" y1="370" x2="600" y2="390" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Decision 1 Yes -->
+  <line x1="700" y1="425" x2="845" y2="425" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="760" y="415" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">是</text>
+  
+  <!-- Decision 1 No -->
+  <line x1="600" y1="455" x2="600" y2="510" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="615" y="485" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">否</text>
+  
+  <!-- Wait readiness loops back -->
+  <line x1="990" y1="455" x2="990" y2="490" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="990" y1="490" x2="600" y2="490" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="600" y1="490" x2="600" y2="510" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Decision 2 Yes -->
+  <line x1="700" y1="545" x2="845" y2="545" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="760" y="535" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">是</text>
+  
+  <!-- Decision 2 No -->
+  <line x1="500" y1="545" x2="380" y2="545" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="380" y1="545" x2="380" y2="665" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="390" y="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">否</text>
+  
+  <!-- Both paths converge -->
+  <line x1="990" y1="595" x2="990" y2="730" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="990" y1="730" x2="600" y2="730" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="240" y1="705" x2="240" y2="730" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="240" y1="730" x2="600" y2="730" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="600" y1="730" x2="600" y2="755" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <line x1="600" y1="820" x2="600" y2="855" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="600" y1="930" x2="600" y2="965" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="600" y1="1040" x2="600" y2="1065" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Decision 3 Yes -->
+  <line x1="700" y1="1100" x2="845" y2="1100" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="760" y="1090" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">是</text>
+  
+  <!-- Decision 3 No -->
+  <line x1="600" y1="1130" x2="600" y2="1175" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="615" y="1155" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280">否</text>
+  
+  <!-- Metrics path converges -->
+  <line x1="990" y1="1140" x2="990" y2="1160" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="990" y1="1160" x2="600" y2="1160" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="600" y1="1160" x2="600" y2="1175" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <line x1="600" y1="1250" x2="600" y2="1285" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="600" y1="1360" x2="600" y2="1395" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>

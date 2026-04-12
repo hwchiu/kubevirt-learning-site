@@ -566,24 +566,7 @@ pkg/virt-launcher/virtwrap/manager.go (約第 754 行)
 func (l *LibvirtDomainManager) preStartHook(vmi *v1.VirtualMachineInstance, ...) error
 ```
 
-```mermaid
-flowchart TD
-    SYNC[SyncVMI 呼叫] --> GCC[generateConverterContext]
-    GCC --> CONV[Convert VMI → Domain]
-    CONV --> PSH
-
-    subgraph "preStartHook() 執行序列"
-        PSH[1. 確認 cloudinit 資料就緒] --> CI
-        CI[2. generateCloudInitISO\n生成 NoCloud ISO\nor ConfigDrive] --> HOOKS
-        HOOKS[3. 執行 Hook Sidecars\n透過 gRPC\n讓外部插件修改 Domain XML] --> EXPAND
-        EXPAND[4. expandDiskImagesOffline\n展開磁碟至最終大小\n避免稀疏檔造成空間問題] --> NET
-        NET[5. setupGracefulShutdown\n設定 ACPI 關機信號] --> DONE
-        DONE[6. 回傳修改後的 Domain]
-    end
-
-    DONE --> DEFINE[libvirt DomainDefine\n寫入 Domain XML]
-    DEFINE --> START[DomainCreate\n啟動 QEMU]
-```
+![preStartHook 執行位置與時機](/diagrams/kubevirt/kubevirt-vm-init-9.png)
 
 ### 5.2 各步驟詳解
 
@@ -605,17 +588,7 @@ if cloudinit.HasCloudInitVolume(vmi) {
 
 Hook Sidecar 是 KubeVirt 的插件機制，允許外部容器在 VM 啟動前攔截並修改 Domain XML：
 
-```mermaid
-sequenceDiagram
-    participant VL as virt-launcher
-    participant HS as Hook Sidecar\n(Unix Socket)
-
-    VL->>HS: Info() — 取得 Sidecar 資訊
-    VL->>HS: OnDefineDomain(domainXML, vmi)
-    HS->>HS: 修改 domainXML\n(例如: 加入自定義設備)
-    HS-->>VL: 回傳修改後的 domainXML
-    VL->>VL: 使用修改後的 XML\n繼續初始化
-```
+![Hook Sidecar 呼叫序列](/diagrams/kubevirt/kubevirt-hook-sidecar-arch.png)
 
 #### 步驟 4：磁碟映像展開
 
@@ -706,85 +679,11 @@ spec:
 
 以下時序圖展示從使用者建立 `VM` 資源到 VMI 狀態轉換為 `Running` 的完整流程，含各元件的互動與 VMI 狀態機轉換：
 
-```mermaid
-sequenceDiagram
-    actor U as 使用者
-    participant API as Kubernetes\nAPI Server
-    participant VC as virt-controller
-    participant SCH as kube-scheduler
-    participant VH as virt-handler\n(目標節點)
-    participant VL as virt-launcher Pod
-    participant LV as libvirtd
-    participant QEMU
-
-    Note over U,QEMU: 階段一：控制平面資源建立
-
-    U->>API: kubectl apply -f vm.yaml
-    API->>VC: VM 建立事件 (Watch)
-    VC->>VC: VM Controller\n判斷需啟動 VMI
-    VC->>API: 建立 VMI 物件\n(status.phase: Pending)
-    API->>VC: VMI 建立事件 (Watch)
-    VC->>VC: VMI Controller\n準備 virt-launcher Pod spec
-    VC->>API: 建立 virt-launcher Pod\n(含 tolerations, resource requests)
-
-    Note over U,QEMU: 階段二：Pod 排程與啟動
-
-    API->>SCH: Pod 待排程
-    SCH->>API: 綁定 Pod 到目標節點\n(nodeName 設定)
-    API->>VH: Pod 排程完成事件\n(virt-handler 監聽本節點 Pod)
-    Note over API: VMI status.phase: Scheduling
-
-    VH->>VH: 偵測新的 VMI\n需要啟動
-    API->>VL: Kubelet 啟動\nvirt-launcher Pod
-    Note over VL: Init Container 執行\nContainerDisk 展開
-    VL->>VL: 等待 libvirtd 就緒
-    Note over API: VMI status.phase: Scheduled
-
-    Note over U,QEMU: 階段三：virt-launcher 初始化
-
-    VH->>VL: gRPC SyncVMI(vmi spec)
-    activate VL
-
-    VL->>VL: generateConverterContext()\n蒐集節點資訊、設備清單
-    VL->>VL: Convert(vmi, ctx)\nVMI Spec → Domain struct
-
-    VL->>VL: preStartHook()
-    Note over VL: 生成 CloudInit ISO\n(若有 cloudInitNoCloud)
-    VL->>VL: executeHookSidecars()\n呼叫 Hook Sidecar 插件
-    VL->>VL: expandDiskImagesOffline()\n展開稀疏磁碟映像
-
-    VL->>LV: DomainDefine(domainXML)\n寫入 Domain 設定
-    LV-->>VL: Domain 定義成功
-    VL->>LV: DomainCreate()\n啟動 Domain
-    LV->>QEMU: 啟動 qemu-kvm 行程\n載入韌體 + 磁碟
-    QEMU-->>LV: 行程啟動成功
-    LV-->>VL: Domain 狀態: Running
-    deactivate VL
-
-    Note over U,QEMU: 階段四：狀態回報
-
-    VL->>API: 更新 VMI status\n(phase: Running\ninterfaces, nodeName, etc.)
-    API->>VC: VMI 狀態更新事件
-    VC->>API: 更新 VM status.ready = true
-
-    Note over API: VMI status.phase: Running ✅
-```
+![VM 初始化時序圖](/diagrams/kubevirt/kubevirt-vm-init-1.png)
 
 ### VMI 狀態機轉換
 
-```mermaid
-stateDiagram-v2
-    [*] --> Pending : VMI 物件建立
-    Pending --> Scheduling : virt-controller 建立 Pod
-    Scheduling --> Scheduled : kube-scheduler 完成排程
-    Scheduled --> Running : virt-launcher 啟動 QEMU 成功
-    Running --> Succeeded : VM 正常關機 (ACPI shutdown)
-    Running --> Failed : QEMU 異常終止
-    Running --> Migrating : Live Migration 進行中
-    Migrating --> Running : Migration 完成
-    Succeeded --> [*]
-    Failed --> [*]
-```
+![VMI 狀態機轉換](/diagrams/kubevirt/kubevirt-vmi-states.png)
 
 ### 狀態轉換觸發條件
 

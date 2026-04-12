@@ -191,29 +191,7 @@ AUTHENTICATION_BACKENDS = [
 
 ### 1.8 認證流程圖
 
-```mermaid
-flowchart TD
-    A[使用者請求] --> B{認證方式}
-    B -->|Local| C[Django ModelBackend]
-    B -->|LDAP| D[NBLDAPBackend]
-    B -->|SSO / Proxy| E[RemoteUserBackend]
-    B -->|OAuth2 / SAML| F[Social Auth Backend]
-    B -->|API Token| G[TokenAuthentication]
-
-    C --> H[ObjectPermissionMixin]
-    D --> H
-    E --> I{REMOTE_AUTH_GROUP_SYNC_ENABLED?}
-    I -->|Yes| J[configure_groups]
-    I -->|No| K[configure_user<br/>預設群組 + 權限]
-    J --> H
-    K --> H
-    F --> L[user_default_groups_handler]
-    L --> H
-    G --> H
-
-    H --> M[ObjectPermission<br/>物件級權限檢查]
-    M --> N[允許 / 拒絕存取]
-```
+![NetBox 認證流程圖](/diagrams/netbox/netbox-auth-flow.png)
 
 ---
 
@@ -446,33 +424,7 @@ def send_webhook(event_rule, object_type, event_type, data, timestamp, username,
 
 ### 2.6 事件流程圖
 
-```mermaid
-sequenceDiagram
-    participant U as 使用者 / API
-    participant MW as EventTrackingMiddleware
-    participant EQ as enqueue_event()
-    participant PEQ as process_event_queue()
-    participant PER as process_event_rules()
-    participant RQ as Redis Queue (RQ)
-    participant WH as send_webhook()
-    participant EXT as 外部系統
-
-    U->>MW: HTTP Request（CRUD 操作）
-    MW->>EQ: 物件變更偵測
-    EQ->>EQ: 合併同一 Request 中的重複事件
-    MW->>PEQ: Request 完成後 flush_events()
-    PEQ->>PER: 逐事件比對 EventRule
-    PER->>PER: eval_conditions(data)
-    alt action_type = webhook
-        PER->>RQ: enqueue send_webhook
-        RQ->>WH: Worker 執行
-        WH->>EXT: HTTP POST + HMAC-SHA512
-    else action_type = script
-        PER->>RQ: enqueue ScriptJob
-    else action_type = notification
-        PER->>PER: NotificationGroup.notify()
-    end
-```
+![NetBox Webhook 事件流程圖](/diagrams/netbox/netbox-webhook-flow.png)
 
 ---
 
@@ -814,35 +766,7 @@ def validate(cls, user_config, netbox_version):
 
 ### 5.5 Plugin 架構圖
 
-```mermaid
-flowchart TD
-    subgraph Plugin 載入
-        A[settings.py 遍歷 PLUGINS] --> B[importlib.import_module]
-        B --> C[取得 plugin.config]
-        C --> D[validate 版本 + 設定]
-        D --> E[registry 註冊]
-        E --> F[INSTALLED_APPS]
-        E --> G[MIDDLEWARE]
-        E --> H[RQ_QUEUES]
-        E --> I[EVENTS_PIPELINE]
-    end
-
-    subgraph Plugin ready
-        F --> J[PluginConfig.ready]
-        J --> K[register_models]
-        J --> L[register_search]
-        J --> M[register_data_backend]
-        J --> N[register_template_extensions]
-        J --> O[register_menu / register_menu_items]
-        J --> P[register_graphql_schema]
-        J --> Q[register_user_preferences]
-    end
-
-    subgraph URL Routing
-        R[/plugins/name/] --> S[Plugin Views]
-        T[/api/plugins/name/] --> U[Plugin API ViewSets]
-    end
-```
+![NetBox Plugin 架構圖](/diagrams/netbox/netbox-plugin-loading.png)
 
 ---
 
@@ -909,13 +833,7 @@ class AutoSyncRecord(models.Model):
     object = GenericForeignKey(ct_field='object_type', fk_field='object_id')
 ```
 
-```mermaid
-flowchart LR
-    A[外部 Git / S3] -->|sync| B[DataSource]
-    B --> C[DataFile]
-    C --> D[AutoSyncRecord]
-    D --> E[ConfigContext / ExportTemplate / 其他物件]
-```
+![DataSource 同步流程圖](/diagrams/netbox/netbox-datasource-sync.png)
 
 ---
 
@@ -1003,15 +921,7 @@ class Subscription(models.Model):
             )
 ```
 
-```mermaid
-flowchart TD
-    A[EventRule<br/>action_type = notification] --> B[NotificationGroup]
-    B --> C[members 計算<br/>users ∪ group.users]
-    C --> D[Notification.update_or_create<br/>per user per object]
-
-    E[使用者訂閱] --> F[Subscription Model]
-    F --> G[物件變更時<br/>觸發個人通知]
-```
+![NotificationGroup 通知流程圖](/diagrams/netbox/netbox-notification-group.png)
 
 ---
 
@@ -1196,45 +1106,7 @@ NetBox 官方提供 Docker 映像（`netboxcommunity/netbox`），包含 Gunicor
 
 ### 9.6 部署架構圖
 
-```mermaid
-flowchart TD
-    subgraph 前端
-        LB[Load Balancer / CDN]
-        NG[Nginx / Apache<br/>Reverse Proxy]
-    end
-
-    subgraph 應用層
-        GU[Gunicorn<br/>netbox.service<br/>workers=2n+1]
-        RQW[RQ Worker<br/>netbox-rq.service<br/>high / default / low]
-    end
-
-    subgraph 資料層
-        PG[(PostgreSQL<br/>+ Advisory Locks)]
-        RD_T[(Redis — tasks<br/>DB 0)]
-        RD_C[(Redis — caching<br/>DB 1)]
-    end
-
-    subgraph 外部整合
-        WH_EXT[Webhook 接收端]
-        LDAP_EXT[LDAP / AD]
-        IDP[OAuth2 / SAML IdP]
-        GIT[Git / S3 DataSource]
-        PROM[Prometheus]
-    end
-
-    LB --> NG
-    NG -->|proxy_pass :8001| GU
-    GU --> PG
-    GU --> RD_C
-    GU -->|enqueue| RD_T
-    RQW -->|dequeue| RD_T
-    RQW --> PG
-    RQW -->|send_webhook| WH_EXT
-    GU -->|auth| LDAP_EXT
-    GU -->|auth| IDP
-    GU -->|sync| GIT
-    GU -->|/metrics| PROM
-```
+![NetBox 部署架構圖](/diagrams/netbox/netbox-production-deployment.png)
 
 ---
 

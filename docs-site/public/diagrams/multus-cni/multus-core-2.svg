@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="1400" height="800" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="700" y="40" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="24" fill="#111827" text-anchor="middle" font-weight="600">DEL 流程與 Scratch 快取機制</text>
+
+  <!-- ADD Path -->
+  <rect x="50" y="100" width="200" height="80" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="150" y="130" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827" text-anchor="middle">CmdAdd</text>
+  <text x="150" y="155" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">執行完成</text>
+
+  <!-- Save to scratch -->
+  <rect x="350" y="100" width="280" height="100" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="490" y="130" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">/var/lib/cni/multus/</text>
+  <text x="490" y="150" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">&#123;containerID&#125;</text>
+  <text x="490" y="175" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">儲存所有 DelegateNetConf JSON</text>
+
+  <!-- Arrow from ADD to Save -->
+  <line x1="250" y1="140" x2="345" y2="140" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="297" y="130" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">saveDelegates()</text>
+
+  <!-- DEL Path -->
+  <rect x="50" y="300" width="200" height="80" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="150" y="335" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827" text-anchor="middle">CmdDel</text>
+  <text x="150" y="360" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">呼叫</text>
+
+  <!-- Decision diamond -->
+  <path d="M 450,340 L 550,300 L 650,340 L 550,380 Z" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="550" y="340" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">快取存在？</text>
+
+  <!-- Yes path - Read cache -->
+  <rect x="750" y="240" width="280" height="120" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="890" y="270" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">consumeScratchNetConf()</text>
+  <text x="890" y="295" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">讀取快取</text>
+  <text x="890" y="315" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">並刪除檔案</text>
+
+  <!-- Delegate DEL -->
+  <rect x="750" y="400" width="280" height="80" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="890" y="425" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">對每個 DelegateNetConf</text>
+  <text x="890" y="450" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">呼叫委派 DEL</text>
+
+  <!-- No path - Rebuild -->
+  <rect x="350" y="440" width="200" height="100" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="450" y="470" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">記錄警告</text>
+  <text x="450" y="495" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">嘗試從設定</text>
+  <text x="450" y="520" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">重建</text>
+
+  <!-- Arrows -->
+  <!-- DEL to decision -->
+  <line x1="250" y1="340" x2="445" y2="340" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Decision to Yes (Read cache) -->
+  <line x1="650" y1="320" x2="745" y2="290" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="690" y="300" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">是</text>
+
+  <!-- Read to Delegate -->
+  <line x1="890" y1="360" x2="890" y2="395" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Decision to No (Rebuild) -->
+  <line x1="550" y1="380" x2="550" y2="420" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="550" y1="420" x2="450" y2="420" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="450" y1="420" x2="450" y2="435" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="560" y="410" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">否</text>
+
+  <!-- Connection from scratch to decision -->
+  <line x1="490" y1="200" x2="490" y2="260" stroke="#3b82f6" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="490" y1="260" x2="550" y2="260" stroke="#3b82f6" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="550" y1="260" x2="550" y2="295" stroke="#3b82f6" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrow)"/>
+
+  <!-- Info box -->
+  <rect x="50" y="600" width="1300" height="160" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="700" y="635" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827" text-anchor="middle" font-weight="600">為何需要快取機制？</text>
+  
+  <text x="70" y="670" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">• DEL 呼叫時，Pod 可能已被 Kubernetes 刪除，API Server 無法回傳 Pod 資訊（包含 Annotations）</text>
+  <text x="70" y="695" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">• Multus 在 ADD 時主動儲存所有委派外掛的設定至本地檔案系統</text>
+  <text x="70" y="720" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">• 確保 DEL 時能正確清理所有網路介面，即使無法從 API Server 取得 Pod 資訊</text>
+  <text x="70" y="745" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">• 快取位置：/var/lib/cni/multus/&#123;containerID&#125;，儲存格式為 JSON</text>
+</svg>

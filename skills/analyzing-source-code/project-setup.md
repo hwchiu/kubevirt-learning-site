@@ -16,7 +16,7 @@ How to set up a new documentation site project from scratch using this skill's w
 mkdir my-analysis-site && cd my-analysis-site
 git init
 npm init -y
-npm install -D vitepress vitepress-plugin-mermaid mermaid
+npm install -D vitepress
 ```
 
 ### 2. Create package.json Scripts
@@ -32,9 +32,7 @@ npm install -D vitepress vitepress-plugin-mermaid mermaid
     "preview": "vitepress preview docs-site"
   },
   "devDependencies": {
-    "mermaid": "^11.0.0",
-    "vitepress": "^1.6.4",
-    "vitepress-plugin-mermaid": "^2.0.0"
+    "vitepress": "^1.6.4"
   }
 }
 ```
@@ -91,7 +89,6 @@ clean:
 ```javascript
 // docs-site/.vitepress/config.js
 import { defineConfig } from 'vitepress'
-import { withMermaid } from 'vitepress-plugin-mermaid'
 
 // Define sidebar arrays per project
 const project1Sidebar = [
@@ -107,7 +104,7 @@ const project1Sidebar = [
   },
 ]
 
-export default withMermaid(defineConfig({
+export default defineConfig({
   base: '/my-analysis-site/',
   title: '原始碼分析',
   description: '開源專案原始碼深度分析',
@@ -129,12 +126,21 @@ export default withMermaid(defineConfig({
     outline: { label: '本頁目錄', level: [2, 3] },
     docFooter: { prev: '上一頁', next: '下一頁' },
     lastUpdated: { text: '最後更新' }
-  },
-  mermaid: {
-    theme: 'default'
   }
-}))
+})
 ```
+
+### 4b. Create Diagram Asset Directories
+
+```bash
+mkdir -p docs-site/public/diagrams
+mkdir -p scripts/diagram-generators
+```
+
+- 本 repo 預設使用 **靜態 SVG/PNG 圖表**
+- 不安裝 `vitepress-plugin-mermaid`
+- 所有文件圖表都以 `![... ](/diagrams/...png)` 方式引用
+- 若有 generator script，統一放在 `scripts/diagram-generators/`
 
 ### 5. Create Homepage
 
@@ -294,7 +300,7 @@ export default {
 // docs-site/.vitepress/config.js
 import { localLlmChatPlugin } from './plugins/localLlmChat.js'
 
-export default withMermaid(defineConfig({
+export default defineConfig({
   // ...existing config...
   vite: {
     plugins: [
@@ -306,7 +312,7 @@ export default withMermaid(defineConfig({
     ],
   },
   // ...
-}))
+})
 ```
 
 ### 8. Add Submodules

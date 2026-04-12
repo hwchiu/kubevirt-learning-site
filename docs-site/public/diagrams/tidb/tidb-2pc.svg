@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="822" viewBox="0 0 940 822">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowrev" markerWidth="10" markerHeight="7" refX="1" refY="3.5" orient="auto-start-reverse">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="940" height="822" fill="#ffffff"/>
+  <line x1="90" y1="70" x2="90" y2="802" stroke="#d1d5db" stroke-width="1.2" stroke-dasharray="6,4"/>
+  <line x1="310" y1="70" x2="310" y2="802" stroke="#d1d5db" stroke-width="1.2" stroke-dasharray="6,4"/>
+  <line x1="560" y1="70" x2="560" y2="802" stroke="#d1d5db" stroke-width="1.2" stroke-dasharray="6,4"/>
+  <line x1="790" y1="70" x2="790" y2="802" stroke="#d1d5db" stroke-width="1.2" stroke-dasharray="6,4"/>
+  <rect x="10.0" y="20" width="160" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="90.0" y="45.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-style="normal" xml:space="preserve">Client</text>
+  <rect x="230.0" y="20" width="160" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="310.0" y="45.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-style="normal" xml:space="preserve">TiDB Server</text>
+  <rect x="480.0" y="20" width="160" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="560.0" y="45.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-style="normal" xml:space="preserve">PD</text>
+  <rect x="710.0" y="20" width="160" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="790.0" y="45.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-style="normal" xml:space="preserve">TiKV</text>
+  <line x1="90" y1="100" x2="310" y2="100" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="200.0" y="88.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">BEGIN</text>
+  <line x1="310" y1="150" x2="560" y2="150" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="435.0" y="138.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">獲取 startTS（全域唯一時間戳）</text>
+  <line x1="560" y1="200" x2="310" y2="200" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="5,4"/>
+  <text x="435.0" y="188.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">startTS</text>
+  <rect x="170.0" y="250" width="280" height="56" fill="#fef9c3" stroke="#fde68a" stroke-width="1.5" rx="6"/>
+  <text x="310" y="262" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#92400e" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">執行 DML 操作</text>
+  <text x="310" y="282" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#92400e" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">修改存放於本地記憶體 buffer</text>
+  <line x1="90" y1="326" x2="310" y2="326" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="200.0" y="314.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">COMMIT</text>
+  <line x1="310" y1="376" x2="560" y2="376" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="435.0" y="364.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">獲取 commitTS</text>
+  <line x1="560" y1="426" x2="310" y2="426" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="5,4"/>
+  <text x="435.0" y="414.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">commitTS</text>
+  <line x1="310" y1="476" x2="790" y2="476" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="550.0" y="464.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Prewrite 階段：寫入 Lock 到主鍵 + 次要鍵</text>
+  <line x1="790" y1="526" x2="310" y2="526" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="5,4"/>
+  <text x="550.0" y="514.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Prewrite OK</text>
+  <line x1="310" y1="576" x2="790" y2="576" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="550.0" y="564.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Commit 階段：提交主鍵（清除鎖，寫入 Write Record）</text>
+  <line x1="790" y1="626" x2="310" y2="626" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="5,4"/>
+  <text x="550.0" y="614.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Commit OK</text>
+  <rect x="200.0" y="676" width="220" height="36" fill="#fef9c3" stroke="#fde68a" stroke-width="1.5" rx="6"/>
+  <text x="310" y="688" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#92400e" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">非同步清理次要鍵鎖</text>
+  <line x1="310" y1="732" x2="90" y2="732" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="5,4"/>
+  <text x="200.0" y="720.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">COMMIT OK</text>
+</svg>

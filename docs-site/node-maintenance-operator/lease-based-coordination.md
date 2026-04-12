@@ -53,26 +53,7 @@ kubectl get lease node-worker01 -n medik8s-leases -o yaml
 
 ## 4. RequestLease 詳細流程
 
-```mermaid
-flowchart TD
-    A([開始 RequestLease]) --> B{GET Lease\nnode-&lt;nodename&gt;}
-
-    B -- 不存在 --> C[CREATE 新 Lease\nHolderIdentity=node-maintenance\nduration=3600s]
-    C --> Z([成功])
-
-    B -- 存在 --> D{HolderIdentity\n== node-maintenance?}
-
-    D -- 是（同一持有者） --> E[UPDATE Lease\n更新 RenewTime]
-    E --> Z
-
-    D -- 否（不同持有者） --> F{Lease 是否\n已過期？}
-
-    F -- 未過期 --> G[return AlreadyHeldError\nholderIdentity=&lt;current holder&gt;]
-    G --> FAIL([失敗])
-
-    F -- 已過期 --> H[TAKEOVER\n更新 HolderIdentity\nLeaseTransitions++]
-    H --> Z
-```
+![RequestLease 詳細流程 - 包含 Lease 建立、更新、接管等各種情境](/diagrams/node-maintenance-operator/nmo-lease-1.png)
 
 ## 5. AlreadyHeldError 型別
 
@@ -95,19 +76,7 @@ func (e AlreadyHeldError) Error() string {
 
 NMO 會追蹤連續 Lease 取得失敗的次數，超過閾值時自動退出維護狀態，避免節點永久被 cordon：
 
-```mermaid
-flowchart TD
-    A([RequestLease]) --> B{結果？}
-
-    B -- AlreadyHeldError\n且 DrainProgress > 0 --> C[ErrorOnLeaseCount++]
-    B -- 其他錯誤 --> C
-    B -- 成功 --> D[ErrorOnLeaseCount = 0]
-
-    C --> E{ErrorOnLeaseCount\n> 3？}
-    E -- 否 --> F([重新排程 reconcile])
-    E -- 是 --> G[Uncordon 節點\n設定 Phase=Failed]
-    G --> H([結束維護])
-```
+![ErrorOnLeaseCount 機制 - 追蹤連續 Lease 失敗次數，超過閾值後自動退出維護以避免節點永久被 cordon](/diagrams/node-maintenance-operator/nmo-lease-2.png)
 
 相關程式碼：
 

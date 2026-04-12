@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="2000" height="2400" viewBox="0 0 2000 2400">
+<defs>
+<marker markerWidth="9.5" markerHeight="7.5" viewBox="-0.5 -0.5 9.5 7.5" orient="auto" id="d0">
+<path d="M0,0.5 L8.5,3.5 L0,6.5 Z" fill="#3b82f6" />
+</marker>
+</defs>
+<rect x="0" y="0" width="2000" height="2400" fill="#ffffff" />
+<use xlink:href="#d0" />
+<text x="1000.0" y="40" font-size="20" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="600">CDI 克隆策略完整決策流程</text>
+<rect x="900" y="80" width="200" height="50" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" rx="25" />
+<text x="1000.0" y="105.0" font-size="13" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="600">ChooseStrategy</text>
+<path d="M1000,145.0 L1080.0,180 L1000,215.0 L920.0,180 Z" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" />
+<text x="1000" y="180.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">來源類型?</text>
+<rect x="350" y="280" width="200" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8" />
+<text x="450.0" y="305.0" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">computeStrategyForSourcePVC</text>
+<rect x="900" y="280" width="200" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8" />
+<text x="1000.0" y="305.0" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">computeStrategyForSourceSnapshot</text>
+<rect x="1500" y="280" width="200" height="50" fill="#fee2e2" stroke="#c62828" stroke-width="2" rx="8" />
+<text x="1600.0" y="297.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">回傳 unsupported</text>
+<text x="1600.0" y="312.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">datasource 錯誤</text>
+<path d="M1000,130 L1000,155" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<path d="M930,180 L450,280" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="676.0" y="220.0" width="28" height="20" fill="#ffffff" stroke="none" />
+<text x="690.0" y="230.0" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">PVC</text>
+<path d="M1000,215 L1000,280" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="971.0" y="237.5" width="58" height="20" fill="#ffffff" stroke="none" />
+<text x="1000.0" y="247.5" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">Snapshot</text>
+<path d="M1070,180 L1600,280" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="1324.0" y="220.0" width="22" height="20" fill="#ffffff" stroke="none" />
+<text x="1335.0" y="230.0" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">其他</text>
+<rect x="300" y="380" width="300" height="60" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8" />
+<text x="450.0" y="395.0" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">驗證目標 StorageClass</text>
+<text x="450.0" y="410.0" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">確認來源 PVC 存在</text>
+<text x="450.0" y="425.0" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">驗證容量相容</text>
+<path d="M450,330 L450,380" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<path d="M450,455.0 L540.0,490 L450,525.0 L360.0,490 Z" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" />
+<text x="450" y="483.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">全域策略覆蓋</text>
+<text x="450" y="497.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">存在?</text>
+<path d="M450,440 L450,455" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="150" y="590" width="180" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8" />
+<text x="240.0" y="615.0" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">使用覆蓋策略</text>
+<path d="M650,555.0 L740.0,590 L650,625.0 L560.0,590 Z" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" />
+<text x="650" y="583.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">StorageProfile</text>
+<text x="650" y="597.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">有 CloneStrategy?</text>
+<path d="M380,490 L240,590" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="302.0" y="530.0" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="310.0" y="540.0" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">是</text>
+<path d="M520,490 L650,555" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="577.0" y="512.5" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="585.0" y="522.5" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">否</text>
+<rect x="500" y="700" width="200" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8" />
+<text x="600.0" y="725.0" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">使用 StorageProfile 策略</text>
+<rect x="900" y="700" width="180" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8" />
+<text x="990.0" y="717.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">預設:</text>
+<text x="990.0" y="732.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">CloneStrategySnapshot</text>
+<path d="M710,625 L600,700" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="647.0" y="652.5" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="655.0" y="662.5" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">是</text>
+<path d="M720,625 L910,725" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="807.0" y="665.0" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="815.0" y="675.0" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">否</text>
+<path d="M450,775.0 L520.0,810 L450,845.0 L380.0,810 Z" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" />
+<text x="450" y="803.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">策略是</text>
+<text x="450" y="817.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">Snapshot?</text>
+<path d="M240,640 L240,950" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<path d="M240,950 L380,845" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<path d="M600,750 L600,880" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<path d="M600,880 L520,845" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<path d="M1000,750 L1000,880" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<path d="M1000,880 L520,775" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<path d="M250,910.0 L340.0,950 L250,990.0 L160.0,950 Z" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" />
+<text x="250" y="936.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">相容的</text>
+<text x="250" y="950.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">VolumeSnapshotClass</text>
+<text x="250" y="964.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">存在?</text>
+<path d="M650,915.0 L720.0,950 L650,985.0 L580.0,950 Z" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" />
+<text x="650" y="943.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">策略是</text>
+<text x="650" y="957.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">CSI Clone?</text>
+<path d="M380,810 L250,910" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="307.0" y="850.0" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="315.0" y="860.0" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">是</text>
+<path d="M520,810 L650,915" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="577.0" y="852.5" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="585.0" y="862.5" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">否</text>
+<rect x="250" y="1080" width="240" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8" />
+<text x="370.0" y="1105.0" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">validateAdvancedClonePVC</text>
+<rect x="650" y="1080" width="200" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8" />
+<text x="750.0" y="1105.0" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">回傳 HostAssisted 策略</text>
+<rect x="50" y="1080" width="180" height="50" fill="#fff3e0" stroke="#f9a825" stroke-width="2" rx="8" />
+<text x="140.0" y="1097.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">降級: NoVolumeSnapshotClass</text>
+<text x="140.0" y="1112.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">→ HostAssisted</text>
+<path d="M340,990 L370,1105" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="347.0" y="1037.5" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="355.0" y="1047.5" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">是</text>
+<path d="M160,990 L140,1105" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="142.0" y="1037.5" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="150.0" y="1047.5" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">否</text>
+<path d="M720,985 L750,1105" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="727.0" y="1035.0" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="735.0" y="1045.0" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">是</text>
+<path d="M650,985 L650,1080" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="642.0" y="1022.5" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="650.0" y="1032.5" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">否</text>
+<path d="M370,1155.0 L440.0,1190 L370,1225.0 L300.0,1190 Z" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" />
+<text x="370" y="1183.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">CSI 驅動</text>
+<text x="370" y="1197.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">相容?</text>
+<path d="M370,1130 L370,1155" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="50" y="1300" width="200" height="50" fill="#fff3e0" stroke="#f9a825" stroke-width="2" rx="8" />
+<text x="150.0" y="1317.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">降級: IncompatibleProvisioners</text>
+<text x="150.0" y="1332.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">→ HostAssisted</text>
+<path d="M540,1265.0 L610.0,1300 L540,1335.0 L470.0,1300 Z" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" />
+<text x="540" y="1293.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">VolumeMode</text>
+<text x="540" y="1307.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">相同?</text>
+<path d="M300,1190 L150,1325" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="217.0" y="1247.5" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="225.0" y="1257.5" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">否</text>
+<path d="M440,1190 L540,1265" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="482.0" y="1217.5" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="490.0" y="1227.5" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">是</text>
+<rect x="200" y="1410" width="220" height="50" fill="#fff3e0" stroke="#f9a825" stroke-width="2" rx="8" />
+<text x="310.0" y="1427.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">降級: IncompatibleVolumeModes</text>
+<text x="310.0" y="1442.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">→ HostAssisted</text>
+<path d="M600,1370.0 L680.0,1410 L600,1450.0 L520.0,1410 Z" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" />
+<text x="600" y="1403.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">需要擴展且</text>
+<text x="600" y="1417.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">允許擴展?</text>
+<path d="M470,1300 L310,1435" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="382.0" y="1357.5" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="390.0" y="1367.5" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">否</text>
+<path d="M610,1335 L600,1370" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="597.0" y="1342.5" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="605.0" y="1352.5" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">是</text>
+<rect x="350" y="1560" width="200" height="50" fill="#fff3e0" stroke="#f9a825" stroke-width="2" rx="8" />
+<text x="450.0" y="1577.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">降級: NoVolumeExpansion</text>
+<text x="450.0" y="1592.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">→ HostAssisted</text>
+<rect x="700" y="1560" width="200" height="50" fill="#d1f4dd" stroke="#2e7d32" stroke-width="2" rx="8" />
+<text x="800.0" y="1585.0" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">回傳選定策略 ✓</text>
+<path d="M530,1450 L450,1585" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="476.0" y="1507.5" width="28" height="20" fill="#ffffff" stroke="none" />
+<text x="490.0" y="1517.5" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">不允許</text>
+<path d="M670,1450 L800,1585" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="712.0" y="1507.5" width="46" height="20" fill="#ffffff" stroke="none" />
+<text x="735.0" y="1517.5" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">允許或不需要</text>
+<rect x="900" y="380" width="300" height="60" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8" />
+<text x="1050.0" y="402.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">驗證目標 StorageClass</text>
+<text x="1050.0" y="417.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">確認來源 Snapshot 存在</text>
+<path d="M1000,330 L1050,380" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<path d="M1050,455.0 L1120.0,490 L1050,525.0 L980.0,490 Z" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" />
+<text x="1050" y="483.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">Provisioner</text>
+<text x="1050" y="497.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">匹配?</text>
+<path d="M1050,440 L1050,455" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="850" y="600" width="180" height="50" fill="#fff3e0" stroke="#f9a825" stroke-width="2" rx="8" />
+<text x="940.0" y="617.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">降級: NoProvisionerMatch</text>
+<text x="940.0" y="632.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">→ HostAssisted</text>
+<path d="M1200,565.0 L1270.0,600 L1200,635.0 L1130.0,600 Z" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" />
+<text x="1200" y="593.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">容量擴展</text>
+<text x="1200" y="607.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">可行?</text>
+<path d="M980,490 L940,625" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="952.0" y="547.5" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="960.0" y="557.5" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">否</text>
+<path d="M1120,490 L1200,565" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="1152.0" y="517.5" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="1160.0" y="527.5" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">是</text>
+<rect x="1000" y="720" width="180" height="50" fill="#fff3e0" stroke="#f9a825" stroke-width="2" rx="8" />
+<text x="1090.0" y="737.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">降級: NoVolumeExpansion</text>
+<text x="1090.0" y="752.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">→ HostAssisted</text>
+<path d="M1350,685.0 L1420.0,720 L1350,755.0 L1280.0,720 Z" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" />
+<text x="1350" y="713.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">VolumeMode</text>
+<text x="1350" y="727.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">相同?</text>
+<path d="M1130,635 L1090,745" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="1102.0" y="680.0" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="1110.0" y="690.0" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">否</text>
+<path d="M1270,635 L1350,685" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="1302.0" y="650.0" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="1310.0" y="660.0" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">是</text>
+<rect x="1150" y="850" width="220" height="50" fill="#fff3e0" stroke="#f9a825" stroke-width="2" rx="8" />
+<text x="1260.0" y="867.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">降級: IncompatibleVolumeModes</text>
+<text x="1260.0" y="882.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">→ HostAssisted</text>
+<rect x="1450" y="850" width="240" height="50" fill="#d1f4dd" stroke="#2e7d32" stroke-width="2" rx="8" />
+<text x="1570.0" y="875.0" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">回傳 CloneStrategySnapshot ✓</text>
+<path d="M1280,755 L1260,875" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="1262.0" y="805.0" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="1270.0" y="815.0" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">否</text>
+<path d="M1420,755 L1570,875" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="1487.0" y="805.0" width="16" height="20" fill="#ffffff" stroke="none" />
+<text x="1495.0" y="815.0" font-size="10" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">是</text>
+</svg>

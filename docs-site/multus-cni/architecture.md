@@ -29,34 +29,7 @@ layout: doc
 
 ## 系統架構圖
 
-```mermaid
-graph TB
-    subgraph "Kubernetes Node"
-        subgraph "Thin Plugin 模式"
-            KR[kubelet / CRI] -->|呼叫 CNI| MT[multus binary\n/opt/cni/bin/multus]
-            MT -->|直接讀取 kubeconfig| K8SAPI[Kubernetes API Server]
-        end
-
-        subgraph "Thick Plugin 模式（推薦）"
-            KR2[kubelet / CRI] -->|呼叫 CNI| SH[multus-shim binary\n/opt/cni/bin/multus]
-            SH -->|HTTP over Unix Socket| MD[multus-daemon\nDaemonSet Pod]
-            MD -->|共用 k8s 客戶端| K8SAPI
-            MD -->|Pod Informer| MD
-            MD -->|NAD Informer| MD
-        end
-
-        subgraph "CNI 委派（兩種模式共用）"
-            MT2[Multus 核心邏輯] -->|呼叫 delegate| D1[CNI Plugin 1\ne.g. bridge]
-            MT2 -->|呼叫 delegate| D2[CNI Plugin 2\ne.g. sriov]
-            MT2 -->|呼叫 delegate| D3[CNI Plugin N\ne.g. macvlan]
-        end
-    end
-
-    subgraph "Kubernetes Control Plane"
-        K8SAPI --- NAD[NetworkAttachmentDefinition\nCRD]
-        K8SAPI --- POD[Pod\nAnnotation]
-    end
-```
+![Multus CNI 系統架構](/diagrams/multus-cni/multus-arch-1.png)
 
 ::: tip 架構要點
 Multus 採用**元外掛（Meta-Plugin）**模式，自身不負責建立任何網路介面，而是根據 Pod Annotation 讀取 `NetworkAttachmentDefinition` 設定，依序呼叫各個下游 CNI 外掛（delegate）。

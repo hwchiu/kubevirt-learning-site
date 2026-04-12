@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="680" viewBox="0 0 900 680">
+<rect width="900" height="680" fill="#ffffff"/>
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+  </marker>
+</defs>
+<line x1="450" y1="82" x2="450" y2="137" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="450" y1="189" x2="450" y2="244" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="450" y1="296" x2="450" y2="351" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="450" y1="403" x2="450" y2="458" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="450" y1="510" x2="450" y2="565" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="450" y1="617" x2="450" y2="672" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="450" y1="724" x2="450" y2="779" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="280" y="30" width="340" height="52" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="56" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">節點被標記 drain taint</text>
+<rect x="280" y="137" width="340" height="52" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="163" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">EvacuationController 偵測</text>
+<rect x="280" y="244" width="340" height="52" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="270" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">vmisToMigrate() 識別需遷移的 VMI</text>
+<rect x="280" y="351" width="340" height="52" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="377" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">filterRunningNonMigratingVMIs() 過濾</text>
+<rect x="280" y="458" width="340" height="52" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="484" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">建立 VirtualMachineInstanceMigration</text>
+<rect x="280" y="565" width="340" height="52" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="591" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">Migration 執行</text>
+<rect x="280" y="672" width="340" height="52" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="450" y="698" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">VMI 遷移到新節點</text>
+<rect x="280" y="779" width="340" height="52" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+<text x="450" y="805" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">EvictionRequested condition 移除</text>
+</svg>

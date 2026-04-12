@@ -15,6 +15,7 @@ description: Use when generating interactive team quiz questions from existing p
 - 每題必須有清楚的正確選項與錯誤誘答（distractors）
 - 中文繁體（zh-TW），術語保留英文原名
 - 題目難度要有層次：概念理解 → 細節掌握 → 情境應用
+- 若 quiz 頁或 index 頁需要示意圖，請沿用 repo 的靜態 SVG/PNG 圖表流程，不要新增 Mermaid
 
 ## 整體流程
 

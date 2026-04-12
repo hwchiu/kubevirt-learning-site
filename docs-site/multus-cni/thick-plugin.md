@@ -41,28 +41,7 @@ Thick Plugin 於 Multus v4.0 引入，採用**Client/Server 架構**：
 
 `cmd/multus-daemon/main.go` 的 `main()` 函式執行以下步驟：
 
-```mermaid
-flowchart TD
-    A[啟動 multus-daemon] --> B[讀取 daemon-config.json\ncniServerConfig()]
-    B --> C[解析 multus CNI 設定\nconfig.ParseMultusConfig()]
-    C --> D{ReadinessIndicatorFile\n是否設定？}
-    D -->|是| E[等待就緒指示檔存在]
-    D -->|否| F{MultusConfigFile\n== auto？}
-    E --> F
-    F -->|是| G[建立 config.Manager\n自動產生 multus CNI 設定]
-    F -->|否| H[複製使用者提供的\nmultus 設定至 cniConfigDir]
-    G --> I[startMultusDaemon()]
-    H --> I
-    I --> J[srv.FilesystemPreRequirements()\n建立 /run/multus/ 目錄]
-    J --> K[srv.NewCNIServer()\n建立 HTTP Server + Informers]
-    K --> L{MetricsPort\n是否設定？}
-    L -->|是| M[啟動 Prometheus\nMetrics HTTP Server]
-    L -->|否| N[srv.GetListener()\n監聽 Unix Socket]
-    M --> N
-    N --> O[server.Start()\n開始接受請求]
-    O --> P[api.WaitUntilAPIReady()\n等待 Socket 就緒]
-    P --> Q[等待 SIGINT/SIGTERM 訊號]
-```
+![multus-daemon 啟動流程](/diagrams/multus-cni/multus-thick-1.png)
 
 ## HTTP Server 架構（`pkg/server/server.go`）
 
@@ -170,21 +149,7 @@ skel.PluginMainFuncs(
 
 ### Shim 通訊流程（`pkg/server/api/shim.go`）
 
-```mermaid
-sequenceDiagram
-    participant kubelet
-    participant shim as multus-shim<br/>(CNI Binary)
-    participant daemon as multus-daemon<br/>(HTTP Server)
-
-    kubelet->>shim: 呼叫 CNI ADD<br/>（環境變數 + stdin）
-    shim->>shim: 封裝 CNI 請求為 HTTP JSON
-    shim->>daemon: POST /cni\n{Env: {...}, Config: {...}}\n（Unix Socket）
-    daemon->>daemon: 解析請求，取得 K8sArgs
-    daemon->>daemon: 從 Informer 快取查詢 Pod/NAD
-    daemon->>daemon: 執行 CNI 委派（呼叫各個 CNI Binary）
-    daemon-->>shim: HTTP 200 + CNI 結果 JSON
-    shim-->>kubelet: 輸出 CNI 結果（stdout）
-```
+![Shim 通訊流程](/diagrams/multus-cni/multus-thick-2.png)
 
 ### HTTP 通訊協定（`pkg/server/api/api.go`）
 

@@ -29,31 +29,7 @@ layout: doc
 
 ### 連線處理流程
 
-```mermaid
-sequenceDiagram
-    participant Client
-    participant Server as pkg/server
-    participant Session as pkg/session
-    participant Executor as pkg/executor
-
-    Client->>Server: TCP 連線建立（:4000）
-    Server->>Client: Handshake 封包（Server Greeting）
-    Client->>Server: Auth 封包（帳號/密碼）
-    Server->>Server: 驗證身分（pkg/privilege）
-    Server-->>Client: OK 封包
-
-    loop 每條 SQL
-        Client->>Server: COM_QUERY / COM_STMT_EXECUTE
-        Server->>Session: 建立 Statement Context
-        Session->>Executor: 解析 → 優化 → 執行
-        Executor-->>Session: 結果集 / 受影響行數
-        Session-->>Server: 結果
-        Server-->>Client: ResultSet / OK 封包
-    end
-
-    Client->>Server: COM_QUIT
-    Server->>Session: 關閉 Session
-```
+![TiDB 連線處理流程](/diagrams/tidb/tidb-connection-flow.png)
 
 ## HTTP Status API（`pkg/server/http_status.go`）
 
@@ -90,16 +66,7 @@ Session 是 TiDB 中每個客戶端連線的核心抽象，主要檔案：
 
 ### Session 生命週期
 
-```mermaid
-stateDiagram-v2
-    [*] --> Idle : 連線建立
-    Idle --> Active : 收到 SQL
-    Active --> Idle : SQL 執行完成（非交易）
-    Active --> InTransaction : BEGIN 或 DML（悲觀交易）
-    InTransaction --> Active : COMMIT / ROLLBACK
-    InTransaction --> InTransaction : 繼續 DML
-    Active --> [*] : COM_QUIT / 連線斷開
-```
+![TiDB Session 生命週期](/diagrams/tidb/tidb-session-lifecycle.png)
 
 ## Information Schema（`pkg/infoschema`）
 

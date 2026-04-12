@@ -274,34 +274,7 @@ const (
 
 ### 3.2 狀態轉換圖
 
-```mermaid
-stateDiagram-v2
-    [*] --> VmPhaseUnset : VMI 建立
-    VmPhaseUnset --> Pending : virt-controller 處理
-
-    Pending --> Scheduling : Pod 被 kube-scheduler\n排程到節點
-    Pending --> Failed : Pod 建立失敗\nSpec 不合法
-
-    Scheduling --> Scheduled : virt-handler 完成\nlibvirt domain 定義
-    Scheduling --> Failed : 節點準備失敗\n資源不足
-
-    Scheduled --> Running : QEMU 啟動成功\nvirt-handler 回報 Ready
-    Scheduled --> Failed : QEMU 啟動失敗
-
-    Running --> Succeeded : Guest OS 正常關機\n(ACPI shutdown / virtctl stop)
-    Running --> Failed : QEMU 崩潰\nOOM Kill\nNode 故障
-    Running --> Unknown : virt-handler 通訊中斷\n(heartbeat 超時)
-    Running --> WaitingForSync : 作為 Migration 目標\n等待來源端資料同步
-
-    WaitingForSync --> Running : 遷移完成\n切換為活躍端
-    WaitingForSync --> Failed : 遷移失敗\n來源端取消
-
-    Unknown --> Running : 通訊恢復
-    Unknown --> Failed : 超時未恢復
-
-    Succeeded --> [*]
-    Failed --> [*]
-```
+![VMI 狀態轉換圖](/diagrams/kubevirt/kubevirt-vmi-states.png)
 
 ### 3.3 關鍵狀態轉換詳解
 

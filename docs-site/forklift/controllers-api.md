@@ -115,26 +115,7 @@ Watches(&api.Migration{}, handler.TypedEnqueueRequestsFromMapFunc(...), builder.
 
 ### Reconcile 流程
 
-```mermaid
-flowchart TD
-    A[Reconcile 入口] --> B{Fetch Plan}
-    B -->|NotFound| C[cleanupOrphanedResources<br/>清除 PVC/DV/Pod/Secret/CM/PV]
-    B -->|Found| D{Archived 且已標記?}
-    D -->|是| E[return — 跳過]
-    D -->|否| F{Succeeded 且未 Archived?}
-    F -->|是| E
-    F -->|否| G[postpone — 等待依賴]
-    G -->|尚未就緒| H[Requeue — 延後重試]
-    G -->|全部就緒| I[Validation — 驗證 Plan]
-    I -->|dangling archived| J[標記 Archived → return]
-    I -->|驗證通過| K[setPopulatorDataSourceLabels]
-    K --> L{plan.Spec.Archived?}
-    L -->|是| M[archive — 清理 + 設定 Archived Condition]
-    L -->|否| N[設定 Ready Condition]
-    N --> O[Stage Conditions]
-    O --> P[execute — 執行遷移]
-    P --> Q[updatePlanStatus — 持久化狀態]
-```
+![Plan Controller Reconcile 流程](/diagrams/forklift/forklift-plan-reconcile.png)
 
 ### execute() — 遷移執行核心
 
@@ -565,24 +546,7 @@ func PermitUser(
 }
 ```
 
-```mermaid
-sequenceDiagram
-    participant User as 使用者
-    participant K8s as Kubernetes API
-    participant WH as Forklift Webhook
-    participant SAR as SubjectAccessReview
-
-    User->>K8s: 建立/更新 Plan
-    K8s->>WH: AdmissionReview (含 UserInfo)
-    WH->>SAR: PermitUser(get, source provider)
-    SAR-->>WH: Allowed / Denied
-    WH->>SAR: PermitUser(get, dest provider)
-    SAR-->>WH: Allowed / Denied
-    WH->>SAR: PermitUser(create, VM in target ns)
-    SAR-->>WH: Allowed / Denied
-    WH-->>K8s: AdmissionResponse
-    K8s-->>User: 結果
-```
+![Forklift Webhook 授權流程](/diagrams/forklift/forklift-webhook-rbac.png)
 
 ---
 
@@ -689,26 +653,7 @@ var populators = map[string]populator{
 
 整個 Populator 生命週期由 `pkg/lib-volume-populator/populator-machinery/controller.go` 管理：
 
-```mermaid
-flowchart TD
-    A[使用者建立 PVC<br/>dataSourceRef 指向 Populator CR] --> B[Controller 偵測 PVC]
-    B --> C{驗證 StorageClass<br/>非 in-tree provisioner}
-    C -->|驗證失敗| D[跳過]
-    C -->|驗證通過| E[處理 WaitForFirstConsumer<br/>Binding Mode]
-    E --> F[建立 prime PVC<br/>前綴: prime-]
-    F --> G[建立 Populator Pod<br/>前綴: populate-]
-    G --> H[監控 Pod 進度<br/>每 5 秒擷取 HTTPS :8443 metrics]
-    H --> I{Pod 狀態?}
-    I -->|Running| H
-    I -->|Succeeded| J[Patch PV ClaimRef<br/>指向原始 PVC]
-    I -->|Failed| K{重試次數 < 3?<br/>VSphere 不重試}
-    K -->|是| L[刪除 Pod → 重建]
-    L --> G
-    K -->|否| M[標記失敗]
-    J --> N[等待 prime PVC<br/>進入 Lost 狀態]
-    N --> O[刪除 prime PVC]
-    O --> P[PV 重新綁定至原始 PVC<br/>Population 完成]
-```
+![Forklift Populator Machinery 流程](/diagrams/forklift/forklift-populator-flow.png)
 
 ### Pod 參數建構
 

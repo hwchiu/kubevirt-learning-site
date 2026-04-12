@@ -31,22 +31,7 @@ Webhook 若無法連線或逾時，**所有** NodeMaintenance 的建立與更新
 
 收到 `CREATE` 請求後，Webhook 依序執行以下三項驗證：
 
-```mermaid
-flowchart TD
-    A([收到 CREATE 請求]) --> B[validateNodeExists\nGET node by name]
-    B -->|Node 不存在| E1["❌ 拒絕\n'invalid nodeName, no node with name %s found'"]
-    B -->|API 錯誤| E2["❌ 拒絕\n'could not get node for validating spec.NodeName,\nplease try again: %v'"]
-    B -->|Node 存在| C[validateNoNodeMaintenanceExists\nLIST all NodeMaintenance CRs]
-    C -->|存在相同 nodeName 的 CR| E3["❌ 拒絕\n'invalid nodeName, a NodeMaintenance for node\n%s already exists'"]
-    C -->|API 錯誤| E4["❌ 拒絕\n'could not list NodeMaintenances for validating\nspec.NodeName, please try again: %v'"]
-    C -->|無衝突| D{OpenShift 叢集?}
-    D -->|否| OK(["✅ 允許建立"])
-    D -->|是| F[validateControlPlaneQuorum\n檢查 node-role label]
-    F -->|非 control-plane 節點| OK
-    F -->|是 control-plane 節點| G["呼叫 etcd.IsEtcdDisruptionAllowed()"]
-    G -->|允許中斷| OK
-    G -->|不允許中斷| E5["❌ 拒絕\n'can not put master/control-plane node into\nmaintenance at this moment, disrupting node\n%s will violate etcd quorum'"]
-```
+![ValidateCreate 檢查流程](/diagrams/node-maintenance-operator/nmo-validation-webhooks-1.png)
 
 ### 步驟 1 — validateNodeExists
 

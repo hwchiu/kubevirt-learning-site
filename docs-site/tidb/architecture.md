@@ -34,23 +34,9 @@ TiDB 主要目錄及其用途如下：
 
 ## TiDB Server 內部架構
 
-TiDB Server 是整個系統的 SQL 引擎，負責解析 MySQL 協定、解析 SQL、優化查詢並分發執行計劃。
+TiDB Server 是整個系統的 SQL 引擎,負責解析 MySQL 協定、解析 SQL、優化查詢並分發執行計劃。
 
-```mermaid
-flowchart TD
-    A["MySQL Client<br/>(TCP :4000)"] -->|"MySQL 協定"| B["pkg/server<br/>連線管理 / 協定解析"]
-    B --> C["pkg/session<br/>Session 管理 / 交易協調"]
-    C --> D["pkg/parser<br/>SQL 詞法 + 語法解析<br/>生成 AST"]
-    D --> E["pkg/planner<br/>邏輯計劃生成<br/>語意分析"]
-    E --> F["pkg/planner/core<br/>查詢優化器<br/>邏輯 → 物理計劃"]
-    F --> G{"查詢類型"}
-    G -->|"OLTP (Point/Batch)"| H["pkg/executor<br/>在 TiDB 本地執行<br/>推送計算至 TiKV Coprocessor"]
-    G -->|"OLAP / MPP"| I["MPP 計劃生成<br/>推送至 TiFlash"]
-    H -->|"KV RPC (gRPC)"| J["TiKV<br/>行式儲存 / Coprocessor"]
-    I -->|"MPP gRPC"| K["TiFlash<br/>列式儲存 / MPP"]
-    J --> L["PD<br/>TSO / Region 路由"]
-    K --> L
-```
+![TiDB Server 內部架構](/diagrams/tidb/tidb-architecture-server-1.png)
 
 ## `cmd/` 可執行檔一覽
 
@@ -125,25 +111,7 @@ TiFlash 以 C++ 編寫，使用 ClickHouse 列式引擎：
 
 ## 典型 SQL 查詢執行序列
 
-```mermaid
-sequenceDiagram
-    participant Client
-    participant TiDB as TiDB Server
-    participant PD
-    participant TiKV
-
-    Client->>TiDB: SELECT * FROM t WHERE id=1
-    TiDB->>TiDB: 解析 SQL → AST
-    TiDB->>TiDB: 語意分析 → 邏輯計劃
-    TiDB->>TiDB: 優化 → 物理計劃（IndexLookup）
-    TiDB->>PD: 獲取 TSO（開始時間戳）
-    PD-->>TiDB: startTS
-    TiDB->>PD: 查詢 Region 路由（id=1 位於哪個 Region）
-    PD-->>TiDB: Region Leader 位址
-    TiDB->>TiKV: KV Get（startTS, key）
-    TiKV-->>TiDB: value
-    TiDB-->>Client: 回傳結果集
-```
+![典型 SQL 查詢執行序列](/diagrams/tidb/tidb-architecture-sequence-2.png)
 
 ## 建置工具鏈
 

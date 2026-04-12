@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="857" viewBox="0 0 1000 857">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowrev" markerWidth="10" markerHeight="7" refX="1" refY="3.5" orient="auto-start-reverse">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="857" fill="#ffffff"/>
+  <line x1="90" y1="70" x2="90" y2="837" stroke="#d1d5db" stroke-width="1.2" stroke-dasharray="6,4"/>
+  <line x1="310" y1="70" x2="310" y2="837" stroke="#d1d5db" stroke-width="1.2" stroke-dasharray="6,4"/>
+  <line x1="570" y1="70" x2="570" y2="837" stroke="#d1d5db" stroke-width="1.2" stroke-dasharray="6,4"/>
+  <line x1="830" y1="70" x2="830" y2="837" stroke="#d1d5db" stroke-width="1.2" stroke-dasharray="6,4"/>
+  <rect x="10" y="357" width="900" height="340" fill="none" stroke="#c7d2fe" stroke-width="1.5" rx="4"/>
+  <rect x="10" y="357" width="50" height="20" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" rx="4"/>
+  <text x="35" y="367" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">loop 每條 SQL</text>
+  <rect x="5.0" y="20" width="170" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="90.0" y="45.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-style="normal" xml:space="preserve">Client</text>
+  <rect x="225.0" y="20" width="170" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="310.0" y="45.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-style="normal" xml:space="preserve">pkg/server</text>
+  <rect x="485.0" y="20" width="170" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="570.0" y="45.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-style="normal" xml:space="preserve">pkg/session</text>
+  <rect x="745.0" y="20" width="170" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="830.0" y="45.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-style="normal" xml:space="preserve">pkg/executor</text>
+  <line x1="90" y1="100" x2="310" y2="100" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="200.0" y="88.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">TCP 連線建立（:4000）</text>
+  <line x1="310" y1="150" x2="90" y2="150" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="5,4"/>
+  <text x="200.0" y="138.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Handshake 封包（Server Greeting）</text>
+  <line x1="90" y1="200" x2="310" y2="200" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="200.0" y="188.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Auth 封包（帳號/密碼）</text>
+  <path d="M 395.0,250 H 445.0 V 282 H 404.0" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="450.0" y="266" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">驗證身分（pkg/privilege）</text>
+  <line x1="310" y1="307" x2="90" y2="307" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="5,4"/>
+  <text x="200.0" y="295.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">OK 封包</text>
+  <line x1="90" y1="387" x2="310" y2="387" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="200.0" y="375.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">COM_QUERY / COM_STMT_EXECUTE</text>
+  <line x1="310" y1="437" x2="570" y2="437" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="440.0" y="425.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">建立 Statement Context</text>
+  <line x1="570" y1="487" x2="830" y2="487" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="700.0" y="475.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">解析 → 優化 → 執行</text>
+  <line x1="830" y1="537" x2="570" y2="537" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="5,4"/>
+  <text x="700.0" y="525.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">結果集 / 受影響行數</text>
+  <line x1="570" y1="587" x2="310" y2="587" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="5,4"/>
+  <text x="440.0" y="575.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">結果</text>
+  <line x1="310" y1="637" x2="90" y2="637" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="5,4"/>
+  <text x="200.0" y="625.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">ResultSet / OK 封包</text>
+  <line x1="90" y1="717" x2="310" y2="717" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="200.0" y="705.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">COM_QUIT</text>
+  <line x1="310" y1="767" x2="570" y2="767" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="440.0" y="755.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">關閉 Session</text>
+</svg>

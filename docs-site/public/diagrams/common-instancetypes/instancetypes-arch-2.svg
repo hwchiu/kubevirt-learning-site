@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 450" style="background:#ffffff; font-family:-apple-system, 'Helvetica Neue', Arial, sans-serif;">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+
+  <!-- Container: Instance Type -->
+  <rect x="50" y="50" width="380" height="250" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="240" y="80" text-anchor="middle" font-size="16" font-weight="600" fill="#111827">Instance Type 組合</text>
+  
+  <!-- Box: sizes.yaml -->
+  <rect x="70" y="100" width="160" height="60" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="150" y="123" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">sizes.yaml</text>
+  <text x="150" y="143" text-anchor="middle" font-size="11" fill="#6b7280">定義各尺寸</text>
+  <text x="150" y="156" text-anchor="middle" font-size="11" fill="#6b7280">CPU/Memory</text>
+  
+  <!-- Box: cx1.yaml -->
+  <rect x="70" y="180" width="160" height="60" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="150" y="203" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">cx1.yaml</text>
+  <text x="150" y="223" text-anchor="middle" font-size="11" fill="#6b7280">系列基礎設定</text>
+  <text x="150" y="236" text-anchor="middle" font-size="11" fill="#6b7280">(patch)</text>
+  
+  <!-- Box: kustomization.yaml -->
+  <rect x="250" y="140" width="160" height="60" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="330" y="160" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">kustomization.yaml</text>
+  <text x="330" y="180" text-anchor="middle" font-size="11" fill="#6b7280">resources + patches</text>
+  
+  <!-- Container: Preference -->
+  <rect x="480" y="50" width="420" height="250" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="690" y="80" text-anchor="middle" font-size="16" font-weight="600" fill="#111827">Preference 繼承鏈</text>
+  
+  <!-- Box: base -->
+  <rect x="500" y="100" width="120" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="560" y="118" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">base/</text>
+  <text x="560" y="136" text-anchor="middle" font-size="11" fill="#6b7280">空白模板</text>
+  
+  <!-- Box: linux -->
+  <rect x="640" y="100" width="120" height="70" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="700" y="118" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">linux/</text>
+  <text x="700" y="135" text-anchor="middle" font-size="10" fill="#6b7280">+ virtio-blk</text>
+  <text x="700" y="150" text-anchor="middle" font-size="10" fill="#6b7280">+ virtio-net</text>
+  <text x="700" y="165" text-anchor="middle" font-size="10" fill="#6b7280">+ rng</text>
+  
+  <!-- Box: alpine -->
+  <rect x="780" y="100" width="100" height="70" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="830" y="118" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">alpine/</text>
+  <text x="830" y="138" text-anchor="middle" font-size="10" fill="#6b7280">+ metadata</text>
+  <text x="830" y="153" text-anchor="middle" font-size="10" fill="#6b7280">+ requirements</text>
+  
+  <!-- Container: Components -->
+  <rect x="480" y="200" width="420" height="100" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="2"/>
+  <text x="690" y="225" text-anchor="middle" font-size="15" font-weight="600" fill="#111827">可重用元件 (Component)</text>
+  
+  <!-- Component boxes -->
+  <rect x="510" y="240" width="110" height="40" rx="5" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="565" y="265" text-anchor="middle" font-size="12" font-weight="600" fill="#111827">efi/</text>
+  
+  <rect x="640" y="240" width="110" height="40" rx="5" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="695" y="265" text-anchor="middle" font-size="12" font-weight="600" fill="#111827">hyperv/</text>
+  
+  <rect x="770" y="240" width="110" height="40" rx="5" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="825" y="255" text-anchor="middle" font-size="11" font-weight="600" fill="#111827">cpu-topology-</text>
+  <text x="825" y="270" text-anchor="middle" font-size="11" font-weight="600" fill="#111827">sockets/</text>
+  
+  <!-- Arrows within InstanceType -->
+  <path d="M 150 160 L 150 180 Q 150 190 160 190 L 250 170" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 150 210 L 200 210 Q 210 210 220 200 L 250 170" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- Arrows within Preference -->
+  <path d="M 620 125 L 640 125" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 760 135 L 780 135" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- Components -> Preference -->
+  <path d="M 690 200 L 690 170" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="705" y="190" font-size="11" fill="#6b7280">components 引用</text>
+</svg>

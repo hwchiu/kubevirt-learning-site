@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="380" viewBox="0 0 1500 380">
+<rect width="1500" height="380" fill="#ffffff"/>
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+  </marker>
+</defs>
+<rect x="40" y="116" width="170" height="48" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="125" y="140" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">kubectl drain node-1</text>
+<rect x="265" y="60" width="170" height="48" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="350" y="84" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">Pod 立即被刪除</text>
+<rect x="490" y="60" width="170" height="48" rx="8" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+<text x="575" y="84" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">VM 強制關機 ❌</text>
+<rect x="265" y="220" width="170" height="48" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="350" y="244" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">Pod 驅逐被阻擋</text>
+<rect x="490" y="220" width="190" height="48" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="585" y="244" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">Live Migration 啟動</text>
+<rect x="735" y="220" width="200" height="48" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="835" y="244" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">遷移完成後釋放 PDB</text>
+<rect x="990" y="220" width="200" height="48" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+<text x="1090" y="244" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">原 Pod 安全刪除 ✅</text>
+<path d="M 210 140 L 255 140 L 255 84 L 265 84" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="232" y="132" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">無 PDB</text>
+<line x1="435" y1="84" x2="490" y2="84" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<path d="M 210 140 L 255 140 L 255 244 L 265 244" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="232" y="258" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">有 PDB</text>
+<line x1="435" y1="244" x2="490" y2="244" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<line x1="680" y1="244" x2="735" y2="244" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<line x1="935" y1="244" x2="990" y2="244" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<text x="40" y="50" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#ef4444" font-weight="600">⚠ 無 PDB 路徑</text>
+<text x="40" y="210" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#16a34a" font-weight="600">✓ 有 PDB 路徑</text>
+</svg>

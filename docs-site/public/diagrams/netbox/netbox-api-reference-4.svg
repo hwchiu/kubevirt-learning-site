@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <style>
+      .box { fill: #f9fafb; stroke: #e5e7eb; stroke-width: 1.5; }
+      .container { fill: #f0f4ff; stroke: #c7d2fe; stroke-width: 2; }
+      .central { fill: #eff6ff; stroke: #bfdbfe; stroke-width: 2; }
+      .text-title { fill: #111827; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 13px; font-weight: 600; }
+      .text-section { fill: #111827; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; font-weight: 700; }
+      .text-small { fill: #6b7280; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; }
+      .line { stroke: #3b82f6; stroke-width: 1.5; fill: none; }
+    </style>
+  </defs>
+
+  <!-- Left: Schema Generation -->
+  <rect class="container" x="30" y="30" width="420" height="280" rx="6"/>
+  <text class="text-section" x="240" y="60" text-anchor="middle">Schema 產生</text>
+
+  <rect class="box" x="50" y="90" width="180" height="50" rx="4"/>
+  <text class="text-title" x="140" y="120" text-anchor="middle">Django REST Framework</text>
+
+  <rect class="box" x="50" y="160" width="100" height="40" rx="4"/>
+  <text class="text-title" x="100" y="185" text-anchor="middle">ViewSets</text>
+
+  <rect class="box" x="170" y="160" width="100" height="40" rx="4"/>
+  <text class="text-title" x="220" y="185" text-anchor="middle">Serializers</text>
+
+  <rect class="box" x="290" y="160" width="100" height="40" rx="4"/>
+  <text class="text-title" x="340" y="185" text-anchor="middle">FilterSets</text>
+
+  <rect class="container" x="110" y="230" width="160" height="60" rx="4"/>
+  <text class="text-title" x="190" y="265" text-anchor="middle">drf-spectacular</text>
+
+  <!-- Arrows: inputs to spectacular -->
+  <path class="line" d="M 140 140 L 190 230" marker-end="url(#arrow)"/>
+  <path class="line" d="M 140 200 L 180 230" marker-end="url(#arrow)"/>
+  <path class="line" d="M 220 200 L 200 230" marker-end="url(#arrow)"/>
+  <path class="line" d="M 340 200 L 210 230" marker-end="url(#arrow)"/>
+
+  <!-- Central: Schema -->
+  <rect class="central" x="420" y="250" width="160" height="70" rx="4"/>
+  <text class="text-title" x="500" y="280" text-anchor="middle">OpenAPI 3.0</text>
+  <text class="text-title" x="500" y="300" text-anchor="middle">Schema</text>
+
+  <!-- Arrow: spectacular to schema -->
+  <path class="line" d="M 270 260 L 420 285" marker-end="url(#arrow)"/>
+
+  <!-- Right: Schema Consumption -->
+  <rect class="container" x="550" y="30" width="420" height="540" rx="6"/>
+  <text class="text-section" x="760" y="60" text-anchor="middle">Schema 消費</text>
+
+  <rect class="box" x="600" y="100" width="140" height="60" rx="4"/>
+  <text class="text-title" x="670" y="120" text-anchor="middle">Swagger UI</text>
+  <text class="text-small" x="670" y="145" text-anchor="middle">/api/schema/swagger-ui/</text>
+
+  <rect class="box" x="780" y="100" width="140" height="60" rx="4"/>
+  <text class="text-title" x="850" y="120" text-anchor="middle">ReDoc</text>
+  <text class="text-small" x="850" y="145" text-anchor="middle">/api/schema/redoc/</text>
+
+  <rect class="box" x="600" y="200" width="160" height="60" rx="4"/>
+  <text class="text-title" x="680" y="225" text-anchor="middle">程式碼產生器</text>
+  <text class="text-small" x="680" y="245" text-anchor="middle">openapi-generator</text>
+
+  <rect class="box" x="600" y="300" width="140" height="60" rx="4"/>
+  <text class="text-title" x="670" y="335" text-anchor="middle">API Client SDK</text>
+
+  <!-- Arrows from schema -->
+  <path class="line" d="M 580 285 L 600 130" marker-end="url(#arrow)"/>
+  <path class="line" d="M 580 285 L 780 130" marker-end="url(#arrow)"/>
+  <path class="line" d="M 560 300 L 600 230" marker-end="url(#arrow)"/>
+  <path class="line" d="M 540 310 L 600 330" marker-end="url(#arrow)"/>
+
+</svg>

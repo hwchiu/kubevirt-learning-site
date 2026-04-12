@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <style>
+      .entity { fill: #f9fafb; stroke: #e5e7eb; stroke-width: 2; }
+      .text-entity { fill: #111827; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 13px; font-weight: 700; }
+      .text-rel { fill: #6b7280; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 10px; }
+      .line { stroke: #3b82f6; stroke-width: 1.5; fill: none; }
+      .cardinality { fill: #111827; font-family: 'Courier New', monospace; font-size: 12px; font-weight: 700; }
+    </style>
+  </defs>
+
+  <!-- Hierarchy entities (top section) -->
+  <rect class="entity" x="50" y="30" width="120" height="50" rx="4"/>
+  <text class="text-entity" x="110" y="60" text-anchor="middle">Region</text>
+
+  <rect class="entity" x="250" y="30" width="120" height="50" rx="4"/>
+  <text class="text-entity" x="310" y="60" text-anchor="middle">SiteGroup</text>
+
+  <rect class="entity" x="450" y="30" width="120" height="50" rx="4"/>
+  <text class="text-entity" x="510" y="60" text-anchor="middle">Site</text>
+
+  <rect class="entity" x="650" y="30" width="120" height="50" rx="4"/>
+  <text class="text-entity" x="710" y="60" text-anchor="middle">Location</text>
+
+  <rect class="entity" x="850" y="30" width="120" height="50" rx="4"/>
+  <text class="text-entity" x="910" y="60" text-anchor="middle">Rack</text>
+
+  <!-- Device and related (middle section) -->
+  <rect class="entity" x="50" y="200" width="130" height="50" rx="4"/>
+  <text class="text-entity" x="115" y="230" text-anchor="middle">Manufacturer</text>
+
+  <rect class="entity" x="220" y="200" width="120" height="50" rx="4"/>
+  <text class="text-entity" x="280" y="230" text-anchor="middle">DeviceType</text>
+
+  <rect class="entity" x="380" y="200" width="120" height="50" rx="4"/>
+  <text class="text-entity" x="440" y="230" text-anchor="middle">DeviceRole</text>
+
+  <rect class="entity" x="540" y="200" width="120" height="50" rx="4"/>
+  <text class="text-entity" x="600" y="230" text-anchor="middle">Platform</text>
+
+  <rect class="entity" x="700" y="200" width="120" height="50" rx="4"/>
+  <text class="text-entity" x="760" y="230" text-anchor="middle">Tenant</text>
+
+  <rect class="entity" x="860" y="200" width="120" height="50" rx="4"/>
+  <text class="text-entity" x="920" y="230" text-anchor="middle">Cluster</text>
+
+  <rect class="entity" x="1020" y="200" width="140" height="50" rx="4"/>
+  <text class="text-entity" x="1090" y="230" text-anchor="middle">VirtualChassis</text>
+
+  <!-- Central Device -->
+  <rect class="entity" x="520" y="380" width="140" height="60" rx="4"/>
+  <text class="text-entity" x="590" y="415" text-anchor="middle">Device</text>
+
+  <!-- Device components (bottom section) -->
+  <rect class="entity" x="50" y="600" width="120" height="50" rx="4"/>
+  <text class="text-entity" x="110" y="630" text-anchor="middle">Interface</text>
+
+  <rect class="entity" x="220" y="600" width="130" height="50" rx="4"/>
+  <text class="text-entity" x="285" y="630" text-anchor="middle">ConsolePort</text>
+
+  <rect class="entity" x="400" y="600" width="120" height="50" rx="4"/>
+  <text class="text-entity" x="460" y="630" text-anchor="middle">PowerPort</text>
+
+  <rect class="entity" x="570" y="600" width="120" height="50" rx="4"/>
+  <text class="text-entity" x="630" y="630" text-anchor="middle">DeviceBay</text>
+
+  <rect class="entity" x="740" y="600" width="130" height="50" rx="4"/>
+  <text class="text-entity" x="805" y="630" text-anchor="middle">ModuleBay</text>
+
+  <rect class="entity" x="50" y="750" width="120" height="50" rx="4"/>
+  <text class="text-entity" x="110" y="780" text-anchor="middle">Cable</text>
+
+  <!-- Key relationships -->
+  <!-- Region -> Site -->
+  <path class="line" d="M 170 55 L 450 55"/>
+  <text class="cardinality" x="175" y="60">||</text>
+  <text class="cardinality" x="440" y="60">o{</text>
+  <text class="text-rel" x="300" y="50">region</text>
+
+  <!-- Site -> Rack -->
+  <path class="line" d="M 570 55 L 850 55"/>
+  <text class="cardinality" x="575" y="60">||</text>
+  <text class="cardinality" x="840" y="60">o{</text>
+  <text class="text-rel" x="700" y="50">site</text>
+
+  <!-- Rack -> Device -->
+  <path class="line" d="M 850 80 L 620 380"/>
+  <text class="cardinality" x="840" y="90">||</text>
+  <text class="cardinality" x="625" y="375">o{</text>
+
+  <!-- Manufacturer -> DeviceType -->
+  <path class="line" d="M 180 225 L 220 225"/>
+  <text class="cardinality" x="185" y="230">||</text>
+  <text class="cardinality" x="210" y="230">o{</text>
+
+  <!-- DeviceType -> Device -->
+  <path class="line" d="M 340 225 L 580 380"/>
+  <text class="cardinality" x="345" y="230">||</text>
+  <text class="cardinality" x="580" y="375">o{</text>
+
+  <!-- DeviceRole -> Device -->
+  <path class="line" d="M 440 250 L 560 380"/>
+  <text class="cardinality" x="445" y="255">||</text>
+  <text class="cardinality" x="560" y="375">o{</text>
+
+  <!-- Device -> Interface -->
+  <path class="line" d="M 560 440 L 150 600"/>
+  <text class="cardinality" x="555" y="450">||</text>
+  <text class="cardinality" x="155" y="595">o{</text>
+
+  <!-- Device -> ConsolePort -->
+  <path class="line" d="M 570 440 L 320 600"/>
+  <text class="cardinality" x="565" y="450">||</text>
+  <text class="cardinality" x="320" y="595">o{</text>
+
+  <!-- Device -> PowerPort -->
+  <path class="line" d="M 580 440 L 480 600"/>
+  <text class="cardinality" x="575" y="450">||</text>
+  <text class="cardinality" x="480" y="595">o{</text>
+
+  <!-- Device -> ModuleBay -->
+  <path class="line" d="M 620 440 L 780 600"/>
+  <text class="cardinality" x="620" y="450">||</text>
+  <text class="cardinality" x="780" y="595">o{</text>
+
+  <!-- Interface -> Cable -->
+  <path class="line" d="M 110 650 L 110 750"/>
+  <text class="cardinality" x="105" y="660">||</text>
+  <text class="cardinality" x="105" y="740">o{</text>
+
+</svg>

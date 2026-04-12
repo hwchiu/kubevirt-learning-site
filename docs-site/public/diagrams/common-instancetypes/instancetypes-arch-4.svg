@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 300" style="background:#ffffff; font-family:-apple-system, 'Helvetica Neue', Arial, sans-serif;">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+
+  <!-- Step A -->
+  <rect x="50" y="100" width="160" height="70" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="130" y="125" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">kubevirt/kubevirt</text>
+  <text x="130" y="145" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">beta.0 release</text>
+  
+  <!-- Step B -->
+  <rect x="270" y="100" width="160" height="70" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="350" y="125" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">建立</text>
+  <text x="350" y="145" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">release-1.Y 分支</text>
+  
+  <!-- Step C -->
+  <rect x="490" y="100" width="120" height="70" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="550" y="125" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">Tag</text>
+  <text x="550" y="145" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">v1.Y.0</text>
+  
+  <!-- Step D -->
+  <rect x="670" y="100" width="160" height="70" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="750" y="120" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">GitHub Actions</text>
+  <text x="750" y="140" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">建置 bundles</text>
+  
+  <!-- Step E -->
+  <rect x="890" y="100" width="160" height="70" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="970" y="120" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">同步至</text>
+  <text x="970" y="140" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">kubevirt/kubevirt</text>
+  <text x="970" y="155" text-anchor="middle" font-size="12" fill="#6b7280">main</text>
+  
+  <!-- Step F -->
+  <rect x="1110" y="100" width="160" height="70" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="1190" y="120" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">建立</text>
+  <text x="1190" y="140" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">v1.Y+1.0</text>
+  <text x="1190" y="155" text-anchor="middle" font-size="12" fill="#6b7280">milestone</text>
+  
+  <!-- Arrows -->
+  <path d="M 210 135 L 270 135" stroke="#3b82f6" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 430 135 L 490 135" stroke="#3b82f6" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 610 135 L 670 135" stroke="#3b82f6" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 830 135 L 890 135" stroke="#3b82f6" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 1050 135 L 1110 135" stroke="#3b82f6" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+</svg>

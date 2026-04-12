@@ -10,28 +10,7 @@ layout: doc
 
 ## 1. 快速診斷流程
 
-```mermaid
-flowchart TD
-    A[NodeMaintenance 異常] --> B{查看 nm.status.phase}
-
-    B --> |Running| C{drainProgress 是否推進?}
-    C --> |是| D[正常排空中，請等待]
-    C --> |否| E{pendingPods 有值?}
-    E --> |是| F[查看 PDB / 卡住的 Pod]
-    E --> |否| G[查看 errorOnLeaseCount]
-
-    B --> |Failed| H[查看 status.lastError]
-    H --> H1[node not found → 節點名稱錯誤]
-    H --> H2[lease 錯誤 → Lease 衝突]
-    H --> H3[lease could not be extended → Lease 失敗超限]
-
-    B --> |卡住 / 無進展| I[查看 errorOnLeaseCount]
-    I --> |遞增| J[確認 medik8s-leases namespace]
-    I --> |未遞增| K[查看 Operator logs]
-
-    K --> L[kubectl logs -n node-maintenance-operator-system]
-    L --> M[查看 Kubernetes Events]
-```
+![NodeMaintenance 快速診斷流程](/diagrams/node-maintenance-operator/nmo-troubleshooting-1.png)
 
 ---
 

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  
+  <rect width="1200" height="700" fill="#ffffff"/>
+  
+  <!-- Producer -->
+  <rect x="50" y="100" width="180" height="80" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="6"/>
+  <text x="140" y="145" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Producer</text>
+  
+  <!-- Schema Registry -->
+  <rect x="510" y="50" width="180" height="80" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2" rx="8"/>
+  <text x="600" y="95" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Schema Registry</text>
+  
+  <!-- Kafka -->
+  <rect x="510" y="250" width="180" height="80" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2" rx="8"/>
+  <text x="600" y="295" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Kafka</text>
+  
+  <!-- Consumer -->
+  <rect x="970" y="500" width="180" height="80" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="6"/>
+  <text x="1060" y="545" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Consumer</text>
+  
+  <!-- Step 1: Producer to Schema Registry -->
+  <path d="M 230 120 L 510 80" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="280" y="90" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">1. 向 Schema Registry</text>
+  <text x="280" y="105" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">登記 Schema</text>
+  
+  <!-- Step 2: Schema Registry to Producer -->
+  <path d="M 510 110 L 230 150" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="280" y="140" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">2. 回傳 Schema ID</text>
+  
+  <!-- Step 3: Producer to Kafka -->
+  <path d="M 230 180 L 230 250 L 510 270" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="250" y="210" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">3. 發送: [Magic Byte]</text>
+  <text x="250" y="225" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">[Schema ID][Avro Payload]</text>
+  
+  <!-- Step 4: Kafka to Consumer -->
+  <path d="M 690 300 L 970 520" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="790" y="400" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">4. 消費訊息</text>
+  
+  <!-- Step 5: Consumer to Schema Registry -->
+  <path d="M 970 520 L 690 100" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="780" y="290" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">5. 從 Schema Registry</text>
+  <text x="780" y="305" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">取得 Schema</text>
+  
+  <!-- Step 6: Schema Registry to Consumer -->
+  <path d="M 690 110 L 970 540" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="800" y="340" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">6. 回傳 Schema</text>
+  
+  <!-- Step 7: Consumer uses Schema (self-arrow) -->
+  <path d="M 1060 580 L 1060 620 L 1100 620 L 1100 580" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="1070" y="605" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">7. 使用 Schema</text>
+  <text x="1070" y="620" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#111827">反序列化</text>
+</svg>

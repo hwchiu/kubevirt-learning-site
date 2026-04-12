@@ -676,20 +676,7 @@ type cdiAPIApp struct {
 
 **Upload Token 產生流程**：
 
-```mermaid
-sequenceDiagram
-    participant Client as kubectl/virtctl
-    participant API as CDI API Server
-    participant Auth as CdiAPIAuthorizer
-    participant Token as TokenGenerator
-
-    Client->>API: POST /namespaces/{ns}/uploadtokenrequests
-    API->>Auth: Authorize(request) - SubjectAccessReview
-    Auth-->>API: allowed=true
-    API->>Token: Generate(Payload{Operation: Upload, Resource: PVC})
-    Token-->>API: JWT Token (5 分鐘有效)
-    API-->>Client: UploadTokenRequest{Status: Token}
-```
+![CDI Upload Token 產生流程](/diagrams/cdi/cdi-controllers-api-1.png)
 
 Token 有效期為 **5 分鐘**：
 
@@ -802,17 +789,7 @@ type ObjectTransferReconciler struct {
 }
 ```
 
-```mermaid
-stateDiagram-v2
-    [*] --> Empty: 建立 ObjectTransfer
-    Empty --> Pending: 加入 Finalizer
-    Pending --> Running: Handler.ReconcilePending()
-    Running --> Running: Handler.ReconcileRunning()
-    Running --> Complete: 轉移完成
-    Running --> Error: 錯誤
-    Error --> Running: 重試
-    Complete --> [*]: reconcileCleanup()
-```
+![ObjectTransfer 狀態機](/diagrams/containerized-data-importer/cdi-object-transfer-state.png)
 
 **Handler 選擇**（第 203-220 行）：
 

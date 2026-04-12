@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600">
+<defs><marker id="arr_3b82f6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/></marker>
+<marker id="arr_6b7280" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#6b7280"/></marker>
+</defs>
+<rect width="900" height="600" fill="#ffffff"/>
+<rect x="30" y="50" width="380" height="200" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="42" y="68" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="bold" fill="#6b7280">Thin Plugin 模式</text>
+<rect x="30" y="280" width="380" height="200" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="42" y="298" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="bold" fill="#6b7280">Thick Plugin 模式（推薦）</text>
+<rect x="440" y="50" width="420" height="200" rx="10" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="452" y="68" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="bold" fill="#6b7280">CNI 委派（兩種模式共用）</text>
+<rect x="30" y="510" width="380" height="70" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="42" y="528" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="bold" fill="#6b7280">Kubernetes Control Plane</text>
+<rect x="40" y="80" width="160" height="36" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="120.0" y="98.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="120.0" dy="0" fill="#111827">kubelet / CRI</tspan></text>
+<rect x="220" y="80" width="190" height="36" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="315.0" y="91.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="315.0" dy="0" fill="#111827">multus binary</tspan><tspan x="315.0" dy="14" fill="#111827">/opt/cni/bin/multus</tspan></text>
+<rect x="40" y="310" width="160" height="36" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="120.0" y="328.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="120.0" dy="0" fill="#111827">kubelet / CRI</tspan></text>
+<rect x="210" y="310" width="190" height="36" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="305.0" y="321.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="305.0" dy="0" fill="#111827">multus-shim binary</tspan><tspan x="305.0" dy="14" fill="#111827">/opt/cni/bin/multus</tspan></text>
+<rect x="40" y="390" width="360" height="44" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="220.0" y="405.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="220.0" dy="0" fill="#111827">multus-daemon DaemonSet Pod (Pod Informer +</tspan><tspan x="220.0" dy="14" fill="#111827">NAD Informer + 共用 k8s 客戶端)</tspan></text>
+<rect x="450" y="80" width="170" height="36" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="535.0" y="98.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="535.0" dy="0" fill="#111827">Multus 核心邏輯</tspan></text>
+<rect x="450" y="150" width="120" height="36" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+<text x="510.0" y="161.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="510.0" dy="0" fill="#111827">CNI Plugin 1</tspan><tspan x="510.0" dy="14" fill="#111827">(bridge)</tspan></text>
+<rect x="590" y="150" width="120" height="36" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+<text x="650.0" y="161.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="650.0" dy="0" fill="#111827">CNI Plugin 2</tspan><tspan x="650.0" dy="14" fill="#111827">(sriov)</tspan></text>
+<rect x="700" y="150" width="130" height="36" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+<text x="765.0" y="161.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="765.0" dy="0" fill="#111827">CNI Plugin N</tspan><tspan x="765.0" dy="14" fill="#111827">(macvlan)</tspan></text>
+<rect x="50" y="530" width="160" height="36" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="130.0" y="541.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="130.0" dy="0" fill="#111827">Kubernetes API</tspan><tspan x="130.0" dy="14" fill="#111827">Server</tspan></text>
+<rect x="220" y="530" width="190" height="36" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="315.0" y="541.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="315.0" dy="0" fill="#111827">NetworkAttachmentDefini</tspan><tspan x="315.0" dy="14" fill="#111827">tion CRD</tspan></text>
+<line x1="200" y1="98.0" x2="220" y2="80" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="219.4" y="99.4" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">呼叫 CNI</text>
+<line x1="315.0" y1="116" x2="130.0" y2="530" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="209.7" y="317.3" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">直接讀取 kubeconfig</text>
+<line x1="200" y1="328.0" x2="210" y2="310" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="217.2" y="325.8" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">呼叫 CNI</text>
+<line x1="305.0" y1="346" x2="220.0" y2="390" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="256.1" y="355.6" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">HTTP over Unix Socket</text>
+<line x1="220.0" y1="434" x2="130.0" y2="530" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="164.8" y="472.4" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">共用 k8s 客戶端</text>
+<line x1="535.0" y1="116" x2="510.0" y2="150" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="511.2" y="124.7" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">委派</text>
+<line x1="535.0" y1="116" x2="650.0" y2="150" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="588.5" y="146.4" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">委派</text>
+<line x1="535.0" y1="116" x2="765.0" y2="150" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="648.0" y="146.8" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">委派</text>
+</svg>

@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 550">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-return" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#6b7280"/>
+    </marker>
+    <style>
+      .participant { fill: #f0f4ff; stroke: #c7d2fe; stroke-width: 1.5; }
+      .lifeline { stroke: #d1d5db; stroke-width: 1; stroke-dasharray: 5,3; }
+      .text-title { fill: #111827; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: 600; }
+      .text-msg { fill: #6b7280; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; }
+      .line { stroke: #3b82f6; stroke-width: 1.5; fill: none; }
+      .line-return { stroke: #6b7280; stroke-width: 1.5; fill: none; stroke-dasharray: 5,3; }
+      .loop-box { fill: none; stroke: #c7d2fe; stroke-width: 1.5; }
+      .loop-label { fill: #111827; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 600; }
+    </style>
+  </defs>
+
+  <!-- Participants -->
+  <rect class="participant" x="50" y="30" width="100" height="50" rx="4"/>
+  <text class="text-title" x="100" y="60" text-anchor="middle">Client</text>
+  
+  <rect class="participant" x="220" y="30" width="140" height="50" rx="4"/>
+  <text class="text-title" x="290" y="60" text-anchor="middle">NetBoxRouter</text>
+  
+  <rect class="participant" x="430" y="30" width="180" height="50" rx="4"/>
+  <text class="text-title" x="520" y="55" text-anchor="middle">BulkUpdateModel</text>
+  <text class="text-title" x="520" y="70" text-anchor="middle">Mixin</text>
+  
+  <rect class="participant" x="680" y="30" width="180" height="50" rx="4"/>
+  <text class="text-title" x="770" y="55" text-anchor="middle">BulkOperation</text>
+  <text class="text-title" x="770" y="70" text-anchor="middle">Serializer</text>
+  
+  <rect class="participant" x="900" y="30" width="80" height="50" rx="4"/>
+  <text class="text-title" x="940" y="60" text-anchor="middle">PostgreSQL</text>
+
+  <!-- Lifelines -->
+  <line class="lifeline" x1="100" y1="80" x2="100" y2="520"/>
+  <line class="lifeline" x1="290" y1="80" x2="290" y2="520"/>
+  <line class="lifeline" x1="520" y1="80" x2="520" y2="520"/>
+  <line class="lifeline" x1="770" y1="80" x2="770" y2="520"/>
+  <line class="lifeline" x1="940" y1="80" x2="940" y2="520"/>
+
+  <!-- Messages -->
+  <!-- 1. Client -> Router -->
+  <path class="line" d="M 100 120 L 290 120" marker-end="url(#arrow)"/>
+  <text class="text-msg" x="195" y="110">PATCH /api/dcim/sites/</text>
+  <text class="text-msg" x="195" y="140">[{id:1, status:"planned"}, ...]</text>
+
+  <!-- 2. Router -> Mixin -->
+  <path class="line" d="M 290 170 L 520 170" marker-end="url(#arrow)"/>
+  <text class="text-msg" x="405" y="165">bulk_partial_update(request)</text>
+
+  <!-- 3. Mixin -> Serializer -->
+  <path class="line" d="M 520 210 L 770 210" marker-end="url(#arrow)"/>
+  <text class="text-msg" x="645" y="205">validate(request.data)</text>
+
+  <!-- 4. Serializer -> Mixin (return) -->
+  <path class="line-return" d="M 770 240 L 520 240" marker-end="url(#arrow-return)"/>
+  <text class="text-msg" x="645" y="235">validated_data</text>
+
+  <!-- 5. Mixin -> DB -->
+  <path class="line" d="M 520 280 L 940 280" marker-end="url(#arrow)"/>
+  <text class="text-msg" x="730" y="275">filter(pk__in=[1, 2, 3])</text>
+
+  <!-- Loop box -->
+  <rect class="loop-box" x="500" y="310" width="460" height="100" rx="4"/>
+  <text class="loop-label" x="510" y="328">loop 逐一更新</text>
+  <line x1="500" y1="335" x2="960" y2="335" stroke="#c7d2fe" stroke-width="1"/>
+
+  <!-- 6. Mixin -> DB (inside loop) -->
+  <path class="line" d="M 520 360 L 940 360" marker-end="url(#arrow)"/>
+  <text class="text-msg" x="730" y="355">update(obj, data)</text>
+
+  <!-- 7. Mixin -> Client (return) -->
+  <path class="line-return" d="M 520 460 L 100 460" marker-end="url(#arrow-return)"/>
+  <text class="text-msg" x="310" y="455">200 OK [updated objects]</text>
+
+</svg>

@@ -4,9 +4,17 @@ Use this checklist to verify documentation quality before committing.
 
 ## Per-Page Checks
 
+### index.md
+- [ ] 有分析版本資訊（commit SHA / 版本）
+- [ ] 有專案資訊表（repo、語言、授權、專案類型）
+- [ ] 有文件導覽表，列出所有主要頁面與用途
+- [ ] **若頁面數量 ≥ 6 或已有多 Section**：有明確的「建議閱讀順序」
+- [ ] 有 `::: info` 類型的快速跳轉，讓讀者可依目標直接進入對應頁面
+- [ ] **若建立 `learning-path/`**：index.md 有入口，且說明該路徑適合哪種讀者
+
 ### architecture.md
 - [ ] Project overview with accurate Go/language version from go.mod
-- [ ] Mermaid system architecture diagram
+- [ ] 至少 1 張靜態系統架構圖（SVG/PNG，使用 `/diagrams/...` 引用）
 - [ ] Binary/tool table with paths and descriptions
 - [ ] Directory structure with 2-level depth for key dirs
 - [ ] Build system documentation (Makefile targets + CI/CD)
@@ -16,7 +24,7 @@ Use this checklist to verify documentation quality before committing.
 ### core-features.md
 - [ ] At least 3 major features documented
 - [ ] Every feature has real code snippets with file paths
-- [ ] Processing flow diagrams (Mermaid sequence/flowchart)
+- [ ] Processing flow diagrams exist as static SVG/PNG assets
 - [ ] `::: tip` containers for key insights
 - [ ] No fabricated code — all snippets verified against source
 - [ ] **IF 含演算法**: 獨立區塊含問題定義、核心邏輯程式碼、決策流程圖、複雜度分析
@@ -49,7 +57,7 @@ Use this checklist to verify documentation quality before committing.
 
 ### data-models.md (Web 應用平台 only)
 - [ ] 模型總覽表包含所有 Django App 及其模型數量
-- [ ] 至少包含 2 張 Mermaid ERD（如 DCIM、IPAM 等主要領域）
+- [ ] 至少包含 2 張靜態 ERD（如 DCIM、IPAM 等主要領域）
 - [ ] 核心模型分析包含 field 數量、relationship 數量、自訂 clean/save 邏輯
 - [ ] Mixin 模式分析包含程式碼片段與使用範例
 - [ ] Migration 慣例與命名規則有說明
@@ -57,7 +65,7 @@ Use this checklist to verify documentation quality before committing.
 
 ### api-reference.md (Web 應用平台 only)
 - [ ] REST API 端點總覽表按 App 分類列出
-- [ ] ViewSet 繼承架構有 Mermaid 類別圖
+- [ ] ViewSet 繼承架構有靜態類別圖（SVG/PNG）
 - [ ] Serializer 架構有程式碼範例
 - [ ] 認證方式（Token、Session、LDAP 等）有完整說明
 - [ ] HTTP 狀態碼對照表包含所有常見回應碼
@@ -70,7 +78,7 @@ Use this checklist to verify documentation quality before committing.
 - [ ] Auth/RBAC mechanisms explained
 - [ ] CI/CD workflows documented
 - [ ] Usage examples from config/samples/
-- [ ] Integration architecture diagram (Mermaid)
+- [ ] Integration architecture diagram exists as static SVG/PNG
 - [ ] **IF 有自定義 Metrics**: Metric 名稱、類型、Labels、PromQL 範例
 
 ## Cross-Page Checks
@@ -78,6 +86,10 @@ Use this checklist to verify documentation quality before committing.
 - [ ] All pages use consistent title format: `{Project} — {Topic}`
 - [ ] All pages have `layout: doc` frontmatter
 - [ ] All pages have `::: info 相關章節` cross-reference box linking to sibling pages
+- [ ] 專案總覽頁（index.md）本身就能扮演最基本的學習導覽入口
+- [ ] 若有 `learning-path/`，內容是**導讀層**而非重複貼上技術文件
+- [ ] quiz index（若存在）中的「建議學習路徑」需與技術文件閱讀順序一致
+- [ ] 文件內不新增 Mermaid，圖表一律引用 `docs-site/public/diagrams/...` 靜態資產
 - [ ] No broken internal links
 - [ ] No `{{ }}` Go/GitHub Actions template syntax outside code fences (Vue will fail)
 - [ ] VitePress sidebar entries match actual page files (條件頁面名稱依專案類型而異)

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="190">
+<defs><marker id="arr_3b82f6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/></marker>
+<marker id="arr_6b7280" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#6b7280"/></marker>
+</defs>
+<rect width="820" height="190" fill="#ffffff"/>
+<rect x="30" y="70" width="190" height="50" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="125.0" y="95.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="125.0" dy="0" fill="#111827">CmdAdd 執行完成</tspan></text>
+<rect x="260" y="30" width="230" height="50" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="375.0" y="41.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="375.0" dy="0" fill="#111827">/var/lib/cni/multus/{contain</tspan><tspan x="375.0" dy="14" fill="#111827">erID} 儲存所有 DelegateNetConf</tspan><tspan x="375.0" dy="14" fill="#111827">JSON</tspan></text>
+<rect x="30" y="140" width="190" height="40" rx="8" fill="#fee2e2" stroke="#fca5a5" stroke-width="1.5"/>
+<text x="125.0" y="160.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="125.0" dy="0" fill="#111827">CmdDel 呼叫</tspan></text>
+<polygon points="280,85 380,115 280,145 180,115" fill="#fef3c7" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="280" y="115.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="280" dy="0" fill="#111827">快取存在?</tspan></text>
+<rect x="420" y="70" width="210" height="50" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="525.0" y="88.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="525.0" dy="0" fill="#111827">consumeScratchNetConf()</tspan><tspan x="525.0" dy="14" fill="#111827">讀取快取，並刪除檔案</tspan></text>
+<rect x="420" y="140" width="210" height="40" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="525.0" y="153.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="525.0" dy="0" fill="#111827">對每個 DelegateNetConf 呼叫委派</tspan><tspan x="525.0" dy="14" fill="#111827">DEL</tspan></text>
+<rect x="620" y="140" width="150" height="40" rx="8" fill="#fee2e2" stroke="#fca5a5" stroke-width="1.5"/>
+<text x="695.0" y="160.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="695.0" dy="0" fill="#111827">記錄警告， 嘗試從設定重建</tspan></text>
+<line x1="220" y1="95.0" x2="260" y2="55.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="249.9" y="84.9" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">saveDelegates()</text>
+<line x1="220" y1="160.0" x2="180" y2="115" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<line x1="280" y1="85" x2="525.0" y2="120" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="400.5" y="116.4" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">是</text>
+<line x1="525.0" y1="120" x2="525.0" y2="140" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<line x1="380" y1="115" x2="620" y2="160.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="497.4" y="151.3" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">否</text>
+</svg>

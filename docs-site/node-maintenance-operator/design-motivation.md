@@ -156,24 +156,7 @@ Lease 持有時間：3600 秒（1 小時）
 
 沒有 Lease 協調的純 `kubectl drain`，完全靠人工協調，非常容易出錯。
 
-```mermaid
-sequenceDiagram
-    participant NM1 as NodeMaintenance<br/>node01
-    participant NM2 as NodeMaintenance<br/>node02
-    participant Lease as Lease (etcd)
-    participant N1 as node01
-    participant N2 as node02
-
-    NM1->>Lease: 嘗試取得 lease
-    NM2->>Lease: 嘗試取得 lease
-    Lease-->>NM1: ✅ 取得成功
-    Lease-->>NM2: ❌ 等待（lease 已被佔用）
-    NM1->>N1: cordon + drain
-    N1-->>NM1: 排空完成
-    NM1->>Lease: 釋放 lease
-    Lease-->>NM2: ✅ 取得成功
-    NM2->>N2: cordon + drain
-```
+![Lease 協調機制 - 當多個 NodeMaintenance CR 同時存在時，Lease 確保只有一個節點在進行排空操作](/diagrams/node-maintenance-operator/nmo-design-1.png)
 
 ### 3.3 與 Remediation 系統共存 — 防止誤觸自動修復
 

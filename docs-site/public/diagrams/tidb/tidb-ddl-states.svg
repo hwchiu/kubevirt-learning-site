@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1070" height="200" viewBox="0 0 1070 200">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowrev" markerWidth="10" markerHeight="7" refX="1" refY="3.5" orient="auto-start-reverse">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="1070" height="200" fill="#ffffff"/>
+  <rect x="100.0" y="87.5" width="130" height="65" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="20"/>
+  <text x="165.0" y="120.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">None</text>
+  <rect x="285.0" y="87.5" width="130" height="65" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="20"/>
+  <text x="350.0" y="110.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Delete</text>
+  <text x="350.0" y="129.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Only</text>
+  <rect x="470.0" y="87.5" width="130" height="65" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="20"/>
+  <text x="535.0" y="110.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Write</text>
+  <text x="535.0" y="129.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Only</text>
+  <rect x="655.0" y="87.5" width="130" height="65" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="20"/>
+  <text x="720.0" y="110.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Write</text>
+  <text x="720.0" y="129.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Reorg</text>
+  <rect x="840.0" y="87.5" width="130" height="65" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="20"/>
+  <text x="905.0" y="120.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Public</text>
+  <circle cx="60" cy="120" r="12" fill="#111827" stroke="#e5e7eb" stroke-width="1.5"/>
+  <circle cx="1020.0" cy="120" r="15" fill="#ffffff" stroke="#111827" stroke-width="2"/>
+  <circle cx="1020.0" cy="120" r="10" fill="#111827"/>
+  <line x1="72" y1="120" x2="100.0" y2="120" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="230.0" y1="120" x2="285.0" y2="120" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="257.5" y="134.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">ADD COLUMN 開始</text>
+  <line x1="415.0" y1="120" x2="470.0" y2="120" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="442.5" y="134.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Write-Only 狀態</text>
+  <line x1="600.0" y1="120" x2="655.0" y2="120" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="627.5" y="134.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">資料重組（backfill）</text>
+  <line x1="785.0" y1="120" x2="840.0" y2="120" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="812.5" y="134.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">正式生效</text>
+  <line x1="970.0" y1="120" x2="1005.0" y2="120" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>

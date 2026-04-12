@@ -41,52 +41,7 @@ Hook Sidecar 的運作涉及多個 KubeVirt 元件之間的協作：
 
 以下是完整的 Hook Sidecar 執行流程：
 
-```mermaid
-sequenceDiagram
-    participant User as 使用者
-    participant API as kube-apiserver
-    participant VC as virt-controller
-    participant VL as virt-launcher
-    participant HS1 as hook-sidecar-1
-    participant HS2 as hook-sidecar-2
-    participant Libvirt as libvirtd
-
-    User->>API: 建立 VMI (含 hook annotation)
-    API->>VC: VMI 事件通知
-    VC->>API: 建立 virt-launcher Pod<br/>(包含 hook sidecar 容器)
-
-    par 容器啟動
-        HS1->>HS1: 啟動 gRPC server<br/>建立 Unix socket
-        HS2->>HS2: 啟動 gRPC server<br/>建立 Unix socket
-    end
-
-    VL->>VL: 掃描 /var/run/kubevirt-hooks/<br/>發現 .sock 檔案
-
-    VL->>HS1: Info() RPC
-    HS1-->>VL: 回傳版本 + Hook Points
-
-    VL->>HS2: Info() RPC
-    HS2-->>VL: 回傳版本 + Hook Points
-
-    Note over VL: 依優先序排序所有 hooks
-
-    rect rgb(240, 248, 255)
-        Note over VL,HS2: OnDefineDomain 階段
-        VL->>HS1: OnDefineDomain(vmi, domainXML)
-        HS1-->>VL: 修改後的 domainXML
-        VL->>HS2: OnDefineDomain(vmi, domainXML')
-        HS2-->>VL: 再次修改的 domainXML
-    end
-
-    rect rgb(255, 248, 240)
-        Note over VL,HS2: PreCloudInitIso 階段
-        VL->>HS1: PreCloudInitIso(vmi, cloudInitData)
-        HS1-->>VL: 修改後的 cloudInitData
-    end
-
-    VL->>Libvirt: 最終 domain XML
-    Libvirt->>Libvirt: 啟動 QEMU
-```
+![Hook Sidecar 詳細流程](/diagrams/kubevirt/kubevirt-hook-sidecar-arch.png)
 
 ### 流程步驟說明
 

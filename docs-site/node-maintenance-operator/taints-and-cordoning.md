@@ -133,40 +133,7 @@ delete(node.Labels, "medik8s.io/exclude-from-remediation")
 
 以下 Mermaid 圖展示節點物件在整個維護生命週期中的狀態變化：
 
-```mermaid
-stateDiagram-v2
-    state "正常狀態 (Before)" as Before {
-        note
-            Taints: []
-            Unschedulable: false
-            Labels: (無 medik8s 標記)
-        end note
-    }
-
-    state "維護中 (During)" as During {
-        note
-            Taints:
-              - node.kubernetes.io/unschedulable:NoSchedule
-              - medik8s.io/drain:NoSchedule
-            Unschedulable: true
-            Labels:
-              medik8s.io/exclude-from-remediation: "true"
-        end note
-    }
-
-    state "維護完成 (After)" as After {
-        note
-            Taints: []（維護 Taint 已移除）
-            Unschedulable: false
-            Labels: (medik8s 標記已移除)
-        end note
-    }
-
-    [*] --> Before
-    Before --> During : NodeMaintenance CR 建立\n①加 Taint\n②Cordon\n③加 Label
-    During --> After : NodeMaintenance CR 刪除\n①移除 Label\n②移除 Taint\n③Uncordon
-    After --> [*]
-```
+![NodeMaintenance 節點狀態變化圖](/diagrams/node-maintenance-operator/nmo-taints-cordoning-1.png)
 
 ---
 

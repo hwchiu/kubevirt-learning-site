@@ -57,70 +57,7 @@ BaseModel
 
 DCIM（Data Center Infrastructure Management）是 NetBox 最龐大的 App，包含 31 個 Model。以下 ERD 呈現核心實體之間的關聯：
 
-```mermaid
-erDiagram
-    Region ||--o{ SiteGroup : "contains"
-    Region ||--o{ Region : "parent"
-    SiteGroup ||--o{ SiteGroup : "parent"
-    SiteGroup ||--o{ Site : "group"
-    Region ||--o{ Site : "region"
-    Site ||--o{ Location : "site"
-    Location ||--o{ Location : "parent"
-    Site ||--o{ Rack : "site"
-    Location ||--o{ Rack : "location"
-    Rack ||--o{ Device : "rack"
-    Site ||--o{ Device : "site"
-    Location ||--o{ Device : "location"
-
-    Manufacturer ||--o{ DeviceType : "manufacturer"
-    DeviceType ||--o{ Device : "device_type"
-    DeviceRole ||--o{ Device : "role"
-    Platform ||--o{ Device : "platform"
-    Tenant ||--o{ Device : "tenant"
-    Cluster ||--o{ Device : "cluster"
-    VirtualChassis ||--o{ Device : "virtual_chassis"
-
-    Device ||--o{ Interface : "device"
-    Device ||--o{ ConsolePort : "device"
-    Device ||--o{ PowerPort : "device"
-    Device ||--o{ DeviceBay : "device"
-    Device ||--o{ ModuleBay : "device"
-    Interface ||--o{ Cable : "termination_a"
-    Cable ||--o{ Interface : "termination_b"
-    Interface ||--o{ Interface : "lag (member)"
-
-    Region {
-        string name
-        int _depth
-    }
-    Site {
-        string name
-        string status
-        string facility
-    }
-    Rack {
-        string name
-        int u_height
-        string status
-    }
-    Device {
-        string name
-        string serial
-        string status
-        decimal position
-    }
-    Interface {
-        string name
-        string type
-        int speed
-        string mode
-    }
-    Cable {
-        string type
-        string status
-        decimal length
-    }
-```
+![NetBox DCIM 模型關係圖](/diagrams/netbox/netbox-dcim-erd.png)
 
 ### 關鍵路徑說明
 
@@ -135,58 +72,7 @@ erDiagram
 
 IPAM（IP Address Management）管理 IP 位址空間、VLAN、VRF 等網路資源：
 
-```mermaid
-erDiagram
-    RIR ||--o{ Aggregate : "rir"
-    Aggregate ||--o{ Prefix : "contains"
-    VRF ||--o{ Prefix : "vrf"
-    Prefix ||--o{ Prefix : "parent/child"
-    Prefix ||--o{ IPAddress : "parent"
-    Prefix ||--o{ IPRange : "parent"
-    VLAN ||--o{ Prefix : "vlan"
-    VLANGroup ||--o{ VLAN : "group"
-    Role ||--o{ Prefix : "role"
-    Role ||--o{ VLAN : "role"
-    VRF ||--o{ IPAddress : "vrf"
-    Tenant ||--o{ Prefix : "tenant"
-
-    RIR {
-        string name
-        bool is_private
-    }
-    Aggregate {
-        cidr prefix
-        string description
-    }
-    VRF {
-        string name
-        string rd
-        bool enforce_unique
-    }
-    Prefix {
-        cidr prefix
-        string status
-        bool is_pool
-        int _depth
-        int _children
-    }
-    IPAddress {
-        inet address
-        string status
-        string role
-        string dns_name
-    }
-    VLAN {
-        int vid
-        string name
-        string status
-    }
-    IPRange {
-        inet start_address
-        inet end_address
-        string status
-    }
-```
+![NetBox IPAM 模型關係圖](/diagrams/netbox/netbox-ipam-erd-full.png)
 
 ### Prefix 層級嵌套
 

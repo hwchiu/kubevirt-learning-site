@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="160">
+<defs><marker id="arr_3b82f6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/></marker>
+<marker id="arr_6b7280" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#6b7280"/></marker>
+</defs>
+<rect width="780" height="160" fill="#ffffff"/>
+<rect x="30" y="60" width="130" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="95.0" y="82.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="95.0" dy="0" fill="#111827">kubelet</tspan></text>
+<rect x="220" y="40" width="230" height="64" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="335.0" y="58.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="335.0" dy="0" fill="#111827">/var/lib/kubelet/device-</tspan><tspan x="335.0" dy="14" fill="#111827">plugins/</tspan><tspan x="335.0" dy="14" fill="#111827">kubelet_internal_checkpoint</tspan></text>
+<rect x="220" y="120" width="130" height="36" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="285.0" y="138.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="285.0" dy="0" fill="#111827">Multus</tspan></text>
+<rect x="430" y="120" width="160" height="36" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="510.0" y="138.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="510.0" dy="0" fill="#111827">NAD 設定 (取得 DeviceID)</tspan></text>
+<rect x="430" y="60" width="160" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="510.0" y="75.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="510.0" dy="0" fill="#111827">RuntimeConfig (設定</tspan><tspan x="510.0" dy="14" fill="#111827">DeviceID)</tspan></text>
+<rect x="620" y="80" width="130" height="44" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+<text x="685.0" y="95.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="685.0" dy="0" fill="#111827">SR-IOV CNI</tspan><tspan x="685.0" dy="14" fill="#111827">Plugin</tspan></text>
+<line x1="160" y1="82.0" x2="220" y2="72.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="192.3" y="90.8" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">分配 SR-IOV VF</text>
+<line x1="285.0" y1="120" x2="335.0" y2="104" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="314.3" y="125.3" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">讀取 checkpoint</text>
+<line x1="350" y1="138.0" x2="430" y2="138.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="390.0" y="152.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">取得 DeviceID</text>
+<line x1="510.0" y1="120" x2="510.0" y2="104" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="524.0" y="112.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">設定 DeviceID</text>
+<line x1="590" y1="82.0" x2="620" y2="102.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="597.2" y="103.6" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">委派</text>
+</svg>

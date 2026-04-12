@@ -370,62 +370,7 @@ func (p *Planner) fallbackToHostAssisted(targetClaim *corev1.PersistentVolumeCla
 
 ### 完整決策流程圖
 
-```mermaid
-flowchart TD
-    Start([ChooseStrategy]) --> CheckSource{來源類型?}
-
-    CheckSource -->|PVC| PVC_Path[computeStrategyForSourcePVC]
-    CheckSource -->|Snapshot| Snap_Path[computeStrategyForSourceSnapshot]
-    CheckSource -->|其他| Err[回傳 unsupported datasource 錯誤]
-
-    PVC_Path --> PVC_Validate[驗證目標 StorageClass<br/>確認來源 PVC 存在<br/>驗證容量相容]
-    PVC_Validate --> PVC_GlobalOverride{全域策略覆蓋<br/>存在?}
-    PVC_GlobalOverride -->|是| PVC_UseOverride[使用覆蓋策略]
-    PVC_GlobalOverride -->|否| PVC_CheckSP{StorageProfile<br/>有 CloneStrategy?}
-    PVC_CheckSP -->|是| PVC_UseSP[使用 StorageProfile 策略]
-    PVC_CheckSP -->|否| PVC_Default[預設: CloneStrategySnapshot]
-
-    PVC_UseOverride --> PVC_IsSnapshot{策略是<br/>Snapshot?}
-    PVC_UseSP --> PVC_IsSnapshot
-    PVC_Default --> PVC_IsSnapshot
-
-    PVC_IsSnapshot -->|是| PVC_CheckVSC{相容的<br/>VolumeSnapshotClass<br/>存在?}
-    PVC_IsSnapshot -->|否| PVC_IsAdvanced{策略是<br/>CSI Clone?}
-
-    PVC_CheckVSC -->|是| PVC_Advanced[validateAdvancedClonePVC]
-    PVC_CheckVSC -->|否| FB_NoVSC[降級: NoVolumeSnapshotClass<br/>→ HostAssisted]
-
-    PVC_IsAdvanced -->|是| PVC_Advanced
-    PVC_IsAdvanced -->|否| PVC_Done[回傳 HostAssisted 策略]
-
-    PVC_Advanced --> Adv_Driver{CSI 驅動<br/>相容?}
-    Adv_Driver -->|否| FB_Provisioner[降級: IncompatibleProvisioners<br/>→ HostAssisted]
-    Adv_Driver -->|是| Adv_Mode{VolumeMode<br/>相同?}
-    Adv_Mode -->|否| FB_Mode[降級: IncompatibleVolumeModes<br/>→ HostAssisted]
-    Adv_Mode -->|是| Adv_Expand{需要擴展且<br/>允許擴展?}
-    Adv_Expand -->|不允許| FB_Expand[降級: NoVolumeExpansion<br/>→ HostAssisted]
-    Adv_Expand -->|允許或不需要| PVC_Success[回傳選定策略 ✓]
-
-    Snap_Path --> Snap_Validate[驗證目標 StorageClass<br/>確認來源 Snapshot 存在]
-    Snap_Validate --> Snap_Provisioner{Provisioner<br/>匹配?}
-    Snap_Provisioner -->|否| FB_SnapProv[降級: NoProvisionerMatch<br/>→ HostAssisted]
-    Snap_Provisioner -->|是| Snap_Size{容量擴展<br/>可行?}
-    Snap_Size -->|否| FB_SnapSize[降級: NoVolumeExpansion<br/>→ HostAssisted]
-    Snap_Size -->|是| Snap_Mode{VolumeMode<br/>相同?}
-    Snap_Mode -->|否| FB_SnapMode[降級: IncompatibleVolumeModes<br/>→ HostAssisted]
-    Snap_Mode -->|是| Snap_Success[回傳 CloneStrategySnapshot ✓]
-
-    style FB_NoVSC fill:#f9a825,color:#000
-    style FB_Provisioner fill:#f9a825,color:#000
-    style FB_Mode fill:#f9a825,color:#000
-    style FB_Expand fill:#f9a825,color:#000
-    style FB_SnapProv fill:#f9a825,color:#000
-    style FB_SnapSize fill:#f9a825,color:#000
-    style FB_SnapMode fill:#f9a825,color:#000
-    style PVC_Success fill:#2e7d32,color:#fff
-    style Snap_Success fill:#2e7d32,color:#fff
-    style Err fill:#c62828,color:#fff
-```
+![CDI 克隆策略完整決策流程](/diagrams/cdi/cdi-integration-1.png)
 
 ::: info 策略優先順序
 1. **全域覆蓋**（CDIConfig 設定）→ 最高優先

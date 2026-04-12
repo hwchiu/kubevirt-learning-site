@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="1200" height="800" viewBox="0 0 1200 800">
+<defs>
+<marker markerWidth="9.5" markerHeight="7.5" viewBox="-0.5 -0.5 9.5 7.5" orient="auto" id="d0">
+<path d="M0,0.5 L8.5,3.5 L0,6.5 Z" fill="#3b82f6" />
+</marker>
+</defs>
+<rect x="0" y="0" width="1200" height="800" fill="#ffffff" />
+<use xlink:href="#d0" />
+<text x="600.0" y="40" font-size="18" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="600">CDI 資料來源分類與處理路徑</text>
+<rect x="80" y="100" width="440" height="450" fill="none" stroke="#c7d2fe" stroke-width="2" rx="12" stroke-dasharray="8,4" />
+<text x="300.0" y="125" font-size="15" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="600">資料來源分類</text>
+<rect x="120" y="160" width="100" height="50" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" rx="8" />
+<text x="170.0" y="185.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">HTTP</text>
+<rect x="120" y="235" width="100" height="50" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" rx="8" />
+<text x="170.0" y="260.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">S3</text>
+<rect x="120" y="310" width="100" height="50" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" rx="8" />
+<text x="170.0" y="335.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">GCS</text>
+<rect x="120" y="385" width="100" height="50" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" rx="8" />
+<text x="170.0" y="410.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">Registry</text>
+<rect x="120" y="460" width="100" height="50" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" rx="8" />
+<text x="170.0" y="485.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">ImageIO</text>
+<rect x="350" y="460" width="100" height="50" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" rx="8" />
+<text x="400.0" y="485.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">VDDK</text>
+<rect x="620" y="260" width="150" height="60" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8" />
+<text x="695.0" y="281.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">nbdkit</text>
+<text x="695.0" y="299.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">Unix Socket</text>
+<rect x="620" y="380" width="150" height="60" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8" />
+<text x="695.0" y="410.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">FormatReaders</text>
+<rect x="880" y="320" width="140" height="60" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8" />
+<text x="950.0" y="341.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">qemu-img</text>
+<text x="950.0" y="359.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">convert</text>
+<rect x="920" y="600" width="100" height="60" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2" rx="8" />
+<text x="970.0" y="630.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">PVC</text>
+<path d="M220,185.0 L620,290.0" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="360.0" y="225.5" width="120" height="24" fill="#ffffff" stroke="none" />
+<text x="420.0" y="237.5" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">nbdkit curl</text>
+<path d="M450,485.0 L695.0,320" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="512.5" y="390.5" width="120" height="24" fill="#ffffff" stroke="none" />
+<text x="572.5" y="402.5" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">nbdkit vddk</text>
+<path d="M220,260.0 L620,390.0" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="360.0" y="313.0" width="120" height="24" fill="#ffffff" stroke="none" />
+<text x="420.0" y="325.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">直接串流</text>
+<path d="M220,335.0 L620,410.0" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="360.0" y="360.5" width="120" height="24" fill="#ffffff" stroke="none" />
+<text x="420.0" y="372.5" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">直接串流</text>
+<path d="M220,410.0 L620,425.0" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="360.0" y="405.5" width="120" height="24" fill="#ffffff" stroke="none" />
+<text x="420.0" y="417.5" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">docker 拉取</text>
+<path d="M220,485.0 L695.0,440" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="397.5" y="450.5" width="120" height="24" fill="#ffffff" stroke="none" />
+<text x="457.5" y="462.5" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">oVirt SDK</text>
+<path d="M770,290.0 L880,340.0" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<path d="M770,410.0 L880,360.0" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<path d="M950.0,380 L970.0,600" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+</svg>

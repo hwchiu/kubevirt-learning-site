@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="1400" height="500" viewBox="0 0 1400 500">
+<defs>
+<marker markerWidth="9.5" markerHeight="7.5" viewBox="-0.5 -0.5 9.5 7.5" orient="auto" id="d0">
+<path d="M0,0.5 L8.5,3.5 L0,6.5 Z" fill="#3b82f6" />
+</marker>
+</defs>
+<rect x="0" y="0" width="1400" height="500" fill="#ffffff" />
+<use xlink:href="#d0" />
+<text x="700.0" y="40" font-size="18" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="600">CDI Checksum 驗證流程</text>
+<rect x="100" y="200" width="120" height="60" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" rx="8" />
+<text x="160.0" y="230.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">資料串流</text>
+<rect x="320" y="200" width="140" height="60" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8" />
+<text x="390.0" y="230.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">io.TeeReader</text>
+<rect x="580" y="120" width="120" height="60" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8" />
+<text x="640.0" y="150.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">目標寫入</text>
+<rect x="580" y="280" width="140" height="60" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8" />
+<text x="650.0" y="301.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">hash.Hash</text>
+<text x="650.0" y="319.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">計算</text>
+<path d="M850,160.0 L910.0,200 L850,240.0 L790.0,200 Z" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" />
+<text x="850" y="200" font-size="13" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">比較</text>
+<rect x="1050" y="120" width="150" height="60" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="8" />
+<text x="1125.0" y="150.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">驗證通過 ✓</text>
+<rect x="1050" y="280" width="240" height="60" fill="#fee2e2" stroke="#ef4444" stroke-width="2" rx="8" />
+<text x="1170.0" y="310.0" font-size="14" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#111827" font-weight="500">ErrChecksumMismatch ✗</text>
+<path d="M220,230.0 L320,230.0" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<path d="M460,215 L580,150.0" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<path d="M460,245 L580,310.0" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<path d="M720,310.0 L790,220" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<path d="M910,180 L1050,150.0" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="968.0" y="153.0" width="24" height="24" fill="#ffffff" stroke="none" />
+<text x="980.0" y="165.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">一致</text>
+<path d="M910,220 L1050,310.0" stroke="#3b82f6" stroke-width="2" marker-end="url(#d0)" />
+<rect x="964.5" y="253.0" width="31" height="24" fill="#ffffff" stroke="none" />
+<text x="980.0" y="265.0" font-size="11" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" fill="#6b7280" font-weight="400">不一致</text>
+</svg>

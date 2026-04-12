@@ -244,15 +244,7 @@ func (dp *DevicePluginBase) Allocate(ctx context.Context,
 
 ### 裝置生命週期
 
-```mermaid
-graph LR
-    A[探索 Discovery] -->|掃描 sysfs| B[註冊 Registration]
-    B -->|gRPC 連線 Kubelet| C[ListAndWatch]
-    C -->|回報裝置清單| D[等待分配]
-    D -->|Pod 請求資源| E[Allocate]
-    E -->|回傳裝置資訊| F[Pod 啟動]
-    F -->|Pod 終止| D
-```
+![Device Plugin 生命週期](/diagrams/kubevirt/kubevirt-gpu-device-plugin.png)
 
 1. **探索（Discovery）**：掃描 `/sys/bus/pci/devices` 或 `/sys/bus/mdev/devices`，收集匹配的裝置
 2. **註冊（Registration）**：向 Kubelet 的 Device Plugin Manager 註冊，提供資源名稱與 socket 路徑

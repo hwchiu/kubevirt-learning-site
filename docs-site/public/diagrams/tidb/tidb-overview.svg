@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="665" viewBox="0 0 1320 665">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowrev" markerWidth="10" markerHeight="7" refX="1" refY="3.5" orient="auto-start-reverse">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="1320" height="665" fill="#ffffff"/>
+  <rect x="370" y="20" width="580" height="110" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" rx="10"/>
+  <text x="382" y="34" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="start" dominant-baseline="middle" font-weight="normal" font-style="italic" xml:space="preserve">用戶端</text>
+  <rect x="20" y="170" width="1280" height="110" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" rx="10"/>
+  <text x="32" y="184" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="start" dominant-baseline="middle" font-weight="normal" font-style="italic" xml:space="preserve">TiDB 計算層（無狀態，可橫向擴展）</text>
+  <rect x="660" y="320" width="640" height="110" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" rx="10"/>
+  <text x="672" y="334" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="start" dominant-baseline="middle" font-weight="normal" font-style="italic" xml:space="preserve">PD 叢集（中繼資料 / TSO / 排程）</text>
+  <rect x="20" y="470" width="660" height="155" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" rx="10"/>
+  <text x="32" y="484" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="start" dominant-baseline="middle" font-weight="normal" font-style="italic" xml:space="preserve">TiKV 行式儲存（Raft 多副本）</text>
+  <rect x="700" y="470" width="600" height="155" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5" rx="10"/>
+  <text x="712" y="484" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="start" dominant-baseline="middle" font-weight="normal" font-style="italic" xml:space="preserve">TiFlash 列式儲存（OLAP 加速）</text>
+  <rect x="380.0" y="50.5" width="200" height="55" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="480.0" y="68.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">應用程式</text>
+  <text x="480.0" y="87.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">(MySQL Driver)</text>
+  <rect x="620.0" y="50.5" width="200" height="55" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="720.0" y="68.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">MySQL CLI /</text>
+  <text x="720.0" y="87.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">ORM 框架</text>
+  <rect x="60.0" y="200.5" width="200" height="55" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="160.0" y="228.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">TiDB Server 1</text>
+  <rect x="560.0" y="200.5" width="200" height="55" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="660.0" y="228.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">TiDB Server 2</text>
+  <rect x="1060.0" y="200.5" width="200" height="55" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="1160.0" y="228.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">TiDB Server N</text>
+  <rect x="690.0" y="350.5" width="220" height="55" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="800.0" y="378.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">PD Leader</text>
+  <rect x="990.0" y="350.5" width="220" height="55" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="1100.0" y="378.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">PD Follower</text>
+  <rect x="25.0" y="518.0" width="190" height="60" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="120.0" y="538.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">TiKV Node 1</text>
+  <text x="120.0" y="557.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">(Region Leader)</text>
+  <rect x="245.0" y="518.0" width="190" height="60" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="340.0" y="538.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">TiKV Node 2</text>
+  <text x="340.0" y="557.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">(Region Follower)</text>
+  <rect x="465.0" y="518.0" width="190" height="60" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="560.0" y="538.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">TiKV Node 3</text>
+  <text x="560.0" y="557.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">(Region Follower)</text>
+  <rect x="740.0" y="520.5" width="200" height="55" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="840.0" y="548.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">TiFlash Node 1</text>
+  <rect x="1000.0" y="520.5" width="200" height="55" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="1100.0" y="548.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">TiFlash Node 2</text>
+  <path d="M 480,105.5 L 160,200.5" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="350.0" y="141.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">MySQL 協定 :4000</text>
+  <path d="M 720,105.5 L 660,200.5" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="720.0" y="141.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">MySQL 協定 :4000</text>
+  <path d="M 160,255.5 L 800,350.5" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="510.0" y="291.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">TSO / 路由資訊</text>
+  <path d="M 660,255.5 L 780,350.5" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="760.0" y="291.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">TSO / 路由資訊</text>
+  <path d="M 160,255.5 V 518 H 120" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="210" y="386.75" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">KV RPC (gRPC)</text>
+  <path d="M 660,255.5 L 340,518" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="535.0" y="376.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">KV RPC (gRPC)</text>
+  <path d="M 260.0,228 H 840 V 520.5" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="550.0" y="214" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">MPP 查詢 (gRPC)</text>
+  <line x1="215" y1="548" x2="245" y2="548" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="230.0" y="534.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Raft 複製</text>
+  <line x1="435" y1="548" x2="465" y2="548" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="450.0" y="534.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Raft 複製</text>
+  <line x1="215" y1="563" x2="740" y2="563" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="477.5" y="579.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Multi-Raft Learner</text>
+  <line x1="435" y1="568" x2="1000" y2="568" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="717.5" y="584.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Multi-Raft Learner</text>
+  <line x1="910" y1="378" x2="990" y2="378" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)" marker-start="url(#arrowrev)"/>
+  <text x="950.0" y="364.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Raft 選舉</text>
+</svg>

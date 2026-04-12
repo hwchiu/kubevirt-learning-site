@@ -34,75 +34,11 @@ layout: doc
 
 ## 2. 系統架構圖
 
-```mermaid
-flowchart TB
-    subgraph Sources["來源平台"]
-        vSphere["VMware vSphere"]
-        oVirt["oVirt / RHV"]
-        OpenStack["OpenStack"]
-        HyperV["Hyper-V"]
-        OVA["OVA 檔案"]
-        OCP_SRC["OpenShift (OCP)"]
-    end
-
-    subgraph Forklift["Forklift Controller"]
-        direction TB
-        Adapters["Provider Adapters\n(Inventory 收集)"]
-        Scheduler["Migration Scheduler\n(Itinerary 狀態機)"]
-        Populators["Volume Populators\n(oVirt / OpenStack / vSphere)"]
-        V2V["virt-v2v\n(Guest OS 轉換)"]
-        API["forklift-api\n(REST + Webhooks)"]
-    end
-
-    subgraph Target["目標環境"]
-        CDI["CDI\n(DataVolume)"]
-        KubeVirt["KubeVirt\n(VirtualMachine)"]
-        TargetVM["目標 VM"]
-    end
-
-    vSphere -->|"govmomi"| Adapters
-    oVirt -->|"go-ovirt"| Adapters
-    OpenStack -->|"gophercloud"| Adapters
-    HyperV -->|"WinRM"| Adapters
-    OVA -->|"OVF 解析"| Adapters
-    OCP_SRC -->|"K8s API"| Adapters
-
-    Adapters --> Scheduler
-    Scheduler --> Populators
-    Scheduler --> V2V
-    Populators --> CDI
-    V2V --> CDI
-    CDI --> KubeVirt
-    KubeVirt --> TargetVM
-    API -.->|"Webhooks\n驗證 / 變更"| Scheduler
-```
+![Forklift 系統架構圖](/diagrams/forklift/forklift-system-arch.png)
 
 ### 遷移管線流程
 
-```mermaid
-sequenceDiagram
-    participant User as 使用者
-    participant API as forklift-api
-    participant Ctrl as Plan Controller
-    participant Itin as Itinerary 狀態機
-    participant Pop as Volume Populator
-    participant V2V as virt-v2v
-    participant CDI as CDI
-    participant KV as KubeVirt
-
-    User->>API: 建立 Migration CR
-    API->>Ctrl: Reconcile Plan
-    Ctrl->>Itin: 選擇 Itinerary (Cold/Warm/Live)
-    loop 每個 VM
-        Itin->>Ctrl: 下一步驟 (Phase)
-        Ctrl->>Pop: 建立 DataVolume / 複製磁碟
-        Pop->>CDI: 寫入 PVC
-        Ctrl->>V2V: 啟動 Guest OS 轉換
-        V2V-->>Ctrl: 轉換完成
-        Ctrl->>KV: 建立 VirtualMachine
-    end
-    Ctrl-->>User: Migration 完成
-```
+![Forklift 遷移管線流程](/diagrams/forklift/forklift-migration-pipeline.png)
 
 ---
 
@@ -315,32 +251,7 @@ Pipeline{
 }
 ```
 
-```mermaid
-stateDiagram-v2
-    [*] --> Started
-    Started --> PreHook: HasPreHook
-    Started --> StorePowerState: 無 Hook
-    PreHook --> StorePowerState
-    StorePowerState --> PowerOffSource
-    PowerOffSource --> WaitForPowerOff
-    WaitForPowerOff --> CreateDataVolumes
-
-    state disk_path <<choice>>
-    CreateDataVolumes --> disk_path
-    disk_path --> CopyDisks: CDIDiskCopy
-    disk_path --> AllocateDisks: VirtV2vDiskCopy
-
-    CopyDisks --> CreateVM
-    AllocateDisks --> CreateGuestConversionPod: RequiresConversion
-    CreateGuestConversionPod --> ConvertGuest
-    ConvertGuest --> CopyDisksVirtV2V
-    CopyDisksVirtV2V --> CreateVM
-
-    CreateVM --> PostHook: HasPostHook
-    CreateVM --> Completed: 無 Hook
-    PostHook --> Completed
-    Completed --> [*]
-```
+![Cold Migration 狀態機](/diagrams/forklift/forklift-cold-migration.png)
 
 ### Warm Migration（暖遷移）
 
@@ -385,60 +296,7 @@ Pipeline{
 }
 ```
 
-```mermaid
-stateDiagram-v2
-    [*] --> Started
-    Started --> PreHook: HasPreHook
-    Started --> CreateInitialSnapshot: 無 Hook
-    PreHook --> CreateInitialSnapshot
-
-    state precopy_init {
-        CreateInitialSnapshot --> WaitForInitialSnapshot
-        WaitForInitialSnapshot --> StoreInitialSnapshotDeltas: VSphere
-        WaitForInitialSnapshot --> CreateDataVolumes: 非 VSphere
-        StoreInitialSnapshotDeltas --> PreflightInspection: RunInspection
-        StoreInitialSnapshotDeltas --> CreateDataVolumes: 無 Inspection
-        PreflightInspection --> CreateDataVolumes
-    }
-
-    state precopy_loop {
-        CopyDisks --> CopyingPaused
-        CopyingPaused --> RemovePreviousSnapshot: VSphere
-        CopyingPaused --> CreateSnapshot: 非 VSphere
-        RemovePreviousSnapshot --> WaitForPreviousSnapshotRemoval
-        WaitForPreviousSnapshotRemoval --> CreateSnapshot
-        CreateSnapshot --> WaitForSnapshot
-        WaitForSnapshot --> StoreSnapshotDeltas: VSphere
-        WaitForSnapshot --> AddCheckpoint: 非 VSphere
-        StoreSnapshotDeltas --> AddCheckpoint
-        AddCheckpoint --> CopyDisks: 繼續 Precopy
-    }
-
-    CreateDataVolumes --> CopyDisks
-
-    state cutover {
-        StorePowerState_c: StorePowerState
-        PowerOffSource_c: PowerOffSource
-        WaitForPowerOff_c: WaitForPowerOff
-        StorePowerState_c --> PowerOffSource_c
-        PowerOffSource_c --> WaitForPowerOff_c
-        WaitForPowerOff_c --> CreateFinalSnapshot
-        CreateFinalSnapshot --> WaitForFinalSnapshot
-        WaitForFinalSnapshot --> AddFinalCheckpoint
-        AddFinalCheckpoint --> Finalize
-    }
-
-    AddCheckpoint --> StorePowerState_c: 觸發 Cutover
-
-    Finalize --> CreateGuestConversionPod: RequiresConversion
-    Finalize --> CreateVM: 無需轉換
-    CreateGuestConversionPod --> ConvertGuest
-    ConvertGuest --> CreateVM
-    CreateVM --> PostHook: HasPostHook
-    CreateVM --> Completed: 無 Hook
-    PostHook --> Completed
-    Completed --> [*]
-```
+![Warm Migration 狀態機](/diagrams/forklift/forklift-warm-migration.png)
 
 ### Live Migration（OCP-to-OCP 即時遷移）
 
@@ -473,37 +331,7 @@ Pipeline{
 }
 ```
 
-```mermaid
-stateDiagram-v2
-    [*] --> Started
-    Started --> PreHook: FlagPreHook
-    Started --> CreateSecrets: 無 Hook
-    PreHook --> CreateSecrets
-
-    state prepare_target {
-        CreateSecrets --> CreateConfigMaps
-        CreateConfigMaps --> EnsurePreference
-        EnsurePreference --> EnsureInstanceType
-        EnsureInstanceType --> EnsureDataVolumes
-        EnsureDataVolumes --> EnsurePersistentVolumeClaims
-        EnsurePersistentVolumeClaims --> CreateTarget
-        CreateTarget --> SetOwnerReferences
-        SetOwnerReferences --> CreateServiceExports: Submariner\n&& Intercluster
-        SetOwnerReferences --> WaitForTargetVMI: 同叢集
-    }
-
-    CreateServiceExports --> WaitForTargetVMI
-
-    state synchronization {
-        WaitForTargetVMI --> CreateVMIMigrations
-        CreateVMIMigrations --> WaitForStateTransfer
-    }
-
-    WaitForStateTransfer --> PostHook: FlagPostHook
-    WaitForStateTransfer --> Completed: 無 Hook
-    PostHook --> Completed
-    Completed --> [*]
-```
+![Live Migration 狀態機](/diagrams/forklift/forklift-live-migration.png)
 
 ---
 

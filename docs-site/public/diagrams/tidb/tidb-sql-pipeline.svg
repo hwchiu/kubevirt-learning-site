@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2056" height="140" viewBox="0 0 2056 140">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowrev" markerWidth="10" markerHeight="7" refX="1" refY="3.5" orient="auto-start-reverse">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="2056" height="140" fill="#ffffff"/>
+  <rect x="30" y="39" width="148" height="62" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="104.0" y="70.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">SQL 文字</text>
+  <rect x="198" y="39" width="148" height="62" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="272.0" y="60.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">詞法分析</text>
+  <text x="272.0" y="79.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">(Lexer)</text>
+  <line x1="178" y1="70.0" x2="198" y2="70.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="366" y="39" width="148" height="62" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="440.0" y="60.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">語法分析</text>
+  <text x="440.0" y="79.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">(Parser/yacc)</text>
+  <line x1="346" y1="70.0" x2="366" y2="70.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="534" y="39" width="148" height="62" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="608.0" y="60.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">AST</text>
+  <text x="608.0" y="79.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">（抽象語法樹）</text>
+  <line x1="514" y1="70.0" x2="534" y2="70.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="702" y="39" width="148" height="62" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="776.0" y="60.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">語意分析</text>
+  <text x="776.0" y="79.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Compile</text>
+  <line x1="682" y1="70.0" x2="702" y2="70.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="870" y="39" width="148" height="62" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="944.0" y="60.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">邏輯計劃</text>
+  <text x="944.0" y="79.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">（LogicalPlan）</text>
+  <line x1="850" y1="70.0" x2="870" y2="70.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="1038" y="39" width="148" height="62" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="1112.0" y="60.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">邏輯優化</text>
+  <text x="1112.0" y="79.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">（規則優化）</text>
+  <line x1="1018" y1="70.0" x2="1038" y2="70.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="1206" y="39" width="148" height="62" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="1280.0" y="60.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">統計資訊</text>
+  <text x="1280.0" y="79.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">估算基數</text>
+  <line x1="1186" y1="70.0" x2="1206" y2="70.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="1374" y="39" width="148" height="62" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="1448.0" y="60.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">物理計劃</text>
+  <text x="1448.0" y="79.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">（PhysicalPlan）</text>
+  <line x1="1354" y1="70.0" x2="1374" y2="70.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="1542" y="39" width="148" height="62" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="1616.0" y="60.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">執行計劃</text>
+  <text x="1616.0" y="79.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">（ExecPlan）</text>
+  <line x1="1522" y1="70.0" x2="1542" y2="70.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="1710" y="39" width="148" height="62" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="1784.0" y="60.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">算子執行</text>
+  <text x="1784.0" y="79.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">（Executor）</text>
+  <line x1="1690" y1="70.0" x2="1710" y2="70.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="1878" y="39" width="148" height="62" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="1952.0" y="70.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">結果集</text>
+  <line x1="1858" y1="70.0" x2="1878" y2="70.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>

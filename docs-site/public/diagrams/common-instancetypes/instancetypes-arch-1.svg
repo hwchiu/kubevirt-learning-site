@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" style="background:#ffffff; font-family:-apple-system, 'Helvetica Neue', Arial, sans-serif;">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+
+  <!-- Container: Sources -->
+  <rect x="50" y="50" width="300" height="180" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="200" y="80" text-anchor="middle" font-size="16" font-weight="600" fill="#111827">原始碼定義</text>
+  
+  <!-- Box: IT -->
+  <rect x="70" y="100" width="260" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="200" y="120" text-anchor="middle" font-size="13" fill="#111827">instancetypes/</text>
+  <text x="200" y="138" text-anchor="middle" font-size="13" fill="#6b7280">7 個系列 × 多種尺寸</text>
+  
+  <!-- Box: CO -->
+  <rect x="70" y="165" width="260" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="200" y="185" text-anchor="middle" font-size="13" fill="#111827">preferences/components/</text>
+  <text x="200" y="203" text-anchor="middle" font-size="13" fill="#6b7280">26 個可重用元件</text>
+  
+  <!-- Container: Kustomize -->
+  <rect x="450" y="50" width="300" height="180" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="600" y="80" text-anchor="middle" font-size="16" font-weight="600" fill="#111827">Kustomize 建置層</text>
+  
+  <!-- Box: ROOT -->
+  <rect x="470" y="100" width="260" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="600" y="118" text-anchor="middle" font-size="13" fill="#111827">根 kustomization.yaml</text>
+  <text x="600" y="136" text-anchor="middle" font-size="12" fill="#6b7280">resources: instancetypes + preferences</text>
+  
+  <!-- Box: VMCI -->
+  <rect x="470" y="165" width="120" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="530" y="182" text-anchor="middle" font-size="11" fill="#111827">VirtualMachine</text>
+  <text x="530" y="196" text-anchor="middle" font-size="11" fill="#111827">Cluster*</text>
+  <text x="530" y="210" text-anchor="middle" font-size="10" fill="#6b7280">Cluster 範圍</text>
+  
+  <!-- Box: VMI -->
+  <rect x="610" y="165" width="120" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="670" y="182" text-anchor="middle" font-size="11" fill="#111827">VirtualMachine*</text>
+  <text x="670" y="196" text-anchor="middle" font-size="11" fill="#6b7280">Namespace 範圍</text>
+  
+  <!-- Container: Build -->
+  <rect x="850" y="50" width="300" height="300" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="1000" y="80" text-anchor="middle" font-size="16" font-weight="600" fill="#111827">建置產出 (_build/)</text>
+  
+  <!-- Bundle boxes -->
+  <rect x="870" y="100" width="260" height="35" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="1000" y="123" text-anchor="middle" font-size="12" fill="#111827">common-instancetypes-all-bundle.yaml</text>
+  
+  <rect x="870" y="145" width="260" height="35" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="1000" y="168" text-anchor="middle" font-size="11" fill="#111827">common-clusterinstancetypes-bundle.yaml</text>
+  
+  <rect x="870" y="190" width="260" height="35" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="1000" y="213" text-anchor="middle" font-size="11" fill="#111827">common-instancetypes-bundle.yaml</text>
+  
+  <rect x="870" y="235" width="260" height="35" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="1000" y="258" text-anchor="middle" font-size="11" fill="#111827">common-clusterpreferences-bundle.yaml</text>
+  
+  <rect x="870" y="280" width="260" height="35" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="1000" y="303" text-anchor="middle" font-size="11" fill="#111827">common-preferences-bundle.yaml</text>
+  
+  <rect x="870" y="325" width="260" height="20" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="1000" y="340" text-anchor="middle" font-size="11" font-weight="600" fill="#111827">CHECKSUMS.sha256</text>
+  
+  <!-- Container: Deploy -->
+  <rect x="850" y="420" width="300" height="80" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="1000" y="445" text-anchor="middle" font-size="16" font-weight="600" fill="#111827">部署目標</text>
+  <rect x="890" y="460" width="220" height="30" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="1000" y="482" text-anchor="middle" font-size="14" font-weight="600" fill="#111827">KubeVirt 叢集</text>
+  
+  <!-- Arrows -->
+  <!-- CO -> PR (label: 組合) -->
+  <path d="M 200 165 L 200 150" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="215" y="158" font-size="11" fill="#6b7280">組合</text>
+  
+  <!-- Sources -> ROOT -->
+  <path d="M 350 140 L 470 125" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- ROOT -> ALL -->
+  <path d="M 730 125 L 870 117" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- IT -> VMCI -->
+  <path d="M 330 125 Q 400 125 470 190" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- IT -> VMI -->
+  <path d="M 330 125 Q 400 125 610 190" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- PR -> VMCI -->
+  <path d="M 330 190 Q 400 190 470 190" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- PR -> VMI -->
+  <path d="M 330 190 Q 470 190 610 190" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- VMCI -> CIB -->
+  <path d="M 590 190 Q 730 190 870 162" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- VMCI -> CPB -->
+  <path d="M 590 190 Q 730 190 870 253" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- VMI -> IB -->
+  <path d="M 730 190 Q 800 190 870 208" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- VMI -> PB -->
+  <path d="M 730 190 Q 800 190 870 298" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- ALL -> CHK -->
+  <path d="M 1000 135 L 1000 325" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- CIB -> CHK -->
+  <path d="M 1000 180 L 1000 325" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- IB -> CHK -->
+  <path d="M 1000 225 L 1000 325" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- CPB -> CHK -->
+  <path d="M 1000 270 L 1000 325" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- PB -> CHK -->
+  <path d="M 1000 315 L 1000 325" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- Build -> Deploy -->
+  <path d="M 1000 370 L 1000 420" stroke="#3b82f6" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="1010" y="400" font-size="12" fill="#6b7280">kubectl apply / kustomize build</text>
+</svg>

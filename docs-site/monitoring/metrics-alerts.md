@@ -541,17 +541,7 @@ func CreateMetricFamily(m Metric) *dto.MetricFamily {
 
 ### 架構
 
-```mermaid
-flowchart LR
-    A[JSON 輸入<br/>metricFamilies + recordingRules] --> B[parseInput]
-    B --> C[promlint.NewWithMetricFamilies]
-    C --> D[promlint.Lint<br/>標準檢查]
-    D --> E[CustomMetricsValidation<br/>自定義指標規則]
-    B --> F[allowlist 過濾]
-    F --> G[CustomRecordingRuleValidation<br/>自定義 Rule 規則]
-    E --> H[排序輸出]
-    G --> H
-```
+![Linter 架構流程](/diagrams/monitoring/monitoring-linter-arch.png)
 
 ### 命令列介面
 

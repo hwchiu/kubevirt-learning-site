@@ -1,0 +1,47 @@
+<svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+  </marker>
+  <marker id="arrow-dash" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#9ca3af"/>
+  </marker>
+</defs>
+<rect width="1000" height="800" fill="#ffffff"/>
+
+<!-- Title -->
+<text x="500" y="40" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle">Container Disk 啟動流程</text>
+<rect x="80.0" y="80" width="140" height="50" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/><text x="150" y="110.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">virt-handler</text>
+<line x1="150" y1="150" x2="150" y2="760" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+<rect x="380.0" y="80" width="140" height="50" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/><text x="450" y="100" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle">container-disk-</text><text x="450" y="114" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle">v2alpha</text>
+<line x1="450" y1="150" x2="450" y2="760" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+<rect x="680.0" y="80" width="140" height="50" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/><text x="750" y="110.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">QEMU</text>
+<line x1="750" y1="150" x2="750" y2="760" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+<line x1="150" y1="180" x2="400" y2="180" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="275.0" y="165" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">啟動 Init Container</text>
+<line x1="400" y1="240" x2="450" y2="240" stroke="#3b82f6" stroke-width="2"/>
+<line x1="450" y1="240" x2="450" y2="280" stroke="#3b82f6" stroke-width="2"/>
+<line x1="450" y1="280" x2="400" y2="280" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="460" y="255" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">建立 Unix domain socket</text>
+<text x="460" y="268" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">/var/run/kubevirt/container-disks/disk_0.sock</text>
+<line x1="400" y1="320" x2="450" y2="320" stroke="#3b82f6" stroke-width="2"/>
+<line x1="450" y1="320" x2="450" y2="360" stroke="#3b82f6" stroke-width="2"/>
+<line x1="450" y1="360" x2="400" y2="360" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="460" y="335" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">啟動心跳機制 (檢查 socket 存在)</text>
+<line x1="150" y1="400" x2="750" y2="400" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="450.0" y="385" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">啟動 QEMU 程序</text>
+<line x1="750" y1="460" x2="400" y2="460" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="575.0" y="445" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">透過 socket 連接</text>
+<line x1="400" y1="520" x2="450" y2="520" stroke="#3b82f6" stroke-width="2"/>
+<line x1="450" y1="520" x2="450" y2="560" stroke="#3b82f6" stroke-width="2"/>
+<line x1="450" y1="560" x2="400" y2="560" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="460" y="535" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">串流磁碟映像資料</text>
+
+<rect x="320" y="580" width="280" height="60" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="2"/>
+<text x="460" y="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle">Socket 持續監聽中...</text>
+<text x="460" y="620" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">定期檢查 socket 檔案是否存在</text>
+
+<rect x="50" y="660" width="900" height="80" rx="4" fill="none" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+<text x="70" y="685" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#6b7280">心跳檢查 loop</text>
+<text x="400" y="710" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">定期檢查 socket 檔案是否存在 — 若 socket 消失則停止服務</text>
+</svg>

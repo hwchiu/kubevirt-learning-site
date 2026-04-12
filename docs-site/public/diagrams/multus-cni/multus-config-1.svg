@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 600">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="1400" height="600" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="700" y="40" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="24" fill="#111827" text-anchor="middle" font-weight="600">Multus 設定自動生成流程</text>
+
+  <!-- Start node -->
+  <rect x="50" y="100" width="200" height="80" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="150" y="130" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827" text-anchor="middle">/etc/cni/net.d/</text>
+  <text x="150" y="155" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280" text-anchor="middle">掃描設定檔</text>
+
+  <!-- Decision diamond -->
+  <path d="M 430,140 L 530,100 L 630,140 L 530,180 Z" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="530" y="135" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">找到 .conf</text>
+  <text x="530" y="155" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">或 .conflist？</text>
+
+  <!-- Yes path - Select config -->
+  <rect x="730" y="100" width="240" height="80" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="850" y="125" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">選取字母排序最前</text>
+  <text x="850" y="145" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">的設定作為</text>
+  <text x="850" y="165" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">預設網路</text>
+
+  <!-- Generate config -->
+  <rect x="730" y="240" width="240" height="100" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="850" y="270" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">產生 00-multus.conf</text>
+  <text x="850" y="295" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">（包含預設網路設定）</text>
+
+  <!-- Monitor -->
+  <rect x="730" y="400" width="240" height="80" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="850" y="425" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">fsnotify 監控目錄</text>
+  <text x="850" y="450" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">設定變更時重新產生</text>
+
+  <!-- No path - Wait -->
+  <rect x="330" y="280" width="200" height="60" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="430" y="305" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">等待設定檔</text>
+  <text x="430" y="325" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">出現</text>
+
+  <!-- Arrows -->
+  <!-- Start to decision -->
+  <line x1="250" y1="140" x2="425" y2="140" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Decision to Yes (Select config) -->
+  <line x1="630" y1="140" x2="725" y2="140" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="670" y="130" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">是</text>
+
+  <!-- Select to Generate -->
+  <line x1="850" y1="180" x2="850" y2="235" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Generate to Monitor -->
+  <line x1="850" y1="340" x2="850" y2="395" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Decision to No (Wait) -->
+  <line x1="530" y1="180" x2="530" y2="220" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="530" y1="220" x2="430" y2="220" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="430" y1="220" x2="430" y2="275" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="540" y="210" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">否</text>
+
+  <!-- Wait loops back to start -->
+  <line x1="330" y1="310" x2="150" y2="310" stroke="#3b82f6" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="150" y1="310" x2="150" y2="185" stroke="#3b82f6" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrow)"/>
+
+  <!-- Info box -->
+  <rect x="1050" y="100" width="300" height="380" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="1200" y="140" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827" text-anchor="middle" font-weight="600">關鍵資訊</text>
+  
+  <text x="1070" y="180" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">• 自動生成模式由</text>
+  <text x="1070" y="200" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">  multus-config-file: auto</text>
+  <text x="1070" y="220" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">  選項啟動</text>
+  
+  <text x="1070" y="250" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">• 00- 前綴確保 Multus</text>
+  <text x="1070" y="270" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">  優先於其他 CNI 設定</text>
+  
+  <text x="1070" y="300" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">• 實作位於</text>
+  <text x="1070" y="320" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">  pkg/server/config/</text>
+  <text x="1070" y="340" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">  的 config.Manager</text>
+  
+  <text x="1070" y="370" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">• 使用 fsnotify 監控</text>
+  <text x="1070" y="390" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">  設定目錄變更</text>
+  
+  <text x="1070" y="420" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">• 字母排序決定預設</text>
+  <text x="1070" y="440" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">  網路優先級</text>
+</svg>

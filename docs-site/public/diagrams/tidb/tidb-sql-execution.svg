@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="726" viewBox="0 0 920 726">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowrev" markerWidth="10" markerHeight="7" refX="1" refY="3.5" orient="auto-start-reverse">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="920" height="726" fill="#ffffff"/>
+  <line x1="90" y1="70" x2="90" y2="706" stroke="#d1d5db" stroke-width="1.2" stroke-dasharray="6,4"/>
+  <line x1="310" y1="70" x2="310" y2="706" stroke="#d1d5db" stroke-width="1.2" stroke-dasharray="6,4"/>
+  <line x1="560" y1="70" x2="560" y2="706" stroke="#d1d5db" stroke-width="1.2" stroke-dasharray="6,4"/>
+  <line x1="790" y1="70" x2="790" y2="706" stroke="#d1d5db" stroke-width="1.2" stroke-dasharray="6,4"/>
+  <rect x="10.0" y="20" width="160" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="90.0" y="45.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-style="normal" xml:space="preserve">Client</text>
+  <rect x="230.0" y="20" width="160" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="310.0" y="45.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-style="normal" xml:space="preserve">TiDB Server</text>
+  <rect x="480.0" y="20" width="160" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="560.0" y="45.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-style="normal" xml:space="preserve">PD</text>
+  <rect x="710.0" y="20" width="160" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="8"/>
+  <text x="790.0" y="45.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-style="normal" xml:space="preserve">TiKV</text>
+  <line x1="90" y1="100" x2="310" y2="100" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="200.0" y="88.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">SELECT * FROM t WHERE id=1</text>
+  <path d="M 390.0,150 H 440.0 V 182 H 399.0" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="445.0" y="166" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">解析 SQL → AST</text>
+  <path d="M 390.0,212 H 440.0 V 244 H 399.0" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="445.0" y="228" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">語意分析 → 邏輯計劃</text>
+  <path d="M 390.0,274 H 440.0 V 306 H 399.0" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="445.0" y="290" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">優化 → 物理計劃（IndexLookup）</text>
+  <line x1="310" y1="336" x2="560" y2="336" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="435.0" y="324.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">獲取 TSO（開始時間戳）</text>
+  <line x1="560" y1="386" x2="310" y2="386" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="5,4"/>
+  <text x="435.0" y="374.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">startTS</text>
+  <line x1="310" y1="436" x2="560" y2="436" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="435.0" y="424.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">查詢 Region 路由（id=1 位於哪個 Region）</text>
+  <line x1="560" y1="486" x2="310" y2="486" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="5,4"/>
+  <text x="435.0" y="474.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">Region Leader 位址</text>
+  <line x1="310" y1="536" x2="790" y2="536" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="550.0" y="524.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">KV Get（startTS, key）</text>
+  <line x1="790" y1="586" x2="310" y2="586" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="5,4"/>
+  <text x="550.0" y="574.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">value</text>
+  <line x1="310" y1="636" x2="90" y2="636" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="5,4"/>
+  <text x="200.0" y="624.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" dominant-baseline="middle" font-weight="normal" font-style="normal" xml:space="preserve">回傳結果集</text>
+</svg>

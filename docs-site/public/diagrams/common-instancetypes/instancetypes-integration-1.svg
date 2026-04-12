@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 450" style="background:#ffffff; font-family:-apple-system, 'Helvetica Neue', Arial, sans-serif;">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+
+  <!-- Container: common-instancetypes -->
+  <rect x="50" y="50" width="320" height="180" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="210" y="80" text-anchor="middle" font-size="16" font-weight="600" fill="#111827">common-instancetypes</text>
+  
+  <!-- Box: IT -->
+  <rect x="70" y="100" width="280" height="60" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="210" y="120" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">VirtualMachineCluster</text>
+  <text x="210" y="138" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">Instancetype</text>
+  <text x="210" y="155" text-anchor="middle" font-size="11" fill="#6b7280">例: u1.medium</text>
+  
+  <!-- Box: PR -->
+  <rect x="70" y="170" width="280" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="210" y="188" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">VirtualMachineCluster</text>
+  <text x="210" y="206" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">Preference</text>
+  <text x="210" y="217" text-anchor="middle" font-size="11" fill="#6b7280">例: fedora</text>
+  
+  <!-- Container: CDI -->
+  <rect x="730" y="50" width="320" height="180" rx="8" fill="#fef3f2" stroke="#fecaca" stroke-width="2"/>
+  <text x="890" y="80" text-anchor="middle" font-size="16" font-weight="600" fill="#111827">CDI</text>
+  
+  <!-- Box: DV -->
+  <rect x="750" y="100" width="280" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="890" y="120" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">DataVolume</text>
+  <text x="890" y="138" text-anchor="middle" font-size="11" fill="#6b7280">匯入 OS 映像</text>
+  
+  <!-- Box: PVC -->
+  <rect x="750" y="170" width="280" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="890" y="193" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">PersistentVolumeClaim</text>
+  
+  <!-- Box: VM (center) -->
+  <rect x="430" y="280" width="240" height="80" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2.5"/>
+  <text x="550" y="310" text-anchor="middle" font-size="16" font-weight="700" fill="#111827">VirtualMachine</text>
+  
+  <!-- Arrows -->
+  <!-- VM -> IT -->
+  <path d="M 520 280 Q 350 240 250 160" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="380" y="210" font-size="11" fill="#6b7280">spec.instancetype</text>
+  
+  <!-- VM -> PR -->
+  <path d="M 480 280 Q 300 240 250 220" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="340" y="260" font-size="11" fill="#6b7280">spec.preference</text>
+  
+  <!-- VM -> DV -->
+  <path d="M 620 280 Q 750 240 850 150" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="680" y="215" font-size="11" fill="#6b7280">dataVolumeTemplates</text>
+  
+  <!-- DV -> PVC -->
+  <path d="M 890 150 L 890 170" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="905" y="162" font-size="11" fill="#6b7280">自動建立</text>
+  
+  <!-- IT -> VM -->
+  <path d="M 300 160 Q 400 240 470 280" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="340" y="180" font-size="11" fill="#6b7280">定義 CPU/Memory</text>
+  
+  <!-- PR -> VM -->
+  <path d="M 300 195 Q 400 240 470 300" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="340" y="235" font-size="11" fill="#6b7280">定義裝置偏好</text>
+</svg>

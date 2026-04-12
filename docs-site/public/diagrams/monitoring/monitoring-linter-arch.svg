@@ -1,0 +1,48 @@
+<svg viewBox="0 0 1400 500" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+  </marker>
+  <style>
+    .box { fill: #f9fafb; stroke: #e5e7eb; stroke-width: 1.5; }
+    .accent { fill: #eff6ff; stroke: #bfdbfe; stroke-width: 1.5; }
+    .container { fill: #f0f4ff; stroke: #c7d2fe; stroke-width: 1.5; }
+    .text { fill: #111827; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; }
+    .text-sm { fill: #6b7280; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; }
+    .arrow { stroke: #3b82f6; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+  </style>
+</defs>
+<rect width="1400" height="500" fill="#ffffff"/>
+<rect class="accent" x="20" y="100" width="180" height="80" rx="8"/>
+<text class="text" x="110" y="122" text-anchor="middle">JSON 輸入</text>
+<text class="text-sm" x="110" y="140" text-anchor="middle">metricFamilies +</text>
+<text class="text-sm" x="110" y="156" text-anchor="middle">recordingRules</text>
+<rect class="box" x="240" y="120" width="120" height="50" rx="8"/>
+<text class="text" x="300" y="148" text-anchor="middle">parseInput</text>
+<rect class="box" x="400" y="100" width="180" height="80" rx="8"/>
+<text class="text" x="490" y="122" text-anchor="middle">promlint.NewWith-</text>
+<text class="text-sm" x="490" y="140" text-anchor="middle">MetricFamilies</text>
+<rect class="box" x="620" y="100" width="150" height="80" rx="8"/>
+<text class="text" x="695" y="122" text-anchor="middle">promlint.Lint</text>
+<text class="text-sm" x="695" y="140" text-anchor="middle">標準檢查</text>
+<rect class="container" x="810" y="100" width="180" height="80" rx="8"/>
+<text class="text" x="900" y="122" text-anchor="middle">CustomMetrics-</text>
+<text class="text-sm" x="900" y="140" text-anchor="middle">Validation</text>
+<text class="text-sm" x="900" y="156" text-anchor="middle">自定義指標規則</text>
+<rect class="box" x="400" y="280" width="160" height="60" rx="8"/>
+<text class="text" x="480" y="308" text-anchor="middle">allowlist 過濾</text>
+<rect class="container" x="600" y="260" width="200" height="80" rx="8"/>
+<text class="text" x="700" y="282" text-anchor="middle">CustomRecording-</text>
+<text class="text-sm" x="700" y="300" text-anchor="middle">RuleValidation</text>
+<text class="text-sm" x="700" y="316" text-anchor="middle">自定義 Rule 規則</text>
+<rect class="accent" x="1100" y="180" width="120" height="60" rx="8"/>
+<text class="text" x="1160" y="208" text-anchor="middle">排序輸出</text>
+<line class="arrow" x1="200" y1="140" x2="235" y2="145"/>
+<line class="arrow" x1="360" y1="145" x2="395" y2="140"/>
+<line class="arrow" x1="580" y1="140" x2="615" y2="140"/>
+<line class="arrow" x1="770" y1="140" x2="805" y2="140"/>
+<path class="arrow" d="M 300 170 L 300 310 L 395 310"/>
+<line class="arrow" x1="560" y1="310" x2="595" y2="300"/>
+<path class="arrow" d="M 900 180 L 900 210 L 1095 210"/>
+<path class="arrow" d="M 800 300 L 1050 300 L 1050 210 L 1095 210"/>
+</svg>

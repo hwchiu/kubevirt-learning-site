@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <style>
+      text { 
+        font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+        fill: #111827;
+      }
+      .state-title { font-size: 14px; font-weight: 600; fill: #111827; }
+      .edge-label { font-size: 11px; fill: #6b7280; }
+      .end-state { font-size: 13px; font-weight: 500; fill: #6b7280; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="900" fill="#ffffff"/>
+
+  <!-- Start State -->
+  <circle cx="800" cy="80" r="25" fill="#111827"/>
+
+  <!-- Pending State -->
+  <rect x="650" y="170" width="300" height="70" rx="35" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="800" y="212" text-anchor="middle" class="state-title">Pending</text>
+
+  <!-- PreparingTarget State -->
+  <rect x="600" y="310" width="400" height="70" rx="35" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="800" y="352" text-anchor="middle" class="state-title">PreparingTarget</text>
+
+  <!-- TargetReady State -->
+  <rect x="650" y="450" width="300" height="70" rx="35" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="800" y="492" text-anchor="middle" class="state-title">TargetReady</text>
+
+  <!-- Running State -->
+  <rect x="650" y="590" width="300" height="70" rx="35" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="800" y="632" text-anchor="middle" class="state-title">Running</text>
+
+  <!-- Succeeded State -->
+  <rect x="1100" y="590" width="300" height="70" rx="35" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+  <text x="1250" y="632" text-anchor="middle" class="state-title">Succeeded</text>
+
+  <!-- Failed State -->
+  <rect x="200" y="590" width="300" height="70" rx="35" fill="#fef2f2" stroke="#fca5a5" stroke-width="2"/>
+  <text x="350" y="632" text-anchor="middle" class="state-title">Failed</text>
+
+  <!-- Cancelled State -->
+  <rect x="200" y="310" width="300" height="70" rx="35" fill="#fef3c7" stroke="#fcd34d" stroke-width="2"/>
+  <text x="350" y="352" text-anchor="middle" class="state-title">Cancelled</text>
+
+  <!-- End State (Succeeded) -->
+  <circle cx="1250" cy="780" r="25" fill="none" stroke="#111827" stroke-width="3"/>
+  <circle cx="1250" cy="780" r="18" fill="#111827"/>
+
+  <!-- End State (Failed) -->
+  <circle cx="350" cy="780" r="25" fill="none" stroke="#111827" stroke-width="3"/>
+  <circle cx="350" cy="780" r="18" fill="#111827"/>
+
+  <!-- End State (Cancelled) -->
+  <circle cx="150" cy="480" r="25" fill="none" stroke="#111827" stroke-width="3"/>
+  <circle cx="150" cy="480" r="18" fill="#111827"/>
+
+  <!-- Start to Pending -->
+  <line x1="800" y1="105" x2="800" y2="170" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="820" y="140" class="edge-label">建立 VirtualMachineInstanceMigration CR</text>
+
+  <!-- Pending to PreparingTarget -->
+  <line x1="800" y1="240" x2="800" y2="310" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="820" y="280" class="edge-label">排程成功，找到目標節點</text>
+
+  <!-- PreparingTarget to TargetReady -->
+  <line x1="800" y1="380" x2="800" y2="450" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="820" y="420" class="edge-label">目標 virt-launcher pod 就緒</text>
+
+  <!-- TargetReady to Running -->
+  <line x1="800" y1="520" x2="800" y2="590" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="820" y="560" class="edge-label">開始傳輸記憶體</text>
+
+  <!-- Running to Succeeded -->
+  <line x1="950" y1="625" x2="1100" y2="625" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="1025" y="615" text-anchor="middle" class="edge-label">最後一批 dirty pages 傳輸完成</text>
+  <text x="1025" y="630" text-anchor="middle" class="edge-label">VM 在目標節點恢復執行</text>
+
+  <!-- Running to Failed -->
+  <line x1="650" y1="625" x2="500" y2="625" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="575" y="615" text-anchor="middle" class="edge-label">超時 / 傳輸錯誤 /</text>
+  <text x="575" y="630" text-anchor="middle" class="edge-label">目標節點失敗</text>
+
+  <!-- Running to Cancelled -->
+  <line x1="700" y1="590" x2="400" y2="380" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="520" y="475" class="edge-label">使用者主動取消</text>
+
+  <!-- Pending to Cancelled -->
+  <line x1="650" y1="205" x2="500" y2="345" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="540" y="270" class="edge-label">使用者取消</text>
+
+  <!-- PreparingTarget to Failed -->
+  <line x1="600" y1="345" x2="500" y2="625" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="510" y="480" class="edge-label">目標 pod 建立失敗</text>
+
+  <!-- Succeeded to End -->
+  <line x1="1250" y1="660" x2="1250" y2="755" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Failed to End -->
+  <line x1="350" y1="660" x2="350" y2="755" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Cancelled to End -->
+  <line x1="200" y1="380" x2="150" y2="455" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+
+</svg>

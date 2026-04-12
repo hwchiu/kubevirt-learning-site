@@ -162,25 +162,7 @@ type Validator interface {
 | OpenShift | `adapter/ocp/` | ✅ PVC 複製 | ✅ VM 操作 | ✅ PVC/Network 驗證 |
 | EC2 | `provider/ec2/` | ✅ EBS Snapshot | ✅ EC2 API | ✅ 磁碟格式驗證 |
 
-```mermaid
-graph TD
-    A[adapter.New] -->|provider.Type| B{Switch Provider}
-    B -->|VSphere| C[vsphere.Adapter]
-    B -->|OVirt| D[ovirt.Adapter]
-    B -->|OpenStack| E[openstack.Adapter]
-    B -->|OpenShift| F[ocp.Adapter]
-    B -->|Ova| G[ova.Adapter]
-    B -->|EC2| H[ec2adapter.New]
-    B -->|HyperV| I[hyperv.Adapter]
-
-    C --> J[Builder / Client / Validator]
-    D --> J
-    E --> J
-    F --> J
-    G --> J
-    H --> J
-    I --> J
-```
+![Forklift Provider Adapter 對照圖](/diagrams/forklift/forklift-provider-adapter.png)
 
 ### 1.4 ConversionPodConfig — Provider 層級的轉換 Pod 設定
 
@@ -416,26 +398,7 @@ func (r *Scheduler) schedulable() (schedulable map[string][]*pendingVM) {
 
 ### 2.7 排程流程圖
 
-```mermaid
-flowchart TD
-    Start([Next 被呼叫]) --> Lock[取得 Package Mutex]
-    Lock --> BuildInFlight[buildInFlight: 掃描所有同 Provider Plan<br/>累加每 Host 正在傳輸的磁碟數]
-    BuildInFlight --> BuildPending[buildPending: 收集當前 Plan<br/>尚未開始的 VM 按 Host 分組]
-    BuildPending --> Schedulable[schedulable: 逐 Host 檢查]
-
-    Schedulable --> CheckHost{Host inFlight<br/>< MaxInFlight?}
-    CheckHost -->|否| SkipHost[跳過此 Host]
-    CheckHost -->|是| CheckVM{VM cost + inFlight<br/><= MaxInFlight?}
-
-    CheckVM -->|是| AddVM[加入可排程清單]
-    CheckVM -->|否| CheckOversize{VM cost > MaxInFlight<br/>且 Host 完全閒置?}
-    CheckOversize -->|是| AddVM
-    CheckOversize -->|否| SkipVM[跳過此 VM]
-
-    AddVM --> Return[回傳第一個可排程 VM]
-    SkipHost --> Return
-    SkipVM --> Return
-```
+![Forklift vSphere 排程流程圖](/diagrams/forklift/forklift-vsphere-scheduler.png)
 
 ### 2.8 與 oVirt/OpenStack Scheduler 比較
 
@@ -574,40 +537,7 @@ type Warm struct {
 
 ### 3.6 Warm Migration 序列圖
 
-```mermaid
-sequenceDiagram
-    participant Controller as Forklift Controller
-    participant Client as Provider Client
-    participant Source as 來源 VM (vSphere)
-    participant CDI as CDI DataVolume
-    participant Target as 目標叢集
-
-    Note over Controller: === Precopy 迴圈 ===
-    loop 每次 Precopy（直到 Cutover）
-        Controller->>Client: CreateSnapshot(vmRef)
-        Client->>Source: 建立 VM 快照
-        Source-->>Client: snapshotId, taskId
-        Controller->>Client: CheckSnapshotReady()
-        Client-->>Controller: ready=true
-        Controller->>Client: GetSnapshotDeltas(snapshot)
-        Client-->>Controller: map[disk]deltaId
-        Controller->>CDI: SetCheckpoints(precopies, DVs, final=false)
-        CDI->>Source: 透過 VDDK 傳輸 delta 區塊
-        CDI-->>Controller: 傳輸完成
-        Controller->>Client: RemoveSnapshot(snapshot)
-        Note over Controller: 記錄 Precopy, 排程 NextPrecopyAt
-    end
-
-    Note over Controller: === Cutover 階段 ===
-    Controller->>Client: CreateSnapshot(vmRef)
-    Controller->>Client: PowerOff(vmRef)
-    Client->>Source: 關閉 VM
-    Controller->>CDI: SetCheckpoints(precopies, DVs, final=true)
-    CDI->>Source: 傳輸最終 delta
-    CDI-->>Controller: 完成
-    Controller->>Target: 建立 KubeVirt VirtualMachine
-    Controller->>Client: Finalize() 清理快照
-```
+![Warm Migration Precoy 序列圖](/diagrams/forklift/forklift-warm-precopy.png)
 
 ---
 
@@ -816,32 +746,7 @@ type ConversionPodConfigResult struct {
 
 ### 4.8 轉換管線流程圖
 
-```mermaid
-flowchart TD
-    Entry[entrypoint.go: main] --> Load[載入 AppConfig 環境變數]
-    Load --> Cert[linkCertificates: 設定 CA 憑證]
-    Cert --> Dir[createV2vOutputDir: 建立工作目錄]
-    Dir --> Conv[NewConversion: 偵測磁碟]
-
-    Conv --> IsRemote{IsRemoteInspection?}
-    IsRemote -->|是| RemoteInsp[RunRemoteV2vInspection<br/>virt-v2v-inspector + VDDK]
-
-    IsRemote -->|否| IsInPlace{IsInPlace?}
-    IsInPlace -->|是| HasLibvirt{LibvirtUrl 存在?}
-    HasLibvirt -->|是| GetXML[GetDomainXML<br/>從 Libvirt 取得 Domain XML]
-    GetXML --> InPlace[RunVirtV2vInPlace<br/>virt-v2v-in-place -i libvirtxml]
-    HasLibvirt -->|否| InPlaceDisk[RunVirtV2vInPlaceDisk<br/>virt-v2v-in-place -i disk]
-
-    IsInPlace -->|否| FullV2V[RunVirtV2v<br/>virt-v2v + virt-v2v-monitor]
-    FullV2V --> Inspect[RunVirtV2VInspection<br/>virt-v2v-inspector]
-    InPlace --> Inspect
-    InPlaceDisk --> Inspect
-    Inspect --> Customize[RunCustomize<br/>virt-customize: 驅動安裝/客製化]
-    Customize --> IsLocal{IsLocalMigration?}
-    IsLocal -->|是| Server[啟動 HTTP Server :8080<br/>/vm /inspection /warnings /shutdown]
-    IsLocal -->|否| Done([完成])
-    Server --> Done
-```
+![virt-v2v 轉換管線流程圖](/diagrams/forklift/forklift-virt-v2v-pipeline.png)
 
 ---
 
@@ -1091,26 +996,4 @@ spec:
 
 ### 6.7 Storage Mapping 流程圖
 
-```mermaid
-flowchart LR
-    subgraph 來源
-        DS1[vSphere Datastore A]
-        DS2[vSphere Datastore B]
-    end
-
-    subgraph StorageMap
-        SP1[StoragePair 1<br/>+ OffloadPlugin]
-        SP2[StoragePair 2]
-    end
-
-    subgraph 目標 Kubernetes
-        SC1[StorageClass: ontap-san<br/>VolumeMode: Block]
-        SC2[StorageClass: ceph-rbd<br/>VolumeMode: Filesystem]
-    end
-
-    DS1 --> SP1 --> SC1
-    DS2 --> SP2 --> SC2
-
-    SP1 -.- XCOPY[XCOPY Offload<br/>陣列內部複製]
-    SP2 -.- CDI[CDI 標準傳輸<br/>網路複製]
-```
+![Storage Mapping 流程圖](/diagrams/forklift/forklift-storage-mapping.png)

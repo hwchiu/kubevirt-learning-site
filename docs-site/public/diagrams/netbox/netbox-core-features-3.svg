@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <style>
+      .box { fill: #f9fafb; stroke: #e5e7eb; stroke-width: 1.5; }
+      .text-title { fill: #111827; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; font-weight: 600; }
+      .text-method { fill: #6b7280; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; }
+      .text-label { fill: #6b7280; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; }
+      .line { stroke: #3b82f6; stroke-width: 1.5; fill: none; }
+    </style>
+  </defs>
+
+  <!-- Manufacturer -->
+  <rect class="box" x="100" y="50" width="200" height="80" rx="4"/>
+  <text class="text-title" x="200" y="80" text-anchor="middle">Manufacturer</text>
+  <line x1="110" y1="90" x2="290" y2="90" stroke="#e5e7eb" stroke-width="1"/>
+  <text class="text-method" x="120" y="115">+name: str</text>
+
+  <!-- DeviceType -->
+  <rect class="box" x="350" y="200" width="200" height="140" rx="4"/>
+  <text class="text-title" x="450" y="230" text-anchor="middle">DeviceType</text>
+  <line x1="360" y1="240" x2="540" y2="240" stroke="#e5e7eb" stroke-width="1"/>
+  <text class="text-method" x="370" y="263">+manufacturer: FK</text>
+  <text class="text-method" x="370" y="280">+model: str</text>
+  <text class="text-method" x="370" y="297">+u_height: Decimal</text>
+  <text class="text-method" x="370" y="314">+is_full_depth: bool</text>
+  <text class="text-method" x="370" y="331">+subdevice_role: str</text>
+
+  <!-- Device -->
+  <rect class="box" x="600" y="50" width="200" height="160" rx="4"/>
+  <text class="text-title" x="700" y="80" text-anchor="middle">Device</text>
+  <line x1="610" y1="90" x2="790" y2="90" stroke="#e5e7eb" stroke-width="1"/>
+  <text class="text-method" x="620" y="113">+device_type: FK</text>
+  <text class="text-method" x="620" y="130">+role: FK</text>
+  <text class="text-method" x="620" y="147">+site: FK</text>
+  <text class="text-method" x="620" y="164">+rack: FK</text>
+  <text class="text-method" x="620" y="181">+position: Decimal</text>
+  <text class="text-method" x="620" y="198">+face: str</text>
+
+  <!-- Rack -->
+  <rect class="box" x="350" y="400" width="200" height="80" rx="4"/>
+  <text class="text-title" x="450" y="445" text-anchor="middle">Rack</text>
+  <line x1="360" y1="455" x2="540" y2="455" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Arrow: Manufacturer -> DeviceType -->
+  <path class="line" d="M 300 90 L 350 200" marker-end="url(#arrow)"/>
+  <text class="text-label" x="310" y="140">1</text>
+  <text class="text-label" x="340" y="190">*</text>
+  <text class="text-label" x="285" y="170">device_types</text>
+
+  <!-- Arrow: DeviceType -> Device -->
+  <path class="line" d="M 550 240 L 600 150" marker-end="url(#arrow)"/>
+  <text class="text-label" x="560" y="230">1</text>
+  <text class="text-label" x="590" y="160">*</text>
+  <text class="text-label" x="555" y="200">instances</text>
+
+  <!-- Arrow: Device -> Rack -->
+  <path class="line" d="M 650 210 L 500 400" marker-end="url(#arrow)"/>
+  <text class="text-label" x="660" y="220">*</text>
+  <text class="text-label" x="510" y="390">0..1</text>
+  <text class="text-label" x="580" y="310">rack</text>
+
+</svg>

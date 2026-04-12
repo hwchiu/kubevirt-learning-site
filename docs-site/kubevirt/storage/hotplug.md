@@ -127,35 +127,7 @@ status:
 
 ### 內部實作流程詳解
 
-```mermaid
-sequenceDiagram
-    participant User as 使用者
-    participant API as Kubernetes API
-    participant VC as virt-controller
-    participant HP as Hotplug Pod<br/>(attacher)
-    participant VH as virt-handler<br/>(節點)
-    participant QEMU as QEMU/libvirt<br/>(VM)
-
-    User->>API: virtctl addvolume vm-name --volume-name=my-pvc
-    API->>VC: VMI 狀態更新（新增 volume 請求）
-
-    VC->>API: 建立 Hotplug Pod<br/>（掛載 PVC，等待 PVC 就緒）
-    API->>HP: 調度 Hotplug Pod 到 VM 所在節點
-
-    HP->>HP: 掛載 PVC 到 Hotplug Pod
-    HP-->>API: Hotplug Pod 變為 Ready
-
-    VH->>API: 偵測到 Hotplug Pod 就緒
-    VH->>QEMU: 透過 libvirt domain XML 更新<br/>執行 qemu device_add
-
-    QEMU->>QEMU: SCSI 設備 attach 到 VM
-    QEMU-->>VH: device_add 成功
-
-    VH->>API: 更新 VMI status.volumeStatus
-    API-->>User: VMI status 顯示磁碟 Ready
-
-    note over User,QEMU: Guest OS 收到 SCSI 熱插拔事件<br/>自動識別新磁碟（/dev/sda, /dev/sdb 等）
-```
+![Hotplug 內部實作流程詳解](/diagrams/kubevirt/kubevirt-hotplug-1.png)
 
 ### Hotplug Pod 的作用
 
@@ -351,21 +323,7 @@ kubectl get vm my-vm -o jsonpath='{.status.memoryDumpRequest.phase}'
 
 ### MemoryDump Phase
 
-```mermaid
-stateDiagram-v2
-    [*] --> Dissociating : virtctl memorydump get 呼叫
-
-    Dissociating --> InProgress : PVC Hot-attach 完成
-    InProgress --> Completed : 記憶體傾印完成 ✅
-    InProgress --> Failed : 傾印失敗 ❌
-
-    Completed --> [*] : PVC 自動 Hot-detach
-
-    note right of InProgress
-        記憶體傾印期間 VM 繼續運行
-        不影響 VM 的正常操作
-    end note
-```
+![MemoryDump Phase 狀態轉換](/diagrams/kubevirt/kubevirt-hotplug-memorydump-phase.png)
 
 ### MemoryDump PVC 需求
 

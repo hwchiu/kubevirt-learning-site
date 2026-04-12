@@ -15,6 +15,7 @@ KubeVirt、CDI（Containerized Data Importer）、Forklift、Node Maintenance Op
 |-------|------|
 | `skills/analyzing-source-code/` | 加入新專案的完整分析流程（含 Structure Planner）|
 | `skills/quiz-generation/` | 從現有文件產生互動式測驗題目 |
+| `skills/fireworks-tech-graph/` | 產生文件用靜態 SVG/PNG 技術圖表 |
 
 **遇到任何任務，先閱讀對應 skill 的 `SKILL.md`，再開始執行。**
 
@@ -38,7 +39,11 @@ title: {專案} — {主題}
 ```
 - 使用 `::: info 相關章節` 區塊放置跨頁連結
 - 所有文件內容使用**繁體中文**
-- Mermaid 圖表包在 ` ```mermaid ` 區塊內（支援彈出視窗功能）
+- **不要新增 Mermaid**
+- 所有圖表預設改用 `skills/fireworks-tech-graph/` 產生 **靜態 SVG/PNG**
+- 圖檔放在 `docs-site/public/diagrams/{project}/`
+- 文件內以 `![圖說](/diagrams/{project}/{name}.png)` 引用
+- 若需要產圖腳本，統一放在 `scripts/diagram-generators/`，不要再放 repo root
 
 ### Vue 元件 — QuizQuestion
 ```vue
@@ -90,7 +95,8 @@ kubevirt-learning-site/
 │   │       └── *.md
 │   └── index.md           ← 網站首頁
 ├── {project}/             ← git submodule（原始碼）
-├── scripts/               ← 版本追蹤與差異分析腳本
+├── scripts/               ← 版本追蹤、差異分析、圖表產生腳本
+│   └── diagram-generators/← 靜態圖表 generator（Python）
 ├── skills/                ← Claude Code workflow skills
 ├── versions.json          ← 各專案已分析的 commit 版本記錄
 └── Makefile               ← 常用指令（submodule 更新、版本比對等）
@@ -103,6 +109,9 @@ kubevirt-learning-site/
 
 ### 產生團隊測驗
 → 使用 `skills/quiz-generation/SKILL.md` 的流程
+
+### 重繪或新增圖表
+→ 使用 `skills/fireworks-tech-graph/SKILL.md`，輸出靜態 SVG/PNG，不使用 Mermaid
 
 ### 更新現有專案文件
 ```bash

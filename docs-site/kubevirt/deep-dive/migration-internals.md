@@ -869,66 +869,7 @@ const (
 
 ## 完整遷移流程時序圖
 
-```mermaid
-sequenceDiagram
-    autonumber
-    participant User as 使用者
-    participant API as K8s API
-    participant MC as Migration Controller
-    participant SH as virt-handler<br/>(Source)
-    participant TH as virt-handler<br/>(Target)
-    participant SL as virt-launcher<br/>(Source)
-    participant TL as virt-launcher<br/>(Target)
-
-    User->>API: 建立 VirtualMachineInstanceMigration
-    API->>MC: Watch 事件
-
-    Note over MC: Phase: Unset → Pending
-    MC->>MC: 驗證 VMI 可遷移性
-    MC->>API: 建立 Target Pod
-
-    Note over MC: Phase: Pending → Scheduling
-    API->>TH: Target Pod 排程到目標節點
-    TH->>TH: 偵測到 Migration Target Pod
-
-    Note over MC: Phase: Scheduling → Scheduled
-    TH->>API: 更新 VMI: PreparingTarget
-
-    Note over MC: Phase: Scheduled → PreparingTarget
-    TH->>TL: 啟動 Target virt-launcher
-    TL->>TL: 定義 Domain + 建立 Unix Socket
-    TH->>TH: 啟動 Target Migration Proxy (TCP → Unix)
-    TH->>API: 回報 TCP Ports
-
-    Note over MC: Phase: PreparingTarget → TargetReady
-    API->>SH: VMI 狀態更新：TargetReady
-    SH->>SH: 啟動 Source Migration Proxy (Unix → TCP)
-    SH->>SL: 通知開始遷移
-
-    Note over MC: Phase: TargetReady → Running
-    SL->>SL: generateMigrationFlags()
-    SL->>SL: generateMigrationParams()
-    SL->>SL: dom.MigrateToURI3()
-
-    loop Pre-copy 迭代
-        SL-->>TL: 記憶體頁面傳輸（經由 Proxy）
-        SL->>SL: dom.GetJobStats() 監控進度
-    end
-
-    alt 遷移成功
-        SL->>API: MigrationState.Completed = true
-        Note over MC: Phase: Running → Succeeded
-        MC->>API: 刪除 Source Pod
-    else 遷移逾時 + AllowPostCopy
-        SL->>SL: dom.MigrateStartPostCopy(0)
-        SL-->>TL: Post-copy: 按需傳送頁面
-        SL->>API: MigrationState.Completed = true
-    else 遷移失敗
-        SL->>API: MigrationState.Failed = true
-        Note over MC: Phase: Running → Failed
-        MC->>API: 刪除 Target Pod
-    end
-```
+![完整遷移流程時序圖](/diagrams/kubevirt/kubevirt-migration-7.png)
 
 ---
 

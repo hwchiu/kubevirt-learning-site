@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1400">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowReturn" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#6b7280"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="1400" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="800" y="40" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="24" fill="#111827" text-anchor="middle" font-weight="600">CNI 委派流程（ADD 操作）</text>
+
+  <!-- Lifelines -->
+  <!-- CRI -->
+  <rect x="50" y="80" width="120" height="60" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="110" y="107" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">kubelet /</text>
+  <text x="110" y="125" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">CRI</text>
+  <line x1="110" y1="140" x2="110" y2="1350" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+
+  <!-- Multus Core -->
+  <rect x="240" y="80" width="180" height="60" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="330" y="100" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">Multus 核心邏輯</text>
+  <text x="330" y="125" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">pkg/multus/multus.go</text>
+  <line x1="330" y1="140" x2="330" y2="1350" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+
+  <!-- K8S API -->
+  <rect x="500" y="80" width="180" height="60" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="590" y="100" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">Kubernetes API</text>
+  <text x="590" y="125" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">pkg/k8sclient</text>
+  <line x1="590" y1="140" x2="590" y2="1350" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+
+  <!-- Default CNI -->
+  <rect x="760" y="80" width="160" height="60" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="840" y="100" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">預設 CNI</text>
+  <text x="840" y="125" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">如 Flannel</text>
+  <line x1="840" y1="140" x2="840" y2="1350" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+
+  <!-- CNI 1 -->
+  <rect x="1000" y="80" width="160" height="60" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="1080" y="100" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">附加 CNI 1</text>
+  <text x="1080" y="125" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">如 SR-IOV</text>
+  <line x1="1080" y1="140" x2="1080" y2="1350" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+
+  <!-- CNI 2 -->
+  <rect x="1240" y="80" width="160" height="60" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="1320" y="100" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">附加 CNI 2</text>
+  <text x="1320" y="125" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">如 macvlan</text>
+  <line x1="1320" y1="140" x2="1320" y2="1350" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+
+  <!-- Messages -->
+  <g id="messages">
+    <!-- 1. CNI ADD -->
+    <line x1="110" y1="180" x2="325" y2="180" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="217" y="170" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">CNI ADD（CNI_ARGS 含 Pod 名稱/命名空間）</text>
+
+    <!-- 2. Parse NetConf -->
+    <rect x="250" y="200" width="160" height="40" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+    <text x="330" y="217" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle">解析 NetConf，</text>
+    <text x="330" y="232" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle">取得 kubeconfig</text>
+
+    <!-- 3. GetPod -->
+    <line x1="330" y1="260" x2="585" y2="260" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="457" y="250" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">GetPod(namespace, name)</text>
+
+    <!-- 4. Return Pod -->
+    <line x1="585" y1="290" x2="335" y2="290" stroke="#6b7280" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrowReturn)"/>
+    <text x="460" y="310" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">Pod 物件（含 Annotations）</text>
+
+    <!-- 5. Parse Annotation -->
+    <rect x="250" y="320" width="160" height="50" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+    <text x="330" y="337" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle">解析</text>
+    <text x="330" y="352" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#111827" text-anchor="middle">k8s.v1.cni.cncf.io/networks</text>
+    <text x="330" y="365" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle">Annotation</text>
+
+    <!-- 6. Loop box -->
+    <rect x="220" y="390" width="480" height="170" rx="6" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+    <text x="230" y="410" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" font-style="italic">loop 每個網路附加選擇器</text>
+
+    <!-- 7. GetNetworkAttachmentDef -->
+    <line x1="330" y1="430" x2="585" y2="430" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="457" y="420" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">GetNetworkAttachmentDef(namespace, name)</text>
+
+    <!-- 8. Return NAD -->
+    <line x1="585" y1="460" x2="335" y2="460" stroke="#6b7280" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrowReturn)"/>
+    <text x="460" y="480" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">NetworkAttachmentDefinition CR</text>
+
+    <!-- 9. Convert to DelegateNetConf -->
+    <rect x="250" y="490" width="160" height="50" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+    <text x="330" y="507" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle">轉換為</text>
+    <text x="330" y="527" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle">DelegateNetConf</text>
+
+    <!-- 10. Delegate to Default CNI -->
+    <line x1="330" y1="600" x2="835" y2="600" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="582" y="590" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">委派 ADD（預設網路，eth0）</text>
+
+    <!-- 11. Return from Default CNI -->
+    <line x1="835" y1="630" x2="335" y2="630" stroke="#6b7280" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrowReturn)"/>
+    <text x="585" y="650" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">網路結果（IP、路由等）</text>
+
+    <!-- 12. Delegate to CNI 1 -->
+    <line x1="330" y1="690" x2="1075" y2="690" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="702" y="680" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">委派 ADD（附加網路 1，net1）</text>
+
+    <!-- 13. Return from CNI 1 -->
+    <line x1="1075" y1="720" x2="335" y2="720" stroke="#6b7280" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrowReturn)"/>
+    <text x="705" y="740" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">網路結果</text>
+
+    <!-- 14. Delegate to CNI 2 -->
+    <line x1="330" y1="780" x2="1315" y2="780" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="822" y="770" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">委派 ADD（附加網路 2，net2）</text>
+
+    <!-- 15. Return from CNI 2 -->
+    <line x1="1315" y1="810" x2="335" y2="810" stroke="#6b7280" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrowReturn)"/>
+    <text x="825" y="830" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">網路結果</text>
+
+    <!-- 16. Merge and save -->
+    <rect x="250" y="860" width="160" height="60" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+    <text x="330" y="877" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle">合併結果，</text>
+    <text x="330" y="892" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle">儲存 delegates</text>
+    <text x="330" y="912" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle">至 scratch 目錄</text>
+
+    <!-- 17. Return to CRI -->
+    <line x1="325" y1="960" x2="115" y2="960" stroke="#6b7280" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrowReturn)"/>
+    <text x="220" y="980" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">CNI 結果（主要 eth0 的 IP 資訊）</text>
+
+    <!-- 18. Update Pod Annotation -->
+    <line x1="330" y1="1020" x2="585" y2="1020" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="457" y="1000" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">更新 Pod Annotation</text>
+    <text x="457" y="1015" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">k8s.v1.cni.cncf.io/network-status</text>
+  </g>
+
+  <!-- Info box -->
+  <rect x="50" y="1100" width="1350" height="200" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="725" y="1130" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827" text-anchor="middle" font-weight="600">關鍵資訊</text>
+  
+  <text x="70" y="1165" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">• Multus 採用元外掛（Meta-Plugin）模式，不直接建立網路介面，而是委派給其他 CNI 外掛</text>
+  <text x="70" y="1185" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">• 每個 Pod 可以有多個網路介面：eth0（預設網路）+ net1, net2, ... （附加網路）</text>
+  <text x="70" y="1205" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">• scratch 目錄（/var/lib/cni/multus/）儲存 ADD 時的委派設定，供 DEL 操作使用</text>
+  <text x="70" y="1225" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">• NetworkAttachmentDefinition (NAD) 定義每個附加網路的 CNI 設定</text>
+  <text x="70" y="1245" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">• Pod Annotation k8s.v1.cni.cncf.io/networks 指定要附加哪些網路</text>
+  <text x="70" y="1265" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">• 所有網路結果會合併，但只回傳主要網路（eth0）的 IP 資訊給 kubelet</text>
+</svg>

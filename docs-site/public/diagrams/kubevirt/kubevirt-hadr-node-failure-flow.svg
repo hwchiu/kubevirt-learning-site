@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="720" viewBox="0 0 1400 720">
+<rect width="1400" height="720" fill="#ffffff"/>
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+  </marker>
+</defs>
+<line x1="700" y1="78" x2="700" y2="138" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="710.0" y="108.0" text-anchor="start" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">超過 5 分鐘</text>
+<line x1="700" y1="186" x2="700" y2="246" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<line x1="700" y1="294" x2="700" y2="354" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<line x1="700" y1="402" x2="700" y2="462" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<line x1="700" y1="510" x2="700" y2="544" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<rect x="570" y="30" width="260" height="48" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="700" y="54" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">virt-handler heartbeat 停止</text>
+<rect x="570" y="138" width="260" height="48" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="700" y="162" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">isNodeUnresponsive 返回 true</text>
+<rect x="570" y="246" width="260" height="48" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="700" y="270" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">節點標記 NodeUnresponsiveReason</text>
+<rect x="570" y="354" width="260" height="48" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="700" y="378" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">節點上的 VMI 標記為 Failed</text>
+<rect x="570" y="462" width="260" height="48" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="700" y="486" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">checkNodeForOrphanedAndErroredVMIs 清理 VMI</text>
+<polygon points="700,544 826.0,580 700,616 574.0,580" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+<text x="700" y="580" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">VM RunStrategy?</text>
+<path d="M 700 616 L 700 651 L 150 651 L 150 686" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="425.0" y="643" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">Always</text>
+<rect x="50" y="686" width="200" height="48" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+<text x="150" y="710" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">在其他節點重建 VMI</text>
+<path d="M 700 616 L 700 651 L 450 651 L 450 686" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="575.0" y="643" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">RerunOnFailure</text>
+<rect x="350" y="686" width="200" height="48" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+<text x="450" y="710" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">在其他節點重建 VMI</text>
+<path d="M 700 616 L 700 651 L 850 651 L 850 686" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="775.0" y="643" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">Manual / Halted</text>
+<rect x="750" y="686" width="200" height="48" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="850" y="710" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">不自動重建</text>
+<path d="M 700 616 L 700 651 L 1150 651 L 1150 686" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="925.0" y="643" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">Once</text>
+<rect x="1050" y="686" width="200" height="48" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="1150" y="710" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">不自動重建</text>
+</svg>

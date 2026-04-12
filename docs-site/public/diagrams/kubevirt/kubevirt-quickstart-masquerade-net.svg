@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="200" viewBox="0 0 1100 200">
+<rect width="1100" height="200" fill="#ffffff"/>
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+  </marker>
+</defs>
+<line x1="220" y1="100" x2="300" y2="100" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="260.0" y="86" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">NAT</text>
+<line x1="480" y1="100" x2="560" y2="100" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="520.0" y="86" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">CNI</text>
+<line x1="740" y1="100" x2="820" y2="100" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="780.0" y="86" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">路由</text>
+<rect x="40" y="70" width="180" height="60" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="130" y="100" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827"><tspan x="130" dy="-9">VM</tspan><tspan x="130" dy="9">10.0.2.2</tspan></text>
+<rect x="300" y="70" width="180" height="60" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="390" y="100" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827"><tspan x="390" dy="-9">Pod Network</tspan><tspan x="390" dy="9">10.244.x.x</tspan></text>
+<rect x="560" y="70" width="180" height="60" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="650" y="100" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827">節點網路</text>
+<rect x="820" y="70" width="180" height="60" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="910" y="100" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827">外部網路</text>
+</svg>

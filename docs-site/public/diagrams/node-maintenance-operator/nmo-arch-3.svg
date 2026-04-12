@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  
+  <rect width="1200" height="800" fill="#ffffff"/>
+  
+  <!-- Initial state -->
+  <circle cx="100" cy="400" r="20" fill="#111827"/>
+  <circle cx="100" cy="400" r="12" fill="#ffffff"/>
+  
+  <!-- Running state -->
+  <rect x="300" y="320" width="200" height="160" rx="80" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="3"/>
+  <text x="400" y="410" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="600" text-anchor="middle" fill="#111827">Running</text>
+  
+  <!-- Succeeded state -->
+  <rect x="700" y="100" width="220" height="160" rx="80" fill="#eff6ff" stroke="#bfdbfe" stroke-width="3"/>
+  <text x="810" y="190" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="600" text-anchor="middle" fill="#111827">Succeeded</text>
+  
+  <!-- Failed state -->
+  <rect x="700" y="540" width="220" height="160" rx="80" fill="#eff6ff" stroke="#bfdbfe" stroke-width="3"/>
+  <text x="810" y="630" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="600" text-anchor="middle" fill="#111827">Failed</text>
+  
+  <!-- End state -->
+  <circle cx="1100" cy="400" r="20" fill="#111827"/>
+  <circle cx="1100" cy="400" r="15" fill="#111827"/>
+  <circle cx="1100" cy="400" r="8" fill="#ffffff"/>
+  
+  <!-- Arrow: Initial -> Running -->
+  <path d="M 120 400 L 300 400" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="210" y="380" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">CR 建立，</text>
+  <text x="210" y="398" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">新增 finalizer</text>
+  
+  <!-- Arrow: Running -> Running (self loop) -->
+  <path d="M 310 320 Q 280 220 400 220 Q 520 220 490 320" fill="none" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="400" y="195" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" text-anchor="middle" fill="#6b7280">drain 進行中，</text>
+  <text x="400" y="213" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" text-anchor="middle" fill="#6b7280">error 時 requeue 5s</text>
+  
+  <!-- Arrow: Running -> Succeeded -->
+  <path d="M 500 360 L 700 220" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="580" y="275" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">所有 Pod</text>
+  <text x="580" y="293" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">驅逐完成</text>
+  
+  <!-- Arrow: Running -> Failed -->
+  <path d="M 500 440 L 700 580" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="550" y="505" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" text-anchor="middle" fill="#6b7280">Node 不存在 OR</text>
+  <text x="550" y="523" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" text-anchor="middle" fill="#6b7280">ErrorOnLeaseCount &gt; 3</text>
+  
+  <!-- Arrow: Succeeded -> End -->
+  <path d="M 920 180 L 1100 180 L 1100 380" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="1010" y="165" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">CR 刪除，</text>
+  <text x="1010" y="183" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">節點 uncordon</text>
+  
+  <!-- Arrow: Failed -> End -->
+  <path d="M 920 620 L 1100 620 L 1100 420" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="990" y="605" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" text-anchor="middle" fill="#6b7280">CR 刪除，</text>
+  <text x="990" y="623" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" text-anchor="middle" fill="#6b7280">節點 uncordon</text>
+  <text x="990" y="641" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" text-anchor="middle" fill="#6b7280">（若可行）</text>
+  
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640">
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0.5,8.5 3.5,0 6.5" fill="#3b82f6"/></marker></defs>
+  <rect width="960" height="640" fill="#ffffff"/>
+  <text x="480" y="30" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#111827" text-anchor="middle">WaitForFirstConsumer 解決流程</text>
+  <rect x="30" y="50" width="140" height="44" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="100" y="77" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#111827" text-anchor="middle">使用者</text>
+  <line x1="100" y1="94" x2="100" y2="600" stroke="#e5e7eb" stroke-width="1.2" stroke-dasharray="5,4"/>
+  <rect x="210" y="50" width="140" height="44" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="280" y="77" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#111827" text-anchor="middle">CDI 控制器</text>
+  <line x1="280" y1="94" x2="280" y2="600" stroke="#e5e7eb" stroke-width="1.2" stroke-dasharray="5,4"/>
+  <rect x="390" y="50" width="140" height="44" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="460" y="77" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#111827" text-anchor="middle">VM Controller</text>
+  <line x1="460" y1="94" x2="460" y2="600" stroke="#e5e7eb" stroke-width="1.2" stroke-dasharray="5,4"/>
+  <rect x="570" y="50" width="140" height="44" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="640" y="77" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#111827" text-anchor="middle">K8s Scheduler</text>
+  <line x1="640" y1="94" x2="640" y2="600" stroke="#e5e7eb" stroke-width="1.2" stroke-dasharray="5,4"/>
+  <rect x="750" y="50" width="140" height="44" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="820" y="77" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#111827" text-anchor="middle">PVC / PV</text>
+  <line x1="820" y1="94" x2="820" y2="600" stroke="#e5e7eb" stroke-width="1.2" stroke-dasharray="5,4"/>
+  <line x1="100" y1="130" x2="280" y2="130" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="190.0" y="122" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">建立 DataVolume (WFC StorageClass)</text>
+  <line x1="280" y1="180" x2="820" y2="180" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="550.0" y="172" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">建立 PVC → WaitForFirstConsumer</text>
+  <line x1="280" y1="230" x2="100" y2="230" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+  <text x="190.0" y="222" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">phase = WaitForFirstConsumer</text>
+  <line x1="100" y1="290" x2="460" y2="290" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="280.0" y="282" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">建立 VM 並引用該 DataVolume</text>
+  <line x1="460" y1="340" x2="640" y2="340" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="550.0" y="332" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">建立 VMI Pod</text>
+  <line x1="640" y1="390" x2="820" y2="390" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="730.0" y="382" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">決定節點後觸發 PVC binding</text>
+  <line x1="820" y1="440" x2="280" y2="440" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+  <text x="550.0" y="432" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">PVC Bound</text>
+  <path d="M 280 500 h 50 v 28 h -42" fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="368" y="492" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">啟動 Importer Pod（同節點）</text>
+  <line x1="280" y1="560" x2="100" y2="560" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+  <text x="190.0" y="552" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">phase = ImportInProgress → Succeeded</text>
+  <rect x="60" y="600" width="840" height="24" rx="4" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="480" y="616" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">重點：先由 Scheduler 決定節點，再讓 PVC binding 與 Importer Pod 在同節點完成。</text>
+</svg>

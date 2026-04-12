@@ -251,13 +251,6 @@ layout: doc
 
 當 Thick Plugin 使用 `multus-config-file: auto` 選項啟動時，`config.Manager`（`pkg/server/config/`）根據以下規則自動產生 Multus CNI 設定：
 
-```mermaid
-flowchart LR
-    A["/etc/cni/net.d/\n掃描設定檔"] --> B{找到 .conf\n或 .conflist？}
-    B -->|是| C[選取字母排序最前\n的設定作為預設網路]
-    C --> D[產生 00-multus.conf\n（包含預設網路設定）]
-    D --> E[fsnotify 監控目錄\n設定變更時重新產生]
-    B -->|否| F[等待設定檔出現]
-```
+![Multus 設定自動生成流程](/diagrams/multus-cni/multus-config-1.png)
 
 自動生成的設定確保 Multus 的 CNI 設定（以 `00-` 前綴）優先於其他 CNI 設定，從而成為叢集的主 CNI 外掛。

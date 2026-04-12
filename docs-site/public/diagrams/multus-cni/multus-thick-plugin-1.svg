@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="580" height="700">
+<defs><marker id="arr_3b82f6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/></marker>
+<marker id="arr_6b7280" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#6b7280"/></marker>
+</defs>
+<rect width="580" height="700" fill="#ffffff"/>
+<rect x="290" y="30" width="200" height="36" rx="18.0" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+<text x="390.0" y="48.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" dominant-baseline="middle"><tspan x="390.0" dy="0" fill="#111827">啟動 multus-daemon</tspan></text>
+<rect x="200" y="95" width="220" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="310.0" y="110.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="310.0" dy="0" fill="#111827">讀取 daemon-config.json</tspan><tspan x="310.0" dy="14" fill="#111827">cniServerConfig()</tspan></text>
+<rect x="200" y="163" width="220" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="310.0" y="178.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="310.0" dy="0" fill="#111827">解析 multus CNI 設定</tspan><tspan x="310.0" dy="14" fill="#111827">config.ParseMultusConfig()</tspan></text>
+<polygon points="290,206 430,240 290,274 150,240" fill="#fef3c7" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="290" y="233.5" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="290" dy="0" fill="#111827">ReadinessIndicatorFile</tspan><tspan x="290" dy="13" fill="#111827">是否設定?</tspan></text>
+<rect x="80" y="320" width="200" height="36" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="180.0" y="338.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="180.0" dy="0" fill="#111827">等待就緒指示檔存在</tspan></text>
+<polygon points="290,316 420,350 290,384 160,350" fill="#fef3c7" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="290" y="343.5" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="290" dy="0" fill="#111827">MultusConfigFile ==</tspan><tspan x="290" dy="13" fill="#111827">auto?</tspan></text>
+<rect x="80" y="430" width="220" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="190.0" y="445.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="190.0" dy="0" fill="#111827">建立 config.Manager 自動產生</tspan><tspan x="190.0" dy="14" fill="#111827">multus CNI 設定</tspan></text>
+<rect x="330" y="430" width="210" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="435.0" y="445.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="435.0" dy="0" fill="#111827">複製使用者提供的 multus 設定至</tspan><tspan x="435.0" dy="14" fill="#111827">cniConfigDir</tspan></text>
+<rect x="200" y="505" width="220" height="36" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="310.0" y="523.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="310.0" dy="0" fill="#111827">startMultusDaemon()</tspan></text>
+<rect x="200" y="563" width="240" height="36" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="320.0" y="574.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="320.0" dy="0" fill="#111827">srv.FilesystemPreRequirements(</tspan><tspan x="320.0" dy="14" fill="#111827">) 建立 /run/multus/ 目錄</tspan></text>
+<rect x="200" y="621" width="240" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="320.0" y="636.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="320.0" dy="0" fill="#111827">srv.NewCNIServer() 建立 HTTP</tspan><tspan x="320.0" dy="14" fill="#111827">Server + Informers</tspan></text>
+<line x1="390.0" y1="66" x2="310.0" y2="95" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<line x1="310.0" y1="139" x2="310.0" y2="163" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<line x1="310.0" y1="207" x2="290" y2="206" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<line x1="150" y1="240" x2="280" y2="338.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="206.6" y="300.2" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">是</text>
+<line x1="290" y1="274" x2="290" y2="316" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="276.0" y="295.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">否</text>
+<line x1="180.0" y1="356" x2="290" y2="316" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<line x1="160" y1="350" x2="300" y2="452.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="221.8" y="412.3" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">是</text>
+<line x1="420" y1="350" x2="435.0" y2="430" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="413.7" y="392.6" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">否</text>
+<line x1="190.0" y1="474" x2="310.0" y2="505" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<line x1="435.0" y1="474" x2="310.0" y2="505" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<line x1="310.0" y1="541" x2="320.0" y2="563" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<line x1="320.0" y1="599" x2="320.0" y2="621" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+</svg>

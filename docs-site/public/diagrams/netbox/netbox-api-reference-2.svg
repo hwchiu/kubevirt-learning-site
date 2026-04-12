@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <style>
+      .box { fill: #f9fafb; stroke: #e5e7eb; stroke-width: 1.5; }
+      .endpoint { fill: #eff6ff; stroke: #bfdbfe; stroke-width: 1.5; }
+      .container { fill: #f0f4ff; stroke: #c7d2fe; stroke-width: 1.5; }
+      .text-title { fill: #111827; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 13px; font-weight: 600; }
+      .text-small { fill: #6b7280; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; }
+      .line { stroke: #3b82f6; stroke-width: 1.5; fill: none; }
+    </style>
+  </defs>
+
+  <!-- Client -->
+  <rect class="container" x="50" y="50" width="100" height="60" rx="4"/>
+  <text class="text-title" x="100" y="85" text-anchor="middle">Client</text>
+
+  <!-- /graphql/ endpoint -->
+  <rect class="endpoint" x="230" y="50" width="120" height="60" rx="4"/>
+  <text class="text-title" x="290" y="85" text-anchor="middle">/graphql/</text>
+
+  <!-- Strawberry Schema -->
+  <rect class="box" x="430" y="40" width="160" height="80" rx="4"/>
+  <text class="text-title" x="510" y="70" text-anchor="middle">Strawberry Schema</text>
+  <text class="text-small" x="510" y="100" text-anchor="middle">(動態註冊)</text>
+
+  <!-- Query types -->
+  <rect class="box" x="680" y="40" width="140" height="40" rx="4"/>
+  <text class="text-title" x="750" y="65" text-anchor="middle">CircuitsQuery</text>
+
+  <rect class="box" x="680" y="95" width="140" height="40" rx="4"/>
+  <text class="text-title" x="750" y="120" text-anchor="middle">DCIMQuery</text>
+
+  <rect class="box" x="680" y="150" width="140" height="40" rx="4"/>
+  <text class="text-title" x="750" y="175" text-anchor="middle">IPAMQuery</text>
+
+  <rect class="box" x="680" y="205" width="140" height="40" rx="4"/>
+  <text class="text-title" x="750" y="230" text-anchor="middle">ExtrasQuery</text>
+
+  <rect class="box" x="680" y="260" width="140" height="40" rx="4"/>
+  <text class="text-title" x="750" y="285" text-anchor="middle">VirtualizationQuery</text>
+
+  <rect class="box" x="680" y="315" width="140" height="50" rx="4"/>
+  <text class="text-title" x="750" y="335" text-anchor="middle">Plugin Schemas</text>
+  <text class="text-small" x="750" y="353" text-anchor="middle">(動態載入)</text>
+
+  <!-- Extensions -->
+  <rect class="box" x="680" y="385" width="180" height="40" rx="4"/>
+  <text class="text-title" x="770" y="410" text-anchor="middle">DjangoOptimizerExtension</text>
+
+  <rect class="box" x="680" y="440" width="180" height="40" rx="4"/>
+  <text class="text-title" x="770" y="465" text-anchor="middle">MaxAliasesLimiter</text>
+
+  <!-- Arrows -->
+  <path class="line" d="M 150 80 L 230 80" marker-end="url(#arrow)"/>
+  <path class="line" d="M 350 80 L 430 80" marker-end="url(#arrow)"/>
+  
+  <path class="line" d="M 590 60 L 680 60" marker-end="url(#arrow)"/>
+  <path class="line" d="M 590 70 L 680 115" marker-end="url(#arrow)"/>
+  <path class="line" d="M 590 80 L 680 170" marker-end="url(#arrow)"/>
+  <path class="line" d="M 590 90 L 680 225" marker-end="url(#arrow)"/>
+  <path class="line" d="M 590 100 L 680 280" marker-end="url(#arrow)"/>
+  <path class="line" d="M 590 105 L 680 340" marker-end="url(#arrow)"/>
+  <path class="line" d="M 590 110 L 680 405" marker-end="url(#arrow)"/>
+  <path class="line" d="M 590 115 L 680 460" marker-end="url(#arrow)"/>
+
+</svg>

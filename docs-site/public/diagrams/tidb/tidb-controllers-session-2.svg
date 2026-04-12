@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  
+  <rect width="1200" height="700" fill="#ffffff"/>
+  
+  <!-- Initial state -->
+  <circle cx="100" cy="150" r="12" fill="#111827"/>
+  <circle cx="100" cy="150" r="18" fill="none" stroke="#111827" stroke-width="2"/>
+  
+  <!-- Idle -->
+  <rect x="250" y="100" width="200" height="80" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8"/>
+  <text x="350" y="145" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Idle</text>
+  
+  <!-- Active -->
+  <rect x="650" y="100" width="200" height="80" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" rx="8"/>
+  <text x="750" y="145" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Active</text>
+  
+  <!-- InTransaction -->
+  <rect x="450" y="350" width="250" height="80" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8"/>
+  <text x="575" y="395" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">InTransaction</text>
+  
+  <!-- Final state -->
+  <circle cx="1000" cy="150" r="12" fill="#111827"/>
+  <circle cx="1000" cy="150" r="18" fill="none" stroke="#111827" stroke-width="2"/>
+  
+  <!-- Initial -> Idle -->
+  <path d="M 118 150 L 250 140" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="165" y="135" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">連線建立</text>
+  
+  <!-- Idle -> Active -->
+  <path d="M 450 130 L 650 130" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="525" y="120" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">收到 SQL</text>
+  
+  <!-- Active -> Idle -->
+  <path d="M 650 150 L 450 150" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="490" y="170" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">SQL 執行完成</text>
+  <text x="490" y="185" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">(非交易)</text>
+  
+  <!-- Active -> InTransaction -->
+  <path d="M 700 180 L 620 350" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="640" y="255" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">BEGIN 或 DML</text>
+  <text x="640" y="270" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">(悲觀交易)</text>
+  
+  <!-- InTransaction -> Active -->
+  <path d="M 650 350 L 730 180" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="720" y="255" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">COMMIT /</text>
+  <text x="720" y="270" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">ROLLBACK</text>
+  
+  <!-- InTransaction -> InTransaction (self loop) -->
+  <path d="M 575 430 Q 575 520 630 450" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="520" y="500" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">繼續 DML</text>
+  
+  <!-- Active -> Final -->
+  <path d="M 850 140 L 982 150" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="870" y="130" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">COM_QUIT /</text>
+  <text x="870" y="145" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">連線斷開</text>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 450">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  
+  <rect width="1400" height="450" fill="#ffffff"/>
+  
+  <!-- Source Cluster -->
+  <rect x="50" y="50" width="260" height="150" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2" rx="8"/>
+  <text x="180" y="80" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Source 叢集</text>
+  <rect x="80" y="100" width="200" height="80" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="6"/>
+  <text x="180" y="145" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827" text-anchor="middle">Broker (Source)</text>
+  
+  <!-- MirrorMaker 2 Worker -->
+  <rect x="390" y="50" width="620" height="350" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2" rx="8"/>
+  <text x="700" y="80" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">MirrorMaker 2 Worker</text>
+  
+  <!-- MirrorSourceConnector -->
+  <rect x="420" y="100" width="260" height="80" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="6"/>
+  <text x="550" y="133" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827" text-anchor="middle">MirrorSourceConnector</text>
+  <text x="550" y="155" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">（複製 Topic 資料）</text>
+  
+  <!-- MirrorCheckpointConnector -->
+  <rect x="420" y="200" width="260" height="80" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="6"/>
+  <text x="550" y="233" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827" text-anchor="middle">MirrorCheckpointConnector</text>
+  <text x="550" y="255" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">（複製 Consumer 位移）</text>
+  
+  <!-- MirrorHeartbeatConnector -->
+  <rect x="420" y="300" width="260" height="80" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="6"/>
+  <text x="550" y="333" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827" text-anchor="middle">MirrorHeartbeatConnector</text>
+  <text x="550" y="355" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">（心跳監控）</text>
+  
+  <!-- Target Cluster -->
+  <rect x="1090" y="50" width="260" height="150" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2" rx="8"/>
+  <text x="1220" y="80" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Target 叢集</text>
+  <rect x="1120" y="100" width="200" height="80" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="6"/>
+  <text x="1220" y="145" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#111827" text-anchor="middle">Broker (Target)</text>
+  
+  <!-- Arrows -->
+  <!-- Source to MirrorSource -->
+  <path d="M 310 140 L 420 140" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="355" y="130" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">消費</text>
+  
+  <!-- MirrorSource to Target -->
+  <path d="M 680 140 L 1120 140" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="880" y="130" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">生產</text>
+  
+  <!-- Source to MirrorCheckpoint -->
+  <path d="M 310 140 L 340 140 L 340 240 L 420 240" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="360" y="200" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">讀取 Offset</text>
+  
+  <!-- MirrorCheckpoint to Target -->
+  <path d="M 680 240 L 1050 240 L 1050 140 L 1120 140" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="840" y="230" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">寫入轉換後 Offset</text>
+  
+  <!-- MirrorHeartbeat to Target -->
+  <path d="M 680 340 L 1070 340 L 1070 140 L 1120 140" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="860" y="330" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">心跳</text>
+</svg>

@@ -51,16 +51,7 @@ VFIO（Virtual Function I/O）提供安全的使用者態裝置存取機制：
 
 ### 效能優勢
 
-```mermaid
-graph LR
-    subgraph "軟體網路（Bridge/Masquerade）"
-        VM_S["VM"] -->|"virtio"| KERNEL["Linux 核心網路棧"] --> NIC_S["實體網卡"]
-    end
-
-    subgraph "SR-IOV 硬體直通"
-        VM_H["VM"] -->|"VFIO 直通"| VF["VF 硬體"] --> NIC_H["實體網卡"]
-    end
-```
+![網路模式效能比較](/diagrams/kubevirt/kubevirt-net-sriov-3.png)
 
 | 效能指標 | Bridge | Masquerade | SR-IOV |
 |---------|--------|-----------|--------|
@@ -75,37 +66,7 @@ graph LR
 
 ### 元件架構
 
-```mermaid
-graph TB
-    subgraph "控制面 Control Plane"
-        KV_CTRL["KubeVirt Controller"]
-        SR_DP["SR-IOV Device Plugin<br/>（管理 VF 資源池）"]
-        MULTUS["Multus CNI<br/>（多 CNI 協調器）"]
-    end
-
-    subgraph "節點 Node"
-        SR_CNI["SR-IOV CNI Plugin<br/>（設定 VF 網路）"]
-        VF_POOL["VF 資源池<br/>intel.com/sriov_net_A: 4"]
-        PF_HW["實體網卡 PF<br/>（已建立 VF）"]
-        VF_POOL --> PF_HW
-    end
-
-    subgraph "Pod"
-        VL["virt-launcher"]
-        QEMU["QEMU VM<br/>（持有 VF）"]
-        VL --> QEMU
-    end
-
-    SR_DP -->|"宣告 VF 資源"| KV_CTRL
-    KV_CTRL -->|"分配 VF"| VL
-    MULTUS -->|"呼叫 SR-IOV CNI"| SR_CNI
-    SR_CNI -->|"設定 VF，移交給 Pod"| VF_POOL
-    VL -->|"透過 VFIO 存取"| QEMU
-
-    style SR_DP fill:#4a9eff,color:#fff
-    style MULTUS fill:#f0ad4e,color:#fff
-    style QEMU fill:#5cb85c,color:#fff
-```
+![KubeVirt SR-IOV 整合架構](/diagrams/kubevirt/kubevirt-net-sriov-4.png)
 
 ### 元件說明
 
@@ -283,16 +244,7 @@ resources:
 5. **不能熱插拔**：SR-IOV 介面目前不支援熱插拔到執行中的 VM。
 :::
 
-```mermaid
-graph TD
-    MIGRATE{"需要 Live Migration？"}
-    MIGRATE -->|"是"| NO_SRIOV["❌ 不能使用 SR-IOV<br/>改用 Bridge 或 Masquerade"]
-    MIGRATE -->|"否"| HW_CHECK{"硬體支援 SR-IOV？"}
-    HW_CHECK -->|"是"| IOMMU{"IOMMU 已啟用？"}
-    HW_CHECK -->|"否"| ALT["考慮 DPDK + vhost-user<br/>或 Passt"]
-    IOMMU -->|"是"| USE_SRIOV["✅ 可以使用 SR-IOV"]
-    IOMMU -->|"否"| ENABLE["先啟用 IOMMU 再評估"]
-```
+![SR-IOV 使用決策樹](/diagrams/kubevirt/kubevirt-net-sriov-5.png)
 
 | 限制項目 | 說明 | 影響 |
 |---------|------|------|
@@ -310,21 +262,7 @@ graph TD
 
 **Passt**（Plug A Simple Socket Transport）是一個**完全在使用者態**實作的 TCP/IP 協定棧的網路轉換程式，由 Red Hat 工程師開發。與 Bridge/Masquerade 的 kernel-space NAT 不同，Passt 不需要任何特權操作。
 
-```mermaid
-graph TB
-    subgraph "Masquerade 模式（對比）"
-        M_VM["VM"] -->|"tap"| M_TAP["kernel tap"]
-        M_TAP -->|"kernel netfilter/nftables"| M_NET["Pod 網路"]
-    end
-
-    subgraph "Passt 模式"
-        P_VM["VM"] -->|"socket"| PASST["passt 程式<br/>（使用者態 TCP/IP）"]
-        PASST -->|"普通 socket syscall"| P_NET["Pod 網路"]
-    end
-
-    style PASST fill:#5bc0de,color:#fff
-    style M_TAP fill:#f0ad4e,color:#fff
-```
+![Masquerade vs Passt 網路模式比較](/diagrams/kubevirt/kubevirt-net-sriov-6.png)
 
 ### Passt 的核心優勢
 
@@ -444,11 +382,7 @@ spec:
 
 Macvtap 是一種基於 **macvlan** 的網路介面類型，它允許 VM 直接連接到父網路介面，VM 擁有獨立的 MAC 地址，在 L2 層可見。
 
-```mermaid
-graph TB
-    PF["實體介面 eth0"] -->|"macvtap"| VF1["macvtap0<br/>（VM 1）"]
-    PF -->|"macvtap"| VF2["macvtap1<br/>（VM 2）"]
-```
+![Macvtap 架構（已棄用）](/diagrams/kubevirt/kubevirt-net-sriov-7.png)
 
 ### 為何棄用？
 

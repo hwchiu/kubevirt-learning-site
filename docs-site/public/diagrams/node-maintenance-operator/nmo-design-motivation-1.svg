@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="508">
+<defs><marker id="arr_3b82f6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/></marker>
+<marker id="arr_6b7280" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#6b7280"/></marker>
+</defs>
+<rect width="800" height="508" fill="#ffffff"/>
+<rect x="50.0" y="30" width="124.0" height="34" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="112.0" y="39.5" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" dominant-baseline="middle"><tspan x="112.0" dy="0" fill="#111827">NodeMaintenance</tspan><tspan x="112.0" dy="15" fill="#111827">node01</tspan></text>
+<rect x="194.0" y="30" width="124.0" height="34" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="256.0" y="39.5" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" dominant-baseline="middle"><tspan x="256.0" dy="0" fill="#111827">NodeMaintenance</tspan><tspan x="256.0" dy="15" fill="#111827">node02</tspan></text>
+<rect x="338.0" y="30" width="124.0" height="34" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="400.0" y="47.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" dominant-baseline="middle"><tspan x="400.0" dy="0" fill="#111827">Lease (etcd)</tspan></text>
+<rect x="482.0" y="30" width="124.0" height="34" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="544.0" y="47.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" dominant-baseline="middle"><tspan x="544.0" dy="0" fill="#111827">node01</tspan></text>
+<rect x="626.0" y="30" width="124.0" height="34" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="688.0" y="47.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" dominant-baseline="middle"><tspan x="688.0" dy="0" fill="#111827">node02</tspan></text>
+<line x1="112.0" y1="104" x2="112.0" y2="468" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="256.0" y1="104" x2="256.0" y2="468" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="400.0" y1="104" x2="400.0" y2="468" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="544.0" y1="104" x2="544.0" y2="468" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="688.0" y1="104" x2="688.0" y2="468" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="112.0" y1="124" x2="400.0" y2="124" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr_3b82f6)"/>
+<text x="256.0" y="119" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">嘗試取得 lease</text>
+<rect x="396.0" y="124" width="8" height="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+<line x1="256.0" y1="166" x2="400.0" y2="166" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr_3b82f6)"/>
+<text x="328.0" y="161" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">嘗試取得 lease</text>
+<rect x="396.0" y="166" width="8" height="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+<line x1="400.0" y1="208" x2="112.0" y2="208" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr_3b82f6)"/>
+<text x="256.0" y="203" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">✅ 取得成功</text>
+<line x1="400.0" y1="250" x2="256.0" y2="250" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr_3b82f6)"/>
+<text x="328.0" y="245" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">❌ 等待（lease 已被佔用）</text>
+<line x1="112.0" y1="292" x2="544.0" y2="292" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr_3b82f6)"/>
+<text x="328.0" y="287" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">cordon + drain</text>
+<rect x="540.0" y="292" width="8" height="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+<line x1="544.0" y1="334" x2="112.0" y2="334" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr_3b82f6)"/>
+<text x="328.0" y="329" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">排空完成</text>
+<line x1="112.0" y1="376" x2="400.0" y2="376" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr_3b82f6)"/>
+<text x="256.0" y="371" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">釋放 lease</text>
+<rect x="396.0" y="376" width="8" height="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+<line x1="400.0" y1="418" x2="256.0" y2="418" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr_3b82f6)"/>
+<text x="328.0" y="413" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">✅ 取得成功</text>
+<line x1="256.0" y1="460" x2="688.0" y2="460" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr_3b82f6)"/>
+<text x="472.0" y="455" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280">cordon + drain</text>
+<rect x="684.0" y="460" width="8" height="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+</svg>

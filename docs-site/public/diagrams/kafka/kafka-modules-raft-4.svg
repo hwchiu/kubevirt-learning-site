@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  
+  <rect width="1400" height="900" fill="#ffffff"/>
+  
+  <!-- Initial state -->
+  <circle cx="100" cy="100" r="12" fill="#111827"/>
+  <circle cx="100" cy="100" r="18" fill="none" stroke="#111827" stroke-width="2"/>
+  
+  <!-- Unattached -->
+  <rect x="200" y="50" width="200" height="80" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8"/>
+  <text x="300" y="95" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Unattached</text>
+  
+  <!-- Candidate -->
+  <rect x="600" y="50" width="200" height="80" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8"/>
+  <text x="700" y="95" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Candidate</text>
+  
+  <!-- Leader -->
+  <rect x="600" y="300" width="200" height="80" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2" rx="8"/>
+  <text x="700" y="345" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Leader</text>
+  
+  <!-- Follower -->
+  <rect x="200" y="300" width="200" height="80" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" rx="8"/>
+  <text x="300" y="345" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Follower</text>
+  
+  <!-- Initial -> Unattached -->
+  <path d="M 118 100 L 200 90" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="145" y="85" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">啟動</text>
+  
+  <!-- Unattached -> Candidate -->
+  <path d="M 400 90 L 600 90" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="480" y="80" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">Election</text>
+  <text x="480" y="95" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">Timeout</text>
+  
+  <!-- Candidate -> Leader -->
+  <path d="M 700 130 L 700 300" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="720" y="205" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">獲得多數票</text>
+  <text x="720" y="220" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">（Quorum）</text>
+  
+  <!-- Candidate -> Follower -->
+  <path d="M 600 110 L 400 320" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="450" y="195" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">收到更高 Term 的</text>
+  <text x="450" y="210" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">選票或 Heartbeat</text>
+  
+  <!-- Candidate -> Candidate (self loop) -->
+  <path d="M 700 50 Q 850 -30 800 90" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="820" y="30" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">選舉超時</text>
+  <text x="820" y="45" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">重試</text>
+  
+  <!-- Leader -> Follower -->
+  <path d="M 600 340 L 400 340" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="460" y="330" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">發現更高 Term</text>
+  
+  <!-- Follower -> Candidate -->
+  <path d="M 300 300 L 650 130" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="420" y="200" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">Election Timeout</text>
+  <text x="420" y="215" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">（未收到 Heartbeat）</text>
+  
+  <!-- Leader -> Leader (self loop) -->
+  <path d="M 800 340 Q 950 420 700 380" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="850" y="385" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">持續發送</text>
+  <text x="850" y="400" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">Heartbeat</text>
+  
+  <!-- Follower -> Follower (self loop) -->
+  <path d="M 200 340 Q 50 420 300 380" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="80" y="380" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">接收 Leader</text>
+  <text x="80" y="395" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">Heartbeat /</text>
+  <text x="80" y="410" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">Log 複製</text>
+</svg>

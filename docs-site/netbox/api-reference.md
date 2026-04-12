@@ -329,36 +329,7 @@ class SiteSerializer(PrimaryModelSerializer):
 
 ### 5.1 FilterSet 繼承鏈
 
-```mermaid
-classDiagram
-    class BaseFilterSet {
-        +FILTER_DEFAULTS: dict
-        +get_additional_lookups()
-    }
-    class ChangeLoggedModelFilterSet {
-        +created: MultiValueDateTimeFilter
-        +last_updated: MultiValueDateTimeFilter
-        +created_by_request: UUIDFilter
-        +filter_by_request(queryset, name, value)
-    }
-    class NetBoxModelFilterSet {
-        +q: CharFilter
-        +tag: TagFilter
-        +tag_id: TagIDFilter
-        +search(queryset, name, value)
-    }
-    class PrimaryModelFilterSet {
-        <<OwnerFilterMixin>>
-    }
-    class OrganizationalModelFilterSet {
-        <<OwnerFilterMixin>>
-    }
-
-    BaseFilterSet <|-- ChangeLoggedModelFilterSet
-    ChangeLoggedModelFilterSet <|-- NetBoxModelFilterSet
-    NetBoxModelFilterSet <|-- PrimaryModelFilterSet
-    NetBoxModelFilterSet <|-- OrganizationalModelFilterSet
-```
+![FilterSet 繼承鏈](/diagrams/netbox/netbox-api-reference-1.png)
 
 ### 5.2 BaseFilterSet — 自動 Filter 類型對應
 
@@ -657,19 +628,7 @@ schema = strawberry.Schema(
 
 ### 7.4 GraphQL 架構
 
-```mermaid
-graph LR
-    Client[Client] --> GQL[/graphql/]
-    GQL --> Schema[Strawberry Schema]
-    Schema --> CQ[CircuitsQuery]
-    Schema --> DQ[DCIMQuery]
-    Schema --> IQ[IPAMQuery]
-    Schema --> EQ[ExtrasQuery]
-    Schema --> VQ[VirtualizationQuery]
-    Schema --> PQ["Plugin Schemas<br/>(動態載入)"]
-    Schema --> Ext1[DjangoOptimizerExtension]
-    Schema --> Ext2[MaxAliasesLimiter]
-```
+![GraphQL 架構](/diagrams/netbox/netbox-api-reference-2.png)
 
 ## 8. Bulk Operations
 
@@ -754,24 +713,7 @@ curl -X POST "https://netbox.example.com/api/dcim/sites/" \
 
 ### 8.4 Bulk 操作流程
 
-```mermaid
-sequenceDiagram
-    participant Client
-    participant Router as NetBoxRouter
-    participant Mixin as BulkUpdateModelMixin
-    participant Serializer as BulkOperationSerializer
-    participant DB as PostgreSQL
-
-    Client->>Router: PATCH /api/dcim/sites/<br/>[{id:1, status:"planned"}, ...]
-    Router->>Mixin: bulk_partial_update(request)
-    Mixin->>Serializer: validate(request.data)
-    Serializer-->>Mixin: validated_data
-    Mixin->>DB: filter(pk__in=[1, 2, 3])
-    loop 逐一更新
-        Mixin->>DB: update(obj, data)
-    end
-    Mixin-->>Client: 200 OK [updated objects]
-```
+![Bulk Update 操作流程](/diagrams/netbox/netbox-api-reference-3.png)
 
 ## 9. OpenAPI Schema
 
@@ -804,23 +746,7 @@ SPECTACULAR_SETTINGS = {
 
 ### 9.3 Schema 使用流程
 
-```mermaid
-graph TB
-    subgraph "Schema 產生"
-        DRF[Django REST Framework] --> Spectacular[drf-spectacular]
-        ViewSets --> Spectacular
-        Serializers --> Spectacular
-        FilterSets --> Spectacular
-        Spectacular --> Schema[OpenAPI 3.0 Schema]
-    end
-
-    subgraph "Schema 消費"
-        Schema --> Swagger[Swagger UI<br/>/api/schema/swagger-ui/]
-        Schema --> ReDoc[ReDoc<br/>/api/schema/redoc/]
-        Schema --> CodeGen[程式碼產生器<br/>openapi-generator]
-        Schema --> Client[API Client SDK]
-    end
-```
+![OpenAPI Schema 產生與使用](/diagrams/netbox/netbox-api-reference-4.png)
 
 **透過 Schema 產生 Client SDK：**
 

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="340" viewBox="0 0 1000 340">
+<rect width="1000" height="340" fill="#ffffff"/>
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+  </marker>
+</defs>
+<rect x="40" y="144" width="100" height="52" rx="20" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+<text x="90" y="170" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="15" fill="#111827" font-weight="600">使用者</text>
+<rect x="320" y="34" width="160" height="52" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="400" y="60" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827"><tspan x="400" dy="-8">序列控制台</tspan><tspan x="400" dy="8">Serial Console</tspan></text>
+<path d="M 140 170 L 210 170 L 210 60 L 320 60" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="230" y="52" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">virtctl console</text>
+<rect x="320" y="114" width="160" height="52" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="400" y="140" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827"><tspan x="400" dy="-8">圖形桌面</tspan><tspan x="400" dy="8">VNC</tspan></text>
+<path d="M 140 170 L 210 170 L 210 140 L 320 140" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="230" y="132" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">virtctl vnc</text>
+<rect x="320" y="194" width="160" height="52" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="400" y="220" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827">SSH 連線</text>
+<path d="M 140 170 L 210 170 L 210 220 L 320 220" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="230" y="212" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">virtctl ssh</text>
+<rect x="320" y="274" width="160" height="52" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="400" y="300" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827"><tspan x="400" dy="-8">自訂 Port</tspan><tspan x="400" dy="8">Forwarding</tspan></text>
+<path d="M 140 170 L 210 170 L 210 300 L 320 300" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="230" y="292" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">kubectl port-forward</text>
+</svg>

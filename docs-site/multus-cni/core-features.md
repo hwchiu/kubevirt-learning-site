@@ -20,35 +20,7 @@ layout: doc
 
 當 kubelet 為 Pod 建立網路時，完整的處理流程如下：
 
-```mermaid
-sequenceDiagram
-    participant CRI as kubelet / CRI
-    participant M as Multus 核心邏輯<br/>(pkg/multus/multus.go)
-    participant K8S as Kubernetes API<br/>(pkg/k8sclient)
-    participant D1 as 預設 CNI<br/>（如 Flannel）
-    participant D2 as 附加 CNI 1<br/>（如 SR-IOV）
-    participant D3 as 附加 CNI 2<br/>（如 macvlan）
-
-    CRI->>M: CNI ADD（CNI_ARGS 含 Pod 名稱/命名空間）
-    M->>M: 解析 NetConf，取得 kubeconfig
-    M->>K8S: GetPod(namespace, name)
-    K8S-->>M: Pod 物件（含 Annotations）
-    M->>M: 解析 k8s.v1.cni.cncf.io/networks Annotation
-    loop 每個網路附加選擇器
-        M->>K8S: GetNetworkAttachmentDef(namespace, name)
-        K8S-->>M: NetworkAttachmentDefinition CR
-        M->>M: 轉換為 DelegateNetConf
-    end
-    M->>D1: 委派 ADD（預設網路，eth0）
-    D1-->>M: 網路結果（IP、路由等）
-    M->>D2: 委派 ADD（附加網路 1，net1）
-    D2-->>M: 網路結果
-    M->>D3: 委派 ADD（附加網路 2，net2）
-    D3-->>M: 網路結果
-    M->>M: 合併結果，儲存 delegates 至 scratch 目錄
-    M-->>CRI: CNI 結果（主要 eth0 的 IP 資訊）
-    M->>K8S: 更新 Pod Annotation k8s.v1.cni.cncf.io/network-status
-```
+![CNI 委派流程（ADD 操作）](/diagrams/multus-cni/multus-core-1.png)
 
 ### 關鍵程式碼路徑（`pkg/multus/multus.go`）
 
@@ -153,14 +125,7 @@ annotations:
 
 Multus 的 DEL 操作依賴 **scratch 快取**機制（`pkg/multus/multus.go`）：
 
-```mermaid
-flowchart LR
-    A[CmdAdd 執行完成] -->|saveDelegates()| B["/var/lib/cni/multus/{containerID}\n儲存所有 DelegateNetConf JSON"]
-    C[CmdDel 呼叫] --> D{快取存在？}
-    D -->|是| E[consumeScratchNetConf()\n讀取快取，並刪除檔案]
-    E --> F[對每個 DelegateNetConf\n呼叫委派 DEL]
-    D -->|否| G[記錄警告，\n嘗試從設定重建]
-```
+![DEL 流程與 Scratch 快取機制](/diagrams/multus-cni/multus-core-2.png)
 
 ::: warning 為何需要快取
 DEL 呼叫時，Pod 可能已被清理，Kubernetes API 可能無法回傳 Pod 資訊（包含 Annotations）。因此 Multus 在 ADD 時主動儲存所有委派外掛的設定，確保 DEL 時能正確清理所有網路介面。
@@ -217,14 +182,7 @@ Multus 支援等待預設 CNI 外掛就緒後才處理 CNI 請求：
 
 Multus 透過 `pkg/checkpoint/` 與 `pkg/kubeletclient/` 與 kubelet 的裝置管理整合：
 
-```mermaid
-flowchart LR
-    K[kubelet] -->|分配 SR-IOV VF| CP["/var/lib/kubelet/device-plugins/\nkubelet_internal_checkpoint"]
-    M[Multus] -->|讀取 checkpoint| CP
-    M -->|取得 DeviceID| NAD[NAD 設定]
-    M -->|設定 DeviceID| RC[RuntimeConfig]
-    M -->|委派| SRIOV[SR-IOV CNI Plugin]
-```
+![SR-IOV 裝置分配整合流程](/diagrams/multus-cni/multus-core-features-3.png)
 
 `pkg/checkpoint/checkpoint.go` 讀取 kubelet 的裝置分配 checkpoint 檔案，取得 Pod 已分配的 SR-IOV Virtual Function（VF）裝置 ID，再透過 RuntimeConfig 傳遞給 SR-IOV CNI 外掛。
 

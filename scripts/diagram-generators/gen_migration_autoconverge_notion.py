@@ -1,0 +1,100 @@
+#!/usr/bin/env python3
+"""Generate Notion Clean SVG for Auto-converge Flow"""
+
+def generate_svg():
+    svg = '''<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1100">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <style>
+      text { 
+        font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+        fill: #111827;
+      }
+      .box-title { font-size: 14px; font-weight: 500; fill: #111827; text-anchor: middle; }
+      .box-subtitle { font-size: 12px; fill: #6b7280; text-anchor: middle; }
+      .decision-title { font-size: 13px; font-weight: 500; fill: #111827; text-anchor: middle; }
+      .decision-subtitle { font-size: 12px; fill: #6b7280; text-anchor: middle; }
+      .edge-label { font-size: 12px; fill: #3b82f6; font-weight: 500; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="1100" fill="#ffffff"/>
+
+  <!-- Migration Running -->
+  <rect x="550" y="60" width="300" height="70" rx="35" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="700" y="102" class="box-title">Migration Running</text>
+
+  <!-- Decision 1: dirty rate > transfer rate? -->
+  <path d="M 700 250 L 850 350 L 700 450 L 550 350 Z" fill="#fff7ed" stroke="#fdba74" stroke-width="2"/>
+  <text x="700" y="340" class="decision-title">dirty rate ></text>
+  <text x="700" y="360" class="decision-title">transfer rate?</text>
+
+  <!-- 繼續傳輸 -->
+  <rect x="950" y="305" width="200" height="90" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="1050" y="355" class="box-title">繼續傳輸</text>
+
+  <!-- 降低 vCPU 速度 -->
+  <rect x="250" y="550" width="300" height="90" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="400" y="585" class="box-title">降低 vCPU 速度</text>
+  <text x="400" y="608" class="box-subtitle">例如: 降至 80%</text>
+
+  <!-- dirty rate 降低 -->
+  <rect x="550" y="550" width="300" height="70" rx="35" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="700" y="592" class="box-title">dirty rate 降低</text>
+
+  <!-- Decision 2: 可以收斂? -->
+  <path d="M 700 730 L 850 830 L 700 930 L 550 830 Z" fill="#fff7ed" stroke="#fdba74" stroke-width="2"/>
+  <text x="700" y="830" class="decision-title">可以收斂?</text>
+
+  <!-- 繼續降低 vCPU 速度 -->
+  <rect x="950" y="755" width="300" height="150" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="1100" y="815" class="box-title">繼續降低 vCPU 速度</text>
+  <text x="1100" y="840" class="box-subtitle">最低可降至 20%</text>
+
+  <!-- 完成 downtime -->
+  <rect x="250" y="785" width="300" height="90" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+  <text x="400" y="820" class="box-title">完成 downtime</text>
+  <text x="400" y="843" class="box-subtitle">Migration Succeeded</text>
+
+  <!-- Arrow: Migration Running to Decision 1 -->
+  <line x1="700" y1="130" x2="700" y2="250" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Arrow: Decision 1 to 繼續傳輸 (No) -->
+  <line x1="850" y1="350" x2="950" y2="350" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="900" y="340" class="edge-label">No</text>
+
+  <!-- Arrow: 繼續傳輸 back to Decision 1 -->
+  <path d="M 1050 305 Q 1050 250 850 290" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Arrow: Decision 1 to 降低 vCPU (Yes) -->
+  <line x1="600" y1="450" x2="450" y2="550" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="490" y="495" class="edge-label">Yes</text>
+
+  <!-- Arrow: 降低 vCPU to dirty rate 降低 -->
+  <line x1="550" y1="585" x2="550" y2="585" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Arrow: dirty rate 降低 to Decision 2 -->
+  <line x1="700" y1="620" x2="700" y2="730" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Arrow: Decision 2 to 繼續降低 (No) -->
+  <line x1="850" y1="830" x2="950" y2="830" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="900" y="820" class="edge-label">No</text>
+
+  <!-- Arrow: 繼續降低 back to Decision 2 -->
+  <path d="M 1100 755 Q 1100 680 850 770" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Arrow: Decision 2 to 完成 downtime (Yes) -->
+  <line x1="550" y1="830" x2="550" y2="830" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="480" y="820" class="edge-label">Yes</text>
+
+</svg>'''
+    return svg
+
+if __name__ == '__main__':
+    with open('kubevirt-migration-autoconverge-notion.svg', 'w') as f:
+        f.write(generate_svg())
+    print('Generated: kubevirt-migration-autoconverge-notion.svg')

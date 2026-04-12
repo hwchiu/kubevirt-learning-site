@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <style>
+      .device-a { fill: #4CAF50; stroke: #2e7d32; stroke-width: 1.5; }
+      .device-b { fill: #4CAF50; stroke: #2e7d32; stroke-width: 1.5; }
+      .panel-1 { fill: #FF9800; stroke: #e65100; stroke-width: 1.5; }
+      .panel-2 { fill: #2196F3; stroke: #0d47a1; stroke-width: 1.5; }
+      .container { fill: #f9fafb; stroke: #e5e7eb; stroke-width: 1.5; stroke-dasharray: 5,3; }
+      .text-title { fill: white; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 13px; font-weight: 600; }
+      .text-container { fill: #111827; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: 600; }
+      .text-label { fill: #6b7280; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; }
+      .line-cable { stroke: #3b82f6; stroke-width: 2; fill: none; }
+      .line-mapping { stroke: #6b7280; stroke-width: 1.5; fill: none; stroke-dasharray: 4,3; }
+    </style>
+  </defs>
+
+  <!-- Device A container -->
+  <rect class="container" x="30" y="30" width="180" height="340" rx="6"/>
+  <text class="text-container" x="120" y="55" text-anchor="middle">Device A</text>
+  
+  <rect class="device-a" x="60" y="150" width="120" height="60" rx="4"/>
+  <text class="text-title" x="120" y="185" text-anchor="middle">Interface 1</text>
+
+  <!-- Patch Panel 1 container -->
+  <rect class="container" x="270" y="30" width="200" height="340" rx="6"/>
+  <text class="text-container" x="370" y="55" text-anchor="middle">Patch Panel 1</text>
+  
+  <rect class="panel-1" x="300" y="100" width="140" height="60" rx="4"/>
+  <text class="text-title" x="370" y="135" text-anchor="middle">Front Port 1</text>
+
+  <rect class="panel-1" x="300" y="240" width="140" height="60" rx="4"/>
+  <text class="text-title" x="370" y="275" text-anchor="middle">Rear Port 1</text>
+
+  <!-- Port mapping 1 -->
+  <path class="line-mapping" d="M 370 160 L 370 240"/>
+  <text class="text-label" x="380" y="205">PortMapping</text>
+
+  <!-- Patch Panel 2 container -->
+  <rect class="container" x="530" y="30" width="200" height="340" rx="6"/>
+  <text class="text-container" x="630" y="55" text-anchor="middle">Patch Panel 2</text>
+  
+  <rect class="panel-2" x="560" y="100" width="140" height="60" rx="4"/>
+  <text class="text-title" x="630" y="135" text-anchor="middle">Front Port 3</text>
+
+  <rect class="panel-2" x="560" y="240" width="140" height="60" rx="4"/>
+  <text class="text-title" x="630" y="275" text-anchor="middle">Rear Port 2</text>
+
+  <!-- Port mapping 2 -->
+  <path class="line-mapping" d="M 630 160 L 630 240"/>
+  <text class="text-label" x="640" y="205">PortMapping</text>
+
+  <!-- Device B container -->
+  <rect class="container" x="790" y="30" width="180" height="340" rx="6"/>
+  <text class="text-container" x="880" y="55" text-anchor="middle">Device B</text>
+  
+  <rect class="device-b" x="820" y="150" width="120" height="60" rx="4"/>
+  <text class="text-title" x="880" y="185" text-anchor="middle">Interface 2</text>
+
+  <!-- Cable A: IF1 -> FP1 -->
+  <path class="line-cable" d="M 180 180 L 300 130" marker-end="url(#arrow)"/>
+  <text class="text-label" x="220" y="145">Cable A</text>
+
+  <!-- Cable B: RP1 -> RP2 -->
+  <path class="line-cable" d="M 440 270 L 560 270" marker-end="url(#arrow)"/>
+  <text class="text-label" x="480" y="260">Cable B</text>
+
+  <!-- Cable C: FP3 -> IF2 -->
+  <path class="line-cable" d="M 700 130 L 820 180" marker-end="url(#arrow)"/>
+  <text class="text-label" x="740" y="145">Cable C</text>
+
+</svg>

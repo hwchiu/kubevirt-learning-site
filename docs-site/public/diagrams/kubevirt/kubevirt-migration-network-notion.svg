@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 500">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <style>
+      text { 
+        font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+        fill: #111827;
+      }
+      .section-title { font-size: 16px; font-weight: 600; fill: #111827; }
+      .box-title { font-size: 14px; font-weight: 500; fill: #111827; }
+      .box-label { font-size: 13px; fill: #6b7280; }
+      .edge-label { font-size: 12px; fill: #6b7280; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="500" fill="#ffffff"/>
+
+  <!-- Source Node Container -->
+  <rect x="100" y="80" width="400" height="340" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="300" y="115" text-anchor="middle" class="section-title">Source Node</text>
+
+  <!-- virt-launcher Source -->
+  <rect x="150" y="150" width="300" height="80" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="300" y="180" text-anchor="middle" class="box-title">virt-launcher</text>
+  <text x="300" y="205" text-anchor="middle" class="box-label">Source</text>
+
+  <!-- Migration Interface Source -->
+  <rect x="150" y="270" width="300" height="100" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="300" y="295" text-anchor="middle" class="box-title">Migration</text>
+  <text x="300" y="315" text-anchor="middle" class="box-title">Interface</text>
+  <text x="300" y="340" text-anchor="middle" class="box-label">10.0.1.1</text>
+
+  <!-- Connection Source virt-launcher to Interface -->
+  <line x1="300" y1="230" x2="300" y2="270" stroke="#6b7280" stroke-width="3"/>
+
+  <!-- Target Node Container -->
+  <rect x="900" y="80" width="400" height="340" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="1100" y="115" text-anchor="middle" class="section-title">Target Node</text>
+
+  <!-- virt-launcher Target -->
+  <rect x="950" y="150" width="300" height="80" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="1100" y="180" text-anchor="middle" class="box-title">virt-launcher</text>
+  <text x="1100" y="205" text-anchor="middle" class="box-label">Target</text>
+
+  <!-- Migration Interface Target -->
+  <rect x="950" y="270" width="300" height="100" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="1100" y="295" text-anchor="middle" class="box-title">Migration</text>
+  <text x="1100" y="315" text-anchor="middle" class="box-title">Interface</text>
+  <text x="1100" y="340" text-anchor="middle" class="box-label">10.0.1.2</text>
+
+  <!-- Connection Target virt-launcher to Interface -->
+  <line x1="1100" y1="230" x2="1100" y2="270" stroke="#6b7280" stroke-width="3"/>
+
+  <!-- Migration Traffic Arrow (Source to Target) -->
+  <line x1="450" y1="320" x2="950" y2="320" stroke="#3b82f6" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="700" y="305" text-anchor="middle" class="edge-label">Migration Traffic</text>
+  <text x="700" y="325" text-anchor="middle" class="edge-label">獨立 VLAN/Network</text>
+
+</svg>

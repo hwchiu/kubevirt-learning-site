@@ -38,19 +38,7 @@ layout: doc
 
 ### LogManager 架構
 
-```mermaid
-graph TB
-    LM["LogManager"] -->|"管理 N 個"| UL1["UnifiedLog<br/>(topic-0)"]
-    LM -->|"管理 N 個"| UL2["UnifiedLog<br/>(topic-1)"]
-    LM -->|"管理 N 個"| UL3["UnifiedLog<br/>(topic-N)"]
-
-    UL1 --> LS1["LogSegment 1<br/>(.log + .index)"]
-    UL1 --> LS2["LogSegment 2<br/>(.log + .index)"]
-    UL1 --> LS3["LogSegment N（Active）<br/>（寫入中）"]
-
-    LM --> LC["LogCleaner<br/>（Compaction 後台）"]
-    LM --> LRetention["LogRetention<br/>（過期刪除後台）"]
-```
+![LogManager 架構](/diagrams/kafka/kafka-modules-logmanager-1.png)
 
 ## `clients` 模組（Java）
 
@@ -93,16 +81,7 @@ public interface Serializer<T> extends Closeable {
 
 ### 核心類別層次
 
-```mermaid
-graph TB
-    KS["KafkaStreams<br/>（串流應用主程序）"] --> ST["StreamThread[]<br/>（N 個執行緒）"]
-    ST --> TP1["TaskManager<br/>（管理 Active/Standby Task）"]
-    TP1 --> T1["StreamTask<br/>（Active：處理並生產）"]
-    TP1 --> T2["StandbyTask<br/>（備援：維護狀態副本）"]
-    T1 --> Proc["ProcessorChain<br/>（ProcessorNode 鏈）"]
-    Proc --> SS["StateStore<br/>（RocksDB / InMemory）"]
-    T1 --> RC["RecordCollector<br/>（輸出至 Kafka）"]
-```
+![Kafka Streams 核心類別層次](/diagrams/kafka/kafka-modules-streams-2.png)
 
 ### StreamsBuilder 主要 API
 
@@ -137,23 +116,7 @@ Kafka Connect 是資料整合框架，分為多個子模組：
 
 ### 子模組架構
 
-```mermaid
-graph TB
-    ConnectAPI["connect/api<br/>（Connector/Task/Transform 介面）"]
-    ConnectRuntime["connect/runtime<br/>（Worker 執行環境）"]
-    ConnectTransforms["connect/transforms<br/>（內建 SMT）"]
-    ConnectJson["connect/json<br/>（JSON Converter）"]
-    ConnectFile["connect/file<br/>（FileStream Connector）"]
-    ConnectMirror["connect/mirror<br/>（MirrorMaker 2）"]
-    ConnectMirrorClient["connect/mirror-client<br/>（MirrorMaker 2 用戶端）"]
-    ConnectBasicAuth["connect/basic-auth-extension<br/>（HTTP Basic Auth）"]
-
-    ConnectAPI --> ConnectRuntime
-    ConnectAPI --> ConnectTransforms
-    ConnectAPI --> ConnectJson
-    ConnectAPI --> ConnectFile
-    ConnectAPI --> ConnectMirror
-```
+![Connect 子模組架構](/diagrams/kafka/kafka-modules-connect-3.png)
 
 ### Connector 開發介面
 
@@ -208,18 +171,7 @@ public interface Transformation<R extends ConnectRecord<R>> extends Configurable
 
 ### Raft 狀態機
 
-```mermaid
-stateDiagram-v2
-    [*] --> Unattached : 啟動
-    Unattached --> Candidate : Election Timeout
-    Candidate --> Leader : 獲得多數票（Quorum）
-    Candidate --> Follower : 收到更高 Term 的選票或 Heartbeat
-    Candidate --> Candidate : 選舉超時重試
-    Leader --> Follower : 發現更高 Term
-    Follower --> Candidate : Election Timeout（未收到 Heartbeat）
-    Leader --> Leader : 持續發送 Heartbeat
-    Follower --> Follower : 接收 Leader Heartbeat / Log 複製
-```
+![Raft 狀態機](/diagrams/kafka/kafka-modules-raft-4.png)
 
 ## `metadata` 模組（Java）
 

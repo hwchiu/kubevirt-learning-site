@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="580" height="520">
+<defs><marker id="arr_3b82f6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/></marker>
+<marker id="arr_6b7280" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#6b7280"/></marker>
+</defs>
+<rect width="580" height="520" fill="#ffffff"/>
+<rect x="290" y="30" width="160" height="36" rx="18.0" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+<text x="370.0" y="48.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" dominant-baseline="middle"><tspan x="370.0" dy="0" fill="#111827">RequestLease</tspan></text>
+<polygon points="290,76 410,110 290,144 170,110" fill="#fef3c7" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="290" y="110.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="290" dy="0" fill="#111827">結果?</tspan></text>
+<rect x="90" y="200" width="200" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="190.0" y="222.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="190.0" dy="0" fill="#111827">ErrorOnLeaseCount++</tspan></text>
+<rect x="370" y="200" width="180" height="44" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+<text x="460.0" y="222.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="460.0" dy="0" fill="#111827">ErrorOnLeaseCount = 0</tspan></text>
+<polygon points="90,246 210,280 90,314 -30,280" fill="#fef3c7" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="90" y="273.5" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="90" dy="0" fill="#111827">ErrorOnLeaseCount &gt;</tspan><tspan x="90" dy="13" fill="#111827">3?</tspan></text>
+<rect x="270" y="360" width="180" height="36" rx="18.0" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="360.0" y="378.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" dominant-baseline="middle"><tspan x="360.0" dy="0" fill="#111827">重新排程 reconcile</tspan></text>
+<rect x="-20" y="360" width="200" height="54" rx="8" fill="#fee2e2" stroke="#fca5a5" stroke-width="1.5"/>
+<text x="80.0" y="380.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="80.0" dy="0" fill="#111827">Uncordon 節點 設定</tspan><tspan x="80.0" dy="14" fill="#111827">Phase=Failed</tspan></text>
+<rect x="10" y="440" width="160" height="36" rx="18.0" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+<text x="90.0" y="458.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" dominant-baseline="middle"><tspan x="90.0" dy="0" fill="#111827">結束維護</tspan></text>
+<line x1="370.0" y1="66" x2="290" y2="76" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<line x1="170" y1="110" x2="190.0" y2="200" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="166.3" y="158.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">AlreadyHeldError / 其他錯誤</text>
+<line x1="410" y1="110" x2="460.0" y2="200" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="422.8" y="161.8" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">成功</text>
+<line x1="190.0" y1="244" x2="90" y2="246" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<line x1="210" y1="280" x2="360.0" y2="360" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="278.4" y="332.4" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">否</text>
+<line x1="-30" y1="280" x2="80.0" y2="360" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="16.8" y="331.3" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">是</text>
+<line x1="80.0" y1="414" x2="90.0" y2="440" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+</svg>

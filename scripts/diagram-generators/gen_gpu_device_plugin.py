@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+"""
+Generate GPU Device Plugin Lifecycle Flowchart
+Notion Clean Style 4
+"""
+
+FONT = "-apple-system, 'Helvetica Neue', Arial, sans-serif"
+BG = "#ffffff"
+BOX_FILL = "#f9fafb"
+BOX_STROKE = "#e5e7eb"
+ARROW = "#3b82f6"
+TEXT_PRIMARY = "#111827"
+TEXT_SECONDARY = "#6b7280"
+
+svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 400">
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="{ARROW}"/>
+  </marker>
+</defs>
+
+<rect width="1100" height="400" fill="{BG}"/>
+
+<!-- Box 1: Discovery -->
+<rect x="50" y="150" width="140" height="80" rx="8" fill="{BOX_FILL}" stroke="{BOX_STROKE}" stroke-width="2"/>
+<text x="120" y="180" font-family="{FONT}" font-size="13" fill="{TEXT_PRIMARY}" text-anchor="middle">探索</text>
+<text x="120" y="200" font-family="{FONT}" font-size="13" fill="{TEXT_PRIMARY}" text-anchor="middle">Discovery</text>
+
+<!-- Arrow 1 -->
+<line x1="190" y1="190" x2="250" y2="190" stroke="{ARROW}" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="220" y="180" font-family="{FONT}" font-size="11" fill="{TEXT_SECONDARY}" text-anchor="middle">掃描 sysfs</text>
+
+<!-- Box 2: Registration -->
+<rect x="250" y="150" width="140" height="80" rx="8" fill="{BOX_FILL}" stroke="{BOX_STROKE}" stroke-width="2"/>
+<text x="320" y="180" font-family="{FONT}" font-size="13" fill="{TEXT_PRIMARY}" text-anchor="middle">註冊</text>
+<text x="320" y="200" font-family="{FONT}" font-size="13" fill="{TEXT_PRIMARY}" text-anchor="middle">Registration</text>
+
+<!-- Arrow 2 -->
+<line x1="390" y1="190" x2="450" y2="190" stroke="{ARROW}" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="420" y="180" font-family="{FONT}" font-size="11" fill="{TEXT_SECONDARY}" text-anchor="middle">gRPC 連線</text>
+<text x="420" y="195" font-family="{FONT}" font-size="11" fill="{TEXT_SECONDARY}" text-anchor="middle">Kubelet</text>
+
+<!-- Box 3: ListAndWatch -->
+<rect x="450" y="150" width="140" height="80" rx="8" fill="{BOX_FILL}" stroke="{BOX_STROKE}" stroke-width="2"/>
+<text x="520" y="190" font-family="{FONT}" font-size="13" fill="{TEXT_PRIMARY}" text-anchor="middle">ListAndWatch</text>
+
+<!-- Arrow 3 -->
+<line x1="590" y1="190" x2="650" y2="190" stroke="{ARROW}" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="620" y="180" font-family="{FONT}" font-size="11" fill="{TEXT_SECONDARY}" text-anchor="middle">回報裝置清單</text>
+
+<!-- Box 4: Wait for Allocation -->
+<rect x="650" y="150" width="140" height="80" rx="8" fill="{BOX_FILL}" stroke="{BOX_STROKE}" stroke-width="2"/>
+<text x="720" y="190" font-family="{FONT}" font-size="13" fill="{TEXT_PRIMARY}" text-anchor="middle">等待分配</text>
+
+<!-- Arrow 4 -->
+<line x1="790" y1="190" x2="850" y2="190" stroke="{ARROW}" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="820" y="180" font-family="{FONT}" font-size="11" fill="{TEXT_SECONDARY}" text-anchor="middle">Pod 請求資源</text>
+
+<!-- Box 5: Allocate -->
+<rect x="850" y="50" width="140" height="80" rx="8" fill="{BOX_FILL}" stroke="{BOX_STROKE}" stroke-width="2"/>
+<text x="920" y="90" font-family="{FONT}" font-size="13" fill="{TEXT_PRIMARY}" text-anchor="middle">Allocate</text>
+
+<!-- Arrow 5 -->
+<line x1="920" y1="130" x2="920" y2="250" stroke="{ARROW}" stroke-width="2"/>
+<line x1="920" y1="250" x2="850" y2="250" stroke="{ARROW}" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="935" y="190" font-family="{FONT}" font-size="11" fill="{TEXT_SECONDARY}">回傳裝置資訊</text>
+
+<!-- Box 6: Pod Started -->
+<rect x="650" y="250" width="200" height="80" rx="8" fill="{BOX_FILL}" stroke="{BOX_STROKE}" stroke-width="2"/>
+<text x="750" y="290" font-family="{FONT}" font-size="13" fill="{TEXT_PRIMARY}" text-anchor="middle">Pod 啟動</text>
+
+<!-- Arrow 6: Back to Wait -->
+<line x1="650" y1="290" x2="520" y2="290" stroke="{ARROW}" stroke-width="2"/>
+<line x1="520" y1="290" x2="520" y2="230" stroke="{ARROW}" stroke-width="2"/>
+<line x1="520" y1="230" x2="650" y2="230" stroke="{ARROW}" stroke-width="2"/>
+<line x1="650" y1="230" x2="650" y2="230" stroke="{ARROW}" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="580" y="310" font-family="{FONT}" font-size="11" fill="{TEXT_SECONDARY}" text-anchor="middle">Pod 終止</text>
+
+</svg>'''
+
+with open('kubevirt-gpu-device-plugin.svg', 'w') as f:
+    f.write(svg)
+
+print("Generated: kubevirt-gpu-device-plugin.svg")

@@ -1,0 +1,26 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+  </marker>
+</defs>
+<rect width="1200" height="500" fill="#ffffff"/>
+
+<text x="600" y="40" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle">VM Export Proxy 架構</text>
+<rect x="60.0" y="215.0" width="180" height="70" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/><text x="150" y="255" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">外部使用者</text>
+<rect x="350.0" y="210.0" width="200" height="80" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/><text x="450" y="243" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">virt-exportproxy</text><text x="450" y="258" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">(kubevirt NS)</text>
+<rect x="700.0" y="115.0" width="200" height="70" rx="4" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/><text x="800" y="143" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">virt-exportserver</text><text x="800" y="158" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">(匯出 Pod 1)</text>
+<rect x="700.0" y="315.0" width="200" height="70" rx="4" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/><text x="800" y="343" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">virt-exportserver</text><text x="800" y="358" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">(匯出 Pod 2)</text>
+<rect x="990.0" y="120.0" width="120" height="60" rx="4" fill="#fce7f3" stroke="#f472b6" stroke-width="2"/><text x="1050" y="143" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">PVC /</text><text x="1050" y="158" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">Snapshot</text>
+<rect x="990.0" y="320.0" width="120" height="60" rx="4" fill="#fce7f3" stroke="#f472b6" stroke-width="2"/><text x="1050" y="343" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">PVC /</text><text x="1050" y="358" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">Snapshot</text>
+<line x1="240" y1="250" x2="350" y2="250" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="295.0" y="242.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">HTTPS + Token</text>
+<line x1="550" y1="230" x2="700" y2="165" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="625.0" y="189.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">反向代理</text>
+<line x1="550" y1="270" x2="700" y2="335" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="625.0" y="294.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">反向代理</text>
+<line x1="900" y1="150" x2="990" y2="150" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="945.0" y="142.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">讀取</text>
+<line x1="900" y1="350" x2="990" y2="350" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="945.0" y="342.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">讀取</text>
+</svg>

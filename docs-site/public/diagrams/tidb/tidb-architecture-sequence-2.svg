@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 950">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-back" markerWidth="10" markerHeight="7" refX="1" refY="3.5" orient="auto">
+      <polygon points="8.5 0.5, 0 3.5, 8.5 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  
+  <rect width="1200" height="950" fill="#ffffff"/>
+  
+  <!-- Participants -->
+  <rect x="50" y="50" width="180" height="70" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2" rx="8"/>
+  <text x="140" y="90" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" fill="#111827" text-anchor="middle">Client</text>
+  
+  <rect x="320" y="50" width="180" height="70" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2" rx="8"/>
+  <text x="410" y="90" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" fill="#111827" text-anchor="middle">TiDB Server</text>
+  
+  <rect x="590" y="50" width="180" height="70" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2" rx="8"/>
+  <text x="680" y="90" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" fill="#111827" text-anchor="middle">PD</text>
+  
+  <rect x="860" y="50" width="180" height="70" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="2" rx="8"/>
+  <text x="950" y="90" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" fill="#111827" text-anchor="middle">TiKV</text>
+  
+  <!-- Lifelines -->
+  <line x1="140" y1="120" x2="140" y2="900" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="410" y1="120" x2="410" y2="900" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="680" y1="120" x2="680" y2="900" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="950" y1="120" x2="950" y2="900" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Message 1: Client to TiDB -->
+  <path d="M 140 160 L 410 160" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="250" y="150" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">SELECT * FROM t</text>
+  <text x="250" y="165" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">WHERE id=1</text>
+  
+  <!-- TiDB internal processing 1 -->
+  <rect x="415" y="200" width="10" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="440" y="230" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">解析 SQL → AST</text>
+  
+  <!-- TiDB internal processing 2 -->
+  <rect x="415" y="260" width="10" height="50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="440" y="290" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">語意分析 → 邏輯計劃</text>
+  
+  <!-- TiDB internal processing 3 -->
+  <rect x="415" y="320" width="10" height="60" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="440" y="345" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">優化 → 物理計劃</text>
+  <text x="440" y="360" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7280">(IndexLookup)</text>
+  
+  <!-- Message 2: TiDB to PD (TSO) -->
+  <path d="M 410 420 L 680 420" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="520" y="410" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">獲取 TSO</text>
+  <text x="520" y="425" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">(開始時間戳)</text>
+  
+  <!-- Response: PD to TiDB -->
+  <path d="M 680 460 L 410 460" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="520" y="450" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">startTS</text>
+  
+  <!-- Message 3: TiDB to PD (Region route) -->
+  <path d="M 410 510 L 680 510" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="480" y="500" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">查詢 Region 路由</text>
+  <text x="480" y="515" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">(id=1 位於哪個 Region)</text>
+  
+  <!-- Response: PD to TiDB -->
+  <path d="M 680 560 L 410 560" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="500" y="550" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">Region Leader 位址</text>
+  
+  <!-- Message 4: TiDB to TiKV -->
+  <path d="M 410 610 L 950 610" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="640" y="600" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">KV Get (startTS, key)</text>
+  
+  <!-- Response: TiKV to TiDB -->
+  <path d="M 950 660 L 410 660" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="650" y="650" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">value</text>
+  
+  <!-- Final response: TiDB to Client -->
+  <path d="M 410 710 L 140 710" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="240" y="700" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#6b7280">回傳結果集</text>
+</svg>

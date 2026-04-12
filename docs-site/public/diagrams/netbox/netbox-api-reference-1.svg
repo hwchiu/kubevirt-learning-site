@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <style>
+      .box { fill: #f9fafb; stroke: #e5e7eb; stroke-width: 1.5; }
+      .text-title { fill: #111827; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; font-weight: 600; }
+      .text-method { fill: #6b7280; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; }
+      .text-note { fill: #6b7280; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-style: italic; }
+      .line { stroke: #3b82f6; stroke-width: 1.5; fill: none; }
+    </style>
+  </defs>
+
+  <!-- BaseFilterSet -->
+  <rect class="box" x="320" y="30" width="260" height="80" rx="4"/>
+  <text class="text-title" x="450" y="55" text-anchor="middle">BaseFilterSet</text>
+  <line x1="330" y1="65" x2="570" y2="65" stroke="#e5e7eb" stroke-width="1"/>
+  <text class="text-method" x="340" y="83">+FILTER_DEFAULTS: dict</text>
+  <text class="text-method" x="340" y="100">+get_additional_lookups()</text>
+
+  <!-- ChangeLoggedModelFilterSet -->
+  <rect class="box" x="280" y="160" width="340" height="100" rx="4"/>
+  <text class="text-title" x="450" y="185" text-anchor="middle">ChangeLoggedModelFilterSet</text>
+  <line x1="290" y1="195" x2="610" y2="195" stroke="#e5e7eb" stroke-width="1"/>
+  <text class="text-method" x="300" y="213">+created: MultiValueDateTimeFilter</text>
+  <text class="text-method" x="300" y="230">+last_updated: MultiValueDateTimeFilter</text>
+  <text class="text-method" x="300" y="247">+created_by_request: UUIDFilter</text>
+
+  <!-- Arrow: BaseFilterSet → ChangeLoggedModelFilterSet -->
+  <path class="line" d="M 450 110 L 450 160" marker-end="url(#arrow)"/>
+
+  <!-- NetBoxModelFilterSet -->
+  <rect class="box" x="300" y="310" width="300" height="100" rx="4"/>
+  <text class="text-title" x="450" y="335" text-anchor="middle">NetBoxModelFilterSet</text>
+  <line x1="310" y1="345" x2="590" y2="345" stroke="#e5e7eb" stroke-width="1"/>
+  <text class="text-method" x="320" y="363">+q: CharFilter</text>
+  <text class="text-method" x="320" y="380">+tag: TagFilter</text>
+  <text class="text-method" x="320" y="397">+tag_id: TagIDFilter</text>
+
+  <!-- Arrow: ChangeLoggedModelFilterSet → NetBoxModelFilterSet -->
+  <path class="line" d="M 450 260 L 450 310" marker-end="url(#arrow)"/>
+
+  <!-- PrimaryModelFilterSet -->
+  <rect class="box" x="80" y="460" width="280" height="80" rx="4"/>
+  <text class="text-title" x="220" y="485" text-anchor="middle">PrimaryModelFilterSet</text>
+  <line x1="90" y1="495" x2="350" y2="495" stroke="#e5e7eb" stroke-width="1"/>
+  <text class="text-note" x="220" y="515" text-anchor="middle">«OwnerFilterMixin»</text>
+
+  <!-- OrganizationalModelFilterSet -->
+  <rect class="box" x="540" y="460" width="280" height="80" rx="4"/>
+  <text class="text-title" x="680" y="485" text-anchor="middle">OrganizationalModelFilterSet</text>
+  <line x1="550" y1="495" x2="810" y2="495" stroke="#e5e7eb" stroke-width="1"/>
+  <text class="text-note" x="680" y="515" text-anchor="middle">«OwnerFilterMixin»</text>
+
+  <!-- Arrow: NetBoxModelFilterSet → PrimaryModelFilterSet -->
+  <path class="line" d="M 380 410 L 280 460" marker-end="url(#arrow)"/>
+
+  <!-- Arrow: NetBoxModelFilterSet → OrganizationalModelFilterSet -->
+  <path class="line" d="M 520 410 L 620 460" marker-end="url(#arrow)"/>
+
+</svg>

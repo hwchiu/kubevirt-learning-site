@@ -1,0 +1,99 @@
+#!/usr/bin/env python3
+"""
+Generate Evict Strategy Flowchart
+Notion Clean Style 4
+"""
+
+FONT = "-apple-system, 'Helvetica Neue', Arial, sans-serif"
+BG = "#ffffff"
+BOX_FILL = "#f9fafb"
+BOX_STROKE = "#e5e7eb"
+ARROW = "#3b82f6"
+TEXT_PRIMARY = "#111827"
+TEXT_SECONDARY = "#6b7280"
+ACCENT_FILL = "#eff6ff"
+ACCENT_STROKE = "#bfdbfe"
+
+svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650">
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="{ARROW}"/>
+  </marker>
+</defs>
+
+<rect width="1200" height="650" fill="{BG}"/>
+
+<!-- Start -->
+<rect x="50" y="30" width="250" height="60" rx="8" fill="{BOX_FILL}" stroke="{BOX_STROKE}" stroke-width="2"/>
+<text x="175" y="55" font-family="{FONT}" font-size="13" fill="{TEXT_PRIMARY}" text-anchor="middle">WorkloadUpdateController</text>
+<text x="175" y="75" font-family="{FONT}" font-size="13" fill="{TEXT_PRIMARY}" text-anchor="middle">定期觸發</text>
+
+<!-- Decision 1 -->
+<line x1="175" y1="90" x2="175" y2="140" stroke="{ARROW}" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 175 140 L 315 200 L 175 260 L 35 200 Z" fill="{ACCENT_FILL}" stroke="{ACCENT_STROKE}" stroke-width="2"/>
+<text x="175" y="195" font-family="{FONT}" font-size="12" fill="{TEXT_PRIMARY}" text-anchor="middle">距上次驅逐</text>
+<text x="175" y="210" font-family="{FONT}" font-size="12" fill="{TEXT_PRIMARY}" text-anchor="middle">是否 >= batchEvictionInterval?</text>
+
+<!-- No path -->
+<line x1="35" y1="200" x2="35" y2="320" stroke="{ARROW}" stroke-width="2"/>
+<line x1="35" y1="320" x2="85" y2="320" stroke="{ARROW}" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="20" y="260" font-family="{FONT}" font-size="11" fill="{TEXT_SECONDARY}">否</text>
+<rect x="85" y="290" width="180" height="60" rx="8" fill="{BOX_FILL}" stroke="{BOX_STROKE}" stroke-width="2"/>
+<text x="175" y="315" font-family="{FONT}" font-size="13" fill="{TEXT_PRIMARY}" text-anchor="middle">跳過本輪</text>
+<text x="175" y="335" font-family="{FONT}" font-size="13" fill="{TEXT_PRIMARY}" text-anchor="middle">等待下次觸發</text>
+
+<!-- Yes path -->
+<line x1="315" y1="200" x2="400" y2="200" stroke="{ARROW}" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="330" y="190" font-family="{FONT}" font-size="11" fill="{TEXT_SECONDARY}">是</text>
+<rect x="400" y="170" width="220" height="60" rx="8" fill="{BOX_FILL}" stroke="{BOX_STROKE}" stroke-width="2"/>
+<text x="510" y="195" font-family="{FONT}" font-size="13" fill="{TEXT_PRIMARY}" text-anchor="middle">取得 evictOutdatedVMIs 列表</text>
+
+<line x1="620" y1="200" x2="680" y2="200" stroke="{ARROW}" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="680" y="170" width="250" height="60" rx="8" fill="{BOX_FILL}" stroke="{BOX_STROKE}" stroke-width="2"/>
+<text x="805" y="195" font-family="{FONT}" font-size="13" fill="{TEXT_PRIMARY}" text-anchor="middle">取前 batchEvictionSize 個 VMI</text>
+
+<line x1="930" y1="200" x2="1000" y2="200" stroke="{ARROW}" stroke-width="2"/>
+<line x1="1000" y1="200" x2="1000" y2="300" stroke="{ARROW}" stroke-width="2"/>
+<line x1="1000" y1="300" x2="950" y2="300" stroke="{ARROW}" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="800" y="270" width="150" height="60" rx="8" fill="{BOX_FILL}" stroke="{BOX_STROKE}" stroke-width="2"/>
+<text x="875" y="305" font-family="{FONT}" font-size="13" fill="{TEXT_PRIMARY}" text-anchor="middle">刪除 VMI Pod</text>
+
+<!-- Decision 2 -->
+<line x1="800" y1="300" x2="680" y2="300" stroke="{ARROW}" stroke-width="2"/>
+<line x1="680" y1="300" x2="680" y2="370" stroke="{ARROW}" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 680 370 L 780 420 L 680 470 L 580 420 Z" fill="{ACCENT_FILL}" stroke="{ACCENT_STROKE}" stroke-width="2"/>
+<text x="680" y="415" font-family="{FONT}" font-size="12" fill="{TEXT_PRIMARY}" text-anchor="middle">VM RunStrategy</text>
+<text x="680" y="430" font-family="{FONT}" font-size="12" fill="{TEXT_PRIMARY}" text-anchor="middle">= Always?</text>
+
+<!-- Yes path -->
+<line x1="780" y1="420" x2="850" y2="420" stroke="{ARROW}" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="795" y="410" font-family="{FONT}" font-size="11" fill="{TEXT_SECONDARY}">是</text>
+<rect x="850" y="390" width="200" height="80" rx="8" fill="{BOX_FILL}" stroke="{BOX_STROKE}" stroke-width="2"/>
+<text x="950" y="415" font-family="{FONT}" font-size="12" fill="{TEXT_PRIMARY}" text-anchor="middle">VM Controller</text>
+<text x="950" y="435" font-family="{FONT}" font-size="12" fill="{TEXT_PRIMARY}" text-anchor="middle">自動重建 VMI</text>
+<text x="950" y="455" font-family="{FONT}" font-size="12" fill="{TEXT_PRIMARY}" text-anchor="middle">使用新版 virt-launcher</text>
+
+<!-- No path -->
+<line x1="580" y1="420" x2="460" y2="420" stroke="{ARROW}" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="545" y="410" font-family="{FONT}" font-size="11" fill="{TEXT_SECONDARY}">否</text>
+<rect x="260" y="390" width="200" height="60" rx="8" fill="{BOX_FILL}" stroke="{BOX_STROKE}" stroke-width="2"/>
+<text x="360" y="415" font-family="{FONT}" font-size="12" fill="{TEXT_PRIMARY}" text-anchor="middle">VMI 終止</text>
+<text x="360" y="435" font-family="{FONT}" font-size="12" fill="{TEXT_PRIMARY}" text-anchor="middle">使用者需手動重啟</text>
+
+<!-- Convergence -->
+<line x1="950" y1="470" x2="950" y2="540" stroke="{ARROW}" stroke-width="2"/>
+<line x1="360" y1="450" x2="360" y2="540" stroke="{ARROW}" stroke-width="2"/>
+<line x1="360" y1="540" x2="950" y2="540" stroke="{ARROW}" stroke-width="2"/>
+<line x1="680" y1="540" x2="680" y2="570" stroke="{ARROW}" stroke-width="2" marker-end="url(#arrow)"/>
+
+<!-- End -->
+<rect x="530" y="570" width="300" height="60" rx="8" fill="{BOX_FILL}" stroke="{BOX_STROKE}" stroke-width="2"/>
+<text x="680" y="595" font-family="{FONT}" font-size="13" fill="{TEXT_PRIMARY}" text-anchor="middle">記錄驅逐時間戳</text>
+<text x="680" y="615" font-family="{FONT}" font-size="13" fill="{TEXT_PRIMARY}" text-anchor="middle">等待下一批次</text>
+
+</svg>'''
+
+with open('kubevirt-upgrade-5.svg', 'w') as f:
+    f.write(svg)
+
+print("Generated: kubevirt-upgrade-5.svg")

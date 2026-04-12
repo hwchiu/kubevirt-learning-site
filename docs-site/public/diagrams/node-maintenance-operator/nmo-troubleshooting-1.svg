@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="620">
+<defs><marker id="arr_3b82f6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/></marker>
+<marker id="arr_6b7280" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#6b7280"/></marker>
+</defs>
+<rect width="700" height="620" fill="#ffffff"/>
+<rect x="280" y="30" width="200" height="44" rx="8" fill="#fee2e2" stroke="#fca5a5" stroke-width="1.5"/>
+<text x="380.0" y="52.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="380.0" dy="0" fill="#111827">NodeMaintenance 異常</tspan></text>
+<polygon points="280,76 410,110 280,144 150,110" fill="#fef3c7" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="280" y="110.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="280" dy="0" fill="#111827">nm.status.phase</tspan></text>
+<polygon points="110,166 240,200 110,234 -20,200" fill="#fef3c7" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="110" y="200.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="110" dy="0" fill="#111827">drainProgress 是否推進?</tspan></text>
+<rect x="-10" y="300" width="190" height="36" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+<text x="85.0" y="318.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="85.0" dy="0" fill="#111827">正常排空中，請等待</tspan></text>
+<polygon points="-30,346 100,380 -30,414 -160,380" fill="#fef3c7" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="-30" y="380.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="-30" dy="0" fill="#111827">pendingPods 有值?</tspan></text>
+<rect x="-120" y="460" width="200" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="-20.0" y="482.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="-20.0" dy="0" fill="#111827">查看 PDB 卡住的 Pod</tspan></text>
+<rect x="80" y="460" width="180" height="36" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="170.0" y="478.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="170.0" dy="0" fill="#111827">查看 errorOnLeaseCount</tspan></text>
+<rect x="370" y="200" width="190" height="44" rx="8" fill="#fee2e2" stroke="#fca5a5" stroke-width="1.5"/>
+<text x="465.0" y="222.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="465.0" dy="0" fill="#111827">查看 status.lastError</tspan></text>
+<rect x="520" y="280" width="190" height="36" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="615.0" y="298.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="615.0" dy="0" fill="#111827">node not found → 節點名稱錯誤</tspan></text>
+<rect x="520" y="330" width="190" height="36" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="615.0" y="348.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="615.0" dy="0" fill="#111827">lease 錯誤 → Lease 衝突</tspan></text>
+<rect x="520" y="380" width="210" height="36" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="625.0" y="391.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="625.0" dy="0" fill="#111827">lease could not be</tspan><tspan x="625.0" dy="14" fill="#111827">extended → Lease 失敗超限</tspan></text>
+<rect x="370" y="430" width="190" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="465.0" y="452.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="465.0" dy="0" fill="#111827">查看 errorOnLeaseCount</tspan></text>
+<rect x="260" y="510" width="200" height="44" rx="8" fill="#f0f4ff" stroke="#c7d2fe" stroke-width="1.5"/>
+<text x="360.0" y="525.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="360.0" dy="0" fill="#111827">確認 medik8s-leases</tspan><tspan x="360.0" dy="14" fill="#111827">namespace</tspan></text>
+<rect x="480" y="510" width="170" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="565.0" y="525.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="565.0" dy="0" fill="#111827">查看 Operator logs</tspan><tspan x="565.0" dy="14" fill="#111827">kubectl logs ...</tspan></text>
+<rect x="300" y="570" width="200" height="36" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="400.0" y="588.0" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" dominant-baseline="middle"><tspan x="400.0" dy="0" fill="#111827">查看 Kubernetes Events</tspan></text>
+<line x1="380.0" y1="74" x2="280" y2="76" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<line x1="150" y1="110" x2="240" y2="200" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="185.1" y="164.9" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">Running</text>
+<line x1="410" y1="110" x2="465.0" y2="200" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="425.6" y="162.3" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">Failed</text>
+<line x1="280" y1="144" x2="465.0" y2="430" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="360.7" y="294.6" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">卡住/無進展</text>
+<line x1="-20" y1="200" x2="180" y2="318.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="72.9" y="271.1" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">是</text>
+<line x1="110" y1="234" x2="-30" y2="346" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="31.3" y="279.1" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">否</text>
+<line x1="-160" y1="380" x2="80" y2="482.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="-45.5" y="443.9" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">是</text>
+<line x1="100" y1="380" x2="80" y2="478.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="76.3" y="426.2" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">否</text>
+<line x1="560" y1="222.0" x2="520" y2="298.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<line x1="560" y1="222.0" x2="520" y2="348.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<line x1="560" y1="222.0" x2="520" y2="398.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<line x1="370" y1="452.0" x2="360.0" y2="510" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="351.2" y="478.6" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">遞增</text>
+<line x1="560" y1="452.0" x2="565.0" y2="510" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+<text x="548.6" y="482.2" text-anchor="middle" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="9" fill="#6b7280">未遞增</text>
+<line x1="565.0" y1="554" x2="500" y2="588.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr_3b82f6)"/>
+</svg>

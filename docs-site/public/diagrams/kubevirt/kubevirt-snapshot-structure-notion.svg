@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <style>
+      text { 
+        font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+        fill: #111827;
+      }
+      .box-title { font-size: 14px; font-weight: 600; text-anchor: middle; }
+      .box-subtitle { font-size: 12px; text-anchor: middle; }
+      .edge-label { font-size: 12px; fill: #6b7280; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="1100" fill="#ffffff"/>
+
+  <!-- VirtualMachineSnapshot -->
+  <rect x="600" y="60" width="400" height="100" rx="8" fill="#4a9eff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="800" y="100" class="box-title" fill="#fff">VirtualMachineSnapshot</text>
+  <text x="800" y="125" class="box-subtitle" fill="#fff">my-vm-snap</text>
+
+  <!-- VirtualMachineSnapshotContent -->
+  <rect x="550" y="240" width="500" height="100" rx="8" fill="#7b68ee" stroke="#6366f1" stroke-width="2"/>
+  <text x="800" y="280" class="box-title" fill="#fff">VirtualMachineSnapshotContent</text>
+  <text x="800" y="305" class="box-subtitle" fill="#fff">my-vm-snap-content</text>
+
+  <!-- Arrow: VMS to VMSC (管理) -->
+  <line x1="800" y1="160" x2="800" y2="240" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="820" y="205" class="edge-label">管理</text>
+
+  <!-- VolumeSnapshot 1 (os-disk) -->
+  <rect x="100" y="420" width="300" height="100" rx="8" fill="#48c9b0" stroke="#10b981" stroke-width="2"/>
+  <text x="250" y="460" class="box-title" fill="#fff">VolumeSnapshot</text>
+  <text x="250" y="485" class="box-subtitle" fill="#fff">my-vm-snap-os-disk</text>
+
+  <!-- VolumeSnapshot 2 (data-disk) -->
+  <rect x="550" y="420" width="300" height="100" rx="8" fill="#48c9b0" stroke="#10b981" stroke-width="2"/>
+  <text x="700" y="460" class="box-title" fill="#fff">VolumeSnapshot</text>
+  <text x="700" y="485" class="box-subtitle" fill="#fff">my-vm-snap-data-disk</text>
+
+  <!-- VolumeSnapshot 3 (config-disk) -->
+  <rect x="1000" y="420" width="300" height="100" rx="8" fill="#48c9b0" stroke="#10b981" stroke-width="2"/>
+  <text x="1150" y="460" class="box-title" fill="#fff">VolumeSnapshot</text>
+  <text x="1150" y="485" class="box-subtitle" fill="#fff">my-vm-snap-config-disk</text>
+
+  <!-- Arrows: VMSC to VolumeSnapshots (包含) -->
+  <line x1="650" y1="340" x2="280" y2="420" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="420" y="370" class="edge-label">包含</text>
+
+  <line x1="750" y1="340" x2="700" y2="420" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="735" y="370" class="edge-label">包含</text>
+
+  <line x1="950" y1="340" x2="1120" y2="420" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="1070" y="370" class="edge-label">包含</text>
+
+  <!-- PVC 1 (os-disk) -->
+  <rect x="100" y="600" width="300" height="80" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="250" y="635" class="box-title" fill="#111827">PVC</text>
+  <text x="250" y="660" class="box-subtitle" fill="#6b7280">os-disk</text>
+
+  <!-- PVC 2 (data-disk) -->
+  <rect x="550" y="600" width="300" height="80" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="700" y="635" class="box-title" fill="#111827">PVC</text>
+  <text x="700" y="660" class="box-subtitle" fill="#6b7280">data-disk</text>
+
+  <!-- PVC 3 (config-disk) -->
+  <rect x="1000" y="600" width="300" height="80" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="1150" y="635" class="box-title" fill="#111827">PVC</text>
+  <text x="1150" y="660" class="box-subtitle" fill="#6b7280">config-disk</text>
+
+  <!-- Arrows: VolumeSnapshots to PVCs (來自) -->
+  <line x1="250" y1="520" x2="250" y2="600" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="270" y="565" class="edge-label">來自</text>
+
+  <line x1="700" y1="520" x2="700" y2="600" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="720" y="565" class="edge-label">來自</text>
+
+  <line x1="1150" y1="520" x2="1150" y2="600" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="1170" y="565" class="edge-label">來自</text>
+
+  <!-- VirtualMachine -->
+  <rect x="600" y="750" width="400" height="80" rx="8" fill="#f39c12" stroke="#f59e0b" stroke-width="2"/>
+  <text x="800" y="785" class="box-title" fill="#fff">VirtualMachine</text>
+  <text x="800" y="810" class="box-subtitle" fill="#fff">my-vm</text>
+
+  <!-- Arrows: PVCs to VM (屬於) -->
+  <line x1="350" y1="680" x2="650" y2="770" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="450" y="715" class="edge-label">屬於</text>
+
+  <line x1="700" y1="680" x2="750" y2="750" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="735" y="705" class="edge-label">屬於</text>
+
+  <line x1="1050" y1="680" x2="950" y2="770" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="1015" y="715" class="edge-label">屬於</text>
+
+  <!-- VolumeSnapshotContent 1 -->
+  <rect x="100" y="920" width="300" height="100" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="250" y="960" class="box-title" fill="#111827">VolumeSnapshotContent</text>
+  <text x="250" y="985" class="box-subtitle" fill="#6b7280">由 CSI 管理</text>
+
+  <!-- VolumeSnapshotContent 2 -->
+  <rect x="550" y="920" width="300" height="100" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="700" y="960" class="box-title" fill="#111827">VolumeSnapshotContent</text>
+  <text x="700" y="985" class="box-subtitle" fill="#6b7280">由 CSI 管理</text>
+
+  <!-- VolumeSnapshotContent 3 -->
+  <rect x="1000" y="920" width="300" height="100" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="1150" y="960" class="box-title" fill="#111827">VolumeSnapshotContent</text>
+  <text x="1150" y="985" class="box-subtitle" fill="#6b7280">由 CSI 管理</text>
+
+  <!-- Arrows: VolumeSnapshots to VolumeSnapshotContents (儲存於) -->
+  <line x1="250" y1="520" x2="250" y2="920" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="270" y="720" class="edge-label">儲存於</text>
+
+  <line x1="700" y1="520" x2="700" y2="920" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="720" y="720" class="edge-label">儲存於</text>
+
+  <line x1="1150" y1="520" x2="1150" y2="920" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="1170" y="720" class="edge-label">儲存於</text>
+
+</svg>

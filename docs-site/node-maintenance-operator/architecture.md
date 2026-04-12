@@ -8,12 +8,7 @@ layout: doc
 
 Node Maintenance Operator 採用**單一控制器**架構：一個 binary（`main.go`）、一個 reconciler（`NodeMaintenanceReconciler`）、一個 CRD（`NodeMaintenance`）。
 
-```mermaid
-graph LR
-    User["👤 使用者"] -->|"kubectl apply"| CR["NodeMaintenance CR"]
-    CR -->|"watch"| Controller["NodeMaintenanceReconciler"]
-    Controller -->|"taint / cordon / drain"| Node["☸ Node"]
-```
+![架構概覽 - 使用者透過 kubectl apply 建立 NodeMaintenance CR，控制器監控並執行 taint/cordon/drain 操作](/diagrams/node-maintenance-operator/nmo-arch-1.png)
 
 ::: tip 設計哲學
 單一 CRD、單一控制器，職責明確。使用者只需建立或刪除一個 `NodeMaintenance` CR，Operator 即自動完成節點的封鎖與驅逐（或恢復）。
@@ -36,46 +31,11 @@ graph LR
 9. **Cordon 節點** — 設定 `node.Spec.Unschedulable = true`
 10. **drain.RunNodeDrain** — 若失敗：requeue 5 秒；若成功：設 phase = `Succeeded`，`DrainProgress = 100`
 
-```mermaid
-flowchart TD
-    A([開始 Reconcile]) --> B{Fetch NM CR}
-    B -->|不存在| Z([結束])
-    B -->|存在| C[建立 drain.Helper]
-    C --> D{Finalizer 檢查}
-    D -->|無 finalizer| E[新增 finalizer\n觸發 BeginMaintenance]
-    D -->|DeletionTimestamp 已設| F[stopMaintenance\n移除 finalizer\n觸發 RemovedMaintenance]
-    F --> Z
-    E --> G{phase == ''}
-    G -->|是| H[設 Running\n統計 TotalPods / EvictionPods]
-    G -->|否| I[取得 Node]
-    H --> I
-    I -->|Node 不存在| J[觸發 FailedMaintenance\n設 Failed]
-    J --> Z
-    I -->|Node 存在| K{ErrorOnLeaseCount > 3?}
-    K -->|是| L[Uncordon\n設 Failed]
-    L --> Z
-    K -->|否| M[RequestLease 3600s]
-    M --> N[Patch 標籤\nexclude-from-remediation=true]
-    N --> O[新增 Taint\nmedik8s.io/drain\nnode.kubernetes.io/unschedulable]
-    O --> P[Cordon 節點\nUnschedulable=true]
-    P --> Q[drain.RunNodeDrain]
-    Q -->|error| R[Requeue 5s]
-    Q -->|success| S[設 Succeeded\nDrainProgress=100]
-    S --> Z
-    R --> Z
-```
+![Reconcile 完整流程圖 - 從 Fetch CR 到 drain 完成的詳細步驟](/diagrams/node-maintenance-operator/nmo-arch-2.png)
 
 ## 狀態機
 
-```mermaid
-stateDiagram-v2
-    [*] --> Running : CR 建立，新增 finalizer
-    Running --> Running : drain 進行中，error 時 requeue 5s
-    Running --> Succeeded : 所有 Pod 驅逐完成
-    Running --> Failed : Node 不存在 OR ErrorOnLeaseCount > 3
-    Succeeded --> [*] : CR 刪除，節點 uncordon
-    Failed --> [*] : CR 刪除，節點 uncordon（若可行）
-```
+![狀態機圖 - NodeMaintenance CR 的生命週期狀態轉換](/diagrams/node-maintenance-operator/nmo-arch-3.png)
 
 ::: warning Failed 狀態說明
 進入 `Failed` 狀態後，Operator 不再自動重試。需由使用者手動刪除 CR，Operator 將在刪除流程中嘗試 uncordon 節點。

@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 850" style="background:#ffffff; font-family:-apple-system, 'Helvetica Neue', Arial, sans-serif;">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+  </defs>
+
+  <!-- Step A -->
+  <rect x="400" y="30" width="300" height="50" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="550" y="62" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">程式碼變更</text>
+  
+  <!-- Step B -->
+  <rect x="400" y="110" width="300" height="50" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="550" y="142" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">make all</text>
+  
+  <!-- Step C -->
+  <rect x="50" y="200" width="180" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="140" y="220" text-anchor="middle" font-size="12" font-weight="600" fill="#111827">lint:</text>
+  <text x="140" y="238" text-anchor="middle" font-size="12" fill="#111827">程式碼檢查</text>
+  
+  <!-- Step D -->
+  <rect x="250" y="200" width="180" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="340" y="220" text-anchor="middle" font-size="12" font-weight="600" fill="#111827">validate:</text>
+  <text x="340" y="238" text-anchor="middle" font-size="11" fill="#111827">kubeconform schema 驗證</text>
+  
+  <!-- Step E -->
+  <rect x="450" y="200" width="180" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="540" y="220" text-anchor="middle" font-size="12" font-weight="600" fill="#111827">readme:</text>
+  <text x="540" y="238" text-anchor="middle" font-size="12" fill="#111827">自動產生文件</text>
+  
+  <!-- Step F -->
+  <rect x="650" y="200" width="180" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="740" y="220" text-anchor="middle" font-size="12" font-weight="600" fill="#111827">test:</text>
+  <text x="740" y="238" text-anchor="middle" font-size="12" fill="#111827">單元測試</text>
+  
+  <!-- Step G -->
+  <rect x="850" y="200" width="180" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="940" y="220" text-anchor="middle" font-size="12" font-weight="600" fill="#111827">test-lint:</text>
+  <text x="940" y="238" text-anchor="middle" font-size="11" fill="#111827">Go 程式碼檢查</text>
+  
+  <!-- Step H (decision) -->
+  <path d="M 550 310 L 650 360 L 550 410 L 450 360 Z" fill="#fef3c7" stroke="#fbbf24" stroke-width="2"/>
+  <text x="550" y="365" text-anchor="middle" font-size="13" font-weight="700" fill="#111827">check-tree-clean</text>
+  
+  <!-- Step I -->
+  <rect x="400" y="480" width="300" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="550" y="512" text-anchor="middle" font-size="14" font-weight="600" fill="#111827">make cluster-up</text>
+  
+  <!-- Step J -->
+  <rect x="400" y="560" width="300" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="550" y="592" text-anchor="middle" font-size="14" font-weight="600" fill="#111827">make cluster-sync</text>
+  
+  <!-- Step K -->
+  <rect x="400" y="640" width="300" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="550" y="672" text-anchor="middle" font-size="14" font-weight="600" fill="#111827">make cluster-functest</text>
+  
+  <!-- Step L -->
+  <rect x="760" y="640" width="180" height="50" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="850" y="672" text-anchor="middle" font-size="13" font-weight="600" fill="#111827">git tag vX.Y.Z</text>
+  
+  <!-- Step M -->
+  <rect x="760" y="720" width="180" height="50" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="850" y="738" text-anchor="middle" font-size="12" font-weight="600" fill="#111827">GitHub Actions</text>
+  <text x="850" y="756" text-anchor="middle" font-size="12" fill="#111827">Release</text>
+  
+  <!-- Step N -->
+  <rect x="760" y="800" width="180" height="30" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+  <text x="850" y="822" text-anchor="middle" font-size="12" font-weight="700" fill="#065f46">產出 bundle + CHECKSUMS</text>
+  
+  <!-- Arrows -->
+  <path d="M 550 80 L 550 110" stroke="#3b82f6" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- B -> C/D/E/F/G -->
+  <path d="M 500 160 Q 300 180 140 200" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 520 160 Q 400 180 340 200" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 550 160 L 540 200" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 580 160 Q 680 180 740 200" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 600 160 Q 780 180 940 200" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- C/D/E/F/G -> H -->
+  <path d="M 140 250 Q 350 280 460 350" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 340 250 Q 420 280 480 340" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 540 250 Q 540 280 540 310" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 740 250 Q 640 280 600 340" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 940 250 Q 720 280 620 350" stroke="#3b82f6" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- H -> I (pass) -->
+  <path d="M 550 410 L 550 480" stroke="#3b82f6" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="575" y="450" font-size="12" font-weight="600" fill="#059669">通過</text>
+  
+  <!-- I -> J -->
+  <path d="M 550 530 L 550 560" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- J -> K -->
+  <path d="M 550 610 L 550 640" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- K -> L -->
+  <path d="M 700 665 L 760 665" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="725" y="655" font-size="11" font-weight="600" fill="#059669">通過</text>
+  
+  <!-- L -> M -->
+  <path d="M 850 690 L 850 720" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- M -> N -->
+  <path d="M 850 770 L 850 800" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+</svg>

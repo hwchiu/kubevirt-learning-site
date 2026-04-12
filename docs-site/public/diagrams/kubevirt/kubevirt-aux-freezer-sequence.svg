@@ -1,0 +1,59 @@
+<svg viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+  </marker>
+  <marker id="arrow-return" markerWidth="10" markerHeight="7" refX="1" refY="3.5" orient="auto">
+    <polygon points="8.5 0.5, 0 3.5, 8.5 6.5" fill="#9ca3af"/>
+  </marker>
+</defs>
+<rect width="1400" height="900" fill="#ffffff"/>
+
+<text x="700" y="40" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle">virt-freezer 檔案系統凍結流程</text>
+<rect x="50.0" y="80" width="140" height="50" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/><text x="120" y="98" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#111827" text-anchor="middle">Snapshot</text><text x="120" y="111" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#111827" text-anchor="middle">Controller</text>
+<line x1="120" y1="150" x2="120" y2="860" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+<rect x="250.0" y="80" width="140" height="50" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/><text x="320" y="110.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle">virt-freezer</text>
+<line x1="320" y1="150" x2="320" y2="860" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+<rect x="450.0" y="80" width="140" height="50" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/><text x="520" y="98" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#111827" text-anchor="middle">virt-launcher</text><text x="520" y="111" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#111827" text-anchor="middle">(gRPC)</text>
+<line x1="520" y1="150" x2="520" y2="860" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+<rect x="650.0" y="80" width="140" height="50" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/><text x="720" y="98" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#111827" text-anchor="middle">QEMU Monitor</text><text x="720" y="111" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#111827" text-anchor="middle">(QMP)</text>
+<line x1="720" y1="150" x2="720" y2="860" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+<rect x="850.0" y="80" width="140" height="50" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/><text x="920" y="110.0" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#111827" text-anchor="middle">Guest Agent</text>
+<line x1="920" y1="150" x2="920" y2="860" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+<rect x="1050.0" y="80" width="140" height="50" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/><text x="1120" y="98" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#111827" text-anchor="middle">Guest</text><text x="1120" y="111" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#111827" text-anchor="middle">Filesystem</text>
+<line x1="1120" y1="150" x2="1120" y2="860" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+<line x1="120" y1="190" x2="320" y2="190" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="220.0" y="173" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">執行 freeze 命令</text>
+<line x1="320" y1="250" x2="520" y2="250" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="420.0" y="233" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">gRPC 連接至 virt-launcher</text>
+<line x1="520" y1="310" x2="720" y2="310" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="620.0" y="293" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">發送 QMP 命令</text>
+<line x1="720" y1="370" x2="920" y2="370" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="820.0" y="353" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">guest-fsfreeze-freeze</text>
+<line x1="920" y1="430" x2="1120" y2="430" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1020.0" y="406" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">fsfreeze --freeze (Linux)</text>
+<text x="1020.0" y="419" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">VSS freeze (Windows)</text>
+<line x1="920" y1="490" x2="1120" y2="490" stroke="#9ca3af" stroke-width="2" stroke-dasharray="5,5" marker-start="url(#arrow-return)"/>
+<text x="1020.0" y="473" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">I/O 已凍結</text>
+<line x1="720" y1="530" x2="920" y2="530" stroke="#9ca3af" stroke-width="2" stroke-dasharray="5,5" marker-start="url(#arrow-return)"/>
+<text x="820.0" y="513" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">回應成功</text>
+<line x1="520" y1="570" x2="720" y2="570" stroke="#9ca3af" stroke-width="2" stroke-dasharray="5,5" marker-start="url(#arrow-return)"/>
+<text x="620.0" y="553" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">確認凍結</text>
+<line x1="320" y1="610" x2="520" y2="610" stroke="#9ca3af" stroke-width="2" stroke-dasharray="5,5" marker-start="url(#arrow-return)"/>
+<text x="420.0" y="593" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">回傳結果</text>
+
+<rect x="900" y="670" width="400" height="50" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="2"/>
+<text x="1100" y="695" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#111827" text-anchor="middle">⏱️ 檔案系統 I/O 暫停中...</text>
+<line x1="120" y1="750" x2="320" y2="750" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="220.0" y="742" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">執行 unfreeze 命令</text>
+<line x1="320" y1="810" x2="520" y2="810" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="420.0" y="802" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">gRPC 連接</text>
+<line x1="520" y1="870" x2="720" y2="870" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="620.0" y="862" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">發送 QMP 命令</text>
+<line x1="720" y1="930" x2="920" y2="930" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="820.0" y="922" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">guest-fsfreeze-thaw</text>
+<line x1="920" y1="990" x2="1120" y2="990" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1020.0" y="982" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">fsfreeze --unfreeze / VSS thaw</text>
+<line x1="120" y1="1030" x2="1120" y2="1030" stroke="#9ca3af" stroke-width="2" stroke-dasharray="5,5" marker-start="url(#arrow-return)"/>
+<text x="620.0" y="1022" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">I/O 已恢復</text>
+</svg>

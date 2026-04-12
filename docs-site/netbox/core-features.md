@@ -110,20 +110,7 @@ def handle_prefix_saved(instance, created, **kwargs):
             update_children_depth(old_prefix)
 ```
 
-```mermaid
-flowchart TD
-    A[Prefix save/delete] --> B{是否為新建或變更?}
-    B -->|是| C[update_parents_children]
-    B -->|是| D[update_children_depth]
-    C --> E[查詢所有 parent prefixes<br/>annotate_hierarchy]
-    E --> F[bulk_update _children 欄位]
-    D --> G[查詢所有 child prefixes<br/>annotate_hierarchy]
-    G --> H[bulk_update _depth 欄位]
-    B -->|否| I[跳過更新]
-    B -->|修改且 prefix 改變| J[對舊 prefix 也執行更新]
-    J --> C
-    J --> D
-```
+![Prefix 階層更新流程](/diagrams/netbox/netbox-core-features-1.png)
 
 ### 1.3 IP 分配演算法
 
@@ -255,7 +242,7 @@ class RouteTarget(PrimaryModel):
                                related_name='route_targets', blank=True, null=True)
 ```
 
-```mermaid
+![Device 模型階層](/diagrams/netbox/netbox-core-features-3.png)
 erDiagram
     VRF ||--o{ Prefix : "contains"
     VRF ||--o{ IPAddress : "contains"
@@ -266,6 +253,8 @@ erDiagram
     Prefix }o--|| Aggregate : "contained by"
     Aggregate }o--|| RIR : "belongs to"
 ```
+
+![IPAM 資料模型關聯](/diagrams/netbox/netbox-core-features-2.png)
 
 ---
 
@@ -304,31 +293,7 @@ class Device(ContactsMixin, ImageAttachmentsMixin, RenderConfigMixin,
     face = models.CharField(max_length=50, blank=True, null=True, choices=DeviceFaceChoices)
 ```
 
-```mermaid
-classDiagram
-    class Manufacturer {
-        +name: str
-    }
-    class DeviceType {
-        +manufacturer: FK
-        +model: str
-        +u_height: Decimal
-        +is_full_depth: bool
-        +subdevice_role: str
-    }
-    class Device {
-        +device_type: FK
-        +role: FK
-        +site: FK
-        +rack: FK
-        +position: Decimal
-        +face: str
-        +status: str
-    }
-    Manufacturer "1" --> "*" DeviceType : device_types
-    DeviceType "1" --> "*" Device : instances
-    Device "*" --> "0..1" Rack : rack
-```
+![Device 模型階層](/diagrams/netbox/netbox-core-features-3.png)
 
 ### 2.2 Cable Path Tracing 演算法
 
@@ -422,36 +387,9 @@ def from_origin(cls, terminations):
                is_active=is_active, is_split=is_split)
 ```
 
-```mermaid
-flowchart LR
-    subgraph "Device A"
-        IF1[Interface 1]
-    end
-    subgraph "Patch Panel 1"
-        FP1[Front Port 1]
-        RP1[Rear Port 1]
-        FP1 -.-|PortMapping| RP1
-    end
-    subgraph "Patch Panel 2"
-        RP2[Rear Port 2]
-        FP3[Front Port 3]
-        RP2 -.-|PortMapping| FP3
-    end
-    subgraph "Device B"
-        IF2[Interface 2]
-    end
-
-    IF1 ---|Cable A| FP1
-    RP1 ---|Cable B| RP2
-    FP3 ---|Cable C| IF2
-
-    style IF1 fill:#4CAF50,color:white
-    style IF2 fill:#4CAF50,color:white
-    style FP1 fill:#FF9800,color:white
-    style RP1 fill:#FF9800,color:white
-    style RP2 fill:#2196F3,color:white
-    style FP3 fill:#2196F3,color:white
 ```
+
+![Cable Path 範例](/diagrams/netbox/netbox-core-features-4.png)
 
 **Path Cache 與 Invalidation：**
 
@@ -662,7 +600,7 @@ class CustomFieldManager(models.Manager.from_queryset(RestrictedQuerySet)):
         return custom_fields
 ```
 
-```mermaid
+![Device 模型階層](/diagrams/netbox/netbox-core-features-3.png)
 flowchart LR
     A[Model Instance] -->|custom_field_data JSON| B[CustomFieldsMixin.cf]
     B --> C[CustomFieldManager.get_for_model]
@@ -770,7 +708,7 @@ def event_tracking(request):
     query_cache.set(None)
 ```
 
-```mermaid
+![Device 模型階層](/diagrams/netbox/netbox-core-features-3.png)
 sequenceDiagram
     participant Client
     participant Middleware as CoreMiddleware
@@ -861,7 +799,7 @@ class Script(EventRulesMixin, JobsMixin):
         return self.module.module_scripts.get(self.name)
 ```
 
-```mermaid
+![Device 模型階層](/diagrams/netbox/netbox-core-features-3.png)
 flowchart TD
     A[ScriptModule<br/>ManagedFile proxy] -->|載入 Python 模組| B[module_scripts dict]
     B -->|get by name| C[Script model]
@@ -976,7 +914,7 @@ post_save.connect(search_backend.caching_handler)
 post_delete.connect(search_backend.removal_handler)
 ```
 
-```mermaid
+![Device 模型階層](/diagrams/netbox/netbox-core-features-3.png)
 flowchart LR
     A[物件 save/delete] -->|post_save signal| B[caching_handler]
     B --> C{remove_existing?}
@@ -1143,7 +1081,7 @@ class NotificationGroup(ChangeLoggedModel):
             )
 ```
 
-```mermaid
+![Device 模型階層](/diagrams/netbox/netbox-core-features-3.png)
 flowchart TD
     A[物件變更事件] --> B{Subscription 存在?}
     B -->|是| C[建立 Notification]

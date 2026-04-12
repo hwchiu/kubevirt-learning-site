@@ -1,0 +1,105 @@
+#!/usr/bin/env python3
+"""Generate Notion Clean SVG for Post-copy Migration Sequence"""
+
+def generate_svg():
+    svg = '''<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1100">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-dashed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 8.5 3.5, 0 6.5" fill="#6b7280"/>
+    </marker>
+    <style>
+      text { 
+        font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+        fill: #111827;
+      }
+      .participant-label { font-size: 14px; font-weight: 600; fill: #111827; text-anchor: middle; }
+      .msg-label { font-size: 12px; fill: #111827; }
+      .note-text { font-size: 12px; fill: #6b7280; }
+      .phase-label { font-size: 13px; font-weight: 600; fill: #dc2626; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="1100" fill="#ffffff"/>
+
+  <!-- Participants -->
+  <!-- 來源節點 VM -->
+  <rect x="100" y="50" width="200" height="60" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="200" y="85" class="participant-label">來源節點 VM</text>
+  <line x1="200" y1="110" x2="200" y2="1050" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+
+  <!-- Migration Network -->
+  <rect x="450" y="50" width="200" height="60" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="550" y="85" class="participant-label">Migration Network</text>
+  <line x1="550" y1="110" x2="550" y2="1050" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+
+  <!-- 目標節點 VM -->
+  <rect x="800" y="50" width="200" height="60" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="900" y="85" class="participant-label">目標節點 VM</text>
+  <line x1="900" y1="110" x2="900" y2="1050" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5,5"/>
+
+  <!-- Note: VM 在來源節點運行 -->
+  <rect x="80" y="150" width="240" height="50" rx="4" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="200" y="175" class="note-text" text-anchor="middle">VM 在來源節點運行</text>
+
+  <!-- Arrow: 傳輸少量初始記憶體 -->
+  <line x1="200" y1="230" x2="540" y2="230" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="230" y="220" class="msg-label">傳輸少量初始記憶體</text>
+
+  <!-- Arrow: 初始化目標環境 -->
+  <line x1="560" y1="250" x2="890" y2="250" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="590" y="240" class="msg-label">初始化目標環境</text>
+
+  <!-- Note: 切換點 -->
+  <rect x="300" y="290" width="500" height="50" rx="4" fill="#fee2e2" stroke="#fca5a5" stroke-width="2"/>
+  <text x="550" y="320" class="phase-label">━━━ 切換點 ━━━</text>
+
+  <!-- Dashed arrow: VM 控制權轉移到目標節點 -->
+  <line x1="200" y1="370" x2="890" y2="370" stroke="#6b7280" stroke-width="2" stroke-dasharray="8,4" marker-end="url(#arrow-dashed)"/>
+  <text x="450" y="360" class="msg-label">VM 控制權轉移到目標節點</text>
+
+  <!-- Note: VM 開始在目標節點執行 -->
+  <rect x="780" y="410" width="240" height="50" rx="4" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="900" y="435" class="note-text" text-anchor="middle">VM 開始在目標節點執行</text>
+
+  <!-- Note: 存取未傳輸的記憶體頁面 → page fault -->
+  <rect x="740" y="490" width="320" height="60" rx="4" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="900" y="515" class="note-text" text-anchor="middle">存取未傳輸的記憶體頁面</text>
+  <text x="900" y="535" class="note-text" text-anchor="middle">→ page fault</text>
+
+  <!-- Arrow: 發出 page fault 請求 -->
+  <line x1="890" y1="580" x2="560" y2="580" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="650" y="570" class="msg-label">發出 page fault 請求</text>
+
+  <!-- Arrow: 從來源節點按需取得頁面 -->
+  <line x1="540" y1="600" x2="210" y2="600" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="280" y="590" class="msg-label">從來源節點按需取得頁面</text>
+
+  <!-- Arrow: 傳送缺失的記憶體頁面 -->
+  <line x1="200" y1="640" x2="540" y2="640" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="230" y="630" class="msg-label">傳送缺失的記憶體頁面</text>
+
+  <!-- Arrow: 補足記憶體頁面 -->
+  <line x1="560" y1="660" x2="890" y2="660" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="590" y="650" class="msg-label">補足記憶體頁面</text>
+
+  <!-- Note: 持續補足，直到所有頁面傳輸完成 -->
+  <rect x="740" y="700" width="320" height="60" rx="4" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="900" y="725" class="note-text" text-anchor="middle">持續補足，直到所有頁面</text>
+  <text x="900" y="745" class="note-text" text-anchor="middle">傳輸完成</text>
+
+  <!-- Note: 來源節點可以退役 -->
+  <rect x="80" y="800" width="240" height="50" rx="4" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+  <text x="200" y="830" class="note-text" text-anchor="middle">來源節點可以退役</text>
+
+</svg>'''
+    return svg
+
+if __name__ == '__main__':
+    with open('kubevirt-migration-postcopy-notion.svg', 'w') as f:
+        f.write(generate_svg())
+    print('Generated: kubevirt-migration-postcopy-notion.svg')

@@ -53,52 +53,7 @@ TiDB 叢集由三個主要核心元件組成，各自職責分明：
 | **TiFlash** | 列式儲存層 | 透過 Multi-Raft Learner 從 TiKV 非同步複製資料，加速 OLAP 查詢 |
 | **TiDB Dashboard** | 管理介面 | 視覺化叢集診斷、慢查詢分析、熱點分析 |
 
-```mermaid
-graph TB
-    subgraph Client["用戶端"]
-        APP["應用程式<br/>(MySQL Driver)"]
-        MYSQL["MySQL CLI /<br/>ORM 框架"]
-    end
-
-    subgraph TiDB_Layer["TiDB 計算層（無狀態，可橫向擴展）"]
-        T1["TiDB Server 1"]
-        T2["TiDB Server 2"]
-        T3["TiDB Server N"]
-    end
-
-    subgraph PD_Layer["PD 叢集（中繼資料 / TSO / 排程）"]
-        PD1["PD Leader"]
-        PD2["PD Follower"]
-    end
-
-    subgraph Storage_Row["TiKV 行式儲存（Raft 多副本）"]
-        KV1["TiKV Node 1<br/>(Region Leader)"]
-        KV2["TiKV Node 2<br/>(Region Follower)"]
-        KV3["TiKV Node 3<br/>(Region Follower)"]
-    end
-
-    subgraph Storage_Col["TiFlash 列式儲存（OLAP 加速）"]
-        TF1["TiFlash Node 1"]
-        TF2["TiFlash Node 2"]
-    end
-
-    APP -->|"MySQL 協定 :4000"| T1
-    MYSQL -->|"MySQL 協定 :4000"| T2
-
-    T1 -->|"TSO / 路由資訊"| PD1
-    T2 -->|"TSO / 路由資訊"| PD1
-
-    T1 -->|"KV RPC (gRPC)"| KV1
-    T2 -->|"KV RPC (gRPC)"| KV2
-    T1 -->|"MPP 查詢 (gRPC)"| TF1
-
-    KV1 -->|"Raft 複製"| KV2
-    KV2 -->|"Raft 複製"| KV3
-    KV1 -->|"Multi-Raft Learner"| TF1
-    KV2 -->|"Multi-Raft Learner"| TF2
-
-    PD1 <-->|"Raft 選舉"| PD2
-```
+![TiDB 系統架構概覽](/diagrams/tidb/tidb-overview.png)
 
 ## 核心子專案
 
