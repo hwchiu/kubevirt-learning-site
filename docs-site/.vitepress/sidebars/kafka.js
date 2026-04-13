@@ -1,5 +1,12 @@
 export default [
   {
+    text: '🗺️ 學習路徑',
+    items: [
+      { text: '學習路徑入口', link: '/kafka/learning-path/' },
+      { text: '故事驅動式', link: '/kafka/learning-path/story' },
+    ]
+  },
+  {
     text: '📖 Apache Kafka 總覽',
     items: [
       { text: '專案簡介', link: '/kafka/' },

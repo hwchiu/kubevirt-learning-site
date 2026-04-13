@@ -1,5 +1,12 @@
 export default [
   {
+    text: '🗺️ 學習路徑',
+    items: [
+      { text: '學習路徑入口', link: '/node-maintenance-operator/learning-path/' },
+      { text: '故事驅動式', link: '/node-maintenance-operator/learning-path/story' },
+    ]
+  },
+  {
     text: '📖 Node Maintenance Operator',
     items: [
       { text: '專案總覽', link: '/node-maintenance-operator/' },

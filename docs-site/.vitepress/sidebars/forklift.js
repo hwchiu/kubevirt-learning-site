@@ -1,5 +1,12 @@
 export default [
   {
+    text: '🗺️ 學習路徑',
+    items: [
+      { text: '學習路徑入口', link: '/forklift/learning-path/' },
+      { text: '故事驅動式', link: '/forklift/learning-path/story' },
+    ]
+  },
+  {
     text: '📖 Forklift 總覽',
     items: [
       { text: '專案簡介', link: '/forklift/' },

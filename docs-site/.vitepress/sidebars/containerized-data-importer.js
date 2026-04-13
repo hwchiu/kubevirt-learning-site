@@ -1,5 +1,12 @@
 export default [
   {
+    text: '🗺️ 學習路徑',
+    items: [
+      { text: '學習路徑入口', link: '/containerized-data-importer/learning-path/' },
+      { text: '故事驅動式', link: '/containerized-data-importer/learning-path/story' },
+    ]
+  },
+  {
     text: '📖 CDI 總覽',
     items: [
       { text: '專案簡介', link: '/containerized-data-importer/' },
