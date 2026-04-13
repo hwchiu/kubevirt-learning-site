@@ -432,6 +432,10 @@ agent-11: observability.md  — 事件與 Metrics
 ## 相關探索結果
 {貼入 Phase 2 中與此頁面相關的 agent 輸出片段}
 
+## 原始碼路徑
+- 專案 submodule 路徑：{project}/
+- 所有宣告的函數、類型、常數名稱，**必須先 grep 原始碼確認存在後才能寫入文件**
+
 ## 撰寫規範
 - 語言：zh-TW（技術詞彙保留英文）
 - 每個程式碼區塊第一行必須是 `// 檔案: {實際路徑}`
@@ -440,7 +444,18 @@ agent-11: observability.md  — 事件與 Metrics
 - frontmatter 必須包含 `layout: doc`
 - 頁首格式：`# {Project} — {Topic}`
 - 結尾加入 `::: info 相關章節` 交叉連結
-- 禁止捏造任何程式碼或行為
+
+## ⛔ 零捏造原則（Zero Fabrication Rule）— 強制執行
+**在文件中寫下任何函數名稱、類型名稱、方法名稱之前，必須執行以下步驟：**
+1. 用 grep 在 `{project}/` 下搜尋該名稱，確認其確實存在
+2. 用 view 讀取包含該名稱的原始碼段落，確認語意正確
+3. 在程式碼區塊第一行標注真實檔案路徑 `// 檔案: {path}`
+
+禁止的行為：
+- ❌ 憑記憶或推斷寫函數名稱
+- ❌ 根據命名慣例「猜測」函數名稱
+- ❌ 將 README 或探索摘要中的名稱直接引用而未 grep 驗證
+- ❌ 省略 file path 的程式碼區塊
 ```
 
 #### 頁面寫作品質標準
@@ -721,6 +736,7 @@ Structure Planner 決定了頁面數量與分區，Phase 4 必須將這個結構
 - Code comments remain in English
 
 ### Code References (Zero Fabrication Rule)
+
 ```markdown
 // ✅ CORRECT — includes real file path
 \```go
@@ -743,6 +759,32 @@ func handleClone() {
 - Use actual variable/function/type names from the source
 - When showing partial code, indicate with `// ...` what's omitted
 - Never invent functions, types, or behaviors
+
+#### 強制驗證協議：寫之前先 grep
+
+**在文件中寫下任何函數名稱、類型名稱、方法名稱、常數名稱之前，必須先在原始碼中確認其存在。** 使用以下指令：
+
+```bash
+# 確認函數/方法存在
+grep -r "func.*FunctionName" {project}/
+
+# 確認類型定義存在
+grep -r "type TypeName" {project}/
+
+# 確認常數/欄位名稱存在
+grep -r "ConstantName" {project}/
+
+# 找到定義後，用 view 讀取完整上下文
+# view {project}/path/to/file.go --view_range [N, M]
+```
+
+**只有 grep 找到結果，才能在文件中引用該名稱。** 若 grep 無結果，代表該名稱不存在於此版本原始碼，禁止寫入文件。
+
+::: warning 常見陷阱
+- README 或舊版文件中的函數名稱可能已重構或刪除，**必須以原始碼為準**
+- 介面方法名稱可能與實作方法名稱不同，須分別驗證
+- 測試檔案中的 helper 函數不算公開 API，除非明確討論測試架構
+:::
 
 ### VitePress Features
 - **Mermaid diagrams** for architecture and state machines — **必須安裝 `vitepress-plugin-mermaid`**
@@ -805,6 +847,7 @@ Summary of what was covered and key takeaways.
 | Mistake | Fix |
 |---------|-----|
 | Fabricating code that looks plausible | Always `view` or `grep` the actual file first |
+| **引用函數/類型名稱前未 grep 驗證** | **寫任何名稱前先執行 `grep -r "FuncName" {project}/`，無結果禁止寫入** |
 | Missing file paths on code blocks | Add `// 檔案: path/to/file.go` as first comment line |
 | Shallow directory listing without reading code | Read `main.go`, reconciler, types.go — not just `ls` |
 | Copy-paste from README without verification | README can be outdated; verify against actual source |
