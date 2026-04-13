@@ -1,5 +1,12 @@
 export default [
   {
+    text: '🗺️ 學習路徑',
+    items: [
+      { text: '學習路徑入口', link: '/common-instancetypes/learning-path/' },
+      { text: '故事驅動式', link: '/common-instancetypes/learning-path/story' },
+    ]
+  },
+  {
     text: '📖 Common Instancetypes 總覽',
     items: [
       { text: '專案簡介', link: '/common-instancetypes/' },
