@@ -11,6 +11,7 @@ description: Use when generating interactive team quiz questions from existing p
 
 **核心原則：**
 - 題目必須基於文件內容，**禁止杜撰**
+- **涉及函數名稱、類型名稱、欄位名稱的題目，必須在原始碼中 grep 確認名稱存在後才能出題**
 - 每題必須有清楚的正確選項與錯誤誘答（distractors）
 - 中文繁體（zh-TW），術語保留英文原名
 - 題目難度要有層次：概念理解 → 細節掌握 → 情境應用
@@ -32,6 +33,20 @@ description: Use when generating interactive team quiz questions from existing p
 ---
 
 ## Phase A: 主題分析（Topic Decomposition）
+
+### 前置步驟：確認原始碼路徑
+
+在開始分析之前，先確認專案的原始碼 submodule 是否可用：
+
+```bash
+# 確認 submodule 已初始化
+ls {project}/
+
+# 若目錄為空，初始化 submodule
+git submodule update --init {project}
+```
+
+**記錄此路徑供 Phase B 的所有 agent 使用**，讓 agent 能在出題前驗證函數/類型名稱。
 
 ### 演算法：動態主題分解
 
@@ -128,6 +143,10 @@ Topic C → Agent 3 (30 questions)
 - docs-site/{project}/{page2}.md
 {其他相關頁面}
 
+## 原始碼路徑（函數/類型名稱驗證用）
+- 專案 submodule 路徑：{project}/
+- **出題時若涉及具體函數名稱、類型名稱、欄位名稱，必須先 grep 原始碼確認存在**
+
 ## 出題要求
 
 1. **題目格式**：單選，4 個選項（A/B/C/D），1 個正確答案
@@ -138,6 +157,18 @@ Topic C → Agent 3 (30 questions)
    - 10 題：情境應用（Given ... what happens / which approach）
 4. **禁止**：模糊選項、「以上皆是」、不看文件就能猜出的答案
 5. **必須**：每題有清楚的解釋，說明「為什麼是這個答案」以及「其他選項為何錯誤」
+
+## ⛔ 零捏造原則（Zero Fabrication Rule）
+
+**出題時嚴格禁止以下行為：**
+- ❌ 使用文件中未明確出現的函數名稱或類型名稱
+- ❌ 根據命名慣例「猜測」函數名稱（如 `handleReconcile()`、`processEvent()` 等）
+- ❌ 在 explanation 中引用未經驗證的實作細節
+
+**若題目涉及函數/類型名稱，必須：**
+1. 先 grep 原始碼確認存在：`grep -r "FuncName" {project}/`
+2. 在 explanation 中標注來源：「此函數定義於 `{project}/path/to/file.go`」
+3. 若 grep 無結果，**改出不涉及具體名稱的概念題**
 
 ## 輸出格式
 

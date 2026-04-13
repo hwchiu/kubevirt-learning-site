@@ -87,10 +87,72 @@ Use this checklist to verify documentation quality before committing.
 
 ## Zero-Fabrication Verification
 
-For a random sample of 5 code blocks across all pages:
-- [ ] Verify file path exists in the submodule
-- [ ] Verify function/type name matches source
-- [ ] Verify code logic is accurate (not paraphrased incorrectly)
+**這是強制步驟，不得略過。** 提交前必須系統性驗證所有原始碼引用。
+
+### 步驟一：列出所有程式碼區塊的 file path
+
+```bash
+# 從所有文件中提取 // 檔案: 註解
+grep -r "// 檔案:" docs-site/{project}/ --include="*.md"
+```
+
+確認每個 code block 都有對應的 `// 檔案:` 行。若有遺漏，補上路徑或移除該程式碼區塊。
+
+### 步驟二：驗證每個引用路徑確實存在
+
+```bash
+# 對每個出現的路徑，確認檔案存在於 submodule
+ls {project}/path/to/cited/file.go
+```
+
+若路徑不存在，代表程式碼區塊內容是捏造的，**必須刪除或用真實路徑替換**。
+
+### 步驟三：驗證關鍵函數/類型名稱
+
+針對文件中每個明確提及的函數名稱、類型名稱、常數名稱，在原始碼中確認存在：
+
+```bash
+# 確認函數名稱
+grep -r "func.*FunctionName" {project}/
+
+# 確認類型定義
+grep -r "type TypeName " {project}/
+
+# 確認常數/欄位名稱
+grep -rn "ConstantName" {project}/
+```
+
+**任何 grep 無結果的名稱，必須從文件中刪除或替換為真實存在的名稱。**
+
+### 步驟四：抽查 5 個程式碼區塊
+
+從所有頁面中隨機選取至少 5 個程式碼區塊，完整執行：
+
+- [ ] 確認 file path 存在於 submodule
+- [ ] 確認函數/類型名稱與原始碼完全相符（大小寫、拼寫）
+- [ ] 確認程式碼邏輯與原始碼語意一致（非改寫或臆測）
+
+### 快速檢查腳本
+
+```bash
+# 找出所有沒有 // 檔案: 的 code block（潛在捏造風險）
+python3 -c "
+import re, sys, glob
+files = glob.glob('docs-site/{project}/**/*.md', recursive=True)
+issues = []
+for f in files:
+    content = open(f).read()
+    # 找到所有 go/python/bash code block
+    blocks = re.finditer(r'\`\`\`(?:go|python|bash|yaml)\n(.*?)\`\`\`', content, re.DOTALL)
+    for m in blocks:
+        if '// 檔案:' not in m.group(1) and '# 檔案:' not in m.group(1):
+            line = content[:m.start()].count('\n') + 1
+            issues.append(f'{f}:{line} — missing file path')
+for i in issues:
+    print(i)
+print(f'Total issues: {len(issues)}')
+"
+```
 
 ## Common Build Issues
 
