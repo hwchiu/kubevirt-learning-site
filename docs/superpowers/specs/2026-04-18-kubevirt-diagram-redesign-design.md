@@ -66,6 +66,7 @@ The redraw should inherit the `diagram-design` rules already reviewed:
 - Keep information density restrained; split diagrams that exceed the skill's complexity budget.
 - Use accent sparingly for 1-2 focal elements, not as a generic importance marker.
 - Keep typography, arrows, legends, labels, and boundary treatments consistent across all KubeVirt pages.
+- Treat `skills/diagram-design/SKILL.md` and the matching `references/type-*.md` files as the normative grammar reference during implementation.
 
 For this effort, the style-guide decision is already resolved:
 
@@ -106,6 +107,7 @@ Expected outputs in this phase:
 - upgrade flow and related state/sequence diagrams
 
 This phase should produce the base language that later sections reuse.
+Only `migration-internals.md` and `upgrade-strategy.md` are pulled forward from `deep-dive/` into Phase 1; the remaining `deep-dive/*` pages belong to Phase 2 unless a later scope correction is made.
 
 ### Phase 2 - Component and subsystem pages
 
@@ -161,20 +163,39 @@ If a diagram mixes two grammars, pick the dominant axis instead of hybridizing. 
 
 New scripts must live under `scripts/diagram-generators/` and follow existing naming conventions, for example:
 
-- `gen_kubevirt_architecture_redraw.py`
-- `gen_kubevirt_migration_redraw.py`
-- `gen_kubevirt_upgrade_redraw.py`
+- `gen_kubevirt_architecture_diagrams.py`
+- `gen_kubevirt_migration_diagrams.py`
+- `gen_kubevirt_upgrade_diagrams.py`
 
 Scripts should be grouped by coherent subject area rather than one script per individual image if batching improves maintainability.
 
 ## Rendering Strategy
 
-The final site should still consume static images, but the redraw process may use `diagram-design`-style source composition as an intermediate step. The implementation may choose the most maintainable path that preserves the visual grammar, for example:
+The final site should still consume static images, and the implementation path is fixed:
 
-- generate SVG directly with code while following the `diagram-design` grammar, or
-- generate intermediate HTML/SVG artifacts during authoring and export the final static assets into the repo.
+1. Use Python generator scripts under `scripts/diagram-generators/` as the canonical source.
+2. Recreate the `diagram-design` system as a set of reusable drawing primitives and tokens inside the generator code path rather than adopting the skill's HTML files as the published source artifact.
+3. Emit final SVG or PNG assets directly into `docs-site/public/diagrams/kubevirt/`.
 
-The key requirement is that published docs keep using committed static assets, not runtime-generated diagrams.
+This means the project adopts the `diagram-design` visual grammar, not the HTML-template delivery model. The repo stays aligned with its established Python-based generator workflow.
+
+Planners should assume one shared helper layer for reusable primitives such as:
+
+- title and label typography
+- node boxes and type tags
+- arrows and arrow labels
+- boundaries and legend strips
+- accent and muted token usage
+
+The helper layer may live in a shared generator helper module if that reduces duplication across subject-area scripts.
+
+## Output Format Rules
+
+Use deterministic output rules:
+
+1. If a diagram is being replaced in place, preserve the current referenced file extension and filename unless the spec explicitly calls for a split or rename.
+2. If a new diagram file is introduced because a legacy diagram is split, prefer SVG by default.
+3. Use PNG only when the existing in-place replacement target is already PNG.
 
 ## Markdown Update Rules
 
@@ -223,6 +244,67 @@ If a current filename is misleading but already referenced in several places, pr
 ### Scope control
 
 Because the full inventory is large, implementation planning should explicitly track which pages and diagrams belong to each phase. This avoids a half-updated state where visual language diverges between adjacent sections.
+
+## Appendix A - Affected Page Inventory
+
+The planning phase should treat the following pages as the current affected inventory baseline.
+
+### Phase 1 inventory
+
+| Page | Candidate refs |
+|---|---:|
+| `architecture/overview.md` | 2 |
+| `architecture/deep-dive.md` | 5 |
+| `architecture/lifecycle.md` | 1 |
+| `deep-dive/migration-internals.md` | 5 |
+| `deep-dive/upgrade-strategy.md` | 6 |
+| `api-resources/migration.md` | 3 |
+| `api-resources/vm-vmi.md` | 1 |
+
+### Phase 2 inventory
+
+| Page | Candidate refs |
+|---|---:|
+| `components/auxiliary-binaries.md` | 5 |
+| `components/hook-sidecars.md` | 2 |
+| `components/virt-api.md` | 1 |
+| `components/virt-operator.md` | 1 |
+| `deep-dive/vm-initialization.md` | 6 |
+| `deep-dive/security.md` | 1 |
+| `deep-dive/gpu-passthrough.md` | 1 |
+| `deep-dive/qemu-kvm.md` | 1 |
+| `deep-dive/performance-tuning.md` | 0 |
+| `deep-dive/vm-optimization.md` | 0 |
+| `deep-dive/windows-optimization.md` | 0 |
+
+The three zero-count `deep-dive` pages remain listed so planning can explicitly confirm they do not contain in-scope architecture/flow/sequence/state assets before skipping implementation work.
+
+### Phase 3 inventory
+
+| Page | Candidate refs |
+|---|---:|
+| `advanced/live-migration.md` | 5 |
+| `advanced/observability.md` | 2 |
+| `advanced/snapshots.md` | 5 |
+| `networking/overview.md` | 3 |
+| `networking/bridge-masquerade.md` | 4 |
+| `networking/sriov.md` | 4 |
+| `storage/container-disk.md` | 3 |
+| `storage/hotplug.md` | 2 |
+| `storage/overview.md` | 3 |
+| `storage/pvc-datavolume.md` | 2 |
+| `guides/ha-dr.md` | 3 |
+| `guides/quickstart.md` | 1 |
+| `virtctl/access.md` | 1 |
+| `api-resources/replica-pool.md` | 2 |
+| `api-resources/snapshot-clone.md` | 2 |
+
+Inventory baseline totals:
+
+- 30 affected pages
+- 83 in-scope diagram references
+
+Implementation planning should break these page-level counts down into per-diagram tasks, but it must not expand scope beyond this baseline without an explicit reason.
 
 ## Recommended Implementation Order
 
