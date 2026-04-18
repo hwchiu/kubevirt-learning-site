@@ -167,7 +167,7 @@ New scripts must live under `scripts/diagram-generators/` and follow existing na
 - `gen_kubevirt_migration_diagrams.py`
 - `gen_kubevirt_upgrade_diagrams.py`
 
-Scripts should be grouped by coherent subject area rather than one script per individual image if batching improves maintainability.
+Scripts should be grouped by coherent subject area rather than one script per individual image if batching improves maintainability. This intentionally departs from some older KubeVirt generator scripts that were split per image; the grouped approach is preferred here to keep the redraw maintainable at phase scale.
 
 ## Rendering Strategy
 
@@ -187,7 +187,7 @@ Planners should assume one shared helper layer for reusable primitives such as:
 - boundaries and legend strips
 - accent and muted token usage
 
-The helper layer may live in a shared generator helper module if that reduces duplication across subject-area scripts.
+The helper layer should live in a shared generator helper module at `scripts/diagram-generators/kubevirt_diagram_helpers.py`.
 
 ## Output Format Rules
 
@@ -268,6 +268,9 @@ The planning phase should treat the following pages as the current affected inve
 | `components/auxiliary-binaries.md` | 5 |
 | `components/hook-sidecars.md` | 2 |
 | `components/virt-api.md` | 1 |
+| `components/virt-controller.md` | 0 |
+| `components/virt-handler.md` | 0 |
+| `components/virt-launcher.md` | 0 |
 | `components/virt-operator.md` | 1 |
 | `deep-dive/vm-initialization.md` | 6 |
 | `deep-dive/security.md` | 1 |
@@ -286,6 +289,7 @@ The three zero-count `deep-dive` pages remain listed so planning can explicitly 
 | `advanced/live-migration.md` | 5 |
 | `advanced/observability.md` | 2 |
 | `advanced/snapshots.md` | 5 |
+| `api-resources/instancetype.md` | 0 |
 | `networking/overview.md` | 3 |
 | `networking/bridge-masquerade.md` | 4 |
 | `networking/sriov.md` | 4 |
@@ -301,7 +305,9 @@ The three zero-count `deep-dive` pages remain listed so planning can explicitly 
 
 Inventory baseline totals:
 
-- 30 affected pages
+- 30 pages currently containing non-zero in-scope diagram references
+- 7 additional pages that must still be explicitly checked and skipped unless new in-scope assets are discovered
+- 37 inspected pages in the planning baseline
 - 83 in-scope diagram references
 
 Implementation planning should break these page-level counts down into per-diagram tasks, but it must not expand scope beyond this baseline without an explicit reason.
