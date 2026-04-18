@@ -28,7 +28,7 @@ The agreed scope is:
 - Replace the current image assets and markdown references in place when possible.
 - Open a local VitePress server after the redraw is complete so the user can inspect the rendered docs.
 
-Current inventory indicates this is a large, cross-section effort, with roughly 83 candidate diagrams spread across:
+Current inventory indicates this is a large, cross-section effort, with 83 candidate diagram references across 30 markdown pages:
 
 - `architecture/*`
 - `deep-dive/*`
@@ -41,6 +41,13 @@ Current inventory indicates this is a large, cross-section effort, with roughly 
 - selected `api-resources/*`
 
 Because this is too large for a single undifferentiated pass, execution should be phased while still converging toward a full-site redraw.
+
+Explicit exclusions for this effort:
+
+- `docs-site/kubevirt/dev-guide/*`
+- `docs-site/kubevirt/learning-path/*`
+
+These sections are intentionally excluded because they are narrative or code-structure oriented and are not part of the agreed architecture/flow/sequence/state redraw scope.
 
 ## Deliverables
 
@@ -59,6 +66,11 @@ The redraw should inherit the `diagram-design` rules already reviewed:
 - Keep information density restrained; split diagrams that exceed the skill's complexity budget.
 - Use accent sparingly for 1-2 focal elements, not as a generic importance marker.
 - Keep typography, arrows, legends, labels, and boundary treatments consistent across all KubeVirt pages.
+
+For this effort, the style-guide decision is already resolved:
+
+- Phase 1 should use the default `diagram-design` editorial style-guide tokens rather than blocking on a custom onboarding pass.
+- A custom site-specific style-guide may be considered later, but it is out of scope for this planning cycle.
 
 ### 2. Preserve repo conventions
 
@@ -82,6 +94,8 @@ Prioritize the pages that define the mental model of the project and establish t
 - `docs-site/kubevirt/architecture/lifecycle.md`
 - `docs-site/kubevirt/deep-dive/migration-internals.md`
 - `docs-site/kubevirt/deep-dive/upgrade-strategy.md`
+- `docs-site/kubevirt/api-resources/migration.md`
+- `docs-site/kubevirt/api-resources/vm-vmi.md`
 
 Expected outputs in this phase:
 
@@ -101,6 +115,10 @@ Apply the same grammar to component-level and subsystem-level pages, including:
 - `docs-site/kubevirt/deep-dive/vm-initialization.md`
 - `docs-site/kubevirt/deep-dive/security.md`
 - `docs-site/kubevirt/deep-dive/gpu-passthrough.md`
+- `docs-site/kubevirt/deep-dive/qemu-kvm.md`
+- `docs-site/kubevirt/deep-dive/performance-tuning.md`
+- `docs-site/kubevirt/deep-dive/vm-optimization.md`
+- `docs-site/kubevirt/deep-dive/windows-optimization.md`
 
 This phase focuses on consistent component boundaries, call paths, and subsystem overviews.
 
@@ -113,7 +131,8 @@ Finish the broader redraw across:
 - `docs-site/kubevirt/storage/*`
 - `docs-site/kubevirt/guides/*`
 - `docs-site/kubevirt/virtctl/*`
-- selected `docs-site/kubevirt/api-resources/*`
+- `docs-site/kubevirt/api-resources/replica-pool.md`
+- `docs-site/kubevirt/api-resources/snapshot-clone.md`
 
 This phase includes operational flows, migration policies, storage flows, networking architecture, HA/DR flows, and user-facing workflow diagrams.
 
