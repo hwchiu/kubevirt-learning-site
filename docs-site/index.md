@@ -36,6 +36,15 @@ hero:
     - theme: alt
       text: 🗄️ TiDB
       link: /tidb/
+    - theme: alt
+      text: 🔩 Cluster API
+      link: /cluster-api/
+    - theme: alt
+      text: 🏗️ CAPM3
+      link: /cluster-api-provider-metal3/
+    - theme: alt
+      text: ☁️ CAPMAAS
+      link: /cluster-api-provider-maas/
 
 
 features:
@@ -93,6 +102,24 @@ features:
     link: /tidb/
     linkText: 開始閱讀
 
+  - icon: 🔩
+    title: Cluster API
+    details: Kubernetes 叢集生命週期管理框架 — 宣告式 API、Provider 生態系、ClusterClass 拓撲化叢集、多 Provider 支援（AWS、Azure、GCP 等）。
+    link: /cluster-api/
+    linkText: 開始閱讀
+
+  - icon: 🏗️
+    title: Cluster API Provider Metal3
+    details: 裸金屬 Kubernetes 叢集 Provider — 整合 Ironic BareMetalHost、Metal3Machine/Metal3Cluster CRD、IPAM 支援、自動節點修復。
+    link: /cluster-api-provider-metal3/
+    linkText: 開始閱讀
+
+  - icon: ☁️
+    title: Cluster API Provider MAAS
+    details: Canonical MAAS 裸金屬 Provider — 對接 MAAS API 佈建 Machine、Resource Pool 篩選、DNS 管理、In-Memory 部署模式。
+    link: /cluster-api-provider-maas/
+    linkText: 開始閱讀
+
 ---
 
 ## 📚 專案總覽
@@ -110,6 +137,9 @@ features:
 | [NetBox](/netbox/) | 網路基礎設施管理平台（IPAM / DCIM） | ✅ 完整分析 |
 | [Apache Kafka](/kafka/) | 分散式事件串流平台 | ✅ 完整分析 |
 | [TiDB](/tidb/) | 分散式 HTAP SQL 資料庫 | ✅ 完整分析 |
+| [Cluster API](/cluster-api/) | Kubernetes 叢集生命週期管理框架 | ✅ 完整分析 |
+| [Cluster API Provider Metal3](/cluster-api-provider-metal3/) | 裸金屬 Kubernetes 叢集 Provider（Ironic） | ✅ 完整分析 |
+| [Cluster API Provider MAAS](/cluster-api-provider-maas/) | Canonical MAAS 裸金屬 Provider | ✅ 完整分析 |
 
 
 ## 🔗 原始碼連結
@@ -125,4 +155,7 @@ features:
 - **NetBox**: [github.com/netbox-community/netbox](https://github.com/netbox-community/netbox)
 - **Apache Kafka**: [github.com/apache/kafka](https://github.com/apache/kafka)
 - **TiDB**: [github.com/pingcap/tidb](https://github.com/pingcap/tidb)
+- **Cluster API**: [github.com/kubernetes-sigs/cluster-api](https://github.com/kubernetes-sigs/cluster-api)
+- **Cluster API Provider Metal3**: [github.com/metal3-io/cluster-api-provider-metal3](https://github.com/metal3-io/cluster-api-provider-metal3)
+- **Cluster API Provider MAAS**: [github.com/spectrocloud/cluster-api-provider-maas](https://github.com/spectrocloud/cluster-api-provider-maas)
 

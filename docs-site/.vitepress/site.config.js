@@ -36,6 +36,9 @@ export const siteConfig = {
     { text: 'Multus CNI',                        link: '/multus-cni/' },
     { text: 'TiDB',                              link: '/tidb/' },
     { text: 'Apache Kafka',                      link: '/kafka/' },
+    { text: 'Cluster API',                       link: '/cluster-api/' },
+    { text: 'Cluster API Provider Metal3',       link: '/cluster-api-provider-metal3/' },
+    { text: 'Cluster API Provider MAAS',         link: '/cluster-api-provider-maas/' },
   ],
 
   /** 頁腳文字 */
