@@ -23,6 +23,9 @@ import netbox from './sidebars/netbox.js'
 import multus from './sidebars/multus-cni.js'
 import tidb from './sidebars/tidb.js'
 import kafka from './sidebars/kafka.js'
+import clusterApi from './sidebars/cluster-api.js'
+import capm3 from './sidebars/cluster-api-provider-metal3.js'
+import capmaas from './sidebars/cluster-api-provider-maas.js'
 
 export default withMermaid(defineConfig({
   base: siteConfig.base,
@@ -59,6 +62,9 @@ export default withMermaid(defineConfig({
       '/multus-cni/': multus,
       '/tidb/': tidb,
       '/kafka/': kafka,
+      '/cluster-api/': clusterApi,
+      '/cluster-api-provider-metal3/': capm3,
+      '/cluster-api-provider-maas/': capmaas,
     },
     socialLinks: [
       { icon: 'github', link: siteConfig.githubLink }

@@ -42,3 +42,15 @@
 	path = cilium
 	url = https://github.com/cilium/cilium
 	branch = main
+[submodule "cluster-api-provider-maas"]
+	path = cluster-api-provider-maas
+	url = https://github.com/spectrocloud/cluster-api-provider-maas.git
+	branch = main
+[submodule "cluster-api-provider-metal3"]
+	path = cluster-api-provider-metal3
+	url = https://github.com/metal3-io/cluster-api-provider-metal3.git
+	branch = main
+[submodule "cluster-api"]
+	path = cluster-api
+	url = https://github.com/kubernetes-sigs/cluster-api.git
+	branch = main

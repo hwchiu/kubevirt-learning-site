@@ -419,6 +419,110 @@
           ]
         }
       }
+    },
+    "cluster-api": {
+      "repo": "https://github.com/kubernetes-sigs/cluster-api",
+      "branch": "main",
+      "analyzed_commit": "533d98a355f8b0a2ea506ce0435f75e5f1197f24",
+      "analyzed_date": "2026-04-24",
+      "pages": {
+        "index": {
+          "source_paths": ["README.md", "go.mod"],
+          "doc_files": ["docs-site/cluster-api/index.md"]
+        },
+        "architecture": {
+          "source_paths": ["api/", "internal/", "cmd/"],
+          "doc_files": ["docs-site/cluster-api/architecture.md"]
+        },
+        "core-features": {
+          "source_paths": ["controllers/", "api/"],
+          "doc_files": ["docs-site/cluster-api/core-features.md"]
+        },
+        "controllers-api": {
+          "source_paths": ["controllers/", "api/", "webhooks/"],
+          "doc_files": ["docs-site/cluster-api/controllers-api.md"]
+        },
+        "providers": {
+          "source_paths": ["api/", "exp/", "internal/"],
+          "doc_files": ["docs-site/cluster-api/providers.md"]
+        },
+        "clusterclass": {
+          "source_paths": ["api/", "controllers/", "internal/"],
+          "doc_files": ["docs-site/cluster-api/clusterclass.md"]
+        },
+        "lifecycle": {
+          "source_paths": ["controllers/", "api/"],
+          "doc_files": ["docs-site/cluster-api/lifecycle.md"]
+        },
+        "integration": {
+          "source_paths": ["cmd/", "hack/", "Tiltfile"],
+          "doc_files": ["docs-site/cluster-api/integration.md"]
+        }
+      }
+    },
+    "cluster-api-provider-metal3": {
+      "repo": "https://github.com/metal3-io/cluster-api-provider-metal3",
+      "branch": "main",
+      "analyzed_commit": "647a5b707966263a304af483837cbbfd1da2ffee",
+      "analyzed_date": "2026-04-24",
+      "pages": {
+        "index": {
+          "source_paths": ["README.md", "go.mod"],
+          "doc_files": ["docs-site/cluster-api-provider-metal3/index.md"]
+        },
+        "architecture": {
+          "source_paths": ["main.go", "api/", "controllers/"],
+          "doc_files": ["docs-site/cluster-api-provider-metal3/architecture.md"]
+        },
+        "core-features": {
+          "source_paths": ["controllers/", "baremetal/", "api/"],
+          "doc_files": ["docs-site/cluster-api-provider-metal3/core-features.md"]
+        },
+        "controllers-api": {
+          "source_paths": ["controllers/", "api/"],
+          "doc_files": ["docs-site/cluster-api-provider-metal3/controllers-api.md"]
+        },
+        "baremetal": {
+          "source_paths": ["baremetal/"],
+          "doc_files": ["docs-site/cluster-api-provider-metal3/baremetal.md"]
+        },
+        "integration": {
+          "source_paths": ["config/", "hack/"],
+          "doc_files": ["docs-site/cluster-api-provider-metal3/integration.md"]
+        },
+        "remediation": {
+          "source_paths": ["controllers/", "api/"],
+          "doc_files": ["docs-site/cluster-api-provider-metal3/remediation.md"]
+        }
+      }
+    },
+    "cluster-api-provider-maas": {
+      "repo": "https://github.com/spectrocloud/cluster-api-provider-maas",
+      "branch": "main",
+      "analyzed_commit": "a50fa129022ad407c8c4d800a7ba298345ee048a",
+      "analyzed_date": "2026-04-24",
+      "pages": {
+        "index": {
+          "source_paths": ["README.md", "go.mod"],
+          "doc_files": ["docs-site/cluster-api-provider-maas/index.md"]
+        },
+        "architecture": {
+          "source_paths": ["main.go", "api/", "controllers/", "pkg/"],
+          "doc_files": ["docs-site/cluster-api-provider-maas/architecture.md"]
+        },
+        "core-features": {
+          "source_paths": ["controllers/", "pkg/"],
+          "doc_files": ["docs-site/cluster-api-provider-maas/core-features.md"]
+        },
+        "controllers-api": {
+          "source_paths": ["controllers/", "api/"],
+          "doc_files": ["docs-site/cluster-api-provider-maas/controllers-api.md"]
+        },
+        "integration": {
+          "source_paths": ["config/", "hack/"],
+          "doc_files": ["docs-site/cluster-api-provider-maas/integration.md"]
+        }
+      }
     }
   }
 }
