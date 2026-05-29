@@ -523,6 +523,78 @@
           "doc_files": ["docs-site/cluster-api-provider-maas/integration.md"]
         }
       }
+    },
+    "ceph": {
+      "repo": "https://github.com/ceph/ceph",
+      "branch": "main",
+      "analyzed_commit": "44fa2a5d857509dd8c12b0ef50035bb3ca60341b",
+      "analyzed_date": "2025-07-17",
+      "pages": {
+        "index": {
+          "source_paths": ["README", "CMakeLists.txt"],
+          "doc_files": ["docs-site/ceph/index.md"]
+        },
+        "architecture": {
+          "source_paths": ["src/mon/Monitor.h", "src/osd/OSD.h", "src/mgr/DaemonServer.h", "src/mds/MDSRank.h"],
+          "doc_files": ["docs-site/ceph/architecture.md"]
+        },
+        "deployment": {
+          "source_paths": ["src/pybind/mgr/cephadm/", "src/python-common/ceph/deployment/"],
+          "doc_files": ["docs-site/ceph/deployment.md"]
+        },
+        "monitor": {
+          "source_paths": ["src/mon/"],
+          "doc_files": ["docs-site/ceph/monitor.md"]
+        },
+        "osd": {
+          "source_paths": ["src/osd/", "src/os/bluestore/"],
+          "doc_files": ["docs-site/ceph/osd.md"]
+        },
+        "manager": {
+          "source_paths": ["src/mgr/", "src/pybind/mgr/"],
+          "doc_files": ["docs-site/ceph/manager.md"]
+        },
+        "mds": {
+          "source_paths": ["src/mds/"],
+          "doc_files": ["docs-site/ceph/mds.md"]
+        },
+        "rados": {
+          "source_paths": ["src/include/rados/", "src/pybind/rados/"],
+          "doc_files": ["docs-site/ceph/rados.md"]
+        },
+        "rbd": {
+          "source_paths": ["src/librbd/", "src/include/rbd/"],
+          "doc_files": ["docs-site/ceph/rbd.md"]
+        },
+        "cephfs": {
+          "source_paths": ["src/client/", "src/mds/"],
+          "doc_files": ["docs-site/ceph/cephfs.md"]
+        },
+        "rgw": {
+          "source_paths": ["src/rgw/"],
+          "doc_files": ["docs-site/ceph/rgw.md"]
+        },
+        "crush": {
+          "source_paths": ["src/crush/"],
+          "doc_files": ["docs-site/ceph/crush.md"]
+        },
+        "pg-replication": {
+          "source_paths": ["src/osd/PG.h", "src/osd/OSDMap.h", "src/osd/PeeringState.h"],
+          "doc_files": ["docs-site/ceph/pg-replication.md"]
+        },
+        "cephadm": {
+          "source_paths": ["src/pybind/mgr/cephadm/", "src/python-common/ceph/deployment/"],
+          "doc_files": ["docs-site/ceph/cephadm.md"]
+        },
+        "dashboard": {
+          "source_paths": ["src/pybind/mgr/dashboard/", "src/pybind/mgr/prometheus/"],
+          "doc_files": ["docs-site/ceph/dashboard.md"]
+        },
+        "operations": {
+          "source_paths": ["src/mon/", "src/osd/"],
+          "doc_files": ["docs-site/ceph/operations.md"]
+        }
+      }
     }
   }
 }
