@@ -165,6 +165,98 @@ dashboard prometheus cephadm ...
 - `ceph/src/mgr/ClusterState.cc` / `ceph/src/mgr/ClusterState.h` — 叢集狀態聚合
 - `ceph/src/pybind/mgr/mgr_module.py` — Python 模組基底
 
+## MGR 的部署與安裝
+
+### Bootstrap 階段：第一個 MGR 如何建立
+
+執行 `cephadm bootstrap` 時，流程會在第一台主機上同時建立初始 MON 與 MGR：
+
+```bash
+cephadm bootstrap --mon-ip 192.168.1.10
+```
+
+Bootstrap 完成後，叢集會有一個 active MGR。Dashboard、Prometheus exporter 等功能此時就已可以使用。
+
+### 擴增 MGR：建立 Active/Standby 配置
+
+實務上建議部署 **2 個 MGR** 以提供高可用性。可用 `ceph orch` 指定數量：
+
+```bash
+# 讓 cephadm 在合適的 host 上自動部署共 2 個 MGR
+ceph orch apply mgr --placement="count:2"
+
+# 或明確指定跑在哪幾台 host
+ceph orch apply mgr --placement="node1,node2"
+```
+
+也可以用 YAML spec：
+
+```yaml
+# mgr-spec.yaml
+service_type: mgr
+placement:
+  hosts:
+    - node1
+    - node2
+```
+
+```bash
+ceph orch apply -i mgr-spec.yaml
+```
+
+::: tip Active/Standby 切換
+只有一個 MGR 處於 active 狀態，其餘都是 standby。當 active MGR 發生故障，standby 會自動接手，通常在數秒內完成切換，不需要手動介入。
+:::
+
+### 驗證 MGR 狀態
+
+```bash
+# 查看目前 active MGR 與 standby 狀態
+ceph mgr stat
+
+# 查看 MGR daemon 清單
+ceph orch ps --daemon-type mgr
+
+# 查看整體健康（含 MGR 相關 health check）
+ceph health detail
+```
+
+### 管理 MGR 模組
+
+MGR 的功能很大程度依賴 Python 模組。常用的模組管理指令：
+
+```bash
+# 查看已啟用與可啟用的模組清單
+ceph mgr module ls
+
+# 啟用特定模組（例如 prometheus exporter）
+ceph mgr module enable prometheus
+
+# 停用特定模組
+ceph mgr module disable <module-name>
+```
+
+常見需要手動啟用的模組包括：
+
+| 模組 | 功能 |
+|---|---|
+| `prometheus` | 暴露 Prometheus 可抓取的 metrics |
+| `dashboard` | Web UI 與 REST API（bootstrap 時通常已啟用）|
+| `balancer` | 自動平衡 PG 分布 |
+| `alerts` | 叢集健康告警整合 |
+| `rbd_support` | RBD 相關擴充操作支援 |
+
+### 手動觸發 Active MGR 切換
+
+如果需要讓 standby 接手（例如維護 active 所在節點）：
+
+```bash
+# 強制讓 active MGR 下線，觸發切換
+ceph mgr fail <active-mgr-name>
+```
+
+切換後，原本的 standby 會升為 active。完成維護後，原 MGR daemon 重新上線時會自動變回 standby。
+
 ## 相關章節
 
 ::: info 延伸閱讀

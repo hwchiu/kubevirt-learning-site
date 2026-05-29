@@ -200,6 +200,109 @@ Scrubbing 是 OSD 長期維持資料可靠性的另一個重點。
 - `ceph/src/osd/PG.h:169` — `class PG`
 - `ceph/src/os/bluestore/BlueStore.h:261` — `class BlueStore : public ObjectStore`
 
+## OSD 的部署與安裝
+
+### OSD 的基本要求
+
+部署 OSD 之前，需要確認以下條件：
+
+- **裸磁碟**：OSD 需要未格式化的原始磁碟（raw block device），不能是已掛載的檔案系統分割區。
+- **BlueStore 要求**：cephadm 預設使用 BlueStore，磁碟會被完全接管；原有資料會被清除。
+- **時間同步**：所有節點的時間必須同步（建議使用 chrony 或 NTP），否則 OSD peering 可能出問題。
+
+### 查看可用磁碟
+
+在部署 OSD 前，先確認 cephadm 看到哪些磁碟可用：
+
+```bash
+# 列出每台主機上目前可用（未使用）的裝置
+ceph orch device ls
+
+# 只看特定主機的裝置
+ceph orch device ls node1
+```
+
+輸出會顯示每顆磁碟的 available 狀態。若顯示 `No` 通常代表磁碟上已有分割表或資料，需先清除（`ceph orch device zap`）才能使用。
+
+### 部署 OSD：自動使用全部可用磁碟
+
+最快的方式是讓 cephadm 自動掃描並使用所有可用磁碟：
+
+```bash
+ceph orch apply osd --all-available-devices
+```
+
+這會讓 cephadm 在所有已知 host 上，把所有符合條件的裸磁碟都建立成 OSD，並在之後加入新磁碟時自動繼續處理。
+
+### 部署 OSD：指定特定磁碟
+
+若只想對特定主機或裝置建立 OSD：
+
+```bash
+# 在特定主機的特定磁碟上建立 OSD
+ceph orch daemon add osd node1:/dev/sdb
+
+# 對特定主機套用 spec（磁碟由條件篩選）
+ceph orch apply osd --service-name osd.node1
+```
+
+也可以用 YAML spec（DriveGroupSpec）更精細地描述篩選條件：
+
+```yaml
+# osd-spec.yaml
+service_type: osd
+service_id: all-nodes
+placement:
+  host_pattern: "*"
+spec:
+  data_devices:
+    all: true
+```
+
+```bash
+ceph orch apply -i osd-spec.yaml
+```
+
+::: tip 使用 DriveGroupSpec 的優點
+相較於一次性手動指定磁碟，DriveGroupSpec 支援依磁碟大小、類型（SSD/HDD）、路徑等條件篩選，適合規模化部署時統一描述儲存策略。
+:::
+
+### 清除磁碟後重新建立 OSD
+
+若磁碟已有舊資料需要重置：
+
+```bash
+# 先清除磁碟上的資料（會銷毀磁碟上所有內容）
+ceph orch device zap node1 /dev/sdb --force
+
+# 再重新套用 OSD spec
+ceph orch apply osd --all-available-devices
+```
+
+### 驗證 OSD 狀態
+
+```bash
+# 查看所有 OSD 的 up/in 狀態
+ceph osd stat
+
+# 查看詳細 OSD 列表
+ceph osd ls
+
+# 查看 OSD daemon 運行狀態（由 cephadm 管理的）
+ceph orch ps --daemon-type osd
+
+# 查看每個 OSD 的延遲統計
+ceph osd perf
+
+# 查看叢集空間與 OSD 分布
+ceph df
+ceph osd df
+```
+
+::: warning OSD 數量影響副本能力
+若使用預設的 3 副本策略（`min_size=2, size=3`），叢集至少要有 3 個 OSD 才能正常寫入。OSD 數量低於 `min_size` 時，PG 會進入 degraded 狀態，新的寫入可能無法完成。
+:::
+
 ## 相關章節
 
 ::: info 延伸閱讀
