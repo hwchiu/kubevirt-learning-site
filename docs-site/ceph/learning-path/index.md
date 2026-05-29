@@ -22,7 +22,7 @@ title: Ceph — 學習路徑入口
 | 4 | [cephadm 深入分析](/ceph/cephadm) | 看懂 orchestrator、spec 與 day-2 管理 |
 | 5 | [Dashboard](/ceph/dashboard) | 把 UI、Prometheus、Grafana 與 alert 串起來 |
 | 6 | [日常維運](/ceph/operations) | 建立巡檢、排錯與升級流程 |
-| 7 | [故事驅動式學習](/ceph/learning-path/story) | 用一條資料流把前面概念重新串起來 |
+| 7 | [故事驅動式學習](/ceph/learning-path/story) | 從分散式儲存概念出發，用一條資料流把前面概念重新串起來 |
 
 ## 兩條建議路徑
 
