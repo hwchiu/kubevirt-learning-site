@@ -26,6 +26,7 @@ import kafka from './sidebars/kafka.js'
 import clusterApi from './sidebars/cluster-api.js'
 import capm3 from './sidebars/cluster-api-provider-metal3.js'
 import capmaas from './sidebars/cluster-api-provider-maas.js'
+import ceph from './sidebars/ceph.js'
 
 export default withMermaid(defineConfig({
   base: siteConfig.base,
@@ -65,6 +66,7 @@ export default withMermaid(defineConfig({
       '/cluster-api/': clusterApi,
       '/cluster-api-provider-metal3/': capm3,
       '/cluster-api-provider-maas/': capmaas,
+      '/ceph/': ceph,
     },
     socialLinks: [
       { icon: 'github', link: siteConfig.githubLink }

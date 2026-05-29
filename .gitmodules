@@ -54,3 +54,7 @@
 	path = cluster-api
 	url = https://github.com/kubernetes-sigs/cluster-api.git
 	branch = main
+[submodule "ceph"]
+	path = ceph
+	url = https://github.com/ceph/ceph.git
+	branch = main
