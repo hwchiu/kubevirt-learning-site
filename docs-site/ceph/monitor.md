@@ -227,6 +227,86 @@ MON 的工作像是「**發布真相**」：
 - `ceph/src/mon/MonitorDBStore.h` — 持久化儲存
 - `ceph/src/auth/cephx/CephxKeyServer.h` — CephX 驗證資料
 
+## MON 的部署與安裝
+
+### Bootstrap 階段：第一個 MON 如何建立
+
+執行 `cephadm bootstrap` 時，流程會自動在第一台主機上建立初始 MON：
+
+```bash
+# 初始化叢集，指定第一個 MON 的 IP 位址
+cephadm bootstrap --mon-ip 192.168.1.10
+```
+
+Bootstrap 完成後，叢集只有一個 MON，此時還不具備高可用能力。
+
+### 擴增 MON：建立三節點 quorum
+
+實務上建議部署 **3 個或 5 個 MON** 以形成容錯 quorum。可用 `ceph orch` 指定數量：
+
+```bash
+# 讓 cephadm 在合適的 host 上自動部署共 3 個 MON
+ceph orch apply mon --placement="count:3"
+
+# 或明確指定哪幾台 host 跑 MON
+ceph orch apply mon --placement="host1,host2,host3"
+```
+
+也可以用 YAML spec 宣告式描述：
+
+```yaml
+# mon-spec.yaml
+service_type: mon
+placement:
+  hosts:
+    - node1
+    - node2
+    - node3
+```
+
+```bash
+ceph orch apply -i mon-spec.yaml
+```
+
+::: tip 建議使用奇數個 MON
+Paxos quorum 需要超過半數成員存活才能繼續運作。3 個 MON 最多容忍 1 台故障；5 個 MON 最多容忍 2 台故障。
+:::
+
+### 加入主機後再加 MON
+
+在加入新主機後，先確認 cephadm 能管理該主機，再套用 spec：
+
+```bash
+# 加入新主機
+ceph orch host add node2 192.168.1.11
+
+# 確認主機列表
+ceph orch host ls
+
+# 套用 MON 擴增
+ceph orch apply mon --placement="count:3"
+```
+
+### 驗證 MON 狀態
+
+```bash
+# 查看 quorum 狀態，確認幾個 MON 在線且形成 quorum
+ceph quorum_status
+
+# 查看整體健康狀態（包含 MON 的 health check）
+ceph health detail
+
+# 查看 MON daemon 清單
+ceph orch ps --daemon-type mon
+
+# 查看 MON map 與成員資訊
+ceph mon dump
+```
+
+::: warning 如果 quorum 遺失
+當少於半數 MON 存活時，叢集控制面（cluster maps、認證更新、指令）都無法繼續運作。維運時請確保 MON 分散在不同主機或 failure domain，避免單台機器故障導致 quorum 喪失。
+:::
+
 ## 相關章節
 
 ::: info 延伸閱讀
