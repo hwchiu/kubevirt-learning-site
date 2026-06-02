@@ -40,6 +40,8 @@ export const siteConfig = {
     { text: 'Cluster API Provider Metal3',       link: '/cluster-api-provider-metal3/' },
     { text: 'Cluster API Provider MAAS',         link: '/cluster-api-provider-maas/' },
     { text: 'Ceph',                              link: '/ceph/' },
+    { text: 'NVIDIA OpenShell',                  link: '/openshell/' },
+    { text: 'NVIDIA NemoClaw',                   link: '/nemoclaw/' },
   ],
 
   /** 頁腳文字 */
