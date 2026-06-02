@@ -181,3 +181,69 @@ OpenShell/
 ├── .agents/skills/        # Agent Skills（Agent 驅動的開發工作流程）
 └── install.sh             # 二進位安裝腳本
 ```
+
+## Kubernetes Driver 底層實作流程
+
+以下是一次 `openshell sandbox create` 在 Kubernetes 上的控制流程（偏實作視角）：
+
+```
+CLI
+ │ 1. create sandbox request
+ ▼
+Gateway API
+ │ 2. 寫入 DB（sandbox record, policy ref, provider ref）
+ │ 3. 指派 sandbox identity / cert material
+ ▼
+Kubernetes Driver
+ │ 4. 組裝 PodSpec（image、securityContext、volumes、resources）
+ │ 5. 決定 supervisor 交付模式（image-volume / init-container）
+ │ 6. 建立 PVC（若 workspace persistence 啟用）
+ ▼
+K8s API Server
+ │ 7. 建立 Pod / Secret / Config
+ ▼
+Sandbox Pod
+ │ 8. Supervisor 啟動，主動回連 Gateway
+ │ 9. 接收策略快照，開始 Policy Proxy / Inference Router
+ ▼
+Sandbox Ready
+```
+
+### 建立路徑中的關鍵狀態
+
+| 狀態 | 觸發條件 | 常見失敗點 |
+|------|---------|-----------|
+| `Requested` | Gateway 收到建立請求 | API 驗證參數不完整 |
+| `Provisioning` | Driver 開始建立 K8s 資源 | Secret / PVC / RBAC 權限不足 |
+| `Bootstrapping` | Pod 已啟動、Supervisor 初始化 | Supervisor sidecar 交付失敗 |
+| `Connected` | Supervisor 成功回連 Gateway | mTLS 憑證錯誤或 CA 不一致 |
+| `Running` | 策略與推理路由載入完成 | OPA policy syntax / provider credentials 錯誤 |
+
+## 控制平面與資料平面的請求路徑
+
+```
+                (控制流)
+CLI ──gRPC/HTTP──▶ Gateway ──session sync──▶ Supervisor
+                                      ▲
+                                      │ policy update / relay / lifecycle
+                                      │
+Agent Process ──localhost proxy──▶ Policy Proxy ──egress──▶ External Service
+        │
+        └──https://inference.local──▶ Inference Router ──▶ LLM Provider
+                         (資料流)
+```
+
+上圖可拆成兩條獨立路徑：
+- **控制流**：CLI ↔ Gateway ↔ Supervisor（生命週期、策略、Relay）
+- **資料流**：Agent ↔ Policy Proxy/Inference Router ↔ 外部 API（執行期網路請求）
+
+## 維運痛點與實務對策（OpenShell on K8s）
+
+| 維運痛點 | 底層原因 | 建議對策 |
+|---------|---------|---------|
+| Gateway 擴容後狀態不一致 | 多副本下若使用 SQLite，狀態無法共享 | 生產環境改用外部 PostgreSQL；啟用備援與連線池監控 |
+| 沙箱大量建立時 Pending | PVC / Image Pull / Node 資源三方競爭 | 預先容量規劃、分離 sandbox node pool、設定 ResourceQuota |
+| policy 更新延遲 | Supervisor 控制通道抖動或重連頻繁 | 監控 supervisor reconnect rate，設定告警並檢查網路抖動 |
+| inference.local 成功率下降 | 上游 LLM provider 限流、憑證過期、DNS 問題 | 導入 provider 健康檢查、API Key 輪替排程、失敗率 SLO |
+| 憑證輪替造成短暫中斷 | mTLS 憑證與 Supervisor session 更新不同步 | 採雙憑證重疊期（overlap）與分批滾動更新 |
+| Debug 困難（Pod 秒退） | 啟動期錯誤在容器早期發生，日誌不完整 | 啟用集中式日誌，保留 init-container 與 supervisor 啟動日誌 |

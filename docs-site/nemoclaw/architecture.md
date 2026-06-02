@@ -214,3 +214,62 @@ NemoClaw 在 Host 上維護以下狀態：
 | 推理 Provider 預設配置 | NemoClaw | NVIDIA NIM 等預設後端 |
 | 常駐 Agent 管理 | NemoClaw | start/stop/status 生命週期 |
 | Operator 審核流程 | NemoClaw | 網路存取請求的審核機制 |
+
+## NemoClaw 在 K8s 的底層落地流程
+
+NemoClaw 本身不直接創建 Pod，而是把「藍圖 + 策略 + 推理配置」轉成 OpenShell 可執行的請求：
+
+```
+nemoclaw start
+   │
+   ├─ 1. 讀取 ~/.nemoclaw/profiles/<agent>.yaml
+   ├─ 2. 合成 Blueprint（image/security/resources）
+   ├─ 3. 產生 Network Policy（baseline + user override）
+   ├─ 4. 檢查 Provider/Model 設定
+   ▼
+OpenShell API 呼叫（sandbox create + policy set + inference set）
+   ▼
+OpenShell Gateway / Kubernetes Driver
+   ▼
+K8s Pod + Supervisor + Agent（OpenClaw/Hermes）
+```
+
+### 重要實作邏輯：不是替代 OpenShell，而是「編排 OpenShell」
+
+| 層次 | 負責元件 | 實作重點 |
+|------|---------|---------|
+| 編排層 | NemoClaw CLI/Plugin | 組合藍圖、策略、推理、常駐模式 |
+| 控制層 | OpenShell Gateway | API、狀態儲存、策略下發、身份驗證 |
+| 執行層 | OpenShell Supervisor | Policy Proxy、Inference Router、程序隔離 |
+| 基礎層 | Kubernetes | Pod 調度、儲存、網路、節點資源管理 |
+
+## 常駐 Agent 的控制/資料雙路徑
+
+```
+          (控制路徑)
+nemoclaw CLI ──▶ OpenShell Gateway ──▶ Supervisor
+      ▲                                   │
+      │                                   ├─ policy/inference config sync
+      │                                   └─ status/log stream
+      │
+      └────────── status / stop / restart ──────────┘
+
+          (資料路徑)
+OpenClaw/Hermes ──▶ Policy Proxy ──▶ External APIs
+        │
+        └──▶ inference.local ──▶ Inference Router ──▶ LLM Provider
+```
+
+若要排查「為什麼 `nemoclaw start` 成功但任務失敗」，要同時檢查兩條路徑：  
+1) 控制路徑是否連通（Gateway/Supervisor session）；2) 資料路徑是否被策略或上游 provider 阻斷。
+
+## 維運痛點與實務對策（NemoClaw）
+
+| 維運痛點 | 底層原因 | 建議對策 |
+|---------|---------|---------|
+| `nemoclaw setup` 與叢集現況脫節 | 初次引導後，叢集資源/憑證會持續變動 | 導入週期性 re-validation（provider key、storage class、GPU 資源） |
+| Agent 長時間執行後記憶體膨脹 | 常駐 workload 缺少明確重啟策略 | 為 Agent Pod 設定 memory limits + liveness probe + 週期性重啟 |
+| 網路審核流程堆積 | pending 規則沒有 SLA 與責任人 | 建立審核隊列 SLA、owner 值班、逾時自動拒絕或升級 |
+| 多環境配置漂移（dev/staging/prod） | Blueprint 與 policy 以檔案散落管理 | 版本化 profile/policy（GitOps），以 PR 審核變更 |
+| 事件追蹤困難 | CLI、Gateway、Supervisor、K8s 事件分散 | 建立統一 trace-id，串接集中式日誌與告警 |
+| 升級後行為改變 | NemoClaw 與 OpenShell 版本相依 | 維護版本相容矩陣，升級前先做 canary sandbox 驗證 |
