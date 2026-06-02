@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="680" viewBox="0 0 1400 680">
+  <style>
+    .bg { fill:#f1f5f9; }
+    .col { fill:#ffffff; stroke:#cbd5e1; stroke-width:1.5; }
+    .hdr { fill:#1e293b; stroke:none; }
+    .hdr-txt { font-family:Arial,sans-serif; font-size:14px; font-weight:bold; fill:#ffffff; }
+    .L0 { fill:#dcfce7; stroke:#16a34a; stroke-width:1.5; }
+    .L1 { fill:#dbeafe; stroke:#2563eb; stroke-width:1.5; }
+    .L2 { fill:#fef9c3; stroke:#d97706; stroke-width:1.5; }
+    .L3 { fill:#fce7f3; stroke:#db2777; stroke-width:1.5; }
+    .L4 { fill:#ede9fe; stroke:#7c3aed; stroke-width:1.5; }
+    .item { font-family:Arial,sans-serif; font-size:12px; fill:#1e293b; }
+    .dim { font-family:Arial,sans-serif; font-size:11px; fill:#64748b; }
+    .legend { font-family:Arial,sans-serif; font-size:12px; fill:#334155; }
+  </style>
+
+  <rect class="bg" width="1400" height="680"/>
+  <text x="700" y="38" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="bold" fill="#0f172a">OpenShell 各 Driver 的 Container Runtime 鏈與隔離層次比較</text>
+
+  <!-- Column headers -->
+  <!-- Docker -->
+  <rect class="hdr" x="30" y="60" width="290" height="40" rx="6"/>
+  <text class="hdr-txt" x="175" y="85" text-anchor="middle">Docker Driver</text>
+  <!-- Podman -->
+  <rect class="hdr" x="340" y="60" width="290" height="40" rx="6"/>
+  <text class="hdr-txt" x="485" y="85" text-anchor="middle">Podman Driver (Rootless)</text>
+  <!-- K8s -->
+  <rect class="hdr" x="650" y="60" width="290" height="40" rx="6"/>
+  <text class="hdr-txt" x="795" y="85" text-anchor="middle">Kubernetes Driver</text>
+  <!-- K8s + User NS -->
+  <rect class="hdr" x="960" y="60" width="200" height="40" rx="6"/>
+  <text class="hdr-txt" x="1060" y="85" text-anchor="middle">K8s + UserNamespace</text>
+  <!-- VM -->
+  <rect class="hdr" x="1175" y="60" width="195" height="40" rx="6"/>
+  <text class="hdr-txt" x="1272" y="85" text-anchor="middle">VM Driver (libkrun)</text>
+
+  <!-- Layer 0: App -->
+  <rect class="L0" x="30" y="120" width="290" height="55" rx="6"/>
+  <text class="item" x="175" y="143" text-anchor="middle" font-weight="bold">Agent Process (claude etc.)</text>
+  <text class="dim" x="175" y="162" text-anchor="middle">受限子程序（drop caps, seccomp）</text>
+  <rect class="L0" x="340" y="120" width="290" height="55" rx="6"/>
+  <text class="item" x="485" y="143" text-anchor="middle" font-weight="bold">Agent Process</text>
+  <text class="dim" x="485" y="162" text-anchor="middle">受限子程序（drop caps, seccomp）</text>
+  <rect class="L0" x="650" y="120" width="290" height="55" rx="6"/>
+  <text class="item" x="795" y="143" text-anchor="middle" font-weight="bold">Agent Process</text>
+  <text class="dim" x="795" y="162" text-anchor="middle">受限子程序（drop caps, seccomp）</text>
+  <rect class="L0" x="960" y="120" width="200" height="55" rx="6"/>
+  <text class="item" x="1060" y="143" text-anchor="middle" font-weight="bold">Agent Process</text>
+  <text class="dim" x="1060" y="162" text-anchor="middle">UID=0 僅在 user NS 內</text>
+  <rect class="L0" x="1175" y="120" width="195" height="55" rx="6"/>
+  <text class="item" x="1272" y="143" text-anchor="middle" font-weight="bold">Guest Agent</text>
+  <text class="dim" x="1272" y="162" text-anchor="middle">KVM Guest 程序</text>
+
+  <!-- Layer 1: Supervisor / OPA -->
+  <rect class="L1" x="30" y="190" width="290" height="60" rx="6"/>
+  <text class="item" x="175" y="213" text-anchor="middle" font-weight="bold">Supervisor (OPA + Policy Proxy)</text>
+  <text class="dim" x="175" y="230" text-anchor="middle">網路/推理策略強制</text>
+  <text class="dim" x="175" y="244" text-anchor="middle">憑證注入、日誌推送</text>
+  <rect class="L1" x="340" y="190" width="290" height="60" rx="6"/>
+  <text class="item" x="485" y="213" text-anchor="middle" font-weight="bold">Supervisor (OPA + Policy Proxy)</text>
+  <text class="dim" x="485" y="230" text-anchor="middle">網路/推理策略強制</text>
+  <text class="dim" x="485" y="244" text-anchor="middle">憑證注入、日誌推送</text>
+  <rect class="L1" x="650" y="190" width="290" height="60" rx="6"/>
+  <text class="item" x="795" y="213" text-anchor="middle" font-weight="bold">Supervisor (OPA + Policy Proxy)</text>
+  <text class="dim" x="795" y="230" text-anchor="middle">網路/推理策略強制</text>
+  <text class="dim" x="795" y="244" text-anchor="middle">憑證注入、日誌推送</text>
+  <rect class="L1" x="960" y="190" width="200" height="60" rx="6"/>
+  <text class="item" x="1060" y="213" text-anchor="middle" font-weight="bold">Supervisor</text>
+  <text class="dim" x="1060" y="230" text-anchor="middle">同左，但 UID remap</text>
+  <text class="dim" x="1060" y="244" text-anchor="middle">保護 host UID 空間</text>
+  <rect class="L1" x="1175" y="190" width="195" height="60" rx="6"/>
+  <text class="item" x="1272" y="213" text-anchor="middle" font-weight="bold">Supervisor</text>
+  <text class="dim" x="1272" y="230" text-anchor="middle">在 Guest 內執行</text>
+  <text class="dim" x="1272" y="244" text-anchor="middle">同容器版安全邊界</text>
+
+  <!-- Layer 2: Container / VM boundary -->
+  <rect class="L2" x="30" y="265" width="290" height="75" rx="6"/>
+  <text class="item" x="175" y="288" text-anchor="middle" font-weight="bold">Docker Container</text>
+  <text class="dim" x="175" y="306" text-anchor="middle">Linux Namespace: pid/net/mnt/ipc/uts</text>
+  <text class="dim" x="175" y="320" text-anchor="middle">Cgroups v2（CPU/Memory/Pids limit）</text>
+  <text class="dim" x="175" y="334" text-anchor="middle">Seccomp + AppArmor/SELinux</text>
+  <rect class="L2" x="340" y="265" width="290" height="75" rx="6"/>
+  <text class="item" x="485" y="288" text-anchor="middle" font-weight="bold">Rootless Container</text>
+  <text class="dim" x="485" y="306" text-anchor="middle">User Namespace（UID remap by default）</text>
+  <text class="dim" x="485" y="320" text-anchor="middle">+ pid/net/mnt/ipc/uts NS</text>
+  <text class="dim" x="485" y="334" text-anchor="middle">Cgroups v2 + Seccomp</text>
+  <rect class="L2" x="650" y="265" width="290" height="75" rx="6"/>
+  <text class="item" x="795" y="288" text-anchor="middle" font-weight="bold">K8s Pod</text>
+  <text class="dim" x="795" y="306" text-anchor="middle">Pod Namespace（per-Pod net/mnt/uts）</text>
+  <text class="dim" x="795" y="320" text-anchor="middle">K8s NetworkPolicy（Egress/Ingress）</text>
+  <text class="dim" x="795" y="334" text-anchor="middle">PodSecurityContext + Seccomp</text>
+  <rect class="L2" x="960" y="265" width="200" height="75" rx="6"/>
+  <text class="item" x="1060" y="288" text-anchor="middle" font-weight="bold">K8s Pod + User NS</text>
+  <text class="dim" x="1060" y="306" text-anchor="middle">UID 0 in pod ≠ UID 0 on host</text>
+  <text class="dim" x="1060" y="320" text-anchor="middle">K8s 1.33+（Beta）</text>
+  <text class="dim" x="1060" y="334" text-anchor="middle">最強 K8s 容器隔離</text>
+  <rect class="L2" x="1175" y="265" width="195" height="75" rx="6"/>
+  <text class="item" x="1272" y="288" text-anchor="middle" font-weight="bold">MicroVM Guest</text>
+  <text class="dim" x="1272" y="306" text-anchor="middle">rootfs.ext4 + overlay.ext4</text>
+  <text class="dim" x="1272" y="320" text-anchor="middle">獨立核心（Guest kernel）</text>
+  <text class="dim" x="1272" y="334" text-anchor="middle">完整 VM 記憶體/網路隔離</text>
+
+  <!-- Layer 3: Runtime -->
+  <rect class="L3" x="30" y="355" width="290" height="65" rx="6"/>
+  <text class="item" x="175" y="378" text-anchor="middle" font-weight="bold">containerd + runc</text>
+  <text class="dim" x="175" y="396" text-anchor="middle">OCI Runtime Spec 執行</text>
+  <text class="dim" x="175" y="410" text-anchor="middle">Namespace + Cgroup 設定</text>
+  <rect class="L3" x="340" y="355" width="290" height="65" rx="6"/>
+  <text class="item" x="485" y="378" text-anchor="middle" font-weight="bold">crun（Podman 預設 OCI Runtime）</text>
+  <text class="dim" x="485" y="396" text-anchor="middle">C 實作，rootless 友善</text>
+  <text class="dim" x="485" y="410" text-anchor="middle">newuidmap/newgidmap UID 重映射</text>
+  <rect class="L3" x="650" y="355" width="290" height="65" rx="6"/>
+  <text class="item" x="795" y="378" text-anchor="middle" font-weight="bold">containerd / CRI-O + runc</text>
+  <text class="dim" x="795" y="396" text-anchor="middle">kubelet 透過 CRI 介面呼叫</text>
+  <text class="dim" x="795" y="410" text-anchor="middle">可替換為 Kata Containers（更強隔離）</text>
+  <rect class="L3" x="960" y="355" width="200" height="65" rx="6"/>
+  <text class="item" x="1060" y="378" text-anchor="middle" font-weight="bold">containerd + runc</text>
+  <text class="dim" x="1060" y="396" text-anchor="middle">UserNamespaces support</text>
+  <text class="dim" x="1060" y="410" text-anchor="middle">需 container runtime 支援</text>
+  <rect class="L3" x="1175" y="355" width="195" height="65" rx="6"/>
+  <text class="item" x="1272" y="378" text-anchor="middle" font-weight="bold">libkrun（Rust library）</text>
+  <text class="dim" x="1272" y="396" text-anchor="middle">KVM-backed MicroVM</text>
+  <text class="dim" x="1272" y="410" text-anchor="middle">virtiofs, vsock network</text>
+
+  <!-- Layer 4: Host kernel -->
+  <rect class="L4" x="30" y="435" width="1340" height="55" rx="6"/>
+  <text class="item" x="700" y="458" text-anchor="middle" font-weight="bold">Linux Host Kernel（共用，除 VM Driver 外）</text>
+  <text class="dim" x="700" y="476" text-anchor="middle">Namespaces（pid / net / mnt / ipc / uts / user） ｜ Cgroups v2 ｜ eBPF ｜ KVM（VM Driver 需要）</text>
+
+  <!-- Legend -->
+  <text x="30" y="530" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0f172a">隔離強度比較</text>
+  <rect class="L0" x="30" y="545" width="18" height="18" rx="3"/> <text class="legend" x="55" y="559">應用層：Agent Process + Supervisor（所有 Driver 共有）</text>
+  <rect class="L1" x="30" y="570" width="18" height="18" rx="3"/> <text class="legend" x="55" y="584">策略層：OPA Rego 評估 + egress 封鎖（所有 Driver 共有）</text>
+  <rect class="L2" x="30" y="595" width="18" height="18" rx="3"/> <text class="legend" x="55" y="609">容器/VM 邊界：Linux Namespace + Cgroups / MicroVM Guest Kernel</text>
+  <rect class="L3" x="30" y="620" width="18" height="18" rx="3"/> <text class="legend" x="55" y="634">OCI Runtime 層：runc / crun / libkrun — 實際建立隔離邊界</text>
+  <rect class="L4" x="30" y="645" width="18" height="18" rx="3"/> <text class="legend" x="55" y="659">Host Kernel（VM Driver 的 Guest OS 本身是獨立 Kernel，與 Host 完全隔離）</text>
+
+  <text x="750" y="540" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0f172a">隔離強度排名</text>
+  <text x="750" y="560" font-family="Arial,sans-serif" font-size="12" fill="#334155">Docker ≈ K8s（runc）&lt; K8s+UserNS &lt; Podman Rootless &lt; K8s+Kata Containers &lt; VM（libkrun）</text>
+</svg>

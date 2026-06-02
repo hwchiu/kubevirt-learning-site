@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800">
+  <style>
+    .bg { fill:#f1f5f9; }
+    .panel { fill:#ffffff; stroke:#cbd5e1; stroke-width:1.5; rx:12; }
+    .panel-hdr { fill:#0f172a; stroke:none; rx:8; }
+    .hdr-txt { font-family:Arial,sans-serif; font-size:16px; font-weight:bold; fill:#ffffff; }
+    .item { font-family:Arial,sans-serif; font-size:13px; fill:#334155; }
+    .sub { font-family:Arial,sans-serif; font-size:11px; fill:#64748b; }
+    .cat { font-family:Arial,sans-serif; font-size:12px; font-weight:bold; fill:#0ea5e9; }
+    .arrow { stroke:#94a3b8; stroke-width:1.5; fill:none; marker-end:url(#arr); }
+    .center-box { fill:#fef9c3; stroke:#eab308; stroke-width:2; rx:14; }
+    .center-txt { font-family:Arial,sans-serif; font-size:22px; font-weight:bold; fill:#78350f; }
+  </style>
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect class="bg" width="1400" height="800"/>
+
+  <!-- title -->
+  <text x="700" y="38" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="bold" fill="#0f172a">OpenShell — 底層開源生態整合全景圖</text>
+
+  <!-- center: OpenShell Core (Rust) -->
+  <rect class="center-box" x="550" y="330" width="300" height="110"/>
+  <text class="center-txt" x="700" y="380" text-anchor="middle">OpenShell Core</text>
+  <text x="700" y="406" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#92400e">Written in Rust</text>
+  <text x="700" y="426" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" fill="#92400e">Gateway + Supervisor + Drivers</text>
+
+  <!-- ── LEFT COLUMN: CONTROL & AUTH ── -->
+  <rect class="panel" x="30" y="80" width="280" height="260"/>
+  <rect class="panel-hdr" x="30" y="80" width="280" height="36" rx="8"/>
+  <text class="hdr-txt" x="170" y="103" text-anchor="middle">控制層 / 通訊</text>
+  <text class="cat" x="50" y="140">gRPC / HTTP</text>
+  <text class="item" x="50" y="160">tonic（Rust gRPC 框架）</text>
+  <text class="sub" x="50" y="175">CLI ↔ Gateway ↔ Supervisor</text>
+  <text class="cat" x="50" y="200">非同步執行時期</text>
+  <text class="item" x="50" y="220">tokio（Rust async runtime）</text>
+  <text class="sub" x="50" y="235">I/O 多工、Timer、Task</text>
+  <text class="cat" x="50" y="260">HTTP 伺服器</text>
+  <text class="item" x="50" y="280">axum（Rust web framework）</text>
+  <text class="sub" x="50" y="295">REST API endpoint</text>
+  <text class="item" x="50" y="315">rustls（TLS 實作）</text>
+
+  <!-- ── LEFT COLUMN: AUTH / PKI ── -->
+  <rect class="panel" x="30" y="380" width="280" height="230"/>
+  <rect class="panel-hdr" x="30" y="380" width="280" height="36" rx="8"/>
+  <text class="hdr-txt" x="170" y="403" text-anchor="middle">身份驗證 / PKI</text>
+  <text class="cat" x="50" y="440">mTLS</text>
+  <text class="item" x="50" y="460">rcgen（憑證產生 Rust crate）</text>
+  <text class="sub" x="50" y="475">Gateway-Supervisor 雙向驗證</text>
+  <text class="cat" x="50" y="500">OIDC</text>
+  <text class="item" x="50" y="520">Keycloak / Entra ID / Okta</text>
+  <text class="sub" x="50" y="535">OpenID Connect JWT 驗證</text>
+  <text class="cat" x="50" y="560">憑證管理（K8s）</text>
+  <text class="item" x="50" y="580">cert-manager（可選整合）</text>
+  <text class="sub" x="50" y="595">自動輪替 TLS Secret</text>
+
+  <!-- ── RIGHT COLUMN: POLICY ── -->
+  <rect class="panel" x="1090" y="80" width="280" height="220"/>
+  <rect class="panel-hdr" x="1090" y="80" width="280" height="36" rx="8"/>
+  <text class="hdr-txt" x="1230" y="103" text-anchor="middle">策略引擎</text>
+  <text class="cat" x="1110" y="140">Open Policy Agent (OPA)</text>
+  <text class="item" x="1110" y="160">嵌入式 Rego 評估引擎</text>
+  <text class="sub" x="1110" y="175">Supervisor Policy Proxy 核心</text>
+  <text class="sub" x="1110" y="190">Allow / Route / Deny 決策</text>
+  <text class="cat" x="1110" y="215">Rego Policy</text>
+  <text class="item" x="1110" y="235">宣告式 YAML → Rego 轉換</text>
+  <text class="sub" x="1110" y="250">network / inference 維度</text>
+  <text class="item" x="1110" y="275">Seccomp Profile（JSON）</text>
+  <text class="sub" x="1110" y="290">syscall allowlist，沙箱建立鎖定</text>
+
+  <!-- ── RIGHT COLUMN: STORAGE ── -->
+  <rect class="panel" x="1090" y="340" width="280" height="200"/>
+  <rect class="panel-hdr" x="1090" y="340" width="280" height="36" rx="8"/>
+  <text class="hdr-txt" x="1230" y="363" text-anchor="middle">持久化儲存</text>
+  <text class="cat" x="1110" y="400">SQLite（預設）</text>
+  <text class="item" x="1110" y="420">rusqlite（Rust binding）</text>
+  <text class="sub" x="1110" y="435">沙箱記錄、策略、Provider</text>
+  <text class="cat" x="1110" y="460">PostgreSQL（HA）</text>
+  <text class="item" x="1110" y="480">sqlx（async Rust DB crate）</text>
+  <text class="sub" x="1110" y="495">生產多副本 Gateway</text>
+  <text class="cat" x="1110" y="520">Bitnami PostgreSQL</text>
+  <text class="item" x="1110" y="540">Helm subchart，可選啟用</text>
+
+  <!-- ── TOP CENTER: COMPUTE DRIVERS ── -->
+  <rect class="panel" x="350" y="80" width="700" height="200"/>
+  <rect class="panel-hdr" x="350" y="80" width="700" height="36" rx="8"/>
+  <text class="hdr-txt" x="700" y="103" text-anchor="middle">計算驅動層（Compute Drivers）— 開源整合</text>
+  <text class="cat" x="370" y="140">Docker Driver</text>
+  <text class="item" x="370" y="158">Docker Engine API（UNIX socket）</text>
+  <text class="sub" x="370" y="172">→ containerd → runc → cgroup/namespace</text>
+  <text class="cat" x="600" y="140">Podman Driver</text>
+  <text class="item" x="600" y="158">Podman REST API（rootless）</text>
+  <text class="sub" x="600" y="172">→ crun → user namespace（UID remap）</text>
+  <text class="cat" x="370" y="200">Kubernetes Driver</text>
+  <text class="item" x="370" y="218">K8s API（client-go / kube crate）</text>
+  <text class="sub" x="370" y="232">→ kubelet → containerd/CRI-O → runc</text>
+  <text class="cat" x="600" y="200">VM Driver（實驗性）</text>
+  <text class="item" x="600" y="218">libkrun（KVM MicroVM）</text>
+  <text class="sub" x="600" y="232">→ KVM hypervisor → 硬體隔離</text>
+  <text class="item" x="370" y="262">kubernetes-sigs/agent-sandbox CRD</text>
+  <text class="sub" x="370" y="276">K8s Driver 的必要前置 CRD</text>
+
+  <!-- ── BOTTOM: GPU ── -->
+  <rect class="panel" x="350" y="600" width="700" height="170"/>
+  <rect class="panel-hdr" x="350" y="600" width="700" height="36" rx="8"/>
+  <text class="hdr-txt" x="700" y="623" text-anchor="middle">GPU 加速整合</text>
+  <text class="cat" x="370" y="660">CDI（Container Device Interface）</text>
+  <text class="item" x="370" y="680">OCI 標準 GPU 裝置注入介面（CNCF spec）</text>
+  <text class="sub" x="370" y="694">Docker / Podman CDI 優先路徑</text>
+  <text class="cat" x="700" y="660">NVIDIA Container Toolkit</text>
+  <text class="item" x="700" y="680">nvidia-container-runtime + libnvidia-container</text>
+  <text class="sub" x="700" y="694">CDI 不可用時的 fallback 路徑（--gpus all）</text>
+  <text class="cat" x="370" y="720">K8s GPU Resource</text>
+  <text class="item" x="370" y="740">nvidia.com/gpu resource request/limit</text>
+  <text class="sub" x="370" y="754">需 NVIDIA GPU Operator 安裝於叢集</text>
+
+  <!-- Arrows from center to panels -->
+  <line class="arrow" x1="550" y1="375" x2="315" y2="220"/>
+  <line class="arrow" x1="550" y1="395" x2="315" y2="480"/>
+  <line class="arrow" x1="700" y1="330" x2="700" y2="285"/>
+  <line class="arrow" x1="700" y1="440" x2="700" y2="600"/>
+  <line class="arrow" x1="850" y1="375" x2="1087" y2="220"/>
+  <line class="arrow" x1="850" y1="395" x2="1087" y2="420"/>
+</svg>
