@@ -27,6 +27,8 @@ import clusterApi from './sidebars/cluster-api.js'
 import capm3 from './sidebars/cluster-api-provider-metal3.js'
 import capmaas from './sidebars/cluster-api-provider-maas.js'
 import ceph from './sidebars/ceph.js'
+import openshell from './sidebars/openshell.js'
+import nemoclaw from './sidebars/nemoclaw.js'
 
 export default withMermaid(defineConfig({
   base: siteConfig.base,
@@ -67,6 +69,8 @@ export default withMermaid(defineConfig({
       '/cluster-api-provider-metal3/': capm3,
       '/cluster-api-provider-maas/': capmaas,
       '/ceph/': ceph,
+      '/openshell/': openshell,
+      '/nemoclaw/': nemoclaw,
     },
     socialLinks: [
       { icon: 'github', link: siteConfig.githubLink }

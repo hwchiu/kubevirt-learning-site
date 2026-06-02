@@ -45,6 +45,12 @@ hero:
     - theme: alt
       text: ☁️ CAPMAAS
       link: /cluster-api-provider-maas/
+    - theme: alt
+      text: 🔒 OpenShell
+      link: /openshell/
+    - theme: alt
+      text: 🤖 NemoClaw
+      link: /nemoclaw/
 
 
 features:
@@ -120,6 +126,18 @@ features:
     link: /cluster-api-provider-maas/
     linkText: 開始閱讀
 
+  - icon: 🔒
+    title: NVIDIA OpenShell
+    details: AI Agent 安全沙箱執行環境 — 宣告式 YAML 策略保護資料與憑證、支援 Docker/Podman/Kubernetes/MicroVM、L7 Policy Engine、Privacy-Aware 推理路由。
+    link: /openshell/
+    linkText: 開始閱讀
+
+  - icon: 🤖
+    title: NVIDIA NemoClaw
+    details: AI Agent 安全執行參考堆疊 — 建立於 OpenShell 之上，為 OpenClaw/Hermes 提供引導式初始設定、強化藍圖、路由推理、網路策略與常駐 Agent 生命週期管理。
+    link: /nemoclaw/
+    linkText: 開始閱讀
+
 ---
 
 ## 📚 專案總覽
@@ -140,6 +158,8 @@ features:
 | [Cluster API](/cluster-api/) | Kubernetes 叢集生命週期管理框架 | ✅ 完整分析 |
 | [Cluster API Provider Metal3](/cluster-api-provider-metal3/) | 裸金屬 Kubernetes 叢集 Provider（Ironic） | ✅ 完整分析 |
 | [Cluster API Provider MAAS](/cluster-api-provider-maas/) | Canonical MAAS 裸金屬 Provider | ✅ 完整分析 |
+| [NVIDIA OpenShell](/openshell/) | AI Agent 安全沙箱執行環境 | ✅ 完整分析 |
+| [NVIDIA NemoClaw](/nemoclaw/) | AI Agent 安全執行參考堆疊（建立於 OpenShell 上） | ✅ 完整分析 |
 
 
 ## 🔗 原始碼連結
@@ -158,4 +178,6 @@ features:
 - **Cluster API**: [github.com/kubernetes-sigs/cluster-api](https://github.com/kubernetes-sigs/cluster-api)
 - **Cluster API Provider Metal3**: [github.com/metal3-io/cluster-api-provider-metal3](https://github.com/metal3-io/cluster-api-provider-metal3)
 - **Cluster API Provider MAAS**: [github.com/spectrocloud/cluster-api-provider-maas](https://github.com/spectrocloud/cluster-api-provider-maas)
+- **NVIDIA OpenShell**: [github.com/NVIDIA/OpenShell](https://github.com/NVIDIA/OpenShell)
+- **NVIDIA NemoClaw**: [github.com/NVIDIA/NemoClaw](https://github.com/NVIDIA/NemoClaw)
 
