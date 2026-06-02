@@ -186,28 +186,7 @@ OpenShell/
 
 以下是一次 `openshell sandbox create` 在 Kubernetes 上的控制流程（偏實作視角）：
 
-```
-CLI
- │ 1. create sandbox request
- ▼
-Gateway API
- │ 2. 寫入 DB（sandbox record, policy ref, provider ref）
- │ 3. 指派 sandbox identity / cert material
- ▼
-Kubernetes Driver
- │ 4. 組裝 PodSpec（image、securityContext、volumes、resources）
- │ 5. 決定 supervisor 交付模式（image-volume / init-container）
- │ 6. 建立 PVC（若 workspace persistence 啟用）
- ▼
-K8s API Server
- │ 7. 建立 Pod / Secret / Config
- ▼
-Sandbox Pod
- │ 8. Supervisor 啟動，主動回連 Gateway
- │ 9. 接收策略快照，開始 Policy Proxy / Inference Router
- ▼
-Sandbox Ready
-```
+![OpenShell Kubernetes Driver 執行流程圖](/diagrams/openshell/k8s-driver-runtime-flow.svg)
 
 ### 建立路徑中的關鍵狀態
 
@@ -221,17 +200,7 @@ Sandbox Ready
 
 ## 控制平面與資料平面的請求路徑
 
-```
-                (控制流)
-CLI ──gRPC/HTTP──▶ Gateway ──session sync──▶ Supervisor
-                                      ▲
-                                      │ policy update / relay / lifecycle
-                                      │
-Agent Process ──localhost proxy──▶ Policy Proxy ──egress──▶ External Service
-        │
-        └──https://inference.local──▶ Inference Router ──▶ LLM Provider
-                         (資料流)
-```
+![OpenShell 控制流與資料流路徑圖](/diagrams/openshell/control-data-plane-path.svg)
 
 上圖可拆成兩條獨立路徑：
 - **控制流**：CLI ↔ Gateway ↔ Supervisor（生命週期、策略、Relay）

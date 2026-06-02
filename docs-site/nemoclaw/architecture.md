@@ -219,20 +219,7 @@ NemoClaw 在 Host 上維護以下狀態：
 
 NemoClaw 本身不直接創建 Pod，而是把「藍圖 + 策略 + 推理配置」轉成 OpenShell 可執行的請求：
 
-```
-nemoclaw start
-   │
-   ├─ 1. 讀取 ~/.nemoclaw/profiles/<agent>.yaml
-   ├─ 2. 合成 Blueprint（image/security/resources）
-   ├─ 3. 產生 Network Policy（baseline + user override）
-   ├─ 4. 檢查 Provider/Model 設定
-   ▼
-OpenShell API 呼叫（sandbox create + policy set + inference set）
-   ▼
-OpenShell Gateway / Kubernetes Driver
-   ▼
-K8s Pod + Supervisor + Agent（OpenClaw/Hermes）
-```
+![NemoClaw 在 K8s 的編排落地流程圖](/diagrams/nemoclaw/k8s-orchestration-flow.svg)
 
 ### 重要實作邏輯：不是替代 OpenShell，而是「編排 OpenShell」
 
@@ -245,20 +232,7 @@ K8s Pod + Supervisor + Agent（OpenClaw/Hermes）
 
 ## 常駐 Agent 的控制/資料雙路徑
 
-```
-          (控制路徑)
-nemoclaw CLI ──▶ OpenShell Gateway ──▶ Supervisor
-      ▲                                   │
-      │                                   ├─ policy/inference config sync
-      │                                   └─ status/log stream
-      │
-      └────────── status / stop / restart ──────────┘
-
-          (資料路徑)
-OpenClaw/Hermes ──▶ Policy Proxy ──▶ External APIs
-        │
-        └──▶ inference.local ──▶ Inference Router ──▶ LLM Provider
-```
+![NemoClaw 常駐 Agent 控制與資料路徑圖](/diagrams/nemoclaw/control-data-path.svg)
 
 若要排查「為什麼 `nemoclaw start` 成功但任務失敗」，要同時檢查兩條路徑：  
 1) 控制路徑是否連通（Gateway/Supervisor session）；2) 資料路徑是否被策略或上游 provider 阻斷。

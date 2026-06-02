@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300">
+  <style>
+    .box { fill:#f8fafc; stroke:#334155; stroke-width:2; rx:10; }
+    .t { font-family:Arial,sans-serif; font-size:18px; fill:#0f172a; }
+    .s { font-family:Arial,sans-serif; font-size:14px; fill:#334155; }
+    .arrow { stroke:#475569; stroke-width:2; marker-end:url(#m); }
+  </style>
+  <defs>
+    <marker id="m" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#475569" /></marker>
+  </defs>
+  <rect class="box" x="30" y="90" width="190" height="95"/><text class="t" x="56" y="132">nemoclaw start</text><text class="s" x="54" y="156">profile + blueprint</text>
+  <rect class="box" x="260" y="90" width="250" height="95"/><text class="t" x="284" y="132">NemoClaw Plugin</text><text class="s" x="280" y="156">policy + inference compose</text>
+  <rect class="box" x="550" y="90" width="220" height="95"/><text class="t" x="578" y="132">OpenShell API</text><text class="s" x="567" y="156">create/policy/inference</text>
+  <rect class="box" x="810" y="90" width="190" height="95"/><text class="t" x="838" y="132">Gateway/Driver</text><text class="s" x="828" y="156">provision runtime</text>
+  <rect class="box" x="1040" y="90" width="140" height="95"/><text class="t" x="1065" y="132">K8s Pod</text><text class="s" x="1055" y="156">agent ready</text>
+  <line class="arrow" x1="220" y1="137" x2="260" y2="137"/>
+  <line class="arrow" x1="510" y1="137" x2="550" y2="137"/>
+  <line class="arrow" x1="770" y1="137" x2="810" y2="137"/>
+  <line class="arrow" x1="1000" y1="137" x2="1040" y2="137"/>
+  <text class="s" x="30" y="245">NemoClaw orchestrates OpenShell instead of replacing it: compose desired state, then delegate provisioning to OpenShell/Kubernetes.</text>
+</svg>
