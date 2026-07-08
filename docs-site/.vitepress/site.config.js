@@ -42,6 +42,7 @@ export const siteConfig = {
     { text: 'Ceph',                              link: '/ceph/' },
     { text: 'NVIDIA OpenShell',                  link: '/openshell/' },
     { text: 'NVIDIA NemoClaw',                   link: '/nemoclaw/' },
+    { text: 'etcd',                              link: '/etcd/' },
   ],
 
   /** 頁腳文字 */

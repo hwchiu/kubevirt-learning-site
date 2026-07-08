@@ -46,6 +46,9 @@ hero:
       text: ☁️ CAPMAAS
       link: /cluster-api-provider-maas/
     - theme: alt
+      text: 🔑 etcd
+      link: /etcd/
+    - theme: alt
       text: 🔒 OpenShell
       link: /openshell/
     - theme: alt
@@ -126,6 +129,12 @@ features:
     link: /cluster-api-provider-maas/
     linkText: 開始閱讀
 
+  - icon: 🔑
+    title: etcd
+    details: Kubernetes 控制平面最關鍵的分散式 KV 儲存層 — 聚焦 Defrag 根因、Kubernetes 中的維運影響，以及 Learner 非投票成員機制。
+    link: /etcd/
+    linkText: 開始閱讀
+
   - icon: 🔒
     title: NVIDIA OpenShell
     details: AI Agent 安全沙箱執行環境 — 宣告式 YAML 策略保護資料與憑證、支援 Docker/Podman/Kubernetes/MicroVM、L7 Policy Engine、Privacy-Aware 推理路由。
@@ -158,6 +167,7 @@ features:
 | [Cluster API](/cluster-api/) | Kubernetes 叢集生命週期管理框架 | ✅ 完整分析 |
 | [Cluster API Provider Metal3](/cluster-api-provider-metal3/) | 裸金屬 Kubernetes 叢集 Provider（Ironic） | ✅ 完整分析 |
 | [Cluster API Provider MAAS](/cluster-api-provider-maas/) | Canonical MAAS 裸金屬 Provider | ✅ 完整分析 |
+| [etcd](/etcd/) | Kubernetes 控制平面的分散式 Key-Value Store | ✅ 專題分析 |
 | [NVIDIA OpenShell](/openshell/) | AI Agent 安全沙箱執行環境 | ✅ 完整分析 |
 | [NVIDIA NemoClaw](/nemoclaw/) | AI Agent 安全執行參考堆疊（建立於 OpenShell 上） | ✅ 完整分析 |
 
@@ -178,6 +188,6 @@ features:
 - **Cluster API**: [github.com/kubernetes-sigs/cluster-api](https://github.com/kubernetes-sigs/cluster-api)
 - **Cluster API Provider Metal3**: [github.com/metal3-io/cluster-api-provider-metal3](https://github.com/metal3-io/cluster-api-provider-metal3)
 - **Cluster API Provider MAAS**: [github.com/spectrocloud/cluster-api-provider-maas](https://github.com/spectrocloud/cluster-api-provider-maas)
+- **etcd**: [github.com/etcd-io/etcd](https://github.com/etcd-io/etcd)
 - **NVIDIA OpenShell**: [github.com/NVIDIA/OpenShell](https://github.com/NVIDIA/OpenShell)
 - **NVIDIA NemoClaw**: [github.com/NVIDIA/NemoClaw](https://github.com/NVIDIA/NemoClaw)
-

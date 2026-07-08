@@ -595,6 +595,61 @@
           "doc_files": ["docs-site/ceph/operations.md"]
         }
       }
+    },
+    "etcd": {
+      "repo": "https://github.com/etcd-io/etcd",
+      "branch": "main",
+      "analyzed_commit": "6e4705678926d5d0982538896acc087d21e09db5",
+      "analyzed_date": "2026-07-08",
+      "pages": {
+        "index": {
+          "source_paths": [
+            "README.md",
+            "client/v3/maintenance.go"
+          ],
+          "doc_files": [
+            "docs-site/etcd/index.md"
+          ]
+        },
+        "defrag": {
+          "source_paths": [
+            "client/v3/maintenance.go",
+            "server/storage/backend/backend.go",
+            "server/storage/backend/metrics.go",
+            "server/storage/mvcc/metrics.go",
+            "tests/integration/metrics_test.go"
+          ],
+          "doc_files": [
+            "docs-site/etcd/defrag.md"
+          ]
+        },
+        "kubernetes-defrag": {
+          "source_paths": [
+            "client/v3/maintenance.go",
+            "etcdctl/ctlv3/command/defrag_command.go",
+            "server/storage/backend/backend.go",
+            "server/embed/config.go",
+            "server/etcdserver/bootstrap.go"
+          ],
+          "doc_files": [
+            "docs-site/etcd/kubernetes-defrag.md"
+          ]
+        },
+        "learner-mode": {
+          "source_paths": [
+            "server/etcdserver/api/membership/member.go",
+            "server/etcdserver/api/membership/cluster.go",
+            "etcdctl/ctlv3/command/member_command.go",
+            "tests/integration/clientv3/cluster_test.go",
+            "tests/integration/clientv3/kv_test.go",
+            "tests/integration/v3_leadership_test.go",
+            "server/embed/config.go"
+          ],
+          "doc_files": [
+            "docs-site/etcd/learner-mode.md"
+          ]
+        }
+      }
     }
   }
 }

@@ -29,6 +29,7 @@ import capmaas from './sidebars/cluster-api-provider-maas.js'
 import ceph from './sidebars/ceph.js'
 import openshell from './sidebars/openshell.js'
 import nemoclaw from './sidebars/nemoclaw.js'
+import etcd from './sidebars/etcd.js'
 
 export default withMermaid(defineConfig({
   base: siteConfig.base,
@@ -71,6 +72,7 @@ export default withMermaid(defineConfig({
       '/ceph/': ceph,
       '/openshell/': openshell,
       '/nemoclaw/': nemoclaw,
+      '/etcd/': etcd,
     },
     socialLinks: [
       { icon: 'github', link: siteConfig.githubLink }

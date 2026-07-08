@@ -58,3 +58,7 @@
 	path = ceph
 	url = https://github.com/ceph/ceph.git
 	branch = main
+[submodule "etcd"]
+	path = etcd
+	url = git@github.com:etcd-io/etcd.git
+	branch = main
