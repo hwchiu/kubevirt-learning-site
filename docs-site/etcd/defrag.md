@@ -1,22 +1,22 @@
 ---
 layout: doc
-title: etcd — 為什麼需要 Defrag
+title: etcd - Why Defrag Matters
 ---
 
-# etcd — 為什麼需要 Defrag
+# etcd - Why Defrag Matters
 
-## 結論先講
+## The Short Version
 
-etcd 需要 Defrag，不是因為資料還在成長，而是因為**資料刪掉之後，底層 bbolt 檔案往往不會自動縮小**。`Compact` 會清掉歷史 revision，讓空間變成「可重用」；`Defrag` 才會把這些空頁真正重寫到新檔案並釋放回檔案系統。
+etcd needs defragmentation not because the live dataset is always growing, but because **deleting data does not automatically shrink the underlying bbolt database file**. `Compact` removes historical revisions and turns space into reusable free pages. `Defrag` is the operation that rewrites the backend and returns those free pages to the filesystem.
 
-## 根因：邏輯空間釋放，不等於實體檔案縮小
+## Root Cause: Logical Reclamation Is Not Physical Shrinkage
 
-![Compaction 與 Defrag 的空間語意](/diagrams/etcd/etcd-defrag-1.png)
+![Compaction and defrag space semantics](/diagrams/etcd/etcd-defrag-1.png)
 
-`server/storage/mvcc/metrics.go` 定義了兩個最重要的 gauge：
+`server/storage/mvcc/metrics.go` defines the two most important gauges for understanding this behavior:
 
 ```go
-// 檔案: etcd/server/storage/mvcc/metrics.go
+// File: etcd/server/storage/mvcc/metrics.go
 Name: "db_total_size_in_bytes"
 Help: "Total size of the underlying database physically allocated in bytes."
 
@@ -24,39 +24,39 @@ Name: "db_total_size_in_use_in_bytes"
 Help: "Total size of the underlying database logically in use in bytes."
 ```
 
-這兩個指標對應兩種不同概念：
+These two metrics represent different things:
 
-- `etcd_mvcc_db_total_size_in_bytes`：目前 bbolt 檔案實際占用多少磁碟
-- `etcd_mvcc_db_total_size_in_use_in_bytes`：目前真正還在使用的資料量
+- `etcd_mvcc_db_total_size_in_bytes`: how much disk the bbolt file physically occupies
+- `etcd_mvcc_db_total_size_in_use_in_bytes`: how much space is still logically in use by live data
 
-當兩者差距愈大，代表「已刪除但尚未還給檔案系統」的空間愈多，也就愈有 Defrag 價值。
+The larger the gap between them, the more deleted-but-not-yet-returned space exists, and the stronger the case for defrag.
 
-在 Kubernetes 維運裡，最常看的也就是這兩個指標：
+In Kubernetes operations, these are usually the two first metrics people watch:
 
 1. `etcd_mvcc_db_total_size_in_use_in_bytes`
 2. `etcd_mvcc_db_total_size_in_bytes`
 
-它們各自反映的不是同一件事：
+They do not answer the same question:
 
-- `db_total_size_in_use_in_bytes` 比較接近「目前資料實際還需要多少空間」
-- `db_total_size_in_bytes` 則是「底層 DB 檔案目前真的占了多少磁碟」
+- `db_total_size_in_use_in_bytes` is closer to "how much space the live dataset still needs"
+- `db_total_size_in_bytes` is "how much disk the DB file actually occupies right now"
 
-這個差異非常重要，因為 **compaction 與 defrag 分別影響的是不同指標**。
+This distinction matters because **compaction and defrag affect different metrics**.
 
-## 先講 compaction：為什麼也要一起理解
+## Why Compaction Must Be Explained Together with Defrag
 
-若只談 Defrag，會少掉一半的判斷依據。`tests/integration/metrics_test.go` 的流程其實是：
+If you discuss defrag alone, you miss half the operational picture. The flow in `tests/integration/metrics_test.go` is:
 
-1. 先大量寫入資料
-2. 執行 `CompactionRequest{Physical: true}`
-3. 驗證 `db_total_size_in_use_in_bytes` 下降
-4. 再做 Defrag
-5. 驗證 `db_total_size_in_bytes` 下降
+1. write enough data to expand the DB
+2. run `CompactionRequest{Physical: true}`
+3. verify that `db_total_size_in_use_in_bytes` drops
+4. run defrag
+5. verify that `db_total_size_in_bytes` drops
 
-程式碼裡寫得很明確：
+The test makes the intent explicit:
 
 ```go
-// 檔案: etcd/tests/integration/metrics_test.go
+// File: etcd/tests/integration/metrics_test.go
 // clear out historical keys, in use bytes should free pages
 creq := &pb.CompactionRequest{Revision: int64(numPuts), Physical: true}
 
@@ -64,37 +64,37 @@ creq := &pb.CompactionRequest{Revision: int64(numPuts), Physical: true}
 mc.Defragment(t.Context(), &pb.DefragmentRequest{})
 ```
 
-也就是說：
+In practice, that means:
 
-- **Compaction** 先把歷史 revision 與不再需要的內容清掉，讓 `in use` 下降
-- **Defrag** 再把已空出的頁面真正回收給檔案系統，讓 `db size` 下降
+- **Compaction** clears obsolete revisions and reduces `in use`
+- **Defrag** rewrites the backend and reduces physical `db size`
 
-如果沒有先理解 compaction，就很容易誤以為 Defrag 應該同時讓兩個指標都大幅下降。
+Without that distinction, it is easy to expect defrag to make both metrics drop in the same way.
 
-## API 本身怎麼定義 Defrag
+## How the API Defines Defrag
 
-`client/v3/maintenance.go` 對 Defragment 的註解已經直接說明使用時機：
+`client/v3/maintenance.go` describes defragmentation directly:
 
 ```go
-// 檔案: etcd/client/v3/maintenance.go
+// File: etcd/client/v3/maintenance.go
 // Defragment releases wasted space from internal fragmentation on a given etcd member.
 // Defragment is only needed when deleting a large number of keys and want to reclaim
 // the resources.
 // Defragment is an expensive operation.
 ```
 
-重點有三個：
+Three points matter:
 
-1. 它處理的是 **internal fragmentation**
-2. 典型觸發情境是 **大量刪除 key**
-3. 它是 **expensive operation**
+1. it addresses **internal fragmentation**
+2. it is most relevant after **large amounts of deletion**
+3. it is an **expensive operation**
 
-## Defrag 實際做了什麼
+## What Defrag Actually Does
 
-真正的動作在 `server/storage/backend/backend.go`。流程不是「整理 page metadata」而已，而是**建立一個暫存 DB，逐個 bucket 複製活資料，最後 rename 覆蓋原檔**。
+The real work happens in `server/storage/backend/backend.go`. The operation is not just metadata cleanup. etcd **creates a temporary database, copies only live bucket data into it, then replaces the original DB file**.
 
 ```go
-// 檔案: etcd/server/storage/backend/backend.go
+// File: etcd/server/storage/backend/backend.go
 temp, err := os.CreateTemp(dir, "db.tmp.*")
 tmpdb, err := bolt.Open(tdbp, 0o600, &options)
 err = defragdb(b.db, tmpdb, defragLimit)
@@ -103,94 +103,94 @@ err = tmpdb.Close()
 err = os.Rename(tdbp, dbp)
 ```
 
-這段流程說明 Defrag 的本質是：
+So the operation is effectively:
 
-- 讀出舊 DB 的有效資料
-- 寫入新的乾淨 DB
-- 用新檔取代舊檔
+- read live data from the old DB
+- write it into a clean new DB
+- replace the old file with the new one
 
-所以它一定比單純 `Compact` 更重，也更接近一次「局部重建資料庫檔案」。
+That is why defrag is far heavier than compaction and is closer to a backend file rebuild.
 
-## 為什麼 Defrag 會影響線上流量
+## Why Defrag Affects Online Traffic
 
-Defrag 之前，backend 會先鎖住三個重要路徑：
+Before defrag starts, the backend locks several critical paths:
 
 ```go
-// 檔案: etcd/server/storage/backend/backend.go
+// File: etcd/server/storage/backend/backend.go
 b.batchTx.LockOutsideApply()
 b.mu.Lock()
 b.readTx.Lock()
 ```
 
-這代表 Defrag 期間：
+That means:
 
-- backend commit 路徑會被卡住
-- read transaction reset 會阻擋讀路徑
-- 不是單純背景低優先序任務
+- backend commit activity is blocked
+- read transaction reset blocks read-side progress
+- this is not just a cheap background cleanup task
 
-也因此 `etcdctl defrag` 沒有並行打全部節點，而是逐個 endpoint 執行：
+This is also why `etcdctl defrag` iterates endpoint by endpoint rather than blasting all members at once:
 
 ```go
-// 檔案: etcd/etcdctl/ctlv3/command/defrag_command.go
+// File: etcd/etcdctl/ctlv3/command/defrag_command.go
 for _, ep := range endpointsFromCluster(cmd) {
     cfg.Endpoints = []string{ep}
     _, err := c.Defragment(ctx, ep)
 }
 ```
 
-## 怎麼判斷該不該做 Defrag
+## How to Decide Whether Defrag Is Worth It
 
-最直接的方法是觀察：
+The most direct signals are:
 
 - `etcd_mvcc_db_total_size_in_bytes`
 - `etcd_mvcc_db_total_size_in_use_in_bytes`
 - `etcd_disk_defrag_inflight`
 - `etcd_disk_backend_defrag_duration_seconds`
 
-`server/storage/backend/metrics.go` 也把後兩者定義得很明確：
+`server/storage/backend/metrics.go` defines the last two clearly:
 
 ```go
-// 檔案: etcd/server/storage/backend/metrics.go
+// File: etcd/server/storage/backend/metrics.go
 Name: "backend_defrag_duration_seconds"
 Name: "defrag_inflight"
 ```
 
-其中：
+Meaning:
 
-- `defrag_inflight=1` 代表該 member 正在執行 Defrag
-- `backend_defrag_duration_seconds` 可用來估算不同資料量下的停頓成本
+- `defrag_inflight=1` means defrag is currently running on that member
+- `backend_defrag_duration_seconds` helps estimate stall cost for different backend sizes
 
-### 這兩個核心 metrics 要怎麼判讀
+### How to Read the Two Core Metrics
 
-| Metric | 主要受什麼影響 | 代表意義 |
+| Metric | Mainly affected by | Meaning |
 |------|------|------|
-| `etcd_mvcc_db_total_size_in_use_in_bytes` | **Compaction** | 邏輯上仍在使用的資料量 |
-| `etcd_mvcc_db_total_size_in_bytes` | **Defrag** | 實體 DB 檔案目前占用的磁碟大小 |
+| `etcd_mvcc_db_total_size_in_use_in_bytes` | **Compaction** | logical size still used by live data |
+| `etcd_mvcc_db_total_size_in_bytes` | **Defrag** | physical size of the DB file on disk |
 
-實務上可以用這個心智模型：
+A useful operational model is:
 
-- `in_use` 先掉了，但 `db_total_size` 還沒掉：代表已經 compact，但尚未 defrag
-- `db_total_size` 跟著掉了：代表 defrag 真的把空頁回收回檔案系統
-- 兩者幾乎沒有差距：代表 defrag 收益通常不高
+- `in_use` drops first but `db_total_size` does not: compaction happened, defrag has not
+- `db_total_size` drops afterwards: defrag actually returned free pages to the filesystem
+- both values are already close: defrag usually has limited benefit
 
-## 測試怎麼證明 Defrag 真的有效
+## How the Tests Prove the Behavior
 
-`tests/integration/metrics_test.go` 先大量寫入、再做 physical compaction、最後執行 Defrag，驗證結果是：
+`tests/integration/metrics_test.go` writes enough data to grow the DB, performs physical compaction, then runs defrag. The expected result is:
 
-- compaction 後 `db_total_size_in_use_in_bytes` 下降
-- defrag 後 `db_total_size_in_bytes` 才真正下降
+- after compaction, `db_total_size_in_use_in_bytes` goes down
+- after defrag, `db_total_size_in_bytes` finally goes down
 
-這正好對應實務上的觀察：
+This matches production behavior exactly:
 
-- **Compaction 回收邏輯空間**
-- **Defrag 回收實體磁碟空間**
+- **compaction reclaims logical space**
+- **defrag reclaims physical disk space**
 
-如果用你在 Kubernetes 裡監看的兩個 metrics 來說，就是：
+Using the two metrics from Kubernetes:
 
-- `etcd_mvcc_db_total_size_in_use_in_bytes` 會先反映 compaction 的成果
-- `etcd_mvcc_db_total_size_in_bytes` 則會在 defrag 後才明顯下降
+- `etcd_mvcc_db_total_size_in_use_in_bytes` reflects the effect of compaction first
+- `etcd_mvcc_db_total_size_in_bytes` drops later when defrag finishes
 
-::: info 相關章節
-- [Kubernetes 中的 Defrag 操作](./kubernetes-defrag)
+::: info Related Pages
+- [Defrag Operations in Kubernetes](./kubernetes-defrag)
 - [Learner Mode](./learner-mode)
 :::

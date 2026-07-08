@@ -9,12 +9,12 @@
   </defs>
   <rect width="100%" height="100%" fill="#ffffff"/>
   
-  <text x="620" y="36" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="700" fill="#111827" text-anchor="middle">Kubernetes 中的 etcd Defrag 維運流程</text>
-  <text x="620" y="62" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle">逐台 member 執行，避免同時放大控制平面延遲與 quorum 風險</text>
+  <text x="620" y="36" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="700" fill="#111827" text-anchor="middle">Operational Flow of etcd Defrag in Kubernetes</text>
+  <text x="620" y="62" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle">Run one member at a time to avoid amplifying control-plane latency and quorum risk</text>
 
   <rect x="60" y="120" width="220" height="100" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
   <text x="170" y="154" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#111827" text-anchor="middle">kube-apiserver</text>
-  <text x="170" y="178" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">持續讀寫 etcd</text>
+  <text x="170" y="178" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">Continuously reads and writes etcd</text>
   <text x="170" y="196" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">CRUD / Watch / Lease</text>
 
   <rect x="340" y="100" width="840" height="180" rx="20" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
@@ -22,43 +22,43 @@
 
   <rect x="400" y="165" width="180" height="80" rx="12" fill="#fffbeb" stroke="#fcd34d" stroke-width="2"/>
   <text x="490" y="196" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#111827" text-anchor="middle">Member A</text>
-  <text x="490" y="218" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">現在被 defrag</text>
+  <text x="490" y="218" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">currently being defragged</text>
 
   <rect x="660" y="165" width="180" height="80" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
   <text x="750" y="196" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#111827" text-anchor="middle">Member B</text>
-  <text x="750" y="218" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">仍可承接流量</text>
+  <text x="750" y="218" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">still able to serve traffic</text>
 
   <rect x="920" y="165" width="180" height="80" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
   <text x="1010" y="196" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#111827" text-anchor="middle">Member C</text>
-  <text x="1010" y="218" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">仍可承接流量</text>
+  <text x="1010" y="218" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">still able to serve traffic</text>
 
   <line x1="280" y1="170" x2="400" y2="200" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
   <line x1="280" y1="170" x2="660" y2="200" stroke="#059669" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow-green)"/>
   <line x1="280" y1="170" x2="920" y2="200" stroke="#059669" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow-green)"/>
-  <text x="350" y="154" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">請求會感受到 A 的停頓</text>
+  <text x="350" y="154" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Requests can feel A's stall</text>
 
   <rect x="80" y="345" width="1090" height="220" rx="20" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="2"/>
-  <text x="625" y="380" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#111827" text-anchor="middle">建議操作順序</text>
+  <text x="625" y="380" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#111827" text-anchor="middle">Recommended Operational Sequence</text>
 
   <rect x="120" y="420" width="220" height="95" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
-  <text x="230" y="450" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">1. 先看 Metrics</text>
-  <text x="230" y="474" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">比較 in-use 與 db size</text>
-  <text x="230" y="492" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">確認 defrag 值得做</text>
+  <text x="230" y="450" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">1. Check Metrics First</text>
+  <text x="230" y="474" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Compare in-use vs db size</text>
+  <text x="230" y="492" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Verify that defrag is worth it</text>
 
   <rect x="385" y="420" width="220" height="95" rx="12" fill="#fffbeb" stroke="#fcd34d" stroke-width="2"/>
-  <text x="495" y="450" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">2. 只做一台</text>
-  <text x="495" y="474" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">etcdctl defrag 單 member</text>
-  <text x="495" y="492" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">不要同時打全部節點</text>
+  <text x="495" y="450" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">2. Defrag One Member</text>
+  <text x="495" y="474" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Run etcdctl defrag against one member</text>
+  <text x="495" y="492" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Do not hit all members at once</text>
 
   <rect x="650" y="420" width="220" height="95" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
-  <text x="760" y="450" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">3. 觀察恢復</text>
-  <text x="760" y="474" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">defrag_inflight 回 0</text>
-  <text x="760" y="492" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">db_total_size 下降</text>
+  <text x="760" y="450" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">3. Observe Recovery</text>
+  <text x="760" y="474" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Wait for defrag_inflight to return to 0</text>
+  <text x="760" y="492" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Confirm db_total_size decreases</text>
 
   <rect x="915" y="420" width="220" height="95" rx="12" fill="#fef2f2" stroke="#fca5a5" stroke-width="2"/>
-  <text x="1025" y="450" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">4. 再處理下一台</text>
-  <text x="1025" y="474" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">避開 control plane 高峰</text>
-  <text x="1025" y="492" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">保留 quorum 緩衝</text>
+  <text x="1025" y="450" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">4. Move to the Next Member</text>
+  <text x="1025" y="474" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Avoid control-plane peak periods</text>
+  <text x="1025" y="492" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Preserve quorum margin</text>
 
   <line x1="340" y1="468" x2="385" y2="468" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
   <line x1="605" y1="468" x2="650" y2="468" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>

@@ -2,9 +2,9 @@
 layout: home
 
 hero:
-  name: "KubeVirt 生態系"
-  text: "原始碼深度分析"
-  tagline: 深入剖析 KubeVirt 生態系各專案的架構設計、核心元件與實作細節
+  name: "KubeVirt Ecosystem"
+  text: "Source Code Deep Dives"
+  tagline: In-depth analysis of architecture, core components, and implementation details across major KubeVirt ecosystem projects
   image:
     src: https://raw.githubusercontent.com/kubevirt/community/main/logo/KubeVirt_icon.png
     alt: KubeVirt
@@ -59,122 +59,122 @@ hero:
 features:
   - icon: 🖥️
     title: KubeVirt
-    details: 基於 Kubernetes 的虛擬機器管理平台 — 架構設計、五大核心元件、CRD 資源、網路/儲存/遷移等完整原始碼分析。
+    details: Virtual machine management on Kubernetes, with source-level coverage of architecture, the five core components, CRDs, networking, storage, and migration.
     link: /kubevirt/architecture/overview
-    linkText: 開始閱讀
+    linkText: Start Reading
 
   - icon: 💾
     title: Containerized Data Importer (CDI)
-    details: Kubernetes 持久化資料卷的資料匯入框架 — 負責將 VM 映像檔匯入 PVC，支援多種資料來源與傳輸方式。
+    details: Data import framework for Kubernetes persistent volumes, focused on moving VM images into PVCs from multiple source types and transfer paths.
     link: /containerized-data-importer/
-    linkText: 開始閱讀
+    linkText: Start Reading
 
   - icon: 📊
     title: Monitoring
-    details: KubeVirt 生態系集中式監控基礎設施 — 75 個告警 Runbook、100+ Prometheus 指標、Grafana 儀表板與 Linter 工具。
+    details: Centralized monitoring for the KubeVirt ecosystem, including 75 alert runbooks, 100+ Prometheus metrics, Grafana dashboards, and linter tooling.
     link: /monitoring/
-    linkText: 開始閱讀
+    linkText: Start Reading
 
   - icon: 📋
     title: Common Instancetypes
-    details: 標準化 VM 實例類型與偏好設定 — 7 大系列 43 種 Instancetype、18+ OS Preference，類似 AWS EC2 Instance Types。
+    details: Standardized VM instance types and preferences, covering 7 major series, 43 instancetypes, and 18+ OS preferences in an EC2-like model.
     link: /common-instancetypes/
-    linkText: 開始閱讀
+    linkText: Start Reading
 
   - icon: 🔧
     title: Node Maintenance Operator
-    details: Kubernetes 節點維護自動化 — 自動封鎖/驅逐/解封節點，針對 KubeVirt VM 工作負載最佳化的 Operator。
+    details: Kubernetes node maintenance automation for cordon, drain, and uncordon workflows, optimized for KubeVirt VM workloads.
     link: /node-maintenance-operator/
-    linkText: 開始閱讀
+    linkText: Start Reading
 
   - icon: 🚚
     title: Forklift
-    details: VM 遷移平台 — 支援 vSphere、oVirt、OpenStack、Hyper-V、OVA 等多來源至 KubeVirt 的自動化遷移，含增量遷移與 XCOPY 加速。
+    details: VM migration platform supporting automated migrations from vSphere, oVirt, OpenStack, Hyper-V, OVA, and more into KubeVirt, including incremental sync and XCOPY acceleration.
     link: /forklift/
-    linkText: 開始閱讀
+    linkText: Start Reading
 
   - icon: 🌐
     title: NetBox
-    details: 網路基礎設施管理平台 — Python/Django 全端 Web 應用，115 個資料模型、131 REST API、GraphQL、Plugin 系統、Object-Level RBAC。
+    details: Network infrastructure management platform built with Python and Django, covering 115 data models, 131 REST APIs, GraphQL, plugins, and object-level RBAC.
     link: /netbox/
-    linkText: 開始閱讀
+    linkText: Start Reading
 
   - icon: 📨
     title: Apache Kafka
-    details: 分散式事件串流平台 — Java/Scala 實作，KRaft 共識協定、Producer/Consumer API、Kafka Streams、Kafka Connect 資料整合框架。
+    details: Distributed event-streaming platform implemented in Java and Scala, with KRaft consensus, Producer and Consumer APIs, Kafka Streams, and Kafka Connect.
     link: /kafka/
-    linkText: 開始閱讀
+    linkText: Start Reading
 
   - icon: 🗄️
     title: TiDB
-    details: 分散式 HTAP SQL 資料庫 — Go 實作，MySQL 相容、TiKV 行式儲存、TiFlash 列式儲存、Raft 多副本強一致性、水平擴展。
+    details: Distributed HTAP SQL database in Go, with MySQL compatibility, TiKV row storage, TiFlash columnar storage, Raft replication, and horizontal scaling.
     link: /tidb/
-    linkText: 開始閱讀
+    linkText: Start Reading
 
   - icon: 🔩
     title: Cluster API
-    details: Kubernetes 叢集生命週期管理框架 — 宣告式 API、Provider 生態系、ClusterClass 拓撲化叢集、多 Provider 支援（AWS、Azure、GCP 等）。
+    details: Kubernetes cluster lifecycle management framework with declarative APIs, a provider ecosystem, ClusterClass topologies, and multi-provider support.
     link: /cluster-api/
-    linkText: 開始閱讀
+    linkText: Start Reading
 
   - icon: 🏗️
     title: Cluster API Provider Metal3
-    details: 裸金屬 Kubernetes 叢集 Provider — 整合 Ironic BareMetalHost、Metal3Machine/Metal3Cluster CRD、IPAM 支援、自動節點修復。
+    details: Bare-metal Kubernetes provider integrating Ironic BareMetalHost, Metal3Machine and Metal3Cluster CRDs, IPAM support, and automated node remediation.
     link: /cluster-api-provider-metal3/
-    linkText: 開始閱讀
+    linkText: Start Reading
 
   - icon: ☁️
     title: Cluster API Provider MAAS
-    details: Canonical MAAS 裸金屬 Provider — 對接 MAAS API 佈建 Machine、Resource Pool 篩選、DNS 管理、In-Memory 部署模式。
+    details: Canonical MAAS bare-metal provider for provisioning Machines through the MAAS API, with resource-pool filtering, DNS management, and in-memory deployment mode.
     link: /cluster-api-provider-maas/
-    linkText: 開始閱讀
+    linkText: Start Reading
 
   - icon: 🔑
     title: etcd
-    details: Kubernetes 控制平面最關鍵的分散式 KV 儲存層 — 聚焦 Defrag 根因、Kubernetes 中的維運影響，以及 Learner 非投票成員機制。
+    details: The distributed key-value store behind the Kubernetes control plane, with focused coverage of defrag, compaction, operational impact, and learner mode.
     link: /etcd/
-    linkText: 開始閱讀
+    linkText: Start Reading
 
   - icon: 🔒
     title: NVIDIA OpenShell
-    details: AI Agent 安全沙箱執行環境 — 宣告式 YAML 策略保護資料與憑證、支援 Docker/Podman/Kubernetes/MicroVM、L7 Policy Engine、Privacy-Aware 推理路由。
+    details: Secure sandboxed execution environment for AI agents, with declarative YAML policies, Docker/Podman/Kubernetes/MicroVM backends, L7 policy enforcement, and privacy-aware inference routing.
     link: /openshell/
-    linkText: 開始閱讀
+    linkText: Start Reading
 
   - icon: 🤖
     title: NVIDIA NemoClaw
-    details: AI Agent 安全執行參考堆疊 — 建立於 OpenShell 之上，為 OpenClaw/Hermes 提供引導式初始設定、強化藍圖、路由推理、網路策略與常駐 Agent 生命週期管理。
+    details: Secure AI agent reference stack built on OpenShell, providing guided bootstrap flows, hardened blueprints, routed inference, network policy, and resident agent lifecycle management.
     link: /nemoclaw/
-    linkText: 開始閱讀
+    linkText: Start Reading
 
 ---
 
-## 📚 專案總覽
+## 📚 Project Overview
 
-本站針對 KubeVirt 生態系的開源專案進行**原始碼級別**的深度分析，幫助工程師快速理解各專案的設計理念與實作細節。
+This site provides **source-code-level** analysis of open source projects in the KubeVirt ecosystem so engineers can understand design choices and implementation details quickly.
 
-| 專案 | 說明 | 狀態 |
+| Project | Description | Status |
 |------|------|------|
-| [KubeVirt](/kubevirt/architecture/overview) | 在 Kubernetes 上運行虛擬機器的核心平台 | ✅ 完整分析 |
-| [CDI](/containerized-data-importer/) | 將 VM 映像匯入 Kubernetes PVC 的資料管理框架 | ✅ 完整分析 |
-| [Monitoring](/monitoring/) | KubeVirt 生態系集中式監控基礎設施 | ✅ 完整分析 |
-| [Common Instancetypes](/common-instancetypes/) | 標準化 VM 實例類型與 OS 偏好設定 | ✅ 完整分析 |
-| [Node Maintenance Operator](/node-maintenance-operator/) | Kubernetes 節點維護自動化 Operator | ✅ 完整分析 |
-| [Forklift](/forklift/) | 多來源 VM 遷移至 KubeVirt 的自動化平台 | ✅ 完整分析 |
-| [NetBox](/netbox/) | 網路基礎設施管理平台（IPAM / DCIM） | ✅ 完整分析 |
-| [Apache Kafka](/kafka/) | 分散式事件串流平台 | ✅ 完整分析 |
-| [TiDB](/tidb/) | 分散式 HTAP SQL 資料庫 | ✅ 完整分析 |
-| [Cluster API](/cluster-api/) | Kubernetes 叢集生命週期管理框架 | ✅ 完整分析 |
-| [Cluster API Provider Metal3](/cluster-api-provider-metal3/) | 裸金屬 Kubernetes 叢集 Provider（Ironic） | ✅ 完整分析 |
-| [Cluster API Provider MAAS](/cluster-api-provider-maas/) | Canonical MAAS 裸金屬 Provider | ✅ 完整分析 |
-| [etcd](/etcd/) | Kubernetes 控制平面的分散式 Key-Value Store | ✅ 專題分析 |
-| [NVIDIA OpenShell](/openshell/) | AI Agent 安全沙箱執行環境 | ✅ 完整分析 |
-| [NVIDIA NemoClaw](/nemoclaw/) | AI Agent 安全執行參考堆疊（建立於 OpenShell 上） | ✅ 完整分析 |
+| [KubeVirt](/kubevirt/architecture/overview) | Core platform for running virtual machines on Kubernetes | ✅ Complete analysis |
+| [CDI](/containerized-data-importer/) | Data management framework for importing VM images into Kubernetes PVCs | ✅ Complete analysis |
+| [Monitoring](/monitoring/) | Centralized monitoring infrastructure for the KubeVirt ecosystem | ✅ Complete analysis |
+| [Common Instancetypes](/common-instancetypes/) | Standardized VM instance types and OS preferences | ✅ Complete analysis |
+| [Node Maintenance Operator](/node-maintenance-operator/) | Kubernetes node maintenance automation operator | ✅ Complete analysis |
+| [Forklift](/forklift/) | Automation platform for migrating VMs from multiple sources into KubeVirt | ✅ Complete analysis |
+| [NetBox](/netbox/) | Network infrastructure management platform for IPAM and DCIM | ✅ Complete analysis |
+| [Apache Kafka](/kafka/) | Distributed event-streaming platform | ✅ Complete analysis |
+| [TiDB](/tidb/) | Distributed HTAP SQL database | ✅ Complete analysis |
+| [Cluster API](/cluster-api/) | Kubernetes cluster lifecycle management framework | ✅ Complete analysis |
+| [Cluster API Provider Metal3](/cluster-api-provider-metal3/) | Bare-metal Kubernetes cluster provider based on Ironic | ✅ Complete analysis |
+| [Cluster API Provider MAAS](/cluster-api-provider-maas/) | Canonical MAAS bare-metal provider | ✅ Complete analysis |
+| [etcd](/etcd/) | Distributed key-value store behind the Kubernetes control plane | ✅ Focused analysis |
+| [NVIDIA OpenShell](/openshell/) | Secure sandboxed execution environment for AI agents | ✅ Complete analysis |
+| [NVIDIA NemoClaw](/nemoclaw/) | Secure AI agent reference stack built on OpenShell | ✅ Complete analysis |
 
 
-## 🔗 原始碼連結
+## 🔗 Source Repositories
 
-所有分析皆基於以下 GitHub 專案的原始碼：
+All analysis on this site is based on the source code from the following GitHub repositories:
 
 - **KubeVirt**: [github.com/kubevirt/kubevirt](https://github.com/kubevirt/kubevirt)
 - **CDI**: [github.com/kubevirt/containerized-data-importer](https://github.com/kubevirt/containerized-data-importer)

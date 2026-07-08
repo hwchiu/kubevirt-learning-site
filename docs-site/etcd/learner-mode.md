@@ -1,49 +1,49 @@
 ---
 layout: doc
-title: etcd — Learner Mode
+title: etcd - Learner Mode
 ---
 
-# etcd — Learner Mode
+# etcd - Learner Mode
 
-## Learner 是什麼
+## What a Learner Is
 
-Learner 是 **Raft non-voting member**。從型別定義看，etcd 直接把它當成 member 的一個 raft 屬性：
+A learner is a **Raft non-voting member**. At the type level, etcd models it as a raft attribute of a member:
 
 ```go
-// 檔案: etcd/server/etcdserver/api/membership/member.go
+// File: etcd/server/etcdserver/api/membership/member.go
 type RaftAttributes struct {
     PeerURLs []string `json:"peerURLs"`
     IsLearner bool `json:"isLearner,omitempty"`
 }
 ```
 
-新增 learner 時，不是先建一般 member 再切換旗標，而是直接走 `NewMemberAsLearner`：
+Adding a learner is not "add a normal member and flip a flag later". etcd creates it explicitly through `NewMemberAsLearner`:
 
 ```go
-// 檔案: etcd/server/etcdserver/api/membership/member.go
+// File: etcd/server/etcdserver/api/membership/member.go
 func NewMemberAsLearner(...) *Member {
     return newMember(name, peerURLs, memberID, true)
 }
 ```
 
-## 為什麼需要 Learner
+## Why Learner Mode Exists
 
-Learner 的核心價值是：**先同步資料，再加入投票**。這樣做可以避免新節點剛加入時就立刻改變 quorum 結構，降低擴容或替換節點時的風險。
+The core value of learner mode is simple: **sync data first, join the voting set later**. That lowers the risk of changing quorum while a new node is still catching up.
 
-CLI 也把這件事做成正式操作：
+The CLI exposes this directly:
 
 ```go
-// 檔案: etcd/etcdctl/ctlv3/command/member_command.go
+// File: etcd/etcdctl/ctlv3/command/member_command.go
 cc.Flags().BoolVar(&isLearner, "learner", false, "indicates if the new member is raft learner")
 ```
 
-![Learner Mode 的 quorum 與 standby member 架構](/diagrams/etcd/etcd-learner-1.png)
+![Quorum and standby-member architecture with learner mode](/diagrams/etcd/etcd-learner-1.png)
 
-## 架構視角：為什麼 primary/standby 需要 learner
+## Architecture View: Why Primary/Standby Needs Learner Mode
 
-如果從架構角度看，不要先把 learner 想成「功能旗標」，而要把它想成 **membership 變更時的緩衝層**。
+Architecturally, a learner should not be thought of as just another feature bit. It is a **buffer layer for membership change**.
 
-在一個標準 3-member etcd primary cluster 中，正常狀態大致如下：
+In a normal 3-member primary etcd cluster, the steady-state looks like this:
 
 ```text
                 +---------------------+
@@ -60,15 +60,15 @@ cc.Flags().BoolVar(&isLearner, "learner", false, "indicates if the new member is
 Quorum = 2 / 3
 ```
 
-這個架構的核心特性是：
+The key properties are:
 
-- leader 負責接收寫入並複寫 raft log
-- voting members 共同構成 quorum
-- 任何 membership 變動都會影響 quorum 計算與容錯邊界
+- the leader accepts writes and replicates the Raft log
+- voting members define quorum
+- any membership change affects failure tolerance and quorum math
 
-### 問題出在「新節點還沒追上資料，卻已經算進 quorum」
+### The problem: a new node can count toward quorum before it has caught up
 
-如果沒有 learner，直接把新節點當成 voting member 加入，架構上會立刻變成：
+Without learner mode, adding a new node directly as a voting member changes the architecture immediately:
 
 ```text
                 +---------------------+
@@ -85,17 +85,17 @@ Quorum = 2 / 3
 Quorum = 3 / 4
 ```
 
-這時候風險不在於「新節點不存在」，而在於：
+The risk is not that the node exists. The risk is:
 
-- quorum 已經從 `2/3` 變成 `3/4`
-- 但新節點可能還在吃 snapshot、補 raft log、做磁碟初始化
-- 也就是說，**容錯門檻先提高了，資料同步卻還沒完成**
+- quorum moves from `2/3` to `3/4`
+- but the new node may still be receiving snapshots, replaying Raft log, and warming its disk state
+- in other words, **the quorum requirement rises before data synchronization is complete**
 
-這正是 learner 要解決的架構問題。
+That is the architectural problem learner mode solves.
 
-### learner 的作用：先同步，不先改變投票面
+### What learner mode changes
 
-加入 learner 後，架構會更接近下面這種狀態：
+With a learner, the cluster looks more like this:
 
 ```text
                 +---------------------+
@@ -112,78 +112,78 @@ Quorum = 3 / 4
 Quorum = still 2 / 3
 ```
 
-這時 learner 的架構價值就很清楚：
+That is the architectural value of a learner:
 
-- 它能先接收 leader 的 snapshot 與 raft log
-- 它不會立刻參與投票
-- 它不會立刻把 quorum 從 `2/3` 改成 `3/4`
-- 等它真正追上後，才進入 promote 流程
+- it can receive snapshots and Raft log from the leader
+- it does not immediately join the voting path
+- it does not immediately change quorum from `2/3` to `3/4`
+- only after it catches up does promotion become the next step
 
-所以 learner 的核心不是「多一台複本」，而是**把資料同步階段與投票成員變更階段拆開**。
+So learner mode is not mainly about "one more replica". It is about **separating data synchronization from voting-topology change**.
 
-## 為什麼這對 primary/standby 思維特別重要
+## Why This Matters for Primary/Standby Thinking
 
-很多人談 primary/standby etcd 時，直覺會用資料庫的主備模型理解：
+Many people approach primary/standby etcd using the mental model of a traditional primary/replica database:
 
-- primary 負責服務
-- standby 持續追資料
-- primary 掛掉後 standby 接手
+- the primary serves traffic
+- the standby keeps following data
+- the standby takes over when the primary fails
 
-但 etcd 不是傳統單主資料庫複寫模型，而是 **Raft membership 模型**。在這個模型下，真正重要的是：
+But etcd is not a classic single-primary replication system. It is a **Raft membership system**. What matters is:
 
-- 哪些節點算進 quorum
-- 哪些節點只做同步、不影響投票
-- 何時可以安全地把同步節點升格成 voting member
+- which nodes count toward quorum
+- which nodes only synchronize state without affecting votes
+- when a synchronized node can safely become a voting member
 
-因此在 etcd 裡，比較精確的說法不是「primary cluster + standby cluster」，而是：
+So in etcd, the more precise model is not "primary cluster + standby cluster". It is:
 
 - **primary cluster**
-- **cluster 內的 standby member（learner）**
+- **standby members inside that cluster**
 
-也就是說，learner 解決的是 **cluster membership transition** 問題，不是 **cross-cluster disaster recovery replication** 問題。
+Learner mode solves a **cluster membership transition** problem, not a **cross-cluster disaster recovery replication** problem.
 
-## 從架構上看，learner 解決了哪三個風險
+## Three Risks Learner Mode Solves
 
-### 1. Quorum 先變大，資料還沒追平
+### 1. Quorum grows before the new node is ready
 
-這是最直接的風險。沒有 learner，新增節點會先改變 voting topology；有 learner，則先保持原 quorum，直到新節點 ready。
+This is the most direct risk. Without learner mode, a newly added member changes the voting topology first. With learner mode, the original quorum remains in place until the node is actually ready.
 
-### 2. 替換故障節點時，把不穩定節點直接放進投票面
+### 2. A replacement node enters the voting path while still unstable
 
-在 Kubernetes control plane 替換節點時，新節點通常同時要面對：
+During Kubernetes control-plane replacement, a new node often has to handle:
 
-- 磁碟初始化
-- 網路與憑證設定
-- snapshot 載入
-- raft log catch-up
+- disk initialization
+- network and certificate setup
+- snapshot intake
+- Raft log catch-up
 
-learner 讓這一段初始化成本先發生在 non-voting 狀態，而不是直接污染 voting path。
+Learner mode moves that initialization cost into a non-voting phase instead of pushing it directly into the voting path.
 
-### 3. 把「同步完成」和「升格為投票成員」綁成同一步
+### 3. "Data synchronized" and "safe to vote" become one step
 
-這是架構設計上很常見的反模式。learner 模式把流程拆成兩步：
+That coupling is a common architecture mistake. Learner mode splits the flow into:
 
-1. 資料同步
-2. membership promote
+1. data synchronization
+2. membership promotion
 
-拆開後，系統可以在 promote 前明確檢查：
+Once separated, the system can check:
 
-- learner 是否真的 in sync with leader
-- promote 後 quorum 是否仍安全
+- whether the learner is really in sync with the leader
+- whether quorum still stays safe after promotion
 
-這也正對應 `IsReadyToPromoteMember` 與相關 error path 的存在理由。
+That is exactly why `IsReadyToPromoteMember` and the related error paths exist.
 
-## 什麼時候才能 Promote
+## When Promotion Is Allowed
 
-etcd 不允許任意提升 learner。最重要的限制在錯誤定義與測試：
+etcd does not allow arbitrary learner promotion. The most important limits are visible in the errors and tests:
 
-- `server/etcdserver/errors/errors.go`：`can only promote a learner member which is in sync with leader`
-- `tests/integration/clientv3/cluster_test.go`：未啟動或未追上 leader 的 learner，`MemberPromote` 應失敗
+- `server/etcdserver/errors/errors.go`: `can only promote a learner member which is in sync with leader`
+- `tests/integration/clientv3/cluster_test.go`: a learner that is not started or not caught up must fail promotion
 
-此外，`RaftCluster.IsReadyToPromoteMember` 還會檢查 promote 之後的 quorum 是否安全：
+In addition, `RaftCluster.IsReadyToPromoteMember` checks whether the post-promotion quorum remains safe:
 
 ```go
-// 檔案: etcd/server/etcdserver/api/membership/cluster.go
+// File: etcd/server/etcdserver/api/membership/cluster.go
 nmembers := 1 // We count the learner to be promoted for the future quorum
 nstarted := 1 // and we also count it as started.
 nquorum := nmembers/2 + 1
@@ -192,88 +192,88 @@ if nstarted < nquorum {
 }
 ```
 
-這段邏輯的意思是：**就算 learner 已經同步完成，也不能讓 promote 把叢集推進不安全的 quorum 狀態**。
+The meaning is clear: **even if a learner has finished syncing, promotion must still be rejected if it would lead to an unsafe quorum position**.
 
-## Learner 有哪些限制
+## Constraints of Learner Mode
 
-### 1. 不能在初始 bootstrap 時直接帶入
+### 1. A learner cannot be part of initial bootstrap
 
-整合測試明確寫出：
+The integration tests state this directly:
 
 ```go
-// 檔案: etcd/tests/integration/clientv3/kv_test.go
+// File: etcd/tests/integration/clientv3/kv_test.go
 // bootstrapping a cluster with learner member is not supported.
 ```
 
-所以 learner 是**既有叢集的擴容/替換機制**，不是初始建群配置。
+So learner mode is for **existing-cluster expansion and replacement**, not initial cluster creation.
 
-### 2. 只接受 serializable read
+### 2. A learner only accepts serializable reads
 
-`TestKVForLearner` 驗證 learner：
+`TestKVForLearner` verifies that a learner:
 
-- `OpGet(..., WithSerializable())` 成功
-- 一般 `Get` 失敗
-- `Put` / `Delete` / `Txn` 都失敗
+- succeeds on `OpGet(..., WithSerializable())`
+- fails on normal linearizable `Get`
+- fails on `Put`, `Delete`, and `Txn`
 
-這代表 learner 不是 read-write member，也不是完整讀節點；它只提供有限的、非線性一致性讀取能力。
+So a learner is not a read-write member, and not even a full read member. It offers a limited, non-linearizable read path.
 
-### 3. 不能成為 leader transfer 目標
+### 3. A learner cannot become a leadership transfer target
 
-`tests/integration/v3_leadership_test.go` 驗證把 leadership 轉給 learner 應該失敗。這與 non-voting 身份一致，因為 learner 不應承擔投票領導者角色。
+`tests/integration/v3_leadership_test.go` verifies that leadership transfer to a learner must fail. That follows naturally from the fact that the learner is non-voting.
 
-### 4. 叢集可容納的 learner 數量可配置，但有限制
+### 4. The number of learners is configurable, but limited
 
-`server/embed/config.go` 定義了：
+`server/embed/config.go` defines:
 
 ```go
-// 檔案: etcd/server/embed/config.go
+// File: etcd/server/embed/config.go
 fs.IntVar(&cfg.MaxLearners, "max-learners", membership.DefaultMaxLearners, ...)
 ```
 
-對應錯誤則在 `server/etcdserver/api/membership/errors.go`：
+And the corresponding failure exists in `server/etcdserver/api/membership/errors.go`:
 
 - `ErrTooManyLearners`
 
-也就是說，learner 不是可以無限制堆疊的「觀察節點」。
+So learner mode is not a mechanism for building an unlimited pool of passive observer nodes.
 
-## Kubernetes 場景下，Learner 最實用在哪裡
+## Where Learner Mode Is Most Useful in Kubernetes
 
-對 Kubernetes 維運最實際的用途有兩類：
+For Kubernetes operations, the two most practical uses are:
 
-1. **替換故障 control-plane 節點上的 etcd member**
-2. **擴充 stacked / external etcd 叢集時，先同步再 promote**
+1. **replacing an etcd member on a failed control-plane node**
+2. **expanding a stacked or external etcd cluster by syncing first and promoting later**
 
-這樣可以避免新 member 還沒追平 log，就立刻進入 voting set，降低直接改動 quorum 的風險。
+This reduces the risk of letting a new node enter the voting set before it has caught up.
 
-## 能不能用 Learner 建立 primary 的 standby etcd cluster？
+## Can Learner Mode Build a Standby etcd Cluster for a Primary Cluster?
 
-短答案：**不能直接建立獨立的 standby cluster**。Learner 模式能做的是建立 **同一個 etcd cluster 內的 warm standby member**，而不是另一套可獨立切換的 cluster。
+Short answer: **no, not directly**. Learner mode can create a **warm standby member inside the same etcd cluster**, but not a separate standby cluster that can be promoted independently.
 
-這個結論是根據原始碼與測試行為整理出的推論：
+That conclusion follows from the code and test behavior:
 
-1. `etcdctl member add --learner` 操作的是現有 cluster 的 membership，而不是建立第二個 cluster。這點可從 `etcdctl/ctlv3/command/member_command.go` 與 `server/etcdserver/api/membership/member.go` 看出來。
-2. `NewMemberAsLearner` 只是把 `IsLearner=true` 寫進 member raft 屬性；它仍然屬於同一個 `RaftCluster`。
-3. `tests/integration/clientv3/kv_test.go` 明確寫出 `bootstrapping a cluster with learner member is not supported`，代表 learner 不是用來初始化另一套 standby cluster。
-4. `server/embed/config.go` 的 `max-learners` 與 membership error 中的 `ErrTooManyLearners`，也顯示 learner 是受控、過渡性的 cluster member，而不是長期跨站備援拓樸。
+1. `etcdctl member add --learner` modifies the membership of an existing cluster. It does not create a second cluster.
+2. `NewMemberAsLearner` only sets `IsLearner=true` on a member inside the same `RaftCluster`.
+3. `tests/integration/clientv3/kv_test.go` explicitly says that bootstrapping with a learner is not supported, so learner mode is not how you initialize a standby cluster.
+4. `max-learners` and `ErrTooManyLearners` also show that learners are controlled transitional members, not a built-in cross-site replication topology.
 
-### 更精確的說法
+### The more precise statement
 
-Learner 適合的是：
+Learner mode is good for:
 
-- 在同一個 primary cluster 裡預先加入新節點
-- 讓它先吃 snapshot / raft log
-- 等追平 leader 後再 promote
-- 最後替換掉舊 member 或完成安全擴容
+- pre-joining a new node to the same primary cluster
+- letting it receive snapshots and Raft log first
+- promoting it only after it catches up
+- replacing an old member or completing a safe expansion
 
-Learner 不適合直接拿來做的是：
+Learner mode is not a direct mechanism for:
 
-- 建立另一個獨立 cluster ID 的 standby etcd 叢集
-- 讓另一個 cluster 持續以 learner 身份跟 primary 同步
-- 在 primary 全掛時，直接把那個 cluster 無縫升格成 primary
+- creating a separate standby etcd cluster with its own cluster ID
+- maintaining a second cluster that continuously follows the primary as a learner
+- turning that second cluster into the new primary with a built-in learner promotion path
 
-如果硬要用架構圖來對比，可以這樣理解：
+Architecturally, the contrast looks like this:
 
-**Learner 能做的**
+**What learner mode can do**
 
 ```text
 Primary etcd cluster
@@ -283,7 +283,7 @@ Primary etcd cluster
   └─ learner   <- warm standby inside the same cluster
 ```
 
-**Learner 不能直接做的**
+**What learner mode does not directly do**
 
 ```text
 Primary etcd cluster          Standby etcd cluster
@@ -294,40 +294,40 @@ Primary etcd cluster          Standby etcd cluster
 No built-in "learner link" between two independent clusters
 ```
 
-### 如果你要的是 DR standby cluster，應該怎麼理解 learner 的角色
+### If your actual goal is a DR standby cluster
 
-從現有 etcd 原始碼來看，learner 比較像 **cluster 內的 warm spare**，不是 **cluster 外的 disaster recovery replica**。
+From the current etcd implementation, a learner is better understood as a **warm spare inside the cluster**, not as a **disaster-recovery replica outside the cluster**.
 
-所以若你的目標是跨機房或跨區域的 standby cluster，實務上通常要靠：
+If your real goal is a cross-zone or cross-site standby cluster, the operational model is usually based on:
 
-- 定期 snapshot / restore
-- 備份同步
-- 在災難時重新 bootstrap 新 cluster
+- periodic snapshot and restore
+- backup distribution
+- re-bootstrap during disaster recovery
 
-這部分不是 learner membership 直接提供的能力。這是根據目前 membership API、bootstrap 限制與測試行為得到的推論。
+That is not a capability directly provided by learner membership. This is an inference grounded in the current membership API, bootstrap limitations, and integration tests.
 
-### 可以怎麼把 learner 用在「接近 standby」的場景
+### How learner mode can still support a "near-standby" model
 
-對 primary cluster 來說，一個實用流程是：
+A practical primary-cluster workflow is:
 
-1. 對現有 primary cluster 執行 `member add --learner`
-2. 啟動新節點，讓它追上 leader
-3. 驗證 learner 已 ready，並滿足 `MemberPromote` 條件
-4. promote 成 voting member
-5. 若目標是替換舊節點，再移除舊 member
+1. run `member add --learner` on the existing primary cluster
+2. start the new node and let it catch up with the leader
+3. confirm that the learner is ready and meets `MemberPromote` requirements
+4. promote it into a voting member
+5. if the goal is replacement, remove the old member afterwards
 
-這是一種**滾動替換 / 安全擴容**模型，本質上是在同一個 cluster 內預先準備 standby capacity，而不是建立另一個 standby cluster。
+That is a **safe rolling replacement / expansion** model. It gives you standby capacity inside the same cluster, not a second standby cluster.
 
-## 團隊應該記住的心智模型
+## The Team-Level Mental Model
 
-Learner 不是「便宜版 member」，而是**加入 voting set 之前的安全緩衝區**：
+Learner mode is not a "cheap member". It is a **safety buffer before a node enters the voting set**:
 
-- 可以先吃 snapshot / raft log
-- 不參與投票
-- 不接受一般寫入
-- 追上 leader 後才考慮 promote
+- it can receive snapshots and Raft log
+- it does not vote
+- it does not accept normal writes
+- it is promoted only after it catches up
 
-::: info 相關章節
-- [為什麼需要 Defrag](./defrag)
-- [Kubernetes 中的 Defrag 操作](./kubernetes-defrag)
+::: info Related Pages
+- [Why Defrag Matters](./defrag)
+- [Defrag Operations in Kubernetes](./kubernetes-defrag)
 :::

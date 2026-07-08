@@ -1,43 +1,43 @@
 ---
 layout: doc
-title: etcd — 專案總覽
+title: etcd - Overview
 ---
 
-# etcd — Kubernetes 控制平面的資料核心
+# etcd - The Data Core of the Kubernetes Control Plane
 
-::: tip 分析版本
-本文件基於 commit [`6e470567`](https://github.com/etcd-io/etcd/commit/6e4705678926d5d0982538896acc087d21e09db5) 進行分析。
+::: tip Analyzed Version
+This chapter is based on commit [`6e470567`](https://github.com/etcd-io/etcd/commit/6e4705678926d5d0982538896acc087d21e09db5).
 :::
 
-## 專案簡介
+## Introduction
 
-**etcd** 是以 **Raft** 為核心的分散式 Key-Value Store，提供 Kubernetes 控制平面最重要的持久化儲存層。`README.md` 明確將其定位為 reliable key-value store，而 `client/v3`、`server`、`raft` 模組分別承擔 API、儲存引擎與共識邏輯。
+**etcd** is a distributed key-value store built around **Raft**. In Kubernetes, it is the persistence layer for the control plane. The upstream `README.md` positions etcd as a reliable key-value store, while the `client/v3`, `server`, and `raft` modules provide the API surface, storage engine, and consensus machinery.
 
-![etcd 在 Kubernetes 中的角色總覽](/diagrams/etcd/etcd-overview-1.png)
+![High-level role of etcd in Kubernetes](/diagrams/etcd/etcd-overview-1.png)
 
 - **GitHub**: [etcd-io/etcd](https://github.com/etcd-io/etcd)
 - **License**: Apache 2.0
-- **語言**: Go
-- **關鍵角色**: Kubernetes API Server 的後端狀態儲存
+- **Language**: Go
+- **Primary role**: backend state store for the Kubernetes API server
 
-## 為什麼這個章節只聚焦 Defrag 與 Learner
+## Why This Chapter Focuses on Defrag and Learner Mode
 
-在 Kubernetes 維運情境裡，etcd 最常見且最容易出問題的兩個主題是：
+In real Kubernetes operations, two etcd topics repeatedly cause confusion and incidents:
 
-| 主題 | 為什麼重要 |
+| Topic | Why it matters |
 |------|------|
-| **Defrag** | 刪除與 Compact 不會立刻縮小 bbolt 檔案；如果長期不整理，磁碟使用量與 I/O 壓力會持續累積 |
-| **Learner Mode** | 擴容或替換成員時，可先用非投票節點同步資料，降低直接加入 voting member 對 quorum 的風險 |
+| **Defrag** | Deletes and compaction do not automatically shrink the underlying bbolt file, so disk usage and I/O pressure can keep growing |
+| **Learner Mode** | A new member can sync data first as a non-voting node, reducing the risk of changing quorum too early |
 
-## 文件導覽
+## Reading Guide
 
-| 文件 | 說明 |
+| Page | Purpose |
 |------|------|
-| [為什麼需要 Defrag](./defrag) | 從 backend 與 metrics 解釋 Defrag 的根因、代價與執行流程 |
-| [Kubernetes 中的 Defrag 操作](./kubernetes-defrag) | 說明 Defrag 對 kube-apiserver 的影響、建議操作順序與觀察指標 |
-| [Learner Mode](./learner-mode) | 分析 learner member 的新增、限制、升級條件與 quorum 保護 |
+| [Why Defrag Matters](./defrag) | Explains the storage root cause of defrag, the cost of the operation, and how the key metrics behave |
+| [Defrag Operations in Kubernetes](./kubernetes-defrag) | Covers control-plane impact, operational sequencing, and how to read the metrics in Kubernetes |
+| [Learner Mode](./learner-mode) | Explains learner membership, promote safety checks, quorum protection, and standby-member architecture |
 
-## 關鍵來源檔案
+## Key Source Files
 
 - `etcd/README.md`
 - `etcd/client/v3/maintenance.go`
@@ -48,8 +48,8 @@ title: etcd — 專案總覽
 - `etcd/tests/integration/clientv3/cluster_test.go`
 - `etcd/tests/integration/clientv3/kv_test.go`
 
-::: info 相關章節
-- [為什麼需要 Defrag](./defrag)
-- [Kubernetes 中的 Defrag 操作](./kubernetes-defrag)
+::: info Related Pages
+- [Why Defrag Matters](./defrag)
+- [Defrag Operations in Kubernetes](./kubernetes-defrag)
 - [Learner Mode](./learner-mode)
 :::
