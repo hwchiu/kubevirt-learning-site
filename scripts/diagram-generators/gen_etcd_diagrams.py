@@ -198,6 +198,91 @@ def gen_defrag() -> None:
     save_svg("etcd-defrag-1", wrap_svg(body, "0 0 1200 640"))
 
 
+def gen_defrag_pages() -> None:
+    body = f'''
+  {text(640, 36, "What Happens Inside the bbolt File", 24, "700")}
+  {text(640, 62, "Compaction frees logical space inside the file; defrag rebuilds the file and shrinks it", 13, "400", SUBT)}
+
+  {rect(40, 105, 380, 400, GRAY_FILL, GRAY_STROKE, 20)}
+  {text(230, 138, "Stage 1: Before Compaction", 19, "700")}
+  {rect(100, 180, 260, 250, "#fff7ed", "#fdba74", 10)}
+  {rect(120, 205, 220, 36, "#fca5a5", "#ef4444", 8)}
+  {text(230, 228, "Live pages", 14, "700")}
+  {rect(120, 252, 220, 36, "#fde68a", "#f59e0b", 8)}
+  {text(230, 275, "Old revisions", 14, "700")}
+  {rect(120, 299, 220, 36, "#fde68a", "#f59e0b", 8)}
+  {text(230, 322, "Old revisions", 14, "700")}
+  {rect(120, 346, 220, 36, "#fca5a5", "#ef4444", 8)}
+  {text(230, 369, "Live pages", 14, "700")}
+  {text(230, 458, "The file is large because it holds both current data and historical versions", 12, "400", SUBT)}
+
+  {rect(450, 105, 380, 400, GRAY_FILL, GRAY_STROKE, 20)}
+  {text(640, 138, "Stage 2: After Compaction", 19, "700")}
+  {rect(510, 180, 260, 250, "#eff6ff", "#93c5fd", 10)}
+  {rect(530, 205, 220, 36, "#fca5a5", "#ef4444", 8)}
+  {text(640, 228, "Live pages", 14, "700")}
+  {rect(530, 252, 220, 36, "#dcfce7", "#22c55e", 8)}
+  {text(640, 275, "Free reusable pages", 14, "700")}
+  {rect(530, 299, 220, 36, "#dcfce7", "#22c55e", 8)}
+  {text(640, 322, "Free reusable pages", 14, "700")}
+  {rect(530, 346, 220, 36, "#fca5a5", "#ef4444", 8)}
+  {text(640, 369, "Live pages", 14, "700")}
+  {text(640, 458, "Compaction removes old revisions, but the file keeps the same outer size", 12, "400", SUBT)}
+
+  {rect(860, 105, 380, 400, GRAY_FILL, GRAY_STROKE, 20)}
+  {text(1050, 138, "Stage 3: After Defrag", 19, "700")}
+  {rect(940, 205, 220, 130, "#ecfdf5", "#86efac", 10)}
+  {rect(960, 228, 180, 36, "#fca5a5", "#ef4444", 8)}
+  {text(1050, 251, "Live pages", 14, "700")}
+  {rect(960, 275, 180, 36, "#fca5a5", "#ef4444", 8)}
+  {text(1050, 298, "Live pages", 14, "700")}
+  {text(1050, 370, "Defrag copies only live pages into a new file", 12, "400", SUBT)}
+  {text(1050, 392, "The free holes disappear and the file becomes smaller", 12, "400", SUBT)}
+
+  {line(360, 307, 530, 307)}
+  {line(750, 307, 940, 270)}
+'''
+    save_svg("etcd-defrag-2", wrap_svg(body, "0 0 1280 540"))
+
+
+def gen_defrag_metrics() -> None:
+    body = f'''
+  {text(640, 36, "How the Metrics Move", 24, "700")}
+  {text(640, 62, "Compaction and defrag change different metrics, so the curves do not move together", 13, "400", SUBT)}
+
+  {rect(70, 110, 1150, 450, GRAY_FILL, GRAY_STROKE, 20)}
+  <line x1="150" y1="490" x2="1150" y2="490" stroke="{TEXT}" stroke-width="2"/>
+  <line x1="150" y1="490" x2="150" y2="150" stroke="{TEXT}" stroke-width="2"/>
+  {text(650, 525, "time", 14, "700")}
+  {text(105, 320, "size", 14, "700")}
+
+  <polyline fill="none" stroke="#2563eb" stroke-width="5"
+    points="180,260 300,250 430,245 570,335 750,330 930,220 1110,215"/>
+  <polyline fill="none" stroke="#059669" stroke-width="5"
+    points="180,220 300,210 430,205 570,205 750,200 930,335 1110,330"/>
+
+  <line x1="560" y1="170" x2="560" y2="490" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8 6"/>
+  <line x1="920" y1="170" x2="920" y2="490" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8 6"/>
+  {text(560, 155, "Compaction", 14, "700")}
+  {text(920, 155, "Defrag", 14, "700")}
+
+  {rect(760, 185, 300, 90, BLUE_FILL, BLUE_STROKE)}
+  {text(910, 215, "Blue: db_total_size_in_use", 15, "700")}
+  {text(910, 238, "Drops when old revisions are removed", 12, "400", SUBT)}
+  {text(910, 260, "Compaction changes logical usage first", 12, "400", SUBT)}
+
+  {rect(760, 310, 300, 90, GREEN_FILL, GREEN_STROKE)}
+  {text(910, 340, "Green: db_total_size", 15, "700")}
+  {text(910, 363, "Drops only after the file is rewritten", 12, "400", SUBT)}
+  {text(910, 385, "Defrag changes physical disk usage", 12, "400", SUBT)}
+
+  {text(300, 190, "Both metrics grow while writes accumulate", 12, "400", SUBT)}
+  {text(630, 360, "Gap widens after compaction", 12, "700", "#1d4ed8")}
+  {text(995, 355, "Gap narrows after defrag", 12, "700", "#047857")}
+'''
+    save_svg("etcd-defrag-3", wrap_svg(body, "0 0 1280 590"))
+
+
 def gen_k8s_defrag() -> None:
     body = f'''
   {text(620, 36, "Operational Flow of etcd Defrag in Kubernetes", 24, "700")}
@@ -316,6 +401,8 @@ def gen_learner() -> None:
 def main() -> None:
     gen_overview()
     gen_defrag()
+    gen_defrag_pages()
+    gen_defrag_metrics()
     gen_k8s_defrag()
     gen_learner()
     print(f"Generated etcd diagrams in {OUT}")

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 590">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 9 3.5, 0 6.5" fill="#2563eb"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  
+  <text x="640" y="36" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="700" fill="#111827" text-anchor="middle">How the Metrics Move</text>
+  <text x="640" y="62" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle">Compaction and defrag change different metrics, so the curves do not move together</text>
+
+  <rect x="70" y="110" width="1150" height="450" rx="20" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <line x1="150" y1="490" x2="1150" y2="490" stroke="#111827" stroke-width="2"/>
+  <line x1="150" y1="490" x2="150" y2="150" stroke="#111827" stroke-width="2"/>
+  <text x="650" y="525" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">time</text>
+  <text x="105" y="320" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">size</text>
+
+  <polyline fill="none" stroke="#2563eb" stroke-width="5"
+    points="180,260 300,250 430,245 570,335 750,330 930,220 1110,215"/>
+  <polyline fill="none" stroke="#059669" stroke-width="5"
+    points="180,220 300,210 430,205 570,205 750,200 930,335 1110,330"/>
+
+  <line x1="560" y1="170" x2="560" y2="490" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8 6"/>
+  <line x1="920" y1="170" x2="920" y2="490" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="560" y="155" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Compaction</text>
+  <text x="920" y="155" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Defrag</text>
+
+  <rect x="760" y="185" width="300" height="90" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <text x="910" y="215" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#111827" text-anchor="middle">Blue: db_total_size_in_use</text>
+  <text x="910" y="238" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">Drops when old revisions are removed</text>
+  <text x="910" y="260" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">Compaction changes logical usage first</text>
+
+  <rect x="760" y="310" width="300" height="90" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="910" y="340" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#111827" text-anchor="middle">Green: db_total_size</text>
+  <text x="910" y="363" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">Drops only after the file is rewritten</text>
+  <text x="910" y="385" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">Defrag changes physical disk usage</text>
+
+  <text x="300" y="190" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">Both metrics grow while writes accumulate</text>
+  <text x="630" y="360" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#1d4ed8" text-anchor="middle">Gap widens after compaction</text>
+  <text x="995" y="355" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#047857" text-anchor="middle">Gap narrows after defrag</text>
+
+</svg>

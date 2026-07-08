@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 540">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 9 3.5, 0 6.5" fill="#2563eb"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  
+  <text x="640" y="36" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="700" fill="#111827" text-anchor="middle">What Happens Inside the bbolt File</text>
+  <text x="640" y="62" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle">Compaction frees logical space inside the file; defrag rebuilds the file and shrinks it</text>
+
+  <rect x="40" y="105" width="380" height="400" rx="20" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="230" y="138" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#111827" text-anchor="middle">Stage 1: Before Compaction</text>
+  <rect x="100" y="180" width="260" height="250" rx="10" fill="#fff7ed" stroke="#fdba74" stroke-width="2"/>
+  <rect x="120" y="205" width="220" height="36" rx="8" fill="#fca5a5" stroke="#ef4444" stroke-width="2"/>
+  <text x="230" y="228" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Live pages</text>
+  <rect x="120" y="252" width="220" height="36" rx="8" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+  <text x="230" y="275" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Old revisions</text>
+  <rect x="120" y="299" width="220" height="36" rx="8" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+  <text x="230" y="322" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Old revisions</text>
+  <rect x="120" y="346" width="220" height="36" rx="8" fill="#fca5a5" stroke="#ef4444" stroke-width="2"/>
+  <text x="230" y="369" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Live pages</text>
+  <text x="230" y="458" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">The file is large because it holds both current data and historical versions</text>
+
+  <rect x="450" y="105" width="380" height="400" rx="20" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="640" y="138" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#111827" text-anchor="middle">Stage 2: After Compaction</text>
+  <rect x="510" y="180" width="260" height="250" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <rect x="530" y="205" width="220" height="36" rx="8" fill="#fca5a5" stroke="#ef4444" stroke-width="2"/>
+  <text x="640" y="228" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Live pages</text>
+  <rect x="530" y="252" width="220" height="36" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="640" y="275" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Free reusable pages</text>
+  <rect x="530" y="299" width="220" height="36" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="640" y="322" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Free reusable pages</text>
+  <rect x="530" y="346" width="220" height="36" rx="8" fill="#fca5a5" stroke="#ef4444" stroke-width="2"/>
+  <text x="640" y="369" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Live pages</text>
+  <text x="640" y="458" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">Compaction removes old revisions, but the file keeps the same outer size</text>
+
+  <rect x="860" y="105" width="380" height="400" rx="20" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="1050" y="138" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#111827" text-anchor="middle">Stage 3: After Defrag</text>
+  <rect x="940" y="205" width="220" height="130" rx="10" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <rect x="960" y="228" width="180" height="36" rx="8" fill="#fca5a5" stroke="#ef4444" stroke-width="2"/>
+  <text x="1050" y="251" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Live pages</text>
+  <rect x="960" y="275" width="180" height="36" rx="8" fill="#fca5a5" stroke="#ef4444" stroke-width="2"/>
+  <text x="1050" y="298" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Live pages</text>
+  <text x="1050" y="370" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">Defrag copies only live pages into a new file</text>
+  <text x="1050" y="392" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">The free holes disappear and the file becomes smaller</text>
+
+  <line x1="360" y1="307" x2="530" y2="307" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="750" y1="307" x2="940" y2="270" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+
+</svg>

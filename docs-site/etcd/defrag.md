@@ -13,6 +13,8 @@ etcd needs defragmentation not because the live dataset is always growing, but b
 
 ![Compaction and defrag space semantics](/diagrams/etcd/etcd-defrag-1.png)
 
+![Page-level behavior inside the bbolt file](/diagrams/etcd/etcd-defrag-2.png)
+
 `server/storage/mvcc/metrics.go` defines the two most important gauges for understanding this behavior:
 
 ```go
@@ -43,6 +45,12 @@ They do not answer the same question:
 
 This distinction matters because **compaction and defrag affect different metrics**.
 
+The second diagram is the key storage-level picture:
+
+- before compaction, the file contains both live pages and historical revisions
+- after compaction, old revisions are gone, but their slots become reusable holes inside the same file
+- after defrag, etcd copies only live pages into a new backend file, so the old holes disappear and disk usage finally shrinks
+
 ## Why Compaction Must Be Explained Together with Defrag
 
 If you discuss defrag alone, you miss half the operational picture. The flow in `tests/integration/metrics_test.go` is:
@@ -70,6 +78,15 @@ In practice, that means:
 - **Defrag** rewrites the backend and reduces physical `db size`
 
 Without that distinction, it is easy to expect defrag to make both metrics drop in the same way.
+
+![Metric behavior across write, compaction, and defrag](/diagrams/etcd/etcd-defrag-3.png)
+
+The metric timeline gives the operational reading:
+
+- both metrics can grow together while writes accumulate revisions
+- compaction usually causes `db_total_size_in_use_in_bytes` to drop first
+- `db_total_size_in_bytes` can stay almost flat after compaction because the file still exists at the same size
+- defrag later makes `db_total_size_in_bytes` drop by rebuilding the backend file
 
 ## How the API Defines Defrag
 
