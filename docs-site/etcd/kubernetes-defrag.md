@@ -11,6 +11,8 @@ When etcd is the backend for Kubernetes, defrag is no longer just internal house
 
 ![Operational flow of etcd defrag in Kubernetes](/diagrams/etcd/etcd-kubernetes-defrag-1.png)
 
+In this chapter, the operational diagrams use a **5-member etcd cluster** as the default production mental model. That is not because smaller clusters are invalid, but because 5 members make the maintenance tradeoffs more realistic: you still defrag one member at a time, but you have a clearer picture of quorum and service margin while one backend is stalled.
+
 ## Why Kubernetes Operations Must Be More Conservative
 
 `client/v3/maintenance.go` already says defrag is expensive, and `backend.go` shows that it locks transaction and read paths:
@@ -48,6 +50,7 @@ In Kubernetes this matters even more because:
 
 - while one member stalls, healthy members can still absorb traffic
 - if several members are defragged together, control-plane latency and quorum risk rise much faster
+- even in a 5-member cluster, the goal is to preserve your extra fault margin rather than spend it on parallel maintenance
 
 ## Recommended Sequence in Kubernetes
 
@@ -87,6 +90,13 @@ That is why defrag should not be treated as step one. It is usually step two aft
 ### 2. Process one member at a time
 
 Defrag each member individually. This is not only a best practice; it matches the way `etcdctl` itself is written.
+
+For a 5-member cluster, a practical sequence is:
+
+1. pick one member with the largest reclaimable gap
+2. defrag that member only
+3. wait for metrics and API latency to normalize
+4. continue to the next member only after the cluster is fully steady again
 
 ### 3. Observe recovery before moving on
 

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 600">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1420 640">
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
       <polygon points="0 0.5, 9 3.5, 0 6.5" fill="#2563eb"/>
@@ -9,59 +9,70 @@
   </defs>
   <rect width="100%" height="100%" fill="#ffffff"/>
   
-  <text x="620" y="36" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="700" fill="#111827" text-anchor="middle">Operational Flow of etcd Defrag in Kubernetes</text>
-  <text x="620" y="62" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle">Run one member at a time to avoid amplifying control-plane latency and quorum risk</text>
+  <text x="700" y="36" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="700" fill="#111827" text-anchor="middle">Operational Flow of etcd Defrag in Kubernetes</text>
+  <text x="700" y="62" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle">Five-member production example: one member stalls, four members preserve service and quorum margin</text>
 
   <rect x="60" y="120" width="220" height="100" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
   <text x="170" y="154" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#111827" text-anchor="middle">kube-apiserver</text>
   <text x="170" y="178" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">Continuously reads and writes etcd</text>
   <text x="170" y="196" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">CRUD / Watch / Lease</text>
 
-  <rect x="340" y="100" width="840" height="180" rx="20" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
-  <text x="760" y="132" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#111827" text-anchor="middle">etcd Cluster</text>
+  <rect x="340" y="100" width="1060" height="220" rx="20" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="870" y="132" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#111827" text-anchor="middle">Five-Member etcd Cluster</text>
+  <text x="870" y="154" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">Production-style maintenance view: quorum stays 3/5 while one member is being defragged</text>
 
-  <rect x="400" y="165" width="180" height="80" rx="12" fill="#fffbeb" stroke="#fcd34d" stroke-width="2"/>
-  <text x="490" y="196" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#111827" text-anchor="middle">Member A</text>
-  <text x="490" y="218" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">currently being defragged</text>
+  <rect x="390" y="205" width="165" height="80" rx="12" fill="#fffbeb" stroke="#fcd34d" stroke-width="2"/>
+  <text x="472" y="236" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#111827" text-anchor="middle">Member A</text>
+  <text x="472" y="258" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">defrag in progress</text>
 
-  <rect x="660" y="165" width="180" height="80" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
-  <text x="750" y="196" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#111827" text-anchor="middle">Member B</text>
-  <text x="750" y="218" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">still able to serve traffic</text>
+  <rect x="580" y="205" width="165" height="80" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="662" y="236" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#111827" text-anchor="middle">Member B</text>
+  <text x="662" y="258" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">serving traffic</text>
 
-  <rect x="920" y="165" width="180" height="80" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
-  <text x="1010" y="196" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#111827" text-anchor="middle">Member C</text>
-  <text x="1010" y="218" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">still able to serve traffic</text>
+  <rect x="770" y="205" width="165" height="80" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="852" y="236" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#111827" text-anchor="middle">Member C</text>
+  <text x="852" y="258" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">serving traffic</text>
 
-  <line x1="280" y1="170" x2="400" y2="200" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
-  <line x1="280" y1="170" x2="660" y2="200" stroke="#059669" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow-green)"/>
-  <line x1="280" y1="170" x2="920" y2="200" stroke="#059669" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow-green)"/>
-  <text x="350" y="154" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Requests can feel A's stall</text>
+  <rect x="960" y="205" width="165" height="80" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="1042" y="236" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#111827" text-anchor="middle">Member D</text>
+  <text x="1042" y="258" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">serving traffic</text>
 
-  <rect x="80" y="345" width="1090" height="220" rx="20" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="2"/>
-  <text x="625" y="380" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#111827" text-anchor="middle">Recommended Operational Sequence</text>
+  <rect x="1150" y="205" width="165" height="80" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="1232" y="236" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#111827" text-anchor="middle">Member E</text>
+  <text x="1232" y="258" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">serving traffic</text>
 
-  <rect x="120" y="420" width="220" height="95" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
-  <text x="230" y="450" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">1. Check Metrics First</text>
-  <text x="230" y="474" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Compare in-use vs db size</text>
-  <text x="230" y="492" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Verify that defrag is worth it</text>
+  <line x1="280" y1="170" x2="390" y2="225" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="280" y1="170" x2="580" y2="225" stroke="#059669" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow-green)"/>
+  <line x1="280" y1="170" x2="770" y2="225" stroke="#059669" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow-green)"/>
+  <line x1="280" y1="170" x2="960" y2="225" stroke="#059669" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow-green)"/>
+  <line x1="280" y1="170" x2="1150" y2="225" stroke="#059669" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow-green)"/>
+  <text x="350" y="154" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="start">Requests can feel A's stall, but the remaining four members keep the cluster available</text>
 
-  <rect x="385" y="420" width="220" height="95" rx="12" fill="#fffbeb" stroke="#fcd34d" stroke-width="2"/>
-  <text x="495" y="450" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">2. Defrag One Member</text>
-  <text x="495" y="474" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Run etcdctl defrag against one member</text>
-  <text x="495" y="492" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Do not hit all members at once</text>
+  <rect x="80" y="385" width="1240" height="220" rx="20" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="2"/>
+  <text x="700" y="420" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#111827" text-anchor="middle">Recommended Operational Sequence</text>
 
-  <rect x="650" y="420" width="220" height="95" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
-  <text x="760" y="450" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">3. Observe Recovery</text>
-  <text x="760" y="474" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Wait for defrag_inflight to return to 0</text>
-  <text x="760" y="492" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Confirm db_total_size decreases</text>
+  <rect x="110" y="460" width="250" height="95" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <text x="235" y="490" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">1. Check Metrics First</text>
+  <text x="235" y="514" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Compare in-use vs db size</text>
+  <text x="235" y="532" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Verify that defrag is worth it</text>
 
-  <rect x="915" y="420" width="220" height="95" rx="12" fill="#fef2f2" stroke="#fca5a5" stroke-width="2"/>
-  <text x="1025" y="450" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">4. Move to the Next Member</text>
-  <text x="1025" y="474" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Avoid control-plane peak periods</text>
-  <text x="1025" y="492" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Preserve quorum margin</text>
+  <rect x="395" y="460" width="250" height="95" rx="12" fill="#fffbeb" stroke="#fcd34d" stroke-width="2"/>
+  <text x="520" y="490" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">2. Defrag One Member</text>
+  <text x="520" y="514" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Run etcdctl defrag against one member</text>
+  <text x="520" y="532" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Keep the other four stable</text>
 
-  <line x1="340" y1="468" x2="385" y2="468" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
-  <line x1="605" y1="468" x2="650" y2="468" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
-  <line x1="870" y1="468" x2="915" y2="468" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="680" y="460" width="250" height="95" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="805" y="490" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">3. Observe Recovery</text>
+  <text x="805" y="514" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Wait for defrag_inflight to return to 0</text>
+  <text x="805" y="532" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Confirm db_total_size decreases</text>
+
+  <rect x="965" y="460" width="250" height="95" rx="12" fill="#fef2f2" stroke="#fca5a5" stroke-width="2"/>
+  <text x="1090" y="490" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">4. Move to the Next Member</text>
+  <text x="1090" y="514" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Avoid control-plane peak periods</text>
+  <text x="1090" y="532" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">Preserve quorum and latency margin</text>
+
+  <line x1="360" y1="508" x2="395" y2="508" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="645" y1="508" x2="680" y2="508" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="930" y1="508" x2="965" y2="508" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
 
 </svg>

@@ -88,39 +88,53 @@ def save_svg(name: str, svg: str) -> None:
 
 def gen_overview() -> None:
     body = f'''
-  {text(540, 36, "Role of etcd in Kubernetes", 24, "700")}
-  {text(540, 62, "All API server state eventually lands in etcd and is protected by Raft replication", 13, "400", SUBT)}
+  {text(660, 36, "Role of etcd in Kubernetes", 24, "700")}
+  {text(660, 62, "All API server state eventually lands in etcd and is protected by Raft replication", 13, "400", SUBT)}
 
   {rect(80, 110, 210, 90, BLUE_FILL, BLUE_STROKE)}
   {text(185, 145, "kube-apiserver", 18, "700")}
   {text(185, 168, "CRUD / Watch / Lease / Event", 12, "400", SUBT)}
   {text(185, 186, "Primary write path", 12, "400", SUBT)}
 
-  {rect(360, 95, 610, 355, GRAY_FILL, GRAY_STROKE, 20)}
-  {text(665, 128, "Primary etcd Raft Cluster", 20, "700")}
-  {text(665, 150, "All members share one cluster membership and one quorum boundary", 12, "400", SUBT)}
+  {rect(360, 95, 850, 355, GRAY_FILL, GRAY_STROKE, 20)}
+  {text(785, 128, "Primary etcd Raft Cluster", 20, "700")}
+  {text(785, 150, "Five-member production example: one leader, four voters, quorum 3/5", 12, "400", SUBT)}
 
   {rect(405, 190, 190, 92, AMBER_FILL, AMBER_STROKE)}
   {text(500, 223, "Leader", 18, "700")}
   {text(500, 246, "Accepts writes", 12, "400", SUBT)}
   {text(500, 264, "Replicates Raft log", 12, "400", SUBT)}
 
-  {rect(575, 320, 180, 90, GREEN_FILL, GREEN_STROKE)}
-  {text(665, 352, "Follower", 17, "700")}
-  {text(665, 375, "voter", 12, "400", SUBT)}
-  {text(665, 393, "Participates in quorum", 12, "400", SUBT)}
+  {rect(580, 320, 140, 90, GREEN_FILL, GREEN_STROKE)}
+  {text(650, 352, "Follower", 17, "700")}
+  {text(650, 375, "voter", 12, "400", SUBT)}
+  {text(650, 393, "Quorum path", 12, "400", SUBT)}
 
-  {rect(770, 320, 160, 90, GREEN_FILL, GREEN_STROKE)}
-  {text(850, 352, "Follower", 17, "700")}
-  {text(850, 375, "voter", 12, "400", SUBT)}
-  {text(850, 393, "Participates in quorum", 12, "400", SUBT)}
+  {rect(740, 320, 140, 90, GREEN_FILL, GREEN_STROKE)}
+  {text(810, 352, "Follower", 17, "700")}
+  {text(810, 375, "voter", 12, "400", SUBT)}
+  {text(810, 393, "Quorum path", 12, "400", SUBT)}
+
+  {rect(900, 320, 140, 90, GREEN_FILL, GREEN_STROKE)}
+  {text(970, 352, "Follower", 17, "700")}
+  {text(970, 375, "voter", 12, "400", SUBT)}
+  {text(970, 393, "Quorum path", 12, "400", SUBT)}
+
+  {rect(1060, 320, 120, 90, GREEN_FILL, GREEN_STROKE)}
+  {text(1120, 352, "Follower", 17, "700")}
+  {text(1120, 375, "voter", 12, "400", SUBT)}
+  {text(1120, 393, "Quorum path", 12, "400", SUBT)}
 
   {line(290, 155, 405, 225)}
   {text(348, 140, "gRPC / MVCC", 11, "400", SUBT)}
-  {line(515, 282, 620, 320)}
-  {line(545, 282, 810, 320)}
-  {text(615, 297, "raft log", 11, "400", SUBT)}
+  {line(500, 282, 635, 320)}
+  {line(520, 282, 795, 320)}
+  {line(545, 282, 955, 320)}
+  {line(565, 282, 1115, 320)}
+  {text(618, 297, "raft log", 11, "400", SUBT)}
   {text(760, 297, "raft log", 11, "400", SUBT)}
+  {text(920, 297, "raft log", 11, "400", SUBT)}
+  {text(1080, 297, "raft log", 11, "400", SUBT)}
 
   {rect(110, 295, 180, 120, PURPLE_FILL, PURPLE_STROKE)}
   {text(200, 328, "Watchers / Controllers", 16, "700")}
@@ -131,8 +145,8 @@ def gen_overview() -> None:
   {line(200, 295, 200, 200, "arrow-green", "#059669")}
   {text(225, 248, "Watch / List", 11, "400", SUBT, "start")}
 
-  {rect(120, 510, 860, 160, GRAY_FILL, GRAY_STROKE, 20)}
-  {text(550, 545, "Chapter Focus", 18, "700")}
+  {rect(120, 510, 1080, 160, GRAY_FILL, GRAY_STROKE, 20)}
+  {text(660, 545, "Chapter Focus", 18, "700")}
 
   {rect(160, 575, 235, 68, BLUE_FILL, BLUE_STROKE)}
   {text(278, 603, "Defrag / Compact", 16, "700")}
@@ -145,8 +159,12 @@ def gen_overview() -> None:
   {rect(690, 575, 250, 68, BLUE_FILL, BLUE_STROKE)}
   {text(815, 603, "Learner Mode", 16, "700")}
   {text(815, 624, "Sync data first, change the voting set later", 11, "400", SUBT)}
+
+  {rect(965, 575, 200, 68, BLUE_FILL, BLUE_STROKE)}
+  {text(1065, 603, "Production Shape", 16, "700")}
+  {text(1065, 624, "Five voters as the default mental model", 11, "400", SUBT)}
 '''
-    save_svg("etcd-overview-1", wrap_svg(body, "0 0 1080 700", ("arrow", "arrow-green")))
+    save_svg("etcd-overview-1", wrap_svg(body, "0 0 1280 700", ("arrow", "arrow-green")))
 
 
 def gen_defrag() -> None:
@@ -285,117 +303,140 @@ def gen_defrag_metrics() -> None:
 
 def gen_k8s_defrag() -> None:
     body = f'''
-  {text(620, 36, "Operational Flow of etcd Defrag in Kubernetes", 24, "700")}
-  {text(620, 62, "Run one member at a time to avoid amplifying control-plane latency and quorum risk", 13, "400", SUBT)}
+  {text(700, 36, "Operational Flow of etcd Defrag in Kubernetes", 24, "700")}
+  {text(700, 62, "Five-member production example: one member stalls, four members preserve service and quorum margin", 13, "400", SUBT)}
 
   {rect(60, 120, 220, 100, BLUE_FILL, BLUE_STROKE)}
   {text(170, 154, "kube-apiserver", 18, "700")}
   {text(170, 178, "Continuously reads and writes etcd", 12, "400", SUBT)}
   {text(170, 196, "CRUD / Watch / Lease", 12, "400", SUBT)}
 
-  {rect(340, 100, 840, 180, GRAY_FILL, GRAY_STROKE, 20)}
-  {text(760, 132, "etcd Cluster", 20, "700")}
+  {rect(340, 100, 1060, 220, GRAY_FILL, GRAY_STROKE, 20)}
+  {text(870, 132, "Five-Member etcd Cluster", 20, "700")}
+  {text(870, 154, "Production-style maintenance view: quorum stays 3/5 while one member is being defragged", 12, "400", SUBT)}
 
-  {rect(400, 165, 180, 80, AMBER_FILL, AMBER_STROKE)}
-  {text(490, 196, "Member A", 17, "700")}
-  {text(490, 218, "currently being defragged", 12, "400", SUBT)}
+  {rect(390, 205, 165, 80, AMBER_FILL, AMBER_STROKE)}
+  {text(472, 236, "Member A", 17, "700")}
+  {text(472, 258, "defrag in progress", 12, "400", SUBT)}
 
-  {rect(660, 165, 180, 80, GREEN_FILL, GREEN_STROKE)}
-  {text(750, 196, "Member B", 17, "700")}
-  {text(750, 218, "still able to serve traffic", 12, "400", SUBT)}
+  {rect(580, 205, 165, 80, GREEN_FILL, GREEN_STROKE)}
+  {text(662, 236, "Member B", 17, "700")}
+  {text(662, 258, "serving traffic", 12, "400", SUBT)}
 
-  {rect(920, 165, 180, 80, GREEN_FILL, GREEN_STROKE)}
-  {text(1010, 196, "Member C", 17, "700")}
-  {text(1010, 218, "still able to serve traffic", 12, "400", SUBT)}
+  {rect(770, 205, 165, 80, GREEN_FILL, GREEN_STROKE)}
+  {text(852, 236, "Member C", 17, "700")}
+  {text(852, 258, "serving traffic", 12, "400", SUBT)}
 
-  {line(280, 170, 400, 200)}
-  {line(280, 170, 660, 200, "arrow-green", "#059669", True)}
-  {line(280, 170, 920, 200, "arrow-green", "#059669", True)}
-  {text(350, 154, "Requests can feel A's stall", 11, "400", SUBT)}
+  {rect(960, 205, 165, 80, GREEN_FILL, GREEN_STROKE)}
+  {text(1042, 236, "Member D", 17, "700")}
+  {text(1042, 258, "serving traffic", 12, "400", SUBT)}
 
-  {rect(80, 345, 1090, 220, PURPLE_FILL, PURPLE_STROKE, 20)}
-  {text(625, 380, "Recommended Operational Sequence", 19, "700")}
+  {rect(1150, 205, 165, 80, GREEN_FILL, GREEN_STROKE)}
+  {text(1232, 236, "Member E", 17, "700")}
+  {text(1232, 258, "serving traffic", 12, "400", SUBT)}
 
-  {rect(120, 420, 220, 95, BLUE_FILL, BLUE_STROKE)}
-  {text(230, 450, "1. Check Metrics First", 16, "700")}
-  {text(230, 474, "Compare in-use vs db size", 11, "400", SUBT)}
-  {text(230, 492, "Verify that defrag is worth it", 11, "400", SUBT)}
+  {line(280, 170, 390, 225)}
+  {line(280, 170, 580, 225, "arrow-green", "#059669", True)}
+  {line(280, 170, 770, 225, "arrow-green", "#059669", True)}
+  {line(280, 170, 960, 225, "arrow-green", "#059669", True)}
+  {line(280, 170, 1150, 225, "arrow-green", "#059669", True)}
+  {text(350, 154, "Requests can feel A's stall, but the remaining four members keep the cluster available", 11, "400", SUBT, "start")}
 
-  {rect(385, 420, 220, 95, AMBER_FILL, AMBER_STROKE)}
-  {text(495, 450, "2. Defrag One Member", 16, "700")}
-  {text(495, 474, "Run etcdctl defrag against one member", 11, "400", SUBT)}
-  {text(495, 492, "Do not hit all members at once", 11, "400", SUBT)}
+  {rect(80, 385, 1240, 220, PURPLE_FILL, PURPLE_STROKE, 20)}
+  {text(700, 420, "Recommended Operational Sequence", 19, "700")}
 
-  {rect(650, 420, 220, 95, GREEN_FILL, GREEN_STROKE)}
-  {text(760, 450, "3. Observe Recovery", 16, "700")}
-  {text(760, 474, "Wait for defrag_inflight to return to 0", 11, "400", SUBT)}
-  {text(760, 492, "Confirm db_total_size decreases", 11, "400", SUBT)}
+  {rect(110, 460, 250, 95, BLUE_FILL, BLUE_STROKE)}
+  {text(235, 490, "1. Check Metrics First", 16, "700")}
+  {text(235, 514, "Compare in-use vs db size", 11, "400", SUBT)}
+  {text(235, 532, "Verify that defrag is worth it", 11, "400", SUBT)}
 
-  {rect(915, 420, 220, 95, RED_FILL, RED_STROKE)}
-  {text(1025, 450, "4. Move to the Next Member", 16, "700")}
-  {text(1025, 474, "Avoid control-plane peak periods", 11, "400", SUBT)}
-  {text(1025, 492, "Preserve quorum margin", 11, "400", SUBT)}
+  {rect(395, 460, 250, 95, AMBER_FILL, AMBER_STROKE)}
+  {text(520, 490, "2. Defrag One Member", 16, "700")}
+  {text(520, 514, "Run etcdctl defrag against one member", 11, "400", SUBT)}
+  {text(520, 532, "Keep the other four stable", 11, "400", SUBT)}
 
-  {line(340, 468, 385, 468)}
-  {line(605, 468, 650, 468)}
-  {line(870, 468, 915, 468)}
+  {rect(680, 460, 250, 95, GREEN_FILL, GREEN_STROKE)}
+  {text(805, 490, "3. Observe Recovery", 16, "700")}
+  {text(805, 514, "Wait for defrag_inflight to return to 0", 11, "400", SUBT)}
+  {text(805, 532, "Confirm db_total_size decreases", 11, "400", SUBT)}
+
+  {rect(965, 460, 250, 95, RED_FILL, RED_STROKE)}
+  {text(1090, 490, "4. Move to the Next Member", 16, "700")}
+  {text(1090, 514, "Avoid control-plane peak periods", 11, "400", SUBT)}
+  {text(1090, 532, "Preserve quorum and latency margin", 11, "400", SUBT)}
+
+  {line(360, 508, 395, 508)}
+  {line(645, 508, 680, 508)}
+  {line(930, 508, 965, 508)}
 '''
-    save_svg("etcd-kubernetes-defrag-1", wrap_svg(body, "0 0 1240 600", ("arrow", "arrow-green")))
+    save_svg("etcd-kubernetes-defrag-1", wrap_svg(body, "0 0 1420 640", ("arrow", "arrow-green")))
 
 
 def gen_learner() -> None:
     body = f'''
-  {text(650, 36, "Learner Mode: Sync First, Change Quorum Later", 24, "700")}
-  {text(650, 62, "Learner mode separates data catch-up from voting-topology change", 13, "400", SUBT)}
+  {text(760, 36, "Learner Mode: Sync First, Change Quorum Later", 24, "700")}
+  {text(760, 62, "Five-member production example: keep quorum 3/5 while the new node catches up", 13, "400", SUBT)}
 
-  {rect(60, 110, 560, 260, GRAY_FILL, GRAY_STROKE, 20)}
-  {text(340, 142, "Directly Adding a Voting Member", 19, "700")}
-  {rect(110, 205, 120, 80, AMBER_FILL, AMBER_STROKE)}
-  {text(170, 236, "Leader", 16, "700")}
-  {text(170, 257, "voter", 11, "400", SUBT)}
-  {rect(260, 205, 120, 80, GREEN_FILL, GREEN_STROKE)}
-  {text(320, 236, "Follower", 16, "700")}
-  {text(320, 257, "voter", 11, "400", SUBT)}
-  {rect(410, 205, 120, 80, GREEN_FILL, GREEN_STROKE)}
-  {text(470, 236, "Follower", 16, "700")}
-  {text(470, 257, "voter", 11, "400", SUBT)}
-  {rect(260, 300, 120, 80, RED_FILL, RED_STROKE)}
-  {text(320, 331, "New Node", 16, "700")}
-  {text(320, 352, "already counted in quorum", 11, "400", SUBT)}
-  {text(340, 338, "Quorum 2/3 -> 3/4", 12, "700", "#b91c1c", "start")}
-  {text(340, 360, "while data is still catching up", 11, "400", SUBT, "start")}
+  {rect(60, 110, 690, 290, GRAY_FILL, GRAY_STROKE, 20)}
+  {text(405, 142, "Directly Adding a Voting Member", 19, "700")}
+  {rect(95, 205, 110, 80, AMBER_FILL, AMBER_STROKE)}
+  {text(150, 236, "Leader", 16, "700")}
+  {text(150, 257, "voter", 11, "400", SUBT)}
+  {rect(225, 205, 110, 80, GREEN_FILL, GREEN_STROKE)}
+  {text(280, 236, "Follower", 16, "700")}
+  {text(280, 257, "voter", 11, "400", SUBT)}
+  {rect(355, 205, 110, 80, GREEN_FILL, GREEN_STROKE)}
+  {text(410, 236, "Follower", 16, "700")}
+  {text(410, 257, "voter", 11, "400", SUBT)}
+  {rect(485, 205, 110, 80, GREEN_FILL, GREEN_STROKE)}
+  {text(540, 236, "Follower", 16, "700")}
+  {text(540, 257, "voter", 11, "400", SUBT)}
+  {rect(615, 205, 110, 80, GREEN_FILL, GREEN_STROKE)}
+  {text(670, 236, "Follower", 16, "700")}
+  {text(670, 257, "voter", 11, "400", SUBT)}
+  {rect(305, 305, 160, 80, RED_FILL, RED_STROKE)}
+  {text(385, 336, "New Node", 16, "700")}
+  {text(385, 357, "already in voting set", 11, "400", SUBT)}
+  {text(255, 335, "Quorum 3/5 -> 4/6", 12, "700", "#b91c1c", "start")}
+  {text(255, 357, "before data catch-up finishes", 11, "400", SUBT, "start")}
 
-  {rect(680, 110, 560, 260, GRAY_FILL, GRAY_STROKE, 20)}
-  {text(960, 142, "Adding a Learner First", 19, "700")}
-  {rect(730, 205, 120, 80, AMBER_FILL, AMBER_STROKE)}
-  {text(790, 236, "Leader", 16, "700")}
-  {text(790, 257, "voter", 11, "400", SUBT)}
-  {rect(880, 205, 120, 80, GREEN_FILL, GREEN_STROKE)}
-  {text(940, 236, "Follower", 16, "700")}
-  {text(940, 257, "voter", 11, "400", SUBT)}
-  {rect(1030, 205, 120, 80, GREEN_FILL, GREEN_STROKE)}
-  {text(1090, 236, "Follower", 16, "700")}
-  {text(1090, 257, "voter", 11, "400", SUBT)}
-  {rect(880, 300, 120, 80, PURPLE_FILL, PURPLE_STROKE)}
-  {text(940, 331, "Learner", 16, "700")}
-  {text(940, 352, "non-voter", 11, "400", SUBT)}
-  {text(962, 338, "Quorum stays 2/3", 12, "700", "#6d28d9", "start")}
-  {text(962, 360, "sync snapshot / log first", 11, "400", SUBT, "start")}
+  {rect(790, 110, 690, 290, GRAY_FILL, GRAY_STROKE, 20)}
+  {text(1135, 142, "Adding a Learner First", 19, "700")}
+  {rect(825, 205, 110, 80, AMBER_FILL, AMBER_STROKE)}
+  {text(880, 236, "Leader", 16, "700")}
+  {text(880, 257, "voter", 11, "400", SUBT)}
+  {rect(955, 205, 110, 80, GREEN_FILL, GREEN_STROKE)}
+  {text(1010, 236, "Follower", 16, "700")}
+  {text(1010, 257, "voter", 11, "400", SUBT)}
+  {rect(1085, 205, 110, 80, GREEN_FILL, GREEN_STROKE)}
+  {text(1140, 236, "Follower", 16, "700")}
+  {text(1140, 257, "voter", 11, "400", SUBT)}
+  {rect(1215, 205, 110, 80, GREEN_FILL, GREEN_STROKE)}
+  {text(1270, 236, "Follower", 16, "700")}
+  {text(1270, 257, "voter", 11, "400", SUBT)}
+  {rect(1345, 205, 110, 80, GREEN_FILL, GREEN_STROKE)}
+  {text(1400, 236, "Follower", 16, "700")}
+  {text(1400, 257, "voter", 11, "400", SUBT)}
+  {rect(1090, 305, 160, 80, PURPLE_FILL, PURPLE_STROKE)}
+  {text(1170, 336, "Learner", 16, "700")}
+  {text(1170, 357, "non-voter", 11, "400", SUBT)}
+  {text(1005, 335, "Quorum stays 3/5", 12, "700", "#6d28d9", "start")}
+  {text(1005, 357, "sync snapshot / log first", 11, "400", SUBT, "start")}
 
-  {line(790, 285, 930, 300, "arrow-green")}
-  {text(855, 305, "sync", 11, "400", SUBT)}
+  {line(880, 285, 1160, 305, "arrow-green")}
+  {text(1010, 300, "sync", 11, "400", SUBT)}
 
-  {rect(140, 430, 980, 160, BLUE_FILL, BLUE_STROKE, 20)}
-  {text(630, 465, "The Correct Primary / Standby Mental Model", 18, "700")}
-  {text(630, 495, "A learner is a warm standby member inside the same cluster, not a separate standby cluster", 13, "400", SUBT)}
+  {rect(210, 450, 1120, 160, BLUE_FILL, BLUE_STROKE, 20)}
+  {text(770, 485, "The Correct Primary / Standby Mental Model", 18, "700")}
+  {text(770, 515, "A learner is a warm standby member inside the same five-member cluster, not a separate standby cluster", 13, "400", SUBT)}
 
-  {rect(190, 525, 290, 40, GREEN_FILL, GREEN_STROKE)}
-  {text(335, 550, "Primary cluster + learner standby member", 14, "700")}
-  {rect(780, 525, 290, 40, RED_FILL, RED_STROKE)}
-  {text(925, 550, "Primary cluster + separate standby cluster", 14, "700")}
-  {text(630, 548, "!=", 24, "700")}
+  {rect(270, 545, 340, 40, GREEN_FILL, GREEN_STROKE)}
+  {text(440, 570, "Five-voter primary cluster + learner spare", 14, "700")}
+  {rect(930, 545, 340, 40, RED_FILL, RED_STROKE)}
+  {text(1100, 570, "Five-voter primary + separate standby cluster", 14, "700")}
+  {text(770, 568, "!=", 24, "700")}
 '''
-    save_svg("etcd-learner-1", wrap_svg(body, "0 0 1300 620", ("arrow", "arrow-green")))
+    save_svg("etcd-learner-1", wrap_svg(body, "0 0 1540 640", ("arrow", "arrow-green")))
 
 
 def main() -> None:

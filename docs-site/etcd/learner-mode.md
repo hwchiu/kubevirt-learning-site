@@ -43,28 +43,27 @@ cc.Flags().BoolVar(&isLearner, "learner", false, "indicates if the new member is
 
 Architecturally, a learner should not be thought of as just another feature bit. It is a **buffer layer for membership change**.
 
-In a normal 3-member primary etcd cluster, the steady-state looks like this:
+In a production-oriented 5-member primary etcd cluster, the steady-state looks like this:
 
 ```text
                 +---------------------+
                 |   Leader (voter)    |
                 +---------------------+
-                   /               \
-                  / raft log        \ raft log
-                 / replication       \
-                v                     v
-      +------------------+   +------------------+
-      | Follower (voter) |   | Follower (voter) |
-      +------------------+   +------------------+
+          / raft log   / raft log   / raft log   \ raft log
+         v            v            v              v
+ +------------------+ +------------------+ +------------------+ +------------------+
+ | Follower (voter) | | Follower (voter) | | Follower (voter) | | Follower (voter) |
+ +------------------+ +------------------+ +------------------+ +------------------+
 
-Quorum = 2 / 3
+Quorum = 3 / 5
 ```
 
 The key properties are:
 
 - the leader accepts writes and replicates the Raft log
 - voting members define quorum
-- any membership change affects failure tolerance and quorum math
+- a 5-member cluster tolerates two unavailable voters while keeping quorum
+- any membership change still affects failure tolerance and quorum math
 
 ### The problem: a new node can count toward quorum before it has caught up
 
@@ -74,20 +73,19 @@ Without learner mode, adding a new node directly as a voting member changes the 
                 +---------------------+
                 |   Leader (voter)    |
                 +---------------------+
-                 /        |          \
-                /         |           \
-               v          v            v
-      +------------------+   +------------------+   +----------------------+
-      | Follower (voter) |   | Follower (voter) |   | New Member (voter)   |
-      +------------------+   +------------------+   +----------------------+
-                                                       data still catching up
+      /      |        |        \            \
+     v       v        v         v            v
++------------------+ +------------------+ +------------------+ +------------------+ +----------------------+
+| Follower (voter) | | Follower (voter) | | Follower (voter) | | Follower (voter) | | New Member (voter)   |
++------------------+ +------------------+ +------------------+ +------------------+ +----------------------+
+                                                                 data still catching up
 
-Quorum = 3 / 4
+Quorum = 4 / 6
 ```
 
 The risk is not that the node exists. The risk is:
 
-- quorum moves from `2/3` to `3/4`
+- quorum moves from `3/5` to `4/6`
 - but the new node may still be receiving snapshots, replaying Raft log, and warming its disk state
 - in other words, **the quorum requirement rises before data synchronization is complete**
 
@@ -101,22 +99,21 @@ With a learner, the cluster looks more like this:
                 +---------------------+
                 |   Leader (voter)    |
                 +---------------------+
-                 /        |          \
-                /         |           \
-               v          v            v
-      +------------------+   +------------------+   +----------------------+
-      | Follower (voter) |   | Follower (voter) |   | Learner (non-voter)  |
-      +------------------+   +------------------+   +----------------------+
-                                                       sync snapshot/log
+      /      |        |        \            \
+     v       v        v         v            v
++------------------+ +------------------+ +------------------+ +------------------+ +----------------------+
+| Follower (voter) | | Follower (voter) | | Follower (voter) | | Follower (voter) | | Learner (non-voter)  |
++------------------+ +------------------+ +------------------+ +------------------+ +----------------------+
+                                                                 sync snapshot/log
 
-Quorum = still 2 / 3
+Quorum = still 3 / 5
 ```
 
 That is the architectural value of a learner:
 
 - it can receive snapshots and Raft log from the leader
 - it does not immediately join the voting path
-- it does not immediately change quorum from `2/3` to `3/4`
+- it does not immediately change quorum from `3/5` to `4/6`
 - only after it catches up does promotion become the next step
 
 So learner mode is not mainly about "one more replica". It is about **separating data synchronization from voting-topology change**.
@@ -243,7 +240,7 @@ For Kubernetes operations, the two most practical uses are:
 1. **replacing an etcd member on a failed control-plane node**
 2. **expanding a stacked or external etcd cluster by syncing first and promoting later**
 
-This reduces the risk of letting a new node enter the voting set before it has caught up.
+In a 5-member production cluster, that reduces the risk of consuming your maintenance margin by counting a still-cold node toward the future quorum too early.
 
 ## Can Learner Mode Build a Standby etcd Cluster for a Primary Cluster?
 
@@ -280,6 +277,8 @@ Primary etcd cluster
   ├─ voter
   ├─ voter
   ├─ voter
+  ├─ voter
+  ├─ voter
   └─ learner   <- warm standby inside the same cluster
 ```
 
@@ -289,6 +288,8 @@ Primary etcd cluster
 Primary etcd cluster          Standby etcd cluster
   ├─ voter                      ├─ voter
   ├─ voter        X             ├─ voter
+  ├─ voter                      ├─ voter
+  ├─ voter                      ├─ voter
   └─ voter                      └─ voter
 
 No built-in "learner link" between two independent clusters
