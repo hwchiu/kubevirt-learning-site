@@ -11,6 +11,8 @@ etcd 需要 Defrag，不是因為資料還在成長，而是因為**資料刪掉
 
 ## 根因：邏輯空間釋放，不等於實體檔案縮小
 
+![Compaction 與 Defrag 的空間語意](/diagrams/etcd/etcd-defrag-1.png)
+
 `server/storage/mvcc/metrics.go` 定義了兩個最重要的 gauge：
 
 ```go

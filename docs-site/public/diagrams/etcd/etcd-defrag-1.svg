@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 9 3.5, 0 6.5" fill="#2563eb"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  
+  <text x="600" y="36" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="700" fill="#111827" text-anchor="middle">Compaction 與 Defrag 的空間語意</text>
+  <text x="600" y="62" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle">in-use 先反映 compaction，physical db size 再由 defrag 下降</text>
+
+  <rect x="70" y="110" width="300" height="250" rx="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="220" y="142" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#111827" text-anchor="middle">Phase 1: 寫入與歷史 revision 累積</text>
+  <rect x="120" y="180" width="200" height="120" rx="12" fill="#fffbeb" stroke="#fcd34d" stroke-width="2"/>
+  <text x="220" y="212" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">bbolt DB file</text>
+  <text x="220" y="236" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">Used pages + old revisions</text>
+  <text x="220" y="255" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">db_total_size 變大</text>
+  <text x="220" y="274" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">db_total_size_in_use 也變大</text>
+
+  <rect x="430" y="110" width="330" height="250" rx="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="595" y="142" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#111827" text-anchor="middle">Phase 2: Compact</text>
+  <rect x="485" y="180" width="220" height="120" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <text x="595" y="212" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">舊 revision 被清掉</text>
+  <text x="595" y="236" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">頁面變成可重用 free pages</text>
+  <text x="595" y="255" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">db_total_size_in_use 下降</text>
+  <text x="595" y="274" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">db_total_size 幾乎不變</text>
+
+  <rect x="820" y="110" width="310" height="250" rx="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="975" y="142" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#111827" text-anchor="middle">Phase 3: Defrag</text>
+  <rect x="875" y="180" width="200" height="120" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="975" y="212" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">重寫到新的 DB file</text>
+  <text x="975" y="236" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">只保留活資料</text>
+  <text x="975" y="255" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">db_total_size 下降</text>
+  <text x="975" y="274" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">空頁真正回到檔案系統</text>
+
+  <line x1="320" y1="240" x2="485" y2="240" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="705" y1="240" x2="875" y2="240" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="120" y="420" width="1010" height="180" rx="18" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="2"/>
+  <text x="625" y="455" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#111827" text-anchor="middle">Kubernetes 環境常看的兩個 Metrics</text>
+
+  <rect x="170" y="490" width="420" height="75" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <text x="380" y="520" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#111827" text-anchor="middle">etcd_mvcc_db_total_size_in_use_in_bytes</text>
+  <text x="380" y="544" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">邏輯上仍被使用的資料量</text>
+
+  <rect x="660" y="490" width="420" height="75" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="870" y="520" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#111827" text-anchor="middle">etcd_mvcc_db_total_size_in_bytes</text>
+  <text x="870" y="544" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">DB 檔案實際占用磁碟大小</text>
+
+  <text x="380" y="590" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#1d4ed8" text-anchor="middle">Compaction 主要影響這個值</text>
+  <text x="870" y="590" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#047857" text-anchor="middle">Defrag 主要影響這個值</text>
+
+</svg>

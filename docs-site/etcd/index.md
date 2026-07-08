@@ -13,6 +13,8 @@ title: etcd — 專案總覽
 
 **etcd** 是以 **Raft** 為核心的分散式 Key-Value Store，提供 Kubernetes 控制平面最重要的持久化儲存層。`README.md` 明確將其定位為 reliable key-value store，而 `client/v3`、`server`、`raft` 模組分別承擔 API、儲存引擎與共識邏輯。
 
+![etcd 在 Kubernetes 中的角色總覽](/diagrams/etcd/etcd-overview-1.png)
+
 - **GitHub**: [etcd-io/etcd](https://github.com/etcd-io/etcd)
 - **License**: Apache 2.0
 - **語言**: Go

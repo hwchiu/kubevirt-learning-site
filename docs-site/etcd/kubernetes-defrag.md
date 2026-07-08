@@ -9,6 +9,8 @@ title: etcd — Kubernetes 中的 Defrag 操作
 
 當 etcd 是 Kubernetes 的後端資料庫時，Defrag 不再只是 etcd 自己的 housekeeping，而是**直接影響 kube-apiserver 延遲與控制平面穩定性**。原因很簡單：API Server 的寫入、讀取、watch 狀態最終都會落到 etcd。
 
+![Kubernetes 中的 etcd Defrag 維運流程](/diagrams/etcd/etcd-kubernetes-defrag-1.png)
+
 ## 為什麼在 Kubernetes 中要更保守
 
 `client/v3/maintenance.go` 已明確標註 Defrag 是 expensive operation，而 `backend.go` 又顯示它會鎖住交易與讀路徑：

@@ -37,6 +37,142 @@ CLI 也把這件事做成正式操作：
 cc.Flags().BoolVar(&isLearner, "learner", false, "indicates if the new member is raft learner")
 ```
 
+![Learner Mode 的 quorum 與 standby member 架構](/diagrams/etcd/etcd-learner-1.png)
+
+## 架構視角：為什麼 primary/standby 需要 learner
+
+如果從架構角度看，不要先把 learner 想成「功能旗標」，而要把它想成 **membership 變更時的緩衝層**。
+
+在一個標準 3-member etcd primary cluster 中，正常狀態大致如下：
+
+```text
+                +---------------------+
+                |   Leader (voter)    |
+                +---------------------+
+                   /               \
+                  / raft log        \ raft log
+                 / replication       \
+                v                     v
+      +------------------+   +------------------+
+      | Follower (voter) |   | Follower (voter) |
+      +------------------+   +------------------+
+
+Quorum = 2 / 3
+```
+
+這個架構的核心特性是：
+
+- leader 負責接收寫入並複寫 raft log
+- voting members 共同構成 quorum
+- 任何 membership 變動都會影響 quorum 計算與容錯邊界
+
+### 問題出在「新節點還沒追上資料，卻已經算進 quorum」
+
+如果沒有 learner，直接把新節點當成 voting member 加入，架構上會立刻變成：
+
+```text
+                +---------------------+
+                |   Leader (voter)    |
+                +---------------------+
+                 /        |          \
+                /         |           \
+               v          v            v
+      +------------------+   +------------------+   +----------------------+
+      | Follower (voter) |   | Follower (voter) |   | New Member (voter)   |
+      +------------------+   +------------------+   +----------------------+
+                                                       data still catching up
+
+Quorum = 3 / 4
+```
+
+這時候風險不在於「新節點不存在」，而在於：
+
+- quorum 已經從 `2/3` 變成 `3/4`
+- 但新節點可能還在吃 snapshot、補 raft log、做磁碟初始化
+- 也就是說，**容錯門檻先提高了，資料同步卻還沒完成**
+
+這正是 learner 要解決的架構問題。
+
+### learner 的作用：先同步，不先改變投票面
+
+加入 learner 後，架構會更接近下面這種狀態：
+
+```text
+                +---------------------+
+                |   Leader (voter)    |
+                +---------------------+
+                 /        |          \
+                /         |           \
+               v          v            v
+      +------------------+   +------------------+   +----------------------+
+      | Follower (voter) |   | Follower (voter) |   | Learner (non-voter)  |
+      +------------------+   +------------------+   +----------------------+
+                                                       sync snapshot/log
+
+Quorum = still 2 / 3
+```
+
+這時 learner 的架構價值就很清楚：
+
+- 它能先接收 leader 的 snapshot 與 raft log
+- 它不會立刻參與投票
+- 它不會立刻把 quorum 從 `2/3` 改成 `3/4`
+- 等它真正追上後，才進入 promote 流程
+
+所以 learner 的核心不是「多一台複本」，而是**把資料同步階段與投票成員變更階段拆開**。
+
+## 為什麼這對 primary/standby 思維特別重要
+
+很多人談 primary/standby etcd 時，直覺會用資料庫的主備模型理解：
+
+- primary 負責服務
+- standby 持續追資料
+- primary 掛掉後 standby 接手
+
+但 etcd 不是傳統單主資料庫複寫模型，而是 **Raft membership 模型**。在這個模型下，真正重要的是：
+
+- 哪些節點算進 quorum
+- 哪些節點只做同步、不影響投票
+- 何時可以安全地把同步節點升格成 voting member
+
+因此在 etcd 裡，比較精確的說法不是「primary cluster + standby cluster」，而是：
+
+- **primary cluster**
+- **cluster 內的 standby member（learner）**
+
+也就是說，learner 解決的是 **cluster membership transition** 問題，不是 **cross-cluster disaster recovery replication** 問題。
+
+## 從架構上看，learner 解決了哪三個風險
+
+### 1. Quorum 先變大，資料還沒追平
+
+這是最直接的風險。沒有 learner，新增節點會先改變 voting topology；有 learner，則先保持原 quorum，直到新節點 ready。
+
+### 2. 替換故障節點時，把不穩定節點直接放進投票面
+
+在 Kubernetes control plane 替換節點時，新節點通常同時要面對：
+
+- 磁碟初始化
+- 網路與憑證設定
+- snapshot 載入
+- raft log catch-up
+
+learner 讓這一段初始化成本先發生在 non-voting 狀態，而不是直接污染 voting path。
+
+### 3. 把「同步完成」和「升格為投票成員」綁成同一步
+
+這是架構設計上很常見的反模式。learner 模式把流程拆成兩步：
+
+1. 資料同步
+2. membership promote
+
+拆開後，系統可以在 promote 前明確檢查：
+
+- learner 是否真的 in sync with leader
+- promote 後 quorum 是否仍安全
+
+這也正對應 `IsReadyToPromoteMember` 與相關 error path 的存在理由。
+
 ## 什麼時候才能 Promote
 
 etcd 不允許任意提升 learner。最重要的限制在錯誤定義與測試：
@@ -134,6 +270,29 @@ Learner 不適合直接拿來做的是：
 - 建立另一個獨立 cluster ID 的 standby etcd 叢集
 - 讓另一個 cluster 持續以 learner 身份跟 primary 同步
 - 在 primary 全掛時，直接把那個 cluster 無縫升格成 primary
+
+如果硬要用架構圖來對比，可以這樣理解：
+
+**Learner 能做的**
+
+```text
+Primary etcd cluster
+  ├─ voter
+  ├─ voter
+  ├─ voter
+  └─ learner   <- warm standby inside the same cluster
+```
+
+**Learner 不能直接做的**
+
+```text
+Primary etcd cluster          Standby etcd cluster
+  ├─ voter                      ├─ voter
+  ├─ voter        X             ├─ voter
+  └─ voter                      └─ voter
+
+No built-in "learner link" between two independent clusters
+```
 
 ### 如果你要的是 DR standby cluster，應該怎麼理解 learner 的角色
 

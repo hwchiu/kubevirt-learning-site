@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 620">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 9 3.5, 0 6.5" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0.5, 9 3.5, 0 6.5" fill="#059669"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  
+  <text x="650" y="36" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="700" fill="#111827" text-anchor="middle">Learner Mode：先同步，再變更投票面</text>
+  <text x="650" y="62" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle">Learner 把資料追平階段與 quorum 變更階段拆開</text>
+
+  <rect x="60" y="110" width="560" height="260" rx="20" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="340" y="142" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#111827" text-anchor="middle">直接加入 Voting Member</text>
+  <rect x="110" y="205" width="120" height="80" rx="12" fill="#fffbeb" stroke="#fcd34d" stroke-width="2"/>
+  <text x="170" y="236" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">Leader</text>
+  <text x="170" y="257" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">voter</text>
+  <rect x="260" y="205" width="120" height="80" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="320" y="236" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">Follower</text>
+  <text x="320" y="257" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">voter</text>
+  <rect x="410" y="205" width="120" height="80" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="470" y="236" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">Follower</text>
+  <text x="470" y="257" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">voter</text>
+  <rect x="260" y="300" width="120" height="80" rx="12" fill="#fef2f2" stroke="#fca5a5" stroke-width="2"/>
+  <text x="320" y="331" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">New Node</text>
+  <text x="320" y="352" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">已算進 quorum</text>
+  <text x="340" y="338" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">Quorum 2/3 → 3/4</text>
+  <text x="340" y="360" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="start">但資料仍在 catch-up</text>
+
+  <rect x="680" y="110" width="560" height="260" rx="20" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="960" y="142" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#111827" text-anchor="middle">先加入 Learner</text>
+  <rect x="730" y="205" width="120" height="80" rx="12" fill="#fffbeb" stroke="#fcd34d" stroke-width="2"/>
+  <text x="790" y="236" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">Leader</text>
+  <text x="790" y="257" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">voter</text>
+  <rect x="880" y="205" width="120" height="80" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="940" y="236" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">Follower</text>
+  <text x="940" y="257" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">voter</text>
+  <rect x="1030" y="205" width="120" height="80" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="1090" y="236" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">Follower</text>
+  <text x="1090" y="257" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">voter</text>
+  <rect x="880" y="300" width="120" height="80" rx="12" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="2"/>
+  <text x="940" y="331" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">Learner</text>
+  <text x="940" y="352" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">non-voter</text>
+  <text x="962" y="338" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#6d28d9" text-anchor="start">Quorum 維持 2/3</text>
+  <text x="962" y="360" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="start">先同步 snapshot / log</text>
+
+  <line x1="790" y1="285" x2="930" y2="300" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow-green)"/>
+  <text x="855" y="305" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#6b7280" text-anchor="middle">sync</text>
+
+  <rect x="140" y="430" width="980" height="160" rx="20" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <text x="630" y="465" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#111827" text-anchor="middle">Primary / Standby 的正確理解</text>
+  <text x="630" y="495" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle">etcd learner 提供的是 cluster 內的 warm standby member，不是另一套獨立 standby cluster</text>
+
+  <rect x="190" y="525" width="290" height="40" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="335" y="550" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Primary cluster + learner standby member</text>
+  <rect x="780" y="525" width="290" height="40" rx="12" fill="#fef2f2" stroke="#fca5a5" stroke-width="2"/>
+  <text x="925" y="550" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Primary cluster + separate standby cluster</text>
+  <text x="630" y="548" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="700" fill="#111827" text-anchor="middle">≠</text>
+
+</svg>
